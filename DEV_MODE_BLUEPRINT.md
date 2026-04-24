@@ -176,9 +176,10 @@ This is the brain. Copy, customize the `$SERVICES` array, and you're done.
 # Usage:
 #   .\dev-mode.ps1              Start all services
 #   .\dev-mode.ps1 -Watch       Start all + error watcher
-#   .\dev-mode.ps1 -Status      Show service status only (human)
-#   .\dev-mode.ps1 -JsonStatus  Print runtime-status.json to stdout (agent)
-#   .\dev-mode.ps1 -Logs        Open logs folder
+#   .\dev-mode.ps1 -Status       Show service status only (human)
+#   .\dev-mode.ps1 -JsonStatus   Print runtime-status.json to stdout (agent)
+#   .\dev-mode.ps1 -ExplainState <Svc> Print agentic explanation of service state
+#   .\dev-mode.ps1 -Logs         Open logs folder
 #   .\dev-mode.ps1 -ClearLogs   Clear logs only (no restart)
 #   .\dev-mode.ps1 -Kill        Kill all Java processes
 #   .\dev-mode.ps1 -Clean       Clean all target directories (use after branch switch!)
@@ -198,6 +199,7 @@ param(
     [switch]$Watch,
     [switch]$Status,
     [switch]$JsonStatus,
+    [string]$ExplainState,
     [switch]$Logs,
     [switch]$ClearLogs,
     [switch]$Kill,
@@ -740,6 +742,8 @@ Write-Host '  ----------------------------------------------------------------' 
 Write-Host ''
 
 `$filePositions = @{}
+`$lastLogTime = @{}
+
 `$serviceColors = @{
     $colorsString
 }
@@ -794,6 +798,7 @@ while (`$true) {
             if (`$lineCount -gt `$filePositions[`$path]) {
                 `$newLines = `$content[`$filePositions[`$path]..(`$lineCount - 1)]
                 `$filePositions[`$path] = `$lineCount
+                `$lastLogTime[`$svcName] = Get-Date
 
                 foreach (`$line in `$newLines) {
                     # === WHAT WE ACTUALLY CARE ABOUT ===
@@ -826,6 +831,18 @@ while (`$true) {
                         foreach (`$fpKey in `$fingerprints.Keys) {
                             if (`$line -match `$fingerprints[`$fpKey]) {
                                 Write-FingerprintEvent `$svcName `$fpKey `$line
+                                
+                                # --- Auto-Healing ---
+                                if (`$fpKey -eq "KeycloakH2Corruption") {
+                                    Write-Host ""
+                                    Write-Host "[AUTO-HEALING] Triggering Keycloak DB Repair..." -ForegroundColor Magenta
+                                    Start-Process cmd -ArgumentList "/c dev.bat -FixKeycloak"
+                                }
+                                elseif (`$fpKey -eq "PortInUse") {
+                                    Write-Host ""
+                                    Write-Host "[AUTO-HEALING] Terminating stale Java processes..." -ForegroundColor Magenta
+                                    Start-Process powershell -ArgumentList "-WindowStyle Hidden -Command Stop-Process -Name java -Force -ErrorAction SilentlyContinue"
+                                }
                             }
                         }
                         # -------------------------------------
@@ -852,6 +869,50 @@ while (`$true) {
         } catch { }
     }
 
+    # --- Agentic Stall Detection ---
+    if (Test-Path `$statusFile) {
+        try {
+            `$statusObj = Get-Content `$statusFile -Raw -ErrorAction Stop | ConvertFrom-Json
+            foreach (`$svcKey in `$lastLogTime.Keys) {
+                if (`$statusObj.services.`$svcKey) {
+                    `$currentState = `$statusObj.services.`$svcKey.state
+                    # Only check for stalls if we are compiling or starting
+                    if (`$currentState -match "COMPILING|STARTING|WARMING") {
+                        `$secondsSinceLog = ((Get-Date) - `$lastLogTime[`$svcKey]).TotalSeconds
+                        if (`$secondsSinceLog -gt 60) {
+                            # Mark as STALLED
+                            `$statusObj.services.`$svcKey.state = "STALLED"
+                            `$statusObj.services.`$svcKey.since = (Get-Date).ToString("o")
+                            `$outJson = `$statusObj | ConvertTo-Json -Depth 6
+                            Set-Content -Path `$statusFile -Value `$outJson -Encoding UTF8 -ErrorAction Stop
+                            
+                            Write-Host ""
+                            Write-Host "[STALLED] `$svcKey has had no log output for 60 seconds." -ForegroundColor Red
+                            
+                            # Write event
+                            `$evt = @{
+                                ts = (Get-Date).ToString('o')
+                                run_id = `$runId
+                                entity = 'service'
+                                name = `$svcKey
+                                event = 'service.stalled'
+                                data = @{ seconds_stalled = `$secondsSinceLog }
+                            }
+                            `$json = `$evt | ConvertTo-Json -Depth 5 -Compress
+                            for (`$i = 0; `$i -lt 5; `$i++) {
+                                try { Add-Content -Path `$eventsFile -Value `$json -Encoding UTF8 -ErrorAction Stop; break }
+                                catch { Start-Sleep -Milliseconds 50 }
+                            }
+                            # Reset time so we don't spam
+                            `$lastLogTime[`$svcKey] = Get-Date
+                        }
+                    }
+                }
+            }
+        } catch {}
+    }
+    # -------------------------------
+
     Start-Sleep -Milliseconds 300
 }
 "@
@@ -874,6 +935,38 @@ if ($JsonStatus) {
     } else {
         Write-Host '{"error": "No runtime-status.json found. Run dev-mode.ps1 first."}'
     }
+    exit 0
+}
+
+if ($ExplainState) {
+    if (-not (Test-Path $STATUS_FILE)) {
+        Write-Host '{"error": "No runtime status available"}'
+        exit 1
+    }
+    $statusObj = Get-Content $STATUS_FILE -Raw | ConvertFrom-Json
+    if (-not $statusObj.services.$ExplainState) {
+        Write-Host "{`"error`": `"Service $ExplainState not found in status`"}"
+        exit 1
+    }
+    $svc = $statusObj.services.$ExplainState
+    $state = $svc.state
+    $fp = $svc.last_error.fingerprint
+    
+    $directive = "Service '$ExplainState' is currently $state."
+    if ($fp) {
+        $directive += " Last detected fingerprint: $fp."
+        if ($fp -eq "MissingBeanQualifier") { $directive += " Policy: Inspect source code for missing @Qualifier annotations." }
+        if ($fp -eq "CircularDependency") { $directive += " Policy: Inspect SPI provider wiring for missing @Lazy annotations." }
+        if ($fp -eq "PortInUse") { $directive += " Policy: Run 'dev.bat -Kill' to terminate stale processes." }
+        if ($fp -eq "StaleClassesAfterBranchSwitch") { $directive += " Policy: Run 'dev.bat -Kill' then 'dev.bat -Clean'." }
+    } else {
+        if ($state -eq "COMPILING") { $directive += " Policy: Wait for compilation to complete." }
+        if ($state -eq "STALLED") { $directive += " Policy: Inspect logs. The process has hung." }
+        if ($state -eq "CRASHED") { $directive += " Policy: Inspect logs to find un-fingerprinted error." }
+    }
+    
+    $out = @{ directive = $directive; state = $state; fingerprint = $fp }
+    $out | ConvertTo-Json -Compress | Write-Host
     exit 0
 }
 
@@ -932,7 +1025,8 @@ Clear-Logs
 Show-Banner
 Bootstrap-State
 
-# Pre-flight checks
+try {
+    # Pre-flight checks
 if (-not (Test-Preflight)) {
     Write-Status "Pre-flight checks failed. Fix issues above and retry." "FAIL"
     exit 1
@@ -1046,20 +1140,22 @@ Write-Host "    .\dev-mode.ps1 -Kill         Stop all Java" -ForegroundColor Dar
 Write-Host "    .\dev-mode.ps1 -FixKeycloak  Fix Keycloak H2 corruption" -ForegroundColor DarkGray
 Write-Host ""
 
-# Generate Run Summary Digest
-if (Test-Path $STATUS_FILE) {
-    try {
-        $status = Get-Content $STATUS_FILE -Raw | ConvertFrom-Json
-        $summary = @{
-            run_id = $RUN_ID
-            completed_at = (Get-Date).ToString("o")
-            services = $status.services
-            infra = $status.infra
-        }
-        $summaryJson = $summary | ConvertTo-Json -Depth 6
-        Set-Content -Path (Join-Path $STATE_DIR "run-summary.json") -Value $summaryJson -Encoding UTF8
-        Write-Event -Entity "devmode" -Name "system" -EventName "devmode.run.finished"
-    } catch {}
+} finally {
+    # Generate Run Summary Digest on exit (even Ctrl+C)
+    if (Test-Path $STATUS_FILE) {
+        try {
+            $status = Get-Content $STATUS_FILE -Raw | ConvertFrom-Json
+            $summary = @{
+                run_id = $RUN_ID
+                completed_at = (Get-Date).ToString("o")
+                services = $status.services
+                infra = $status.infra
+            }
+            $summaryJson = $summary | ConvertTo-Json -Depth 6
+            Set-Content -Path (Join-Path $STATE_DIR "run-summary.json") -Value $summaryJson -Encoding UTF8
+            Write-Event -Entity "devmode" -Name "system" -EventName "devmode.run.finished"
+        } catch {}
+    }
 }
 ```
 
@@ -2515,6 +2611,27 @@ In addition to the existing commands, add these machine-oriented helpers:
 | `dev.bat -ExplainState gateway` | High-level explanation / hints derived from `policies.json` and fingerprints (e.g., "Gateway is COMPILING and still inside expected window. Do not restart yet."). |
 
 CLI output should default to human-friendly, but the JSON subcommands are intentionally machine-oriented.
+
+### Active Intelligence (Stall Detection & Auto-Healing)
+
+The blueprint goes beyond passive state reporting. The `dev-mode.ps1` script actively enforces stability:
+
+1. **Agentic Stall Detection:** The error watcher tracks a heartbeat for every service. If a service is in `COMPILING`, `STARTING`, or `WARMING` state and produces **no log output for 60 seconds**, the script actively overwrites the `runtime-status.json` state to `STALLED` and emits a `service.stalled` event.
+2. **Infrastructure Auto-Healing:** When the watcher detects the `KeycloakH2Corruption` fingerprint, it automatically triggers `dev.bat -FixKeycloak` in the background. No agent or human intervention is required.
+3. **Aggressive Port Healing:** When the watcher detects the `PortInUse` fingerprint, it automatically executes a targeted process kill against stale Java tasks to clear the port.
+
+### The Agent Translator (`-ExplainState`)
+
+Agents usually have to read raw JSON state, find a matching fingerprint, and then consult an external policy document. The `-ExplainState` command shifts this burden into the runtime:
+
+```json
+{
+  "state": "STALLED",
+  "fingerprint": "CircularDependency",
+  "directive": "Service 'gateway' is currently STALLED. Last detected fingerprint: CircularDependency. Policy: Inspect SPI provider wiring for missing @Lazy annotations."
+}
+```
+Any AI agent can blindly execute `dev.bat -ExplainState <service>` and immediately know what to do next without hallucinating.
 
 ### Behavioral Rules for Agents (How to Use Dev Mode)
 
