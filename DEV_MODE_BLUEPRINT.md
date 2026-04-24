@@ -1,6 +1,6 @@
 # Dev Mode Blueprint -- Universal Developer Experience
 
-> **Philosophy:** Before a project becomes a product to sell to customers, it must first be a product for developers. The more intuitive, cunning, and automatic the tooling, the better the developer experience, and thus the better the final result.
+> **Philosophy:** Before a project becomes a product to sell to customers, it must first be a product for developers. The more intuitive, cunning, and automatic the tooling, the better the developer experience, and thus the better the final result. In the era of AI coding assistants, Dev Mode is not just a launcher -- it is the **runtime contract** between code, humans, and AI agents. Its job is to turn a chaotic local stack into a **state machine with forensic artifacts** that even a blind, dumb agent can navigate safely.
 
 A complete, copy-paste-ready blueprint for adding sophisticated dev tooling to any project. Works for **microservices** (Eureka, Gateway, N services) **and modular monoliths** (single JVM, multi-module Maven). Battle-tested in a real production monorepo.
 
@@ -14,6 +14,9 @@ A complete, copy-paste-ready blueprint for adding sophisticated dev tooling to a
 - **Debug-friendly** -- named windows, port labels, log files with timestamps
 - **Recovery commands** -- Keycloak H2 repair, nuclear clean, targeted restart
 - **Pre-flight validation** -- checks for Maven wrapper, Java version, Docker
+- **Agentic Runtime Contract** -- canonical lifecycle states, structured event streams (`events.jsonl`), live state files (`runtime-status.json`), and `run_id`-correlated forensic artifacts so AI agents never have to guess
+- **Error fingerprinting** -- codified heuristics (`fingerprints.json`) and agent behavioral policies (`policies.json`) that teach tools what to do instead of leaving them to hallucinate
+- **Machine-readable CLI** -- `dev.bat -JsonStatus` for agents, meaningful exit codes (0-5), no text parsing required
 
 ---
 
@@ -29,6 +32,9 @@ A complete, copy-paste-ready blueprint for adding sophisticated dev tooling to a
 8. [Supporting Scripts](#supporting-scripts)
 9. [Customization Guide](#customization-guide)
 10. [Gotchas and Lessons Learned](#gotchas-and-lessons-learned)
+11. [Agentic Runtime Contract](#agentic-runtime-contract)
+12. [Adapting for Non-Java Projects](#adapting-for-non-java-projects)
+13. [Summary](#summary)
 
 ---
 
@@ -43,8 +49,11 @@ Once implemented, your dev workflow becomes:
 # Start everything + centralized error watcher
 .\dev.bat -Watch
 
-# Check what's running
+# Check what's running (human-friendly)
 .\dev.bat -Status
+
+# Check what's running (machine-friendly JSON -- for AI agents)
+.\dev.bat -JsonStatus
 
 # Open logs folder
 .\dev.bat -Logs
@@ -87,6 +96,8 @@ Once implemented, your dev workflow becomes:
 | **Infrastructure Dance** | "Did I start Docker? Is Kafka up? Let me check..." |
 | **Mysterious Failures** | Branch switch causes "Redis connection refused" -- actually stale classes |
 | **Wiring Nightmares** | Circular bean deps, missing qualifiers, Lombok eating annotations |
+| **Agent Blindness** | AI coding assistants grep terminal output, hallucinate state, conflate "still compiling" with "crashed" |
+| **No Forensic Trail** | Important runtime truth lives only in ephemeral terminal buffers -- gone on scroll, gone on close |
 
 ### The Dev Mode Solution
 
@@ -100,6 +111,10 @@ Once implemented, your dev workflow becomes:
 | **Centralized Errors** | One window shows all ERROR logs from all services, deduplicated and color-coded |
 | **Pre-flight Checks** | Verifies Maven wrapper, Java, Docker exist before launching anything |
 | **Recovery Tools** | `-FixKeycloak` for H2 corruption, `-Clean` for stale builds |
+| **Canonical State Machine** | Every service is in exactly one state (`QUEUED`, `COMPILING`, `STARTING`, `WARMING`, `READY`, `STALLED`, `CRASHED`). "Not ready yet" is never silently conflated with "failed." |
+| **Structured Event Stream** | Every state transition is recorded as a JSON event in `events.jsonl`, correlated by `run_id`. Machines read JSON, not terminal noise. |
+| **Live State File** | `runtime-status.json` is the single source of truth. Agents read one file, know everything. |
+| **Error Fingerprinting** | Known error patterns codified in `fingerprints.json` with recommended actions. Agents match errors to solutions instead of guessing. |
 
 ---
 
@@ -111,9 +126,19 @@ your-project/
 |   +-- dev.bat                        # Simple batch wrapper (entry point)
 |   +-- compose-infra-only.yaml        # Docker: just the dependencies
 |   +-- compose.yaml                   # Docker: full stack (for prod-like testing)
-|   +-- logs/                          # Auto-created, timestamped log files
-|   |   +-- service-a-2024-01-01_12-30-00.log
-|   |   +-- service-b-2024-01-01_12-30-00.log
+|   +-- logs/                          # Auto-created, run_id-stamped log files
+|   |   +-- gateway-2026-04-24T07-42-00Z.log
+|   |   +-- service-a-2026-04-24T07-42-00Z.log
+|   |   +-- infra-2026-04-24T07-42-00Z.log
+|   +-- state/                         # Agentic runtime artifacts
+|   |   +-- runtime-status.json        # Live canonical state (THE source of truth)
+|   |   +-- events.jsonl               # Append-only structured event stream
+|   |   +-- run-summary.json           # Post-run digest (written on exit/timeout)
+|   |   +-- config/
+|   |       +-- services.json          # Static service definitions (versioned in git)
+|   |       +-- infra.json             # Static infra definitions (versioned in git)
+|   |       +-- fingerprints.json      # Error pattern knowledge base
+|   |       +-- policies.json          # Agent behavioral hints
 |   +-- scripts/
 |   |   +-- dev-mode.ps1               # The brain -- handles everything
 |   |   +-- stop_all.bat               # Kill services by port
@@ -145,13 +170,14 @@ This is the brain. Copy, customize the `$SERVICES` array, and you're done.
 
 ```powershell
 # ============================================================================
-# Dev Mode - All-in-One Service Launcher
+# Dev Mode - All-in-One Service Launcher (Agentic Runtime Edition)
 # ============================================================================
 #
 # Usage:
 #   .\dev-mode.ps1              Start all services
 #   .\dev-mode.ps1 -Watch       Start all + error watcher
-#   .\dev-mode.ps1 -Status      Show service status only
+#   .\dev-mode.ps1 -Status      Show service status only (human)
+#   .\dev-mode.ps1 -JsonStatus  Print runtime-status.json to stdout (agent)
 #   .\dev-mode.ps1 -Logs        Open logs folder
 #   .\dev-mode.ps1 -ClearLogs   Clear logs only (no restart)
 #   .\dev-mode.ps1 -Kill        Kill all Java processes
@@ -164,11 +190,14 @@ This is the brain. Copy, customize the `$SERVICES` array, and you're done.
 # IMPORTANT: After changing lombok.config or annotation processors, run -Clean!
 # IMPORTANT: This file MUST stay ASCII-only for PS 5.1 compatibility!
 #
+# Exit codes: 0=OK, 1=preflight fail, 2=infra fail, 3=build fail, 4=crash, 5=bad args
+#
 # ============================================================================
 
 param(
     [switch]$Watch,
     [switch]$Status,
+    [switch]$JsonStatus,
     [switch]$Logs,
     [switch]$ClearLogs,
     [switch]$Kill,
@@ -189,9 +218,18 @@ $SCRIPT_DIR = Split-Path -Parent $MyInvocation.MyCommand.Path
 $INFRA_DIR = Split-Path -Parent $SCRIPT_DIR
 $ROOT_DIR = Split-Path -Parent $INFRA_DIR
 $LOG_DIR = Join-Path $INFRA_DIR "logs"
+$STATE_DIR = Join-Path $INFRA_DIR "state"
+$EVENTS_FILE = Join-Path $STATE_DIR "events.jsonl"
+$STATUS_FILE = Join-Path $STATE_DIR "runtime-status.json"
 
 # PROJECT NAME -- Used in banner and window titles
 $PROJECT_NAME = "MyProject"
+
+# RUN ID -- Unique per invocation, correlates all logs/events/state
+$RUN_ID = Get-Date -Format "yyyy-MM-ddTHH-mm-ssZ"
+
+# Ensure state directory exists
+if (-not (Test-Path $STATE_DIR)) { New-Item -ItemType Directory -Path $STATE_DIR -Force | Out-Null }
 
 # SERVICE DEFINITIONS -- Customize for your project
 # Name: Display name (lowercase, no spaces)
@@ -259,7 +297,54 @@ function Show-Banner {
     Write-Host ""
     Write-Host "  Root:    $ROOT_DIR" -ForegroundColor DarkGray
     Write-Host "  Logs:    $LOG_DIR" -ForegroundColor DarkGray
+    Write-Host "  Run ID:  $RUN_ID" -ForegroundColor DarkGray
     Write-Host ""
+}
+
+# ============================================================================
+# Agentic State Management -- Structured events and live state
+# ============================================================================
+
+function Write-Event {
+    param([string]$Entity, [string]$Name, [string]$EventName, [hashtable]$Data = @{})
+    $evt = @{
+        ts = (Get-Date).ToString("o")
+        run_id = $RUN_ID
+        entity = $Entity
+        name = $Name
+        event = $EventName
+        data = $Data
+    }
+    $json = $evt | ConvertTo-Json -Depth 5 -Compress
+    Add-Content -Path $EVENTS_FILE -Value $json -Encoding UTF8
+}
+
+function Write-RuntimeStatus {
+    param([hashtable]$StatusData)
+    $json = $StatusData | ConvertTo-Json -Depth 6
+    Set-Content -Path $STATUS_FILE -Value $json -Encoding UTF8
+}
+
+function Bootstrap-State {
+    $initialState = @{
+        run_id = $RUN_ID
+        started_at = (Get-Date).ToString("o")
+        mode = @{ watch = $Watch.IsPresent; infra_only = $Infra.IsPresent }
+        services = @{}
+        infra = @{}
+    }
+    
+    foreach ($svc in $SERVICES) {
+        $initialState.services[$svc.Name] = @{
+            state = "QUEUED"
+            since = (Get-Date).ToString("o")
+            build = @{ state = "NOT_STARTED"; last_progress_at = null }
+            runtime = @{ state = "NOT_STARTED"; pid = null; port_open = $false; health = "unknown" }
+            last_error = @{ fingerprint = null; message = null; at = null }
+        }
+    }
+    Write-RuntimeStatus $initialState
+    Write-Event -Entity "devmode" -Name "system" -EventName "devmode.run.started" -Data @{ mode = if ($Watch) { "watch" } else { "default" } }
 }
 
 # ============================================================================
@@ -480,19 +565,67 @@ function Start-ServiceInWindow {
     # Full log goes to file for forensics, but screen is SILENT unless trouble
     $innerScript = @"
 `$ErrorActionPreference = 'Continue'
-`$host.UI.RawUI.WindowTitle = '[$PROJECT_NAME] $Name ... (:$Port)'
+`$host.UI.RawUI.WindowTitle = '[$PROJECT_NAME] $Name COMPILING (:$Port)'
 
 `$logFile = '$logFile'
 `$serviceDir = '$serviceDir'
 `$serviceName = '$Name'
 `$servicePort = $Port
+`$statusFile = '$STATUS_FILE'
+`$eventsFile = '$EVENTS_FILE'
+`$runId = '$RUN_ID'
 `$errorCount = 0
 `$isReady = `$false
 
+# --- Agentic IPC Helpers ---
+function Write-InnerEvent {
+    param([string]`$EventName, [hashtable]`$Data = @{})
+    `$evt = @{
+        ts = (Get-Date).ToString('o')
+        run_id = `$runId
+        entity = 'service'
+        name = `$serviceName
+        event = `$EventName
+        data = `$Data
+    }
+    `$json = `$evt | ConvertTo-Json -Depth 5 -Compress
+    for (`$i = 0; `$i -lt 5; `$i++) {
+        try { Add-Content -Path `$eventsFile -Value `$json -Encoding UTF8 -ErrorAction Stop; break }
+        catch { Start-Sleep -Milliseconds (Get-Random -Minimum 50 -Maximum 150) }
+    }
+}
+
+function Update-State {
+    param([string]`$NewState)
+    if (-not (Test-Path `$statusFile)) { return }
+    for (`$i = 0; `$i -lt 10; `$i++) {
+        try {
+            `$json = Get-Content `$statusFile -Raw -ErrorAction Stop
+            `$data = `$json | ConvertFrom-Json
+            if (`$data.services.`$serviceName) {
+                `$oldState = `$data.services.`$serviceName.state
+                if (`$oldState -ne `$NewState) {
+                    `$data.services.`$serviceName.state = `$NewState
+                    `$data.services.`$serviceName.since = (Get-Date).ToString('o')
+                    `$outJson = `$data | ConvertTo-Json -Depth 6
+                    Set-Content -Path `$statusFile -Value `$outJson -Encoding UTF8 -ErrorAction Stop
+                    Write-InnerEvent -EventName 'service.state.changed' -Data @{ from = `$oldState; to = `$NewState }
+                }
+            }
+            break
+        } catch {
+            Start-Sleep -Milliseconds (Get-Random -Minimum 50 -Maximum 150)
+        }
+    }
+}
+# ---------------------------
+
 # Minimal header
 Write-Host "[$Name] port $Port" -ForegroundColor Cyan
-Write-Host "Log: $logFile" -ForegroundColor DarkGray
+Write-Host "Log: `$logFile" -ForegroundColor DarkGray
 Write-Host ""
+
+Update-State "COMPILING"
 
 function Process-Line {
     param([string]`$Line)
@@ -506,20 +639,34 @@ function Process-Line {
     }
 
     # ONLY show to screen if it SCREAMS for attention
-    if (`$Line -match '\s(ERROR|FATAL)\s|^Caused by:|BUILD FAILURE|COMPILATION ERROR') {
+    if (`$Line -match 'BUILD FAILURE|COMPILATION ERROR') {
         `$script:errorCount++
         Write-Host `$Line -ForegroundColor Red
-        `$host.UI.RawUI.WindowTitle = "[$PROJECT_NAME] $Name ERR! (:$Port)"
+        `$host.UI.RawUI.WindowTitle = "[$PROJECT_NAME] $Name BUILD_FAILED (:$Port)"
+        Update-State "BUILD_FAILED"
+    }
+    elseif (`$Line -match '\s(ERROR|FATAL)\s|^Caused by:') {
+        `$script:errorCount++
+        Write-Host `$Line -ForegroundColor Red
     }
     elseif (`$Line -match '^\s+at\s|^\t+at\s') {
         # Stack trace lines -- show but dimmer
         Write-Host `$Line -ForegroundColor DarkRed
     }
+    elseif (`$Line -match 'Starting .+ using Java') {
+        `$host.UI.RawUI.WindowTitle = "[$PROJECT_NAME] $Name STARTING (:$Port)"
+        Update-State "STARTING"
+    }
+    elseif (`$Line -match 'Tomcat initialized with port|Netty started on port') {
+        `$host.UI.RawUI.WindowTitle = "[$PROJECT_NAME] $Name WARMING (:$Port)"
+        Update-State "WARMING"
+    }
     elseif (`$Line -match 'Started .+ in .+ seconds|Tomcat started|Netty started') {
         # SUCCESS -- show this one line
         `$script:isReady = `$true
         Write-Host `$Line -ForegroundColor Green
-        `$host.UI.RawUI.WindowTitle = "[$PROJECT_NAME] $Name OK (:$Port)"
+        `$host.UI.RawUI.WindowTitle = "[$PROJECT_NAME] $Name READY (:$Port)"
+        Update-State "READY"
     }
     # Everything else: SILENT (goes to file only)
 }
@@ -534,10 +681,14 @@ Set-Location `$serviceDir
 `$exitCode = `$LASTEXITCODE
 Write-Host ""
 if (`$exitCode -ne 0) {
+    `$host.UI.RawUI.WindowTitle = "[$PROJECT_NAME] $Name CRASHED (:$Port)"
+    Update-State "CRASHED"
     Write-Host "=== CRASHED (exit `$exitCode) ===" -ForegroundColor Red
     Write-Host "Last 30 lines:" -ForegroundColor DarkGray
     Get-Content `$logFile -Tail 30 | ForEach-Object { Write-Host `$_ -ForegroundColor DarkGray }
 } else {
+    `$host.UI.RawUI.WindowTitle = "[$PROJECT_NAME] $Name STOPPED (:$Port)"
+    Update-State "STOPPED"
     Write-Host "=== STOPPED ===" -ForegroundColor Yellow
 }
 Write-Host ""
@@ -577,6 +728,9 @@ function Start-ErrorWatcher {
     $watcherScript = @"
 `$host.UI.RawUI.WindowTitle = '$PROJECT_NAME Errors'
 `$LogDir = '$LOG_DIR'
+`$statusFile = '$STATUS_FILE'
+`$eventsFile = '$EVENTS_FILE'
+`$runId = '$RUN_ID'
 
 Write-Host ''
 Write-Host '  ERROR WATCHER' -ForegroundColor Red
@@ -586,9 +740,33 @@ Write-Host '  ----------------------------------------------------------------' 
 Write-Host ''
 
 `$filePositions = @{}
-
 `$serviceColors = @{
     $colorsString
+}
+
+`$fingerprints = @{
+    "MissingBeanQualifier" = "No qualifying bean of type|expected single matching bean but found"
+    "CircularDependency" = "Requested bean is currently in creation|circular reference"
+    "PortInUse" = "Address already in use|already in use"
+    "KeycloakH2Corruption" = "MVStoreException|AccessDeniedException.*h2"
+    "StaleClassesAfterBranchSwitch" = "NoSuchMethodError|ClassNotFoundException|NoClassDefFoundError"
+}
+
+function Write-FingerprintEvent {
+    param([string]`$SvcName, [string]`$Fingerprint, [string]`$Evidence)
+    `$evt = @{
+        ts = (Get-Date).ToString('o')
+        run_id = `$runId
+        entity = 'service'
+        name = `$SvcName
+        event = 'error.fingerprint.detected'
+        data = @{ fingerprint = `$Fingerprint; evidence = `$Evidence }
+    }
+    `$json = `$evt | ConvertTo-Json -Depth 5 -Compress
+    for (`$i = 0; `$i -lt 5; `$i++) {
+        try { Add-Content -Path `$eventsFile -Value `$json -Encoding UTF8 -ErrorAction Stop; break }
+        catch { Start-Sleep -Milliseconds (Get-Random -Minimum 50 -Maximum 150) }
+    }
 }
 
 while (`$true) {
@@ -644,6 +822,14 @@ while (`$true) {
                     if (`$shouldShow) {
                         `$ts = Get-Date -Format 'HH:mm:ss'
 
+                        # --- Agentic Fingerprint Detection ---
+                        foreach (`$fpKey in `$fingerprints.Keys) {
+                            if (`$line -match `$fingerprints[`$fpKey]) {
+                                Write-FingerprintEvent `$svcName `$fpKey `$line
+                            }
+                        }
+                        # -------------------------------------
+
                         if (`$isStackTrace) {
                             Write-Host "         `$line" -ForegroundColor DarkRed
                         }
@@ -657,8 +843,9 @@ while (`$true) {
                             Write-Host ""
                             Write-Host "[`$ts] " -NoNewline -ForegroundColor DarkGray
                             Write-Host "`$(`$svcName.ToUpper().PadRight(12))" -NoNewline -ForegroundColor `$color
-                            Write-Host `$line -ForegroundColor Red
+                            Write-Host "`$line" -ForegroundColor DarkYellow
                         }
+                    }
                     }
                 }
             }
@@ -681,6 +868,15 @@ while (`$true) {
 # ============================================================================
 
 # Handle simple commands first
+if ($JsonStatus) {
+    if (Test-Path $STATUS_FILE) {
+        Get-Content $STATUS_FILE -Raw | Write-Host
+    } else {
+        Write-Host '{"error": "No runtime-status.json found. Run dev-mode.ps1 first."}'
+    }
+    exit 0
+}
+
 if ($Status) {
     Show-ServiceStatus
     exit 0
@@ -693,6 +889,7 @@ if ($Logs) {
 
 if ($Kill) {
     Stop-AllJava
+    Write-Event -Entity "devmode" -Name "system" -EventName "devmode.kill.executed"
     exit 0
 }
 
@@ -703,7 +900,9 @@ if ($ClearLogs) {
 
 if ($Clean) {
     Show-Banner
+    Write-Event -Entity "devmode" -Name "system" -EventName "devmode.clean.started"
     Clean-AllTargets
+    Write-Event -Entity "devmode" -Name "system" -EventName "devmode.clean.completed"
     exit 0
 }
 
@@ -731,6 +930,7 @@ Clear-Logs
 
 # Main startup flow
 Show-Banner
+Bootstrap-State
 
 # Pre-flight checks
 if (-not (Test-Preflight)) {
@@ -839,11 +1039,28 @@ Write-Host ""
 Write-Host "  Logs folder:      $LOG_DIR" -ForegroundColor Cyan
 Write-Host ""
 Write-Host "  Commands:" -ForegroundColor White
-Write-Host "    .\dev-mode.ps1 -Status       Check all services" -ForegroundColor DarkGray
+Write-Host "    .\dev-mode.ps1 -Status       Check all services (human)" -ForegroundColor DarkGray
+Write-Host "    .\dev-mode.ps1 -JsonStatus   Check all services (agent JSON)" -ForegroundColor DarkGray
 Write-Host "    .\dev-mode.ps1 -Logs         Open logs folder" -ForegroundColor DarkGray
 Write-Host "    .\dev-mode.ps1 -Kill         Stop all Java" -ForegroundColor DarkGray
 Write-Host "    .\dev-mode.ps1 -FixKeycloak  Fix Keycloak H2 corruption" -ForegroundColor DarkGray
 Write-Host ""
+
+# Generate Run Summary Digest
+if (Test-Path $STATUS_FILE) {
+    try {
+        $status = Get-Content $STATUS_FILE -Raw | ConvertFrom-Json
+        $summary = @{
+            run_id = $RUN_ID
+            completed_at = (Get-Date).ToString("o")
+            services = $status.services
+            infra = $status.infra
+        }
+        $summaryJson = $summary | ConvertTo-Json -Depth 6
+        Set-Content -Path (Join-Path $STATE_DIR "run-summary.json") -Value $summaryJson -Encoding UTF8
+        Write-Event -Entity "devmode" -Name "system" -EventName "devmode.run.finished"
+    } catch {}
+}
 ```
 
 ---
@@ -915,10 +1132,58 @@ function Start-MonolithInWindow {
 
     $innerScript = @"
 `$ErrorActionPreference = 'Continue'
-`$host.UI.RawUI.WindowTitle = '[$PROJECT_NAME] $Name ... (:$Port)'
+`$host.UI.RawUI.WindowTitle = '[$PROJECT_NAME] $Name COMPILING (:$Port)'
 
 `$logFile = '$logFile'
 `$serviceDir = '$serviceDir'
+`$serviceName = '$Name'
+`$servicePort = $Port
+`$statusFile = '$STATUS_FILE'
+`$eventsFile = '$EVENTS_FILE'
+`$runId = '$RUN_ID'
+
+# --- Agentic IPC Helpers ---
+function Write-InnerEvent {
+    param([string]`$EventName, [hashtable]`$Data = @{})
+    `$evt = @{
+        ts = (Get-Date).ToString('o')
+        run_id = `$runId
+        entity = 'service'
+        name = `$serviceName
+        event = `$EventName
+        data = `$Data
+    }
+    `$json = `$evt | ConvertTo-Json -Depth 5 -Compress
+    for (`$i = 0; `$i -lt 5; `$i++) {
+        try { Add-Content -Path `$eventsFile -Value `$json -Encoding UTF8 -ErrorAction Stop; break }
+        catch { Start-Sleep -Milliseconds (Get-Random -Minimum 50 -Maximum 150) }
+    }
+}
+
+function Update-State {
+    param([string]`$NewState)
+    if (-not (Test-Path `$statusFile)) { return }
+    for (`$i = 0; `$i -lt 10; `$i++) {
+        try {
+            `$json = Get-Content `$statusFile -Raw -ErrorAction Stop
+            `$data = `$json | ConvertFrom-Json
+            if (`$data.services.`$serviceName) {
+                `$oldState = `$data.services.`$serviceName.state
+                if (`$oldState -ne `$NewState) {
+                    `$data.services.`$serviceName.state = `$NewState
+                    `$data.services.`$serviceName.since = (Get-Date).ToString('o')
+                    `$outJson = `$data | ConvertTo-Json -Depth 6
+                    Set-Content -Path `$statusFile -Value `$outJson -Encoding UTF8 -ErrorAction Stop
+                    Write-InnerEvent -EventName 'service.state.changed' -Data @{ from = `$oldState; to = `$NewState }
+                }
+            }
+            break
+        } catch {
+            Start-Sleep -Milliseconds (Get-Random -Minimum 50 -Maximum 150)
+        }
+    }
+}
+# ---------------------------
 
 Write-Host ''
 Write-Host '  ============================================' -ForegroundColor Cyan
@@ -927,6 +1192,8 @@ Write-Host '  ============================================' -ForegroundColor Cya
 Write-Host "  Log: `$logFile" -ForegroundColor DarkGray
 Write-Host ''
 
+Update-State "COMPILING"
+
 function Process-Line {
     param([string]`$Line)
     Add-Content -Path `$logFile -Value `$Line -ErrorAction SilentlyContinue
@@ -934,16 +1201,29 @@ function Process-Line {
     # Skip noise (info-level mentions of exception class names, SLF4J warnings)
     if (`$Line -match 'ExceptionHandler|ExceptionResolver|GlobalExceptionHandler|SLF4J|LoggerFactory') { return }
 
-    if (`$Line -match '\s(ERROR|FATAL)\s|^Caused by:|BUILD FAILURE|COMPILATION ERROR') {
+    if (`$Line -match 'BUILD FAILURE|COMPILATION ERROR') {
         Write-Host `$Line -ForegroundColor Red
-        `$host.UI.RawUI.WindowTitle = '[$PROJECT_NAME] $Name ERR! (:$Port)'
+        `$host.UI.RawUI.WindowTitle = '[$PROJECT_NAME] $Name BUILD_FAILED (:$Port)'
+        Update-State "BUILD_FAILED"
+    }
+    elseif (`$Line -match '\s(ERROR|FATAL)\s|^Caused by:') {
+        Write-Host `$Line -ForegroundColor Red
     }
     elseif (`$Line -match '^\s+at\s') {
         Write-Host `$Line -ForegroundColor DarkRed
     }
+    elseif (`$Line -match 'Starting .+ using Java') {
+        `$host.UI.RawUI.WindowTitle = '[$PROJECT_NAME] $Name STARTING (:$Port)'
+        Update-State "STARTING"
+    }
+    elseif (`$Line -match 'Tomcat initialized with port|Netty started on port') {
+        `$host.UI.RawUI.WindowTitle = '[$PROJECT_NAME] $Name WARMING (:$Port)'
+        Update-State "WARMING"
+    }
     elseif (`$Line -match 'Started .+ in .+ seconds|Tomcat started') {
         Write-Host `$Line -ForegroundColor Green
-        `$host.UI.RawUI.WindowTitle = '[$PROJECT_NAME] $Name OK (:$Port)'
+        `$host.UI.RawUI.WindowTitle = '[$PROJECT_NAME] $Name READY (:$Port)'
+        Update-State "READY"
     }
 }
 
@@ -959,6 +1239,8 @@ Write-Host '[$Name] Installing modules (clean install)...' -ForegroundColor Dark
 }
 
 if (`$LASTEXITCODE -ne 0) {
+    `$host.UI.RawUI.WindowTitle = '[$PROJECT_NAME] $Name BUILD_FAILED (:$Port)'
+    Update-State "BUILD_FAILED"
     Write-Host '=== BUILD FAILED ===' -ForegroundColor Red
     Write-Host 'Last 30 lines:' -ForegroundColor DarkGray
     Get-Content `$logFile -Tail 30 | ForEach-Object { Write-Host `$_ -ForegroundColor DarkGray }
@@ -974,10 +1256,14 @@ Write-Host '[$Name] Starting Spring Boot ($BootModule)...' -ForegroundColor Dark
 `$exitCode = `$LASTEXITCODE
 Write-Host ''
 if (`$exitCode -ne 0) {
+    `$host.UI.RawUI.WindowTitle = '[$PROJECT_NAME] $Name CRASHED (:$Port)'
+    Update-State "CRASHED"
     Write-Host "=== CRASHED (exit `$exitCode) ===" -ForegroundColor Red
     Write-Host 'Last 30 lines:' -ForegroundColor DarkGray
     Get-Content `$logFile -Tail 30 | ForEach-Object { Write-Host `$_ -ForegroundColor DarkGray }
 } else {
+    `$host.UI.RawUI.WindowTitle = '[$PROJECT_NAME] $Name STOPPED (:$Port)'
+    Update-State "STOPPED"
     Write-Host '=== STOPPED ===' -ForegroundColor Yellow
 }
 Write-Host ''
@@ -1080,7 +1366,8 @@ REM
 REM Usage:
 REM   dev.bat              Start all services
 REM   dev.bat -Watch       Start all + error watcher
-REM   dev.bat -Status      Show service status
+REM   dev.bat -Status      Show service status (human)
+REM   dev.bat -JsonStatus  Print runtime-status.json (agent)
 REM   dev.bat -Logs        Open logs folder
 REM   dev.bat -ClearLogs   Clear logs only (no restart)
 REM   dev.bat -Kill        Kill all Java processes
@@ -1088,6 +1375,8 @@ REM   dev.bat -Clean       Clean all Maven target dirs (use after switching bran
 REM   dev.bat -Infra       Start infrastructure only (Docker)
 REM   dev.bat -InfraDown   Stop infrastructure (Docker)
 REM   dev.bat -FixKeycloak Fix Keycloak H2 database corruption
+REM
+REM Exit codes: 0=OK, 1=preflight, 2=infra, 3=build, 4=crash, 5=bad args
 REM
 REM IMPORTANT: After switching git branches, run `dev -Kill` then `dev -Clean`!
 REM IMPORTANT: After changing lombok.config, run `dev -Clean`!
@@ -1806,6 +2095,502 @@ Each function handles its own build command, success detection, and error filter
 
 ---
 
+## Agentic Runtime Contract
+
+This section elevates Dev Mode from a "fancy script" into a local, opinionated, agent-grade runtime. Everything here is additive -- it enhances the existing scripts and workflows described above. If Dev Mode behaves like this, you've effectively designed a local OpenTelemetry-ish runtime for a coding agent, instead of a fancy script. It makes both humans and agents less blind, less dumb, and much harder to gaslight by random runtime noise.
+
+### Non-Negotiable Principles
+
+- Every service and infra component has an explicit lifecycle state.
+- Every state transition is recorded as a structured event.
+- Every run is correlated by `run_id` across logs, status, and events.
+- "Not ready yet" is never silently conflated with "failed."
+- All important truth is persisted to files, never only to ephemeral terminal output.
+
+Everything else is detail.
+
+### Entities
+
+You have three primary kinds of entities:
+
+- **Run** -- a single invocation of Dev Mode (e.g., `.\dev.bat -Watch`). Gets a unique `run_id`.
+- **Service** -- a Spring Boot service, monolith boot module, or microservice.
+- **Infra** -- external dependencies (Dockerized databases, Keycloak, Kafka, etc.).
+
+Everything in the runtime contract hangs off these three.
+
+### Canonical Lifecycle States
+
+Every Service and Infra instance must always be in exactly one of these states. **No other words** in status, window titles, or files. If you invent new states, they must be added to this list and documented.
+
+| State | Meaning |
+|-------|---------|
+| `NOT_CONFIGURED` | Present in config but missing required files (e.g., `mvnw.cmd`). |
+| `QUEUED` | Known, not yet touched this run. |
+| `PRECHECK` | Under preflight validation. |
+| `PRECHECK_FAILED` | Preflight validation failed. |
+| `INFRA_STARTING` | (Infra only) Docker container being started. |
+| `INFRA_READY` | (Infra only) Port open and healthy. |
+| `COMPILING` | In build/compile phase. |
+| `BUILD_FAILED` | Compilation or build failed. |
+| `STARTING` | Process spawned, not yet listening. |
+| `WARMING` | Port open but app health not OK yet. |
+| `READY` | Passing health checks / fully started. |
+| `DEGRADED` | Alive but health indicates partial failure. |
+| `STALLED` | No meaningful progress for configurable window. |
+| `CRASHED` | Process exited unexpectedly. |
+| `STOPPED` | Explicitly stopped this run. |
+| `UNKNOWN` | Fallback; should be rare. |
+
+**Window titles must reflect the canonical state:** `[MyProject] gateway COMPILING (:8888)`, `[MyProject] gateway READY (:8888)`, `[MyProject] gateway CRASHED (:8888)`. This keeps the human mental model in sync with what the files say.
+
+### State Machine Rules (No Ambiguity)
+
+#### Build vs Runtime -- Never Conflate
+
+Every service has two independent sub-states:
+
+- `build.state`: `NOT_STARTED` | `COMPILING` | `BUILD_OK` | `BUILD_FAILED`
+- `runtime.state`: `NOT_STARTED` | `STARTING` | `WARMING` | `READY` | `DEGRADED` | `CRASHED` | `STOPPED`
+
+The combined `service.state` in `runtime-status.json` is derived:
+
+- If `build.state = COMPILING` -> `service.state = COMPILING`
+- Else if `build.state = BUILD_FAILED` -> `service.state = BUILD_FAILED`
+- Else if `runtime.state = STARTING` -> `service.state = STARTING`
+- Else if `runtime.state = WARMING` -> `service.state = WARMING`
+- Else `service.state = runtime.state` (READY/DEGRADED/CRASHED/STOPPED/UNKNOWN)
+
+#### Progress vs Stall
+
+Track `last_progress_at` for both build and runtime phases:
+
+- Progress events include: new compile output, dependency downloaded, healthcheck passed, log size increase, etc.
+- If no progress for `stall_threshold_seconds` (per service), transition to `STALLED` and emit `service.state.changed` with `data.reason = "no_progress"`.
+
+Agents should treat `STALLED` as "needs intervention", but not necessarily irrecoverable.
+
+#### Time Budgets
+
+Use the `expected_*_seconds` hints from `services.json` to classify:
+
+- If compile time > expected but progress continues -> stay `COMPILING`, set `late: true`.
+- If boot time > expected but port eventually opens -> remain `STARTING`/`WARMING` with `late: true`.
+- Only after both **no progress** and **exceeded timeout** should you go to `STALLED` or `CRASHED`.
+
+This is the exact fix for "compiling vs fail to start" confusion.
+
+### Agentic Artifact Schemas
+
+These are the JSON files the runtime produces and maintains. They live under `infrastructure/state/`.
+
+#### `config/services.json` (Static Config -- Versioned in Git)
+
+Replaces or supplements the hardcoded `$SERVICES` array in `dev-mode.ps1`. This is the machine-consumable source of truth for service definitions.
+
+```json
+{
+  "services": [
+    {
+      "name": "gateway",
+      "display_name": "Gateway",
+      "dir": "api-gateway",
+      "port": 8888,
+      "type": "core",
+      "boot_module": null,
+      "expected_compile_seconds": 90,
+      "expected_boot_seconds": 60,
+      "expected_ready_timeout_seconds": 120,
+      "dependencies": ["eureka", "redis"],
+      "healthcheck": {
+        "type": "http",
+        "path": "/actuator/health",
+        "expected_status": 200,
+        "timeout_seconds": 5
+      }
+    }
+  ]
+}
+```
+
+#### `config/infra.json` (Static Config -- Versioned in Git)
+
+Same idea for infra:
+
+```json
+{
+  "infra": [
+    {
+      "name": "mongo",
+      "port": 27017,
+      "compose_service": "mongo",
+      "critical": true
+    },
+    {
+      "name": "keycloak",
+      "port": 8180,
+      "compose_service": "keycloak",
+      "critical": true
+    }
+  ]
+}
+```
+
+#### `runtime-status.json` (Live State -- Updated on Every Transition)
+
+Single canonical "what's going on right now" file. Dev Mode must update this on **every** meaningful transition (no lazy updates). Agents should trust this file over ad-hoc grepping of logs.
+
+```json
+{
+  "run_id": "2026-04-24T07-42-00Z",
+  "started_at": "2026-04-24T07-42-00Z",
+  "mode": {
+    "watch": true,
+    "infra_only": false
+  },
+  "services": {
+    "gateway": {
+      "state": "COMPILING",
+      "since": "2026-04-24T07-42-10Z",
+      "build": {
+        "state": "COMPILING",
+        "last_progress_at": "2026-04-24T07-42-25Z"
+      },
+      "runtime": {
+        "state": "NOT_STARTED",
+        "pid": null,
+        "port_open": false,
+        "health": "unknown"
+      },
+      "waiting_on": ["eureka"],
+      "blocked_by": null,
+      "last_error": {
+        "fingerprint": null,
+        "message": null,
+        "at": null
+      }
+    }
+  },
+  "infra": {
+    "keycloak": {
+      "state": "INFRA_READY",
+      "since": "2026-04-24T07-41-30Z",
+      "port_open": true
+    }
+  }
+}
+```
+
+#### `events.jsonl` (Append-Only Structured Event Stream)
+
+One JSON per line. This is the forensic trace for the run. Built for machines first; humans can still read it, but the ordering and structure are what matter.
+
+Event schema (core fields):
+
+```json
+{
+  "ts": "2026-04-24T07-42-18.123Z",
+  "run_id": "2026-04-24T07-42-00Z",
+  "entity": "service",
+  "name": "gateway",
+  "event": "service.state.changed",
+  "data": {
+    "from": "COMPILING",
+    "to": "STARTING"
+  }
+}
+```
+
+Standard events (minimum set):
+
+- `devmode.run.started`
+- `devmode.run.finished`
+- `devmode.preflight.started`
+- `devmode.preflight.failed`
+- `infra.check.started`
+- `infra.check.completed`
+- `infra.start.requested`
+- `infra.state.changed`
+- `service.compile.started`
+- `service.compile.progress`
+- `service.build.failed`
+- `service.process.spawned`
+- `service.healthcheck.passed`
+- `service.healthcheck.failed`
+- `service.state.changed`
+- `service.crashed`
+- `service.retry.scheduled`
+- `service.retry.aborted`
+- `error.fingerprint.detected`
+
+#### `run-summary.json` (Post-Run Digest)
+
+At the end (or after a timeout), Dev Mode should produce a small summary file for the run. Agents can open **one** file and see the overall outcome.
+
+```json
+{
+  "run_id": "2026-04-24T07-42-00Z",
+  "completed_at": "2026-04-24T07-45-30Z",
+  "services": {
+    "gateway": {
+      "final_state": "READY",
+      "startup_seconds": 47,
+      "build_state": "BUILD_OK",
+      "error_fingerprints": []
+    },
+    "service-a": {
+      "final_state": "BUILD_FAILED",
+      "startup_seconds": null,
+      "build_state": "BUILD_FAILED",
+      "error_fingerprints": ["MissingBeanQualifier"]
+    }
+  },
+  "infra": {
+    "keycloak": {
+      "final_state": "INFRA_READY"
+    }
+  }
+}
+```
+
+#### Log File Naming
+
+You already have great log discipline; just lock down naming and semantics to use `run_id`:
+
+- Per-service: `logs/<service>-<run_id>.log`
+- Per-run infra: `logs/infra-<run_id>.log`
+
+Rules:
+
+- All stdout/stderr from the process must end up here.
+- Console windows only show heavily filtered, human-friendly slices (as described in the core script above).
+- Error watcher should tail log files, not processes, and also emit events to `events.jsonl` when it detects significant issues.
+
+### Error Fingerprinting
+
+Your existing gotchas section already documents these problems; fingerprinting **encodes** them so tools and agents can use them programmatically.
+
+#### `config/fingerprints.json` (Error Knowledge Base)
+
+A small knowledge base of known error patterns and their meaning:
+
+```json
+{
+  "MissingBeanQualifier": {
+    "patterns": [
+      "No qualifying bean of type",
+      "expected single matching bean but found"
+    ],
+    "description": "Spring cannot decide which bean to inject.",
+    "recommended_actions": [
+      "Check @Qualifier annotations.",
+      "If using Lombok, verify lombok.config has copyableAnnotations for @Qualifier."
+    ]
+  },
+  "CircularDependency": {
+    "patterns": [
+      "Requested bean is currently in creation",
+      "circular reference"
+    ],
+    "description": "Bean A and B depend on each other.",
+    "recommended_actions": [
+      "Add @Lazy at the chokepoint fields.",
+      "Check SPI provider wiring."
+    ]
+  },
+  "PortInUse": {
+    "patterns": [
+      "Address already in use",
+      "Port .+ was already in use"
+    ],
+    "description": "Another process is already bound to the service port.",
+    "recommended_actions": [
+      "Run dev.bat -Kill to stop stale Java processes.",
+      "Check for orphaned processes on the port."
+    ]
+  },
+  "KeycloakH2Corruption": {
+    "patterns": [
+      "MVStoreException",
+      "AccessDeniedException.*h2"
+    ],
+    "description": "Keycloak embedded H2 database corrupted on unclean shutdown.",
+    "recommended_actions": [
+      "Run dev.bat -FixKeycloak to purge and recreate."
+    ]
+  },
+  "StaleClassesAfterBranchSwitch": {
+    "patterns": [
+      "NoSuchMethodError",
+      "ClassNotFoundException",
+      "NoClassDefFoundError"
+    ],
+    "description": "Compiled classes from a different branch are poisoning the classpath.",
+    "recommended_actions": [
+      "Run dev.bat -Kill then dev.bat -Clean.",
+      "This is the #1 cause of mysterious failures after git checkout."
+    ]
+  }
+}
+```
+
+#### Fingerprint Assignment
+
+When the error watcher sees a log line matching a pattern:
+
+1. Emit `error.fingerprint.detected` event with `fingerprint`, `evidence` (the line or short excerpt), and `first_seen` timestamp.
+2. Update `runtime-status.json` -> `services.<name>.last_error.fingerprint` and `message`.
+3. Add fingerprint to the `run-summary.json` list for that service.
+
+#### `config/policies.json` (Agent Behavioral Hints)
+
+Optional but powerful file mapping states / fingerprints to recommended behavior. This turns your runtime into an environment that **teaches** the agent what to do, instead of leaving it to guess.
+
+```json
+{
+  "actions": {
+    "on_state": {
+      "COMPILING": {
+        "agent_should": "wait",
+        "min_wait_seconds": 15
+      },
+      "WARMING": {
+        "agent_should": "check_health",
+        "health_check_path": "/actuator/health"
+      },
+      "STALLED": {
+        "agent_should": "inspect_logs_then_suggest_restart"
+      },
+      "BUILD_FAILED": {
+        "agent_should": "inspect_logs_propose_code_changes"
+      }
+    },
+    "on_fingerprint": {
+      "MissingBeanQualifier": {
+        "agent_should": "inspect_source",
+        "hints": [
+          "Search for @Qualifier on fields mentioned in the stack trace.",
+          "Propose adding explicit @Qualifier(\"...\") on injection site."
+        ]
+      },
+      "CircularDependency": {
+        "agent_should": "inspect_source",
+        "hints": [
+          "Follow the chain in the error message.",
+          "Find the cross-module SPI field and add @Lazy."
+        ]
+      },
+      "StaleClassesAfterBranchSwitch": {
+        "agent_should": "run_command",
+        "command": "dev.bat -Kill && dev.bat -Clean",
+        "explanation": "Stale compiled classes are poisoning the runtime."
+      }
+    }
+  }
+}
+```
+
+### CLI Exit Codes
+
+Every command must use meaningful exit codes so agents can act on exit codes **without** parsing text:
+
+| Exit Code | Meaning |
+|-----------|---------|
+| `0` | Success or benign incomplete (e.g., `-Status`). |
+| `1` | Preflight failure (missing tools, Docker not running). |
+| `2` | Infra failed to start or health checks failed. |
+| `3` | At least one service `BUILD_FAILED`. |
+| `4` | All builds OK, but at least one service `CRASHED` or `STALLED`. |
+| `5` | Invalid arguments / misuse. |
+
+### Agent-Friendly CLI Extensions
+
+In addition to the existing commands, add these machine-oriented helpers:
+
+| Command | What It Does |
+|---------|-------------|
+| `dev.bat -JsonStatus` | Print `runtime-status.json` to stdout (no colors, single line). |
+| `dev.bat -ServiceStatus gateway` | Print JSON status for one service only. |
+| `dev.bat -ServiceLogs gateway -Tail 100` | Dump the last N lines of a service log to stdout (for quick agent ingestion). |
+| `dev.bat -ExplainState gateway` | High-level explanation / hints derived from `policies.json` and fingerprints (e.g., "Gateway is COMPILING and still inside expected window. Do not restart yet."). |
+
+CLI output should default to human-friendly, but the JSON subcommands are intentionally machine-oriented.
+
+### Behavioral Rules for Agents (How to Use Dev Mode)
+
+Feed this to any AI coding assistant or tool that hooks into this project:
+
+1. **Always call `dev.bat -JsonStatus` first** to understand current state; never assume.
+2. If a service is:
+    - `COMPILING` -> wait at least `expected_compile_seconds / 2` before taking action.
+    - `STARTING` / `WARMING` -> check health once before deciding it failed.
+    - `STALLED` -> inspect logs and fingerprints before restarting.
+    - `BUILD_FAILED` -> inspect logs, propose code changes; only then re-run.
+3. **Never call `-Kill` in a tight loop;** use `policies.json` to decide.
+4. When you propose changes, **reference fingerprints and the exact evidence lines** from logs, not vague "build failed" messages.
+
+You don't have to strap an agent directly onto Dev Mode right now, but this is the protocol you and future tooling can rely on.
+
+### Observability: Deep, But Cheap
+
+This is a local dev tool, not a SaaS product, so no heavyweight observability stack. But you should still:
+
+- Emit structured events and states as described above.
+- Track:
+    - Startup time per service.
+    - Build duration.
+    - Number of restarts in a run.
+    - Common fingerprints per week.
+
+Even basic counts and durations make agent behavior better, because the environment can say "this service usually takes about 35 seconds to get READY" instead of guessing.
+
+**Dev Mode must run with: PowerShell + Docker + Java + local Maven wrapper. No external DB or telemetry server required.**
+
+### Safety and Hygiene
+
+#### Retention
+
+- Keep N recent runs (configurable) in `logs/` and `state/`.
+- Older run artifacts can be zipped and archived, or deleted.
+
+#### Redaction
+
+- Optional: a simple regex-based redaction step in the error watcher to avoid writing secrets (tokens, passwords) to structured logs and events.
+
+#### Sandbox Assumptions
+
+Treat Dev Mode as a "semi-trusted sandbox":
+
+- All destructive operations (e.g., `-Clean`, `-FixKeycloak`) must:
+    - Emit events to `events.jsonl`.
+    - Be idempotent when possible.
+    - Warn before running if triggered repeatedly in a short window (agent loop detection).
+
+### Implementation Priority
+
+To avoid getting crushed by scope, implement in two waves:
+
+**First wave (do this now):**
+
+1. Add `services.json` and `infra.json` to `state/config/`.
+2. Implement `runtime-status.json` with canonical states and separate build/runtime sections.
+3. Implement `events.jsonl` with at least: `devmode.run.started`, `service.state.changed`, `service.build.failed`, `service.crashed`.
+4. Implement time-based classification into `STALLED` vs `CRASHED`.
+5. Normalize window titles to show canonical state names.
+6. Add `-JsonStatus` and `-ServiceStatus <name>` commands (machine-oriented output).
+7. Start `fingerprints.json` with 3-5 real patterns you already hit constantly (qualifier issues, circular deps, port in use, Keycloak H2).
+
+**Second wave (do this later):**
+
+- `policies.json` for agent behavioral hints.
+- `run-summary.json` post-run digest.
+- `-ExplainState` command.
+- Replay metadata and redaction.
+- Retention policies and log rotation by `run_id`.
+- Stall detection with `last_progress_at` tracking.
+
+---
+
 ## Summary
 
 This blueprint gives you:
@@ -1820,11 +2605,15 @@ This blueprint gives you:
 8. **Recovery tools** -- Keycloak repair, nuclear clean
 9. **Pre-flight validation** -- catches missing tools before you wait 60s for a crash
 10. **Monolith support** -- two-step Maven build, Lombok/Spring wiring guidance
+11. **Agentic Runtime Contract** -- canonical state machines, structured events, forensic artifacts, `run_id` correlation
+12. **Error fingerprinting** -- codified heuristics with agent-consumable recommended actions
+13. **Machine-readable CLI** -- `dev.bat -JsonStatus`, meaningful exit codes, no text parsing required
+14. **Agent behavioral policies** -- the runtime teaches agents what to do instead of leaving them to hallucinate
 
-Copy the files, customize the configuration section, and you have enterprise-grade developer experience.
+Copy the files, customize the configuration section, add your `services.json` and `infra.json`, and you have enterprise-grade developer experience that works for both humans and AI agents.
 
-**Remember:** A project that's a joy to develop becomes a product worth buying.
+**Remember:** A project that's a joy to develop becomes a product worth buying. And a runtime that agents can navigate without hallucinating becomes a codebase that scales with AI.
 
 ---
 
-*Battle-tested in a real production monorepo. Every gotcha in this document cost real debugging hours.*
+*Battle-tested in a real production monorepo. Every gotcha in this document cost real debugging hours. Every agentic runtime concept is designed so that your next AI coding assistant won't have to pay those hours again.*
