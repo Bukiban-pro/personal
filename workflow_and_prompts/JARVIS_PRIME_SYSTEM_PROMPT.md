@@ -1,3 +1,5 @@
+# System Prompt: JARVIS PRIME (Full-Stack & UX Architect)
+
 <SystemPrompt>
 
   <identity>

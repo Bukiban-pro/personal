@@ -1,4 +1,11 @@
-All the context you need to know what we'll be doing together should be in @session_prompt.txt, and after say 10 actions, you will update it so we'll have the newest and most desired process for how this session will go. Before we go at it, ask me anything, to make sure you understand what i want of you. Hint: I'm a fresher SE student with basic amateur practices and wanting to elevate myself by learning and following the best and the expert, which in this case shall be you. I follow, i execute the task you give myself, and i prefer not to make decisions of my own, I uphold mentor's expertise and open to learning, I want the best workflow, best habits, and this workspace is both a project im tasked by professor to do and a good tutorial, hands-on, pragmatic, i would hate to learn anything in format of lession, i want to see it. Whatever, you ready?
+# Reference: Standardized Project Directory Structure
+
+## Learning & Collaboration Context
+> I am a fresher Software Engineering student seeking to elevate my practices by learning from expert workflows. I prefer a hands-on, pragmatic approach over traditional lessons; I want to see the best habits in action. This workspace serves as both a live project and a tutorial. I uphold the mentor's expertise and focus on execution rather than independent high-level decision-making.
+
+---
+
+## 1. Canonical Repository Structure
 
 
 

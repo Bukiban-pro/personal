@@ -1,34 +1,35 @@
-<img src="https://r2cdn.perplexity.ai/pplx-full-logo-primary-dark%402x.png" style="height:64px;margin-right:32px"/>
+# Career: Java Fresher & Intern Application Tracker
 
-# done, now no more walls of texts please, so i can put under my pillow type shi
+## Objectives & Focus
+- **Target**: Fresher/Intern Java Backend roles.
+- **Goal**: High-fidelity application list for immediate action ("under-the-pillow list").
 
-Got it. Here’s your **final under‑the‑pillow list**.
+---
 
-### Where to Apply (Core)
+## 1. Where to Apply (Core Targets)
 
 - **KMS – Fresher Java**
-https://careers.kms-technology.com/job/fresher-java-software-engineer-744000055736355/[^1][^2]
+  https://careers.kms-technology.com/job/fresher-java-software-engineer-744000055736355/ [^1]
 - **Endava – Java Software Intern**
-https://vn.linkedin.com/jobs/view/java-software-intern-at-endava-4145588597[^3][^4]
+  https://vn.linkedin.com/jobs/view/java-software-intern-at-endava-4145588597 [^3]
 - **VNG – Software Intern (Backend/Java)**
-https://vn.linkedin.com/jobs/view/software-intern-at-vng-4166071624[^5][^6]
+  https://vn.linkedin.com/jobs/view/software-intern-at-vng-4166071624 [^5]
 - **Axon Active – Software Fresher Program**
-https://www.edu.axonactive.com/software-fresher-program[^7][^8]
+  https://www.edu.axonactive.com/software-fresher-program [^7]
 - **ELCA Vietnam – Java Fresher**
-Info: https://www.fit.hcmus.edu.vn/tin-tuc/d/grow-with-elca-vietnam-as-a-java-fresher[^9]
-Job ref: https://vn.linkedin.com/jobs/view/java-engineer-at-elca-vietnam-4234944555[^10]
+  - Info: https://www.fit.hcmus.edu.vn/tin-tuc/d/grow-with-elca-vietnam-as-a-java-fresher [^9]
+  - Job ref: https://vn.linkedin.com/jobs/view/java-engineer-at-elca-vietnam-4234944555 [^10]
 - **ISB (IVC) – Intern Java (Spring)**
-https://vn.linkedin.com/jobs/view/intern-java-spring-at-isb-vietnam-company-ivc-4069584072[^11]
+  https://vn.linkedin.com/jobs/view/intern-java-spring-at-isb-vietnam-company-ivc-4069584072 [^11]
 
+---
 
-### Prep Playbook (One File to Rule Them All)
+## 2. Preparation Assets
 
-- **Interview playbook (14 days, all free links, no‑brainer plan)**
-`intern-fresher-java-playbook.md`
+- **Interview Playbook**: `DEVELOPER_PLAYBOOK.md` (14-day, free-link, no-brainer plan).
 
-If you stick to that list + that file, you’re covered.
+---
 
-<div align="center">⁂</div>
 
 [^1]: https://careers.kms-technology.com/job/fresher-java-software-engineer-744000055736355/
 

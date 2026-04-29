@@ -1,4 +1,6 @@
-## Paranoid Free Model List (Copy-Paste Ready)
+# Reference: LLM Model Selection & API Keys
+
+## 1. Paranoid Free Model List (Copy-Paste Ready)
 
 | Provider | **FREE Models Only** (No billing ever) | RPM Limits | Key Confirmation |
 |----------|-------------------------------|------------|------------------|

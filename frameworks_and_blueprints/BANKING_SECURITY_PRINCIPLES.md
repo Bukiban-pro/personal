@@ -1,8 +1,11 @@
-The goal is not to build a system that can handle millions of users with a multi-million dollar budget, but to **demonstrate that you understand and can implement modern, risk-based security principles** using feasible, open-source tools.
+# Architecture: Risk-Based Banking Security (SBV Standards)
 
-Here is a practical, achievable plan.
+## Core Philosophy
+The objective is to demonstrate understanding and implementation of modern, risk-based security principles using feasible, open-source tools. This plan focuses on practical, academically sound logic rather than enterprise-scale budgets.
 
-### 1\. Simplify the Risk Engine: Build a "Rule-Based Decision Service"
+---
+
+## 1. Internal Rule-Based Decision Service
 
 Instead of a complex Machine Learning engine, you will build a simple, internal REST API service that acts as your risk engine. This is academically sound and teaches the core logic.
 
