@@ -6,3 +6,4 @@ Error states, dialogs, consent surfaces, loaders, and operational feedback layer
 - Good first picks: `Alert`, `ConfirmDialog`, `ErrorBoundary`, `ErrorState`, `CookieConsent`, `OverlayLoader`, `PagePreloader`, `TopLoadingBar`
 - Exact-component barrel: `components.ts`
 - Full export barrel: `index.ts`
+- Machine-readable metadata: `meta.json`

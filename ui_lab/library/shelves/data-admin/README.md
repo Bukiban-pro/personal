@@ -6,3 +6,4 @@ Dashboards, tables, charts, monitoring, timelines, and administrative informatio
 - Good first picks: `BentoGrid`, `KPICard`, `DataTable`, `AdvancedFilter`, `Timeline`, `RadarChart`, `NetworkGraph`, `MetricsDashboard`
 - Exact-component barrel: `components.ts`
 - Full export barrel: `index.ts`
+- Machine-readable metadata: `meta.json`

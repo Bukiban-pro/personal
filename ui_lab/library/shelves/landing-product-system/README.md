@@ -6,3 +6,4 @@ Enterprise landing/product sections with dedicated chapter guidance, starter kit
 - Good first picks: `LandingProductProof`, `LandingProductQBRFramework`, `LandingProductOperatingSystem`, `LandingProductTrustRegistry`
 - Exact-component barrel: `components.ts`
 - Full export barrel: `index.ts`
+- Machine-readable metadata: `meta.json`

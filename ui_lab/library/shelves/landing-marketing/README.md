@@ -6,3 +6,4 @@ General marketing sections, landing-page building blocks, and non-LandingProduct
 - Good first picks: `HeroSection`, `FeatureGrid`, `SocialProof`, `PricingCards`, `CTASection`, `FAQSection`, `AnnouncementBanner`, `Newsletter`
 - Exact-component barrel: `components.ts`
 - Full export barrel: `index.ts`
+- Machine-readable metadata: `meta.json`

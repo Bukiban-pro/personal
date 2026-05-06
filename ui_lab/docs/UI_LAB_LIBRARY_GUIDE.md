@@ -3,8 +3,9 @@
 This is the repo-level entrypoint. Use it to decide where to start before you dive into any single subsystem.
 
 ## Current Snapshot
-- Top-level component files: 588
+- Catalog component files: 588
 - Component tree files (including nested ui atoms): 634
+- Source component shelf root: `ui_lab/components/shelves`
 - LandingProduct components: 321
 - Non-LandingProduct components: 267
 - Legacy Landing* prefix components outside LandingProduct: 17
@@ -15,6 +16,8 @@ This is the repo-level entrypoint. Use it to decide where to start before you di
 - Component index: `ui_lab/library/component-index.json`
 - Shelf exact-component barrels: `ui_lab/library/shelves/*/components.ts`
 - Starter-lane exact-component barrels: `ui_lab/library/starter-lanes/*/components.ts`
+- Shelf metadata files: `ui_lab/library/shelves/*/meta.json`
+- Starter-lane metadata files: `ui_lab/library/starter-lanes/*/meta.json`
 - Top-level named export collisions: 0
 - Machine-readable registry: `ui_lab/configs/ui-lab-registry.json`
 - LandingProduct subsystem guide: `ui_lab/docs/LANDING_PRODUCT_LIBRARY_GUIDE.md`
@@ -31,9 +34,10 @@ This is the repo-level entrypoint. Use it to decide where to start before you di
 - By-name barrel: `ui_lab/library/by-name`
 - Machine-readable component index: `ui_lab/library/component-index.json`
 - Each shelf and starter-lane folder now also ships `components.ts`, which exposes exact file-name entries without helper exports.
+- Each shelf and starter-lane folder also ships `meta.json`, so folder-local machine-readable metadata lives next to the human README and barrels.
 
 ## Folder Map
-- Library: `52` files in `ui_lab/library` (generated grouped access layer count)
+- Library: `69` files in `ui_lab/library` (generated grouped access layer count)
 - Components: `634` files in `ui_lab/components` (recursive component tree count)
 - Layouts: `8` files in `ui_lab/layouts` (recursive folder count)
 - Hooks: `31` files in `ui_lab/hooks` (recursive folder count)
@@ -126,13 +130,14 @@ These pairs are not automatically wrong, but they are the first place to inspect
 - Additional watchlist entries in registry: 3
 
 ## API Surface
-- No duplicate top-level named exports found across top-level component files.
+- No duplicate named exports found across catalog component files.
 
 ## QA Status
 - Every component file is assigned to exactly one repo-level shelf.
 - Every starter lane references existing components only.
-- Every top-level component filename has an exact grouped entrypoint in `ui_lab/library/by-name`.
+- Every catalog component filename has an exact grouped entrypoint in `ui_lab/library/by-name`.
 - Every shelf and starter-lane folder now has a strict `components.ts` barrel for exact file-name imports only.
+- Physical shelf folders, when present, match the generator-owned shelf classification.
 - Folder counts are generated from disk, not manually maintained.
 - Top-level named component exports are collision-free.
 

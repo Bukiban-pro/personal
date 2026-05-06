@@ -1,0 +1,19 @@
+﻿{
+    "key":  "dashboard-core",
+    "label":  "Dashboard Core",
+    "useWhen":  "You are building a product or admin surface with metrics, tables, and workflow context.",
+    "count":  8,
+    "components":  [
+                       "BentoGrid",
+                       "KPICard",
+                       "DataTable",
+                       "AdvancedFilter",
+                       "Timeline",
+                       "StepIndicator",
+                       "Breadcrumbs",
+                       "NotificationCenter"
+                   ],
+    "exactExportPath":  "ui_lab/library/starter-lanes/dashboard-core/components.ts",
+    "fullExportPath":  "ui_lab/library/starter-lanes/dashboard-core/index.ts",
+    "readmePath":  "ui_lab/library/starter-lanes/dashboard-core/README.md"
+}

@@ -4,3 +4,4 @@
 - Components: `FormInput`, `FormSelect`, `FormTextarea`, `AdvancedAutocomplete`, `DateRangePicker`, `FileUpload`, `BadgeInput`, `SearchFilter`
 - Exact-component barrel: `components.ts`
 - Full export barrel: `index.ts`
+- Machine-readable metadata: `meta.json`

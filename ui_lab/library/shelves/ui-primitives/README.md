@@ -6,3 +6,4 @@ Small reusable surface elements used as atoms or composable presentation buildin
 - Good first picks: `Avatar`, `Badge`, `Popover`, `Sheet`, `Tooltip`, `StatusBadge`
 - Exact-component barrel: `components.ts`
 - Full export barrel: `index.ts`
+- Machine-readable metadata: `meta.json`

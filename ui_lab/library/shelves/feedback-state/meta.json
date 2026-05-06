@@ -1,0 +1,38 @@
+﻿{
+    "key":  "feedback-state",
+    "label":  "Feedback and State",
+    "description":  "Error states, dialogs, consent surfaces, loaders, and operational feedback layers.",
+    "count":  17,
+    "highlights":  [
+                       "Alert",
+                       "ConfirmDialog",
+                       "ErrorBoundary",
+                       "ErrorState",
+                       "CookieConsent",
+                       "OverlayLoader",
+                       "PagePreloader",
+                       "TopLoadingBar"
+                   ],
+    "components":  [
+                       "Alert",
+                       "AuthRequiredModal",
+                       "ConfirmDialog",
+                       "CookieConsent",
+                       "EmptyState",
+                       "ErrorBoundary",
+                       "ErrorState",
+                       "Loader",
+                       "Modal",
+                       "OfflineBanner",
+                       "OverlayLoader",
+                       "PageLoading",
+                       "PagePreloader",
+                       "ScrollToTop",
+                       "skeleton",
+                       "Toast",
+                       "TopLoadingBar"
+                   ],
+    "exactExportPath":  "ui_lab/library/shelves/feedback-state/components.ts",
+    "fullExportPath":  "ui_lab/library/shelves/feedback-state/index.ts",
+    "readmePath":  "ui_lab/library/shelves/feedback-state/README.md"
+}

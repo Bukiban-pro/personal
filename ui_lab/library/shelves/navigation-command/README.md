@@ -6,3 +6,4 @@ Menus, command surfaces, navigational scaffolding, and page-structure affordance
 - Good first picks: `CommandMenu`, `CommandPalette`, `FloatingNav`, `MegaMenu`, `MorphingNav`, `SideMenu`, `SlideTabs`, `Breadcrumbs`
 - Exact-component barrel: `components.ts`
 - Full export barrel: `index.ts`
+- Machine-readable metadata: `meta.json`

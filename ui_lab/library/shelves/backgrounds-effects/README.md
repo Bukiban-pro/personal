@@ -6,3 +6,4 @@ Ambient backgrounds, visual effects, particles, glow systems, and decorative dep
 - Good first picks: `AuroraBackground`, `GridPattern`, `GradientBlobs`, `Spotlight`, `Particles`, `RetroGrid`, `BorderBeam`, `WavyBackground`
 - Exact-component barrel: `components.ts`
 - Full export barrel: `index.ts`
+- Machine-readable metadata: `meta.json`

@@ -1,6 +1,6 @@
 ﻿# UI Lab Grouped Access Layer
 
-This folder is generated. It provides grouped entrypoints over the flat component stash without moving the source files.
+This folder is generated. It provides grouped entrypoints over the component source tree and keeps the shelf taxonomy consumable from one place.
 
 - Repo guide: `ui_lab/docs/UI_LAB_LIBRARY_GUIDE.md`
 - LandingProduct guide: `ui_lab/docs/LANDING_PRODUCT_LIBRARY_GUIDE.md`
@@ -9,11 +9,14 @@ This folder is generated. It provides grouped entrypoints over the flat componen
 - Component index: `ui_lab/library/component-index.json`
 - Shelf exact-component barrels: `ui_lab/library/shelves/*/components.ts`
 - Starter-lane exact-component barrels: `ui_lab/library/starter-lanes/*/components.ts`
+- Shelf metadata files: `ui_lab/library/shelves/*/meta.json`
+- Starter-lane metadata files: `ui_lab/library/starter-lanes/*/meta.json`
 
 ## Lookup
 - Use `ui_lab/library/by-name` when you know the component filename but not its shelf.
 - Use `ui_lab/library/component-index.json` for machine-readable lookup by name, shelf, and starter-lane membership.
 - Use `components.ts` inside a shelf or starter lane when you want exact file-name exports only, without helper exports.
+- Use `meta.json` inside a shelf or starter lane when you want folder-local machine-readable metadata.
 
 ## Shelves
 - `LandingProduct System`: `ui_lab/library/shelves/landing-product-system`

@@ -5,3 +5,4 @@ Components that still need sharper shelf placement or clearer naming before they
 - Component count: `0`
 - Exact-component barrel: `components.ts`
 - Full export barrel: `index.ts`
+- Machine-readable metadata: `meta.json`

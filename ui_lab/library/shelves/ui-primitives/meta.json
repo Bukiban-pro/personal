@@ -1,0 +1,30 @@
+﻿{
+    "key":  "ui-primitives",
+    "label":  "UI Primitives",
+    "description":  "Small reusable surface elements used as atoms or composable presentation building blocks.",
+    "count":  11,
+    "highlights":  [
+                       "Avatar",
+                       "Badge",
+                       "Popover",
+                       "Sheet",
+                       "Tooltip",
+                       "StatusBadge"
+                   ],
+    "components":  [
+                       "Avatar",
+                       "AvatarCircles",
+                       "badge",
+                       "Divider",
+                       "Menu",
+                       "popover",
+                       "sheet",
+                       "StatusBadge",
+                       "ThemeToggle",
+                       "ToggleGroup",
+                       "tooltip"
+                   ],
+    "exactExportPath":  "ui_lab/library/shelves/ui-primitives/components.ts",
+    "fullExportPath":  "ui_lab/library/shelves/ui-primitives/index.ts",
+    "readmePath":  "ui_lab/library/shelves/ui-primitives/README.md"
+}

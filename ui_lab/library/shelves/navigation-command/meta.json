@@ -1,0 +1,33 @@
+﻿{
+    "key":  "navigation-command",
+    "label":  "Navigation and Command",
+    "description":  "Menus, command surfaces, navigational scaffolding, and page-structure affordances.",
+    "count":  12,
+    "highlights":  [
+                       "CommandMenu",
+                       "CommandPalette",
+                       "FloatingNav",
+                       "MegaMenu",
+                       "MorphingNav",
+                       "SideMenu",
+                       "SlideTabs",
+                       "Breadcrumbs"
+                   ],
+    "components":  [
+                       "Breadcrumbs",
+                       "CommandMenu",
+                       "CommandPalette",
+                       "ContextMenu",
+                       "Dock",
+                       "FloatingNav",
+                       "MegaMenu",
+                       "MegaMenuComponent",
+                       "MorphingNav",
+                       "SideMenu",
+                       "SlideTabs",
+                       "StickyHeader"
+                   ],
+    "exactExportPath":  "ui_lab/library/shelves/navigation-command/components.ts",
+    "fullExportPath":  "ui_lab/library/shelves/navigation-command/index.ts",
+    "readmePath":  "ui_lab/library/shelves/navigation-command/README.md"
+}

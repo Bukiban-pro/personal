@@ -4,3 +4,4 @@
 - Components: `HeroSection`, `FeatureGrid`, `SocialProof`, `PricingCards`, `CTASection`, `FAQSection`, `LogoCloud`, `AnnouncementBanner`
 - Exact-component barrel: `components.ts`
 - Full export barrel: `index.ts`
+- Machine-readable metadata: `meta.json`

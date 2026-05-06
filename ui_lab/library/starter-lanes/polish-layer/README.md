@@ -4,3 +4,4 @@
 - Components: `AnimatedText`, `BlurFade`, `AuroraBackground`, `SpotlightCards`, `ComparisonSlider`, `PageTransition`, `TextScramble`, `GradientBlobs`
 - Exact-component barrel: `components.ts`
 - Full export barrel: `index.ts`
+- Machine-readable metadata: `meta.json`

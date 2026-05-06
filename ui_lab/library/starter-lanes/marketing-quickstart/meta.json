@@ -1,0 +1,19 @@
+﻿{
+    "key":  "marketing-quickstart",
+    "label":  "Marketing Quickstart",
+    "useWhen":  "You need a standard marketing page without entering the heavier enterprise subsystem.",
+    "count":  8,
+    "components":  [
+                       "HeroSection",
+                       "FeatureGrid",
+                       "SocialProof",
+                       "PricingCards",
+                       "CTASection",
+                       "FAQSection",
+                       "LogoCloud",
+                       "AnnouncementBanner"
+                   ],
+    "exactExportPath":  "ui_lab/library/starter-lanes/marketing-quickstart/components.ts",
+    "fullExportPath":  "ui_lab/library/starter-lanes/marketing-quickstart/index.ts",
+    "readmePath":  "ui_lab/library/starter-lanes/marketing-quickstart/README.md"
+}

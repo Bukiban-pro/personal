@@ -6,3 +6,4 @@ Input systems, editors, uploads, search filters, and workflow authoring tools.
 - Good first picks: `FormInput`, `FormSelect`, `FormTextarea`, `AdvancedAutocomplete`, `DateRangePicker`, `FileUpload`, `BadgeInput`, `RichTextEditor`
 - Exact-component barrel: `components.ts`
 - Full export barrel: `index.ts`
+- Machine-readable metadata: `meta.json`

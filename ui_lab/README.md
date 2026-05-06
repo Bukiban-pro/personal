@@ -4,17 +4,21 @@ This repo started as a ~221-file React pattern stash. It now contains a much lar
 
 ## Current Status
 
-- Top-level component files: 588
+- Flat root-level catalog files: 0
+- Catalog component files under `components/shelves`: 588
 - Component tree files including nested ui atoms: 634
 - LandingProduct components: 321
 - Repo-level shelves: 11
 - Repo-level starter lanes: 4
-- Grouped access layer files: 52
+- Grouped access layer files: 69
+- Component source root: `ui_lab/components/shelves`
 - Grouped access root: `ui_lab/library`
 - By-name barrel: `ui_lab/library/by-name`
 - Component index: `ui_lab/library/component-index.json`
 - Shelf exact-component barrels: `ui_lab/library/shelves/*/components.ts`
 - Starter-lane exact-component barrels: `ui_lab/library/starter-lanes/*/components.ts`
+- Shelf metadata files: `ui_lab/library/shelves/*/meta.json`
+- Starter-lane metadata files: `ui_lab/library/starter-lanes/*/meta.json`
 - Repo-level misc shelf: 0
 - Top-level named export collisions: 0
 - LandingProduct chapters: 6
@@ -24,16 +28,18 @@ This repo started as a ~221-file React pattern stash. It now contains a much lar
 ## Start Here
 
 1. Read `ui_lab/docs/UI_LAB_LIBRARY_GUIDE.md` for the repo-level shelf map, starter lanes, naming watchlist, and export-surface QA.
-2. Browse `ui_lab/library/` when you want actual shelf folders and starter-lane folders instead of the flat component stash.
+2. Browse `ui_lab/library/` when you want the generated shelf folders and starter-lane folders instead of walking the raw source tree.
 3. Use `ui_lab/library/by-name/` when you know the component filename but not the shelf.
 4. Use `ui_lab/library/component-index.json` when you need machine-readable lookup by component name, shelf, and starter-lane membership.
-5. Inside a shelf or starter-lane folder, use `components.ts` when you want exact file-name exports only and `index.ts` when you want the full module export surface.
-6. Use `ui_lab/configs/ui-lab-registry.json` when you need the machine-readable root inventory.
-7. Read `ui_lab/docs/UI_LAB_CURATION_QUEUE.md` for the active admin backlog around the remaining naming ambiguity.
-8. Read `ui_lab/docs/LANDING_PRODUCT_LIBRARY_GUIDE.md` when you are specifically entering the 321-file LandingProduct subsystem.
-9. Use `ui_lab/configs/landing-product-registry.json` for the machine-readable LandingProduct inventory.
-10. Use `ui_lab/HANDOFF_UI_MINING_2026-05-06.md` as the full LandingProduct archive and source inventory.
-11. Rerun `ui_lab/docs/generate-ui-lab-library-catalog.ps1` and `ui_lab/docs/generate-landing-product-catalog.ps1` after future inventory changes so the guides, registries, grouped folders, exact barrels, and by-name index stay honest.
+5. Use `ui_lab/components/shelves/` when you need the physical source files grouped by shelf.
+6. Inside a shelf or starter-lane folder, use `components.ts` when you want exact file-name exports only and `index.ts` when you want the full module export surface.
+7. Inside a shelf or starter-lane folder, use `meta.json` when you want folder-local machine-readable metadata without opening the repo-level registry.
+8. Use `ui_lab/configs/ui-lab-registry.json` when you need the machine-readable root inventory.
+9. Read `ui_lab/docs/UI_LAB_CURATION_QUEUE.md` for the active admin backlog around the remaining naming ambiguity.
+10. Read `ui_lab/docs/LANDING_PRODUCT_LIBRARY_GUIDE.md` when you are specifically entering the 321-file LandingProduct subsystem.
+11. Use `ui_lab/configs/landing-product-registry.json` for the machine-readable LandingProduct inventory.
+12. Use `ui_lab/HANDOFF_UI_MINING_2026-05-06.md` as the full LandingProduct archive and source inventory.
+13. Rerun `ui_lab/docs/generate-ui-lab-library-catalog.ps1` and `ui_lab/docs/generate-landing-product-catalog.ps1` after future inventory changes so the guides, registries, grouped folders, exact barrels, metadata files, and by-name index stay honest.
 
 ## What This README Still Covers
 

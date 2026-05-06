@@ -1,0 +1,43 @@
+﻿{
+    "key":  "forms-authoring",
+    "label":  "Forms and Authoring",
+    "description":  "Input systems, editors, uploads, search filters, and workflow authoring tools.",
+    "count":  22,
+    "highlights":  [
+                       "FormInput",
+                       "FormSelect",
+                       "FormTextarea",
+                       "AdvancedAutocomplete",
+                       "DateRangePicker",
+                       "FileUpload",
+                       "BadgeInput",
+                       "RichTextEditor"
+                   ],
+    "components":  [
+                       "AdvancedAutocomplete",
+                       "BadgeInput",
+                       "ColorPicker",
+                       "DateRangePicker",
+                       "DragDropZone",
+                       "FileUpload",
+                       "FormCheckboxGroup",
+                       "FormFieldArray",
+                       "FormInput",
+                       "FormRadioGroup",
+                       "FormSelect",
+                       "FormSlider",
+                       "FormTextarea",
+                       "FormToggle",
+                       "InputAddon",
+                       "MarkdownEditor",
+                       "pagination",
+                       "QRCodeGenerator",
+                       "ResizablePanel",
+                       "RichTextEditor",
+                       "SearchFilter",
+                       "SignaturePad"
+                   ],
+    "exactExportPath":  "ui_lab/library/shelves/forms-authoring/components.ts",
+    "fullExportPath":  "ui_lab/library/shelves/forms-authoring/index.ts",
+    "readmePath":  "ui_lab/library/shelves/forms-authoring/README.md"
+}
