@@ -13,12 +13,12 @@ import * as React from "react";
  * Use: Hero sections, dramatic reveals, landing pages
  */
 
-export interface TextRevealProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface TextRevealOnScrollProps extends React.HTMLAttributes<HTMLDivElement> {
   text: string;
   direction?: "ltr" | "rtl" | "top" | "bottom";
 }
 
-export const TextReveal = React.forwardRef<HTMLDivElement, TextRevealProps>(
+export const TextRevealOnScroll = React.forwardRef<HTMLDivElement, TextRevealOnScrollProps>(
   (
     {
       text,
@@ -78,4 +78,4 @@ export const TextReveal = React.forwardRef<HTMLDivElement, TextRevealProps>(
   },
 );
 
-TextReveal.displayName = "TextReveal";
+TextRevealOnScroll.displayName = "TextRevealOnScroll";

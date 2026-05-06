@@ -14,21 +14,21 @@ import * as React from "react";
  * Use: Code editors, file explorers, documentation sidebars
  */
 
-export interface FileTreeNode {
+export interface FileTreeExplorerNode {
   id: string;
   name: string;
   type: "file" | "folder";
   icon?: React.ReactNode;
-  children?: FileTreeNode[];
+  children?: FileTreeExplorerNode[];
 }
 
-export interface FileTreeProps extends React.HTMLAttributes<HTMLDivElement> {
-  nodes: FileTreeNode[];
-  onSelect?: (node: FileTreeNode) => void;
+export interface FileTreeExplorerProps extends React.HTMLAttributes<HTMLDivElement> {
+  nodes: FileTreeExplorerNode[];
+  onSelect?: (node: FileTreeExplorerNode) => void;
   selectedId?: string;
 }
 
-export const FileTree = React.forwardRef<HTMLDivElement, FileTreeProps>(
+export const FileTreeExplorer = React.forwardRef<HTMLDivElement, FileTreeExplorerProps>(
   (
     {
       nodes,
@@ -49,7 +49,7 @@ export const FileTree = React.forwardRef<HTMLDivElement, FileTreeProps>(
       });
     };
 
-    const renderNode = (node: FileTreeNode, depth: number = 0) => {
+    const renderNode = (node: FileTreeExplorerNode, depth: number = 0) => {
       const isExpanded = expandedIds.has(node.id);
       const hasChildren = node.children && node.children.length > 0;
 
@@ -98,4 +98,4 @@ export const FileTree = React.forwardRef<HTMLDivElement, FileTreeProps>(
   },
 );
 
-FileTree.displayName = "FileTree";
+FileTreeExplorer.displayName = "FileTreeExplorer";

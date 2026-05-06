@@ -14,7 +14,7 @@ import * as React from "react";
  * Use: Project milestones, activity history, product roadmaps
  */
 
-export interface TimelineEvent {
+export interface TimelineComponentEvent {
   id: string;
   title: string;
   description?: string;
@@ -23,12 +23,12 @@ export interface TimelineEvent {
   status?: "completed" | "in-progress" | "pending";
 }
 
-export interface TimelineProps extends React.HTMLAttributes<HTMLDivElement> {
-  events: TimelineEvent[];
+export interface TimelineComponentProps extends React.HTMLAttributes<HTMLDivElement> {
+  events: TimelineComponentEvent[];
   orientation?: "vertical" | "horizontal";
 }
 
-export const Timeline = React.forwardRef<HTMLDivElement, TimelineProps>(
+export const TimelineComponent = React.forwardRef<HTMLDivElement, TimelineComponentProps>(
   (
     {
       events,
@@ -104,4 +104,4 @@ export const Timeline = React.forwardRef<HTMLDivElement, TimelineProps>(
   },
 );
 
-Timeline.displayName = "Timeline";
+TimelineComponent.displayName = "TimelineComponent";

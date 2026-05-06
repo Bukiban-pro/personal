@@ -14,13 +14,13 @@ import * as React from "react";
  * Use: Blog posts, long pages, reading progress
  */
 
-export interface ScrollProgressProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface ScrollProgressIndicatorProps extends React.HTMLAttributes<HTMLDivElement> {
   variant?: "bar" | "circle" | "percentage";
   position?: "top" | "bottom";
   color?: string;
 }
 
-export const ScrollProgress = React.forwardRef<HTMLDivElement, ScrollProgressProps>(
+export const ScrollProgressIndicator = React.forwardRef<HTMLDivElement, ScrollProgressIndicatorProps>(
   (
     {
       variant = "bar",
@@ -136,4 +136,4 @@ export const ScrollProgress = React.forwardRef<HTMLDivElement, ScrollProgressPro
   },
 );
 
-ScrollProgress.displayName = "ScrollProgress";
+ScrollProgressIndicator.displayName = "ScrollProgressIndicator";

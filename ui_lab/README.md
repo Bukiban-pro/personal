@@ -1,6 +1,43 @@
 # React Kit — Universal Pattern Reference
 
-**~221 files** across layouts, components, ui atoms, hooks, lib utilities, providers, stores, configs, and styling. Copy into any React/Next.js/Vite project.
+This repo started as a ~221-file React pattern stash. It now contains a much larger component tree with a dedicated LandingProduct subsystem, so the raw folder view is no longer a good first entrypoint.
+
+## Current Status
+
+- Top-level component files: 588
+- Component tree files including nested ui atoms: 634
+- LandingProduct components: 321
+- Repo-level shelves: 11
+- Repo-level starter lanes: 4
+- Grouped access layer files: 52
+- Grouped access root: `ui_lab/library`
+- By-name barrel: `ui_lab/library/by-name`
+- Component index: `ui_lab/library/component-index.json`
+- Shelf exact-component barrels: `ui_lab/library/shelves/*/components.ts`
+- Starter-lane exact-component barrels: `ui_lab/library/starter-lanes/*/components.ts`
+- Repo-level misc shelf: 0
+- Top-level named export collisions: 0
+- LandingProduct chapters: 6
+- LandingProduct starter kits: 5
+- Inventory status: QA-checked against the file system and regenerated entrypoints via `ui_lab/docs/generate-ui-lab-library-catalog.ps1` and `ui_lab/docs/generate-landing-product-catalog.ps1`
+
+## Start Here
+
+1. Read `ui_lab/docs/UI_LAB_LIBRARY_GUIDE.md` for the repo-level shelf map, starter lanes, naming watchlist, and export-surface QA.
+2. Browse `ui_lab/library/` when you want actual shelf folders and starter-lane folders instead of the flat component stash.
+3. Use `ui_lab/library/by-name/` when you know the component filename but not the shelf.
+4. Use `ui_lab/library/component-index.json` when you need machine-readable lookup by component name, shelf, and starter-lane membership.
+5. Inside a shelf or starter-lane folder, use `components.ts` when you want exact file-name exports only and `index.ts` when you want the full module export surface.
+6. Use `ui_lab/configs/ui-lab-registry.json` when you need the machine-readable root inventory.
+7. Read `ui_lab/docs/UI_LAB_CURATION_QUEUE.md` for the active admin backlog around the remaining naming ambiguity.
+8. Read `ui_lab/docs/LANDING_PRODUCT_LIBRARY_GUIDE.md` when you are specifically entering the 321-file LandingProduct subsystem.
+9. Use `ui_lab/configs/landing-product-registry.json` for the machine-readable LandingProduct inventory.
+10. Use `ui_lab/HANDOFF_UI_MINING_2026-05-06.md` as the full LandingProduct archive and source inventory.
+11. Rerun `ui_lab/docs/generate-ui-lab-library-catalog.ps1` and `ui_lab/docs/generate-landing-product-catalog.ps1` after future inventory changes so the guides, registries, grouped folders, exact barrels, and by-name index stay honest.
+
+## What This README Still Covers
+
+The inventory below is a legacy snapshot of the original base kit. It is still useful for the earlier cross-category stash, but it does not describe the full repo-level shelf map or the full 321-file LandingProduct surface.
 
 Built from 8 audit phases:
 1. **Clean** — extracted 47 raw files from 3 frontends
@@ -43,7 +80,7 @@ Files use `@/` path aliases (e.g., `@/lib/utils`, `@/lib/motion`). Configure you
 
 Or swap to relative imports when adopting individual files.
 
-## File Inventory
+## Legacy Base-Kit Snapshot
 
 ### layouts/ (8 files)
 `AppShell` · `AuthLayout` · `Footer` · `MobileBottomNav` · `PageContainer` · `PublicLayout` · `SidebarLayout` · `StickyHeader`

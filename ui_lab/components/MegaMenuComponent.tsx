@@ -14,25 +14,25 @@ import * as React from "react";
  * Use: Product navigation, complex site menus
  */
 
-export interface MegaMenuItem {
+export interface MegaMenuComponentItem {
   label: string;
   href?: string;
   icon?: React.ReactNode;
   description?: string;
   featured?: boolean;
-  submenu?: MegaMenuItem[];
+  submenu?: MegaMenuComponentItem[];
 }
 
-export interface MegaMenuProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface MegaMenuComponentProps extends React.HTMLAttributes<HTMLDivElement> {
   trigger: React.ReactNode;
   items: Array<{
     title: string;
-    items: MegaMenuItem[];
+    items: MegaMenuComponentItem[];
   }>;
   columns?: number;
 }
 
-export const MegaMenu = React.forwardRef<HTMLDivElement, MegaMenuProps>(
+export const MegaMenuComponent = React.forwardRef<HTMLDivElement, MegaMenuComponentProps>(
   (
     {
       trigger,
@@ -114,4 +114,4 @@ export const MegaMenu = React.forwardRef<HTMLDivElement, MegaMenuProps>(
   },
 );
 
-MegaMenu.displayName = "MegaMenu";
+MegaMenuComponent.displayName = "MegaMenuComponent";

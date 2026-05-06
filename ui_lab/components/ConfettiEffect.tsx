@@ -42,18 +42,18 @@ type Api = {
   fire: (options?: ConfettiOptions) => void
 }
 
-type ConfettiProps = React.ComponentPropsWithRef<"canvas"> & {
+export type ConfettiEffectProps = React.ComponentPropsWithRef<"canvas"> & {
   options?: ConfettiOptions
   globalOptions?: ConfettiGlobalOptions
   manualstart?: boolean
   children?: ReactNode
 }
 
-export type ConfettiRef = Api | null
+export type ConfettiEffectRef = Api | null
 
 const ConfettiContext = createContext<Api>({} as Api)
 
-export const Confetti = forwardRef<ConfettiRef, ConfettiProps>((props, ref) => {
+export const ConfettiEffect = forwardRef<ConfettiEffectRef, ConfettiEffectProps>((props, ref) => {
   const { options, globalOptions = { resize: true, useWorker: true }, manualstart = false, children, ...rest } = props
   const instanceRef = useRef<ConfettiInstance | null>(null)
 
@@ -107,13 +107,13 @@ export const Confetti = forwardRef<ConfettiRef, ConfettiProps>((props, ref) => {
   )
 })
 
-Confetti.displayName = "Confetti"
+ConfettiEffect.displayName = "ConfettiEffect"
 
-interface ConfettiButtonProps extends React.ComponentProps<"button"> {
+interface ConfettiEffectButtonProps extends React.ComponentProps<"button"> {
   options?: ConfettiOptions & ConfettiGlobalOptions & { canvas?: HTMLCanvasElement }
 }
 
-export function ConfettiButton({ options, children, ...props }: ConfettiButtonProps) {
+export function ConfettiEffectButton({ options, children, ...props }: ConfettiEffectButtonProps) {
   const handleClick = async (event: React.MouseEvent<HTMLButtonElement>) => {
     try {
       const rect = event.currentTarget.getBoundingClientRect()

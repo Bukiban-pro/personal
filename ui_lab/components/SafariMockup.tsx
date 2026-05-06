@@ -31,14 +31,14 @@ const HEIGHT_PCT = (SCREEN_HEIGHT / SAFARI_HEIGHT) * 100
 
 type SafariMode = "default" | "simple"
 
-export interface SafariProps extends HTMLAttributes<HTMLDivElement> {
+export interface SafariMockupProps extends HTMLAttributes<HTMLDivElement> {
   url?: string
   imageSrc?: string
   videoSrc?: string
   mode?: SafariMode
 }
 
-export function Safari({ imageSrc, videoSrc, url, mode = "default", className, style, ...props }: SafariProps) {
+export function SafariMockup({ imageSrc, videoSrc, url, mode = "default", className, style, ...props }: SafariMockupProps) {
   const hasVideo = !!videoSrc
   const hasMedia = hasVideo || !!imageSrc
 
@@ -104,3 +104,5 @@ export function Safari({ imageSrc, videoSrc, url, mode = "default", className, s
     </div>
   )
 }
+
+SafariMockup.displayName = "SafariMockup"

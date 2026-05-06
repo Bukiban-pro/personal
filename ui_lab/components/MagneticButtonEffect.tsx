@@ -13,12 +13,12 @@ import * as React from "react";
  * Use: CTA buttons, interactive elements, premium UX
  */
 
-export interface MagneticButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+export interface MagneticButtonEffectProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   pullDistance?: number;
   children: React.ReactNode;
 }
 
-export const MagneticButton = React.forwardRef<HTMLButtonElement, MagneticButtonProps>(
+export const MagneticButtonEffect = React.forwardRef<HTMLButtonElement, MagneticButtonEffectProps>(
   (
     {
       pullDistance = 100,
@@ -75,4 +75,4 @@ export const MagneticButton = React.forwardRef<HTMLButtonElement, MagneticButton
   },
 );
 
-MagneticButton.displayName = "MagneticButton";
+MagneticButtonEffect.displayName = "MagneticButtonEffect";

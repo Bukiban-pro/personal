@@ -13,13 +13,13 @@ import * as React from "react";
  * Use: Premium cards, featured elements, visual emphasis
  */
 
-export interface BorderBeamProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface BorderBeamEffectProps extends React.HTMLAttributes<HTMLDivElement> {
   color?: string;
   speed?: number;
   children: React.ReactNode;
 }
 
-export const BorderBeam = React.forwardRef<HTMLDivElement, BorderBeamProps>(
+export const BorderBeamEffect = React.forwardRef<HTMLDivElement, BorderBeamEffectProps>(
   (
     {
       color = "#06b6d4",
@@ -63,4 +63,4 @@ export const BorderBeam = React.forwardRef<HTMLDivElement, BorderBeamProps>(
   },
 );
 
-BorderBeam.displayName = "BorderBeam";
+BorderBeamEffect.displayName = "BorderBeamEffect";

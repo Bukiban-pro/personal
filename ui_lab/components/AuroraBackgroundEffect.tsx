@@ -13,13 +13,13 @@ import * as React from "react";
  * Use: Hero backgrounds, landing pages, premium sections
  */
 
-export interface AuroraBackgroundProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface AuroraBackgroundEffectProps extends React.HTMLAttributes<HTMLDivElement> {
   colors?: string[];
   blur?: number;
   speed?: number;
 }
 
-export const AuroraBackground = React.forwardRef<HTMLDivElement, AuroraBackgroundProps>(
+export const AuroraBackgroundEffect = React.forwardRef<HTMLDivElement, AuroraBackgroundEffectProps>(
   (
     {
       colors = ["#ff0080", "#7928ca", "#1e3a8a"],
@@ -86,4 +86,4 @@ export const AuroraBackground = React.forwardRef<HTMLDivElement, AuroraBackgroun
   },
 );
 
-AuroraBackground.displayName = "AuroraBackground";
+AuroraBackgroundEffect.displayName = "AuroraBackgroundEffect";

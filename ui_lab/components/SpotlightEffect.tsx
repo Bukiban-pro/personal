@@ -13,13 +13,13 @@ import * as React from "react";
  * Use: Hero sections, decorative backgrounds, interactive highlights
  */
 
-export interface SpotlightProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface SpotlightEffectProps extends React.HTMLAttributes<HTMLDivElement> {
   size?: number;
   color?: string;
   opacity?: number;
 }
 
-export const Spotlight = React.forwardRef<HTMLDivElement, SpotlightProps>(
+export const SpotlightEffect = React.forwardRef<HTMLDivElement, SpotlightEffectProps>(
   (
     {
       size = 300,
@@ -68,4 +68,4 @@ export const Spotlight = React.forwardRef<HTMLDivElement, SpotlightProps>(
   },
 );
 
-Spotlight.displayName = "Spotlight";
+SpotlightEffect.displayName = "SpotlightEffect";

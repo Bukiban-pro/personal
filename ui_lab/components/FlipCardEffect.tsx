@@ -13,13 +13,13 @@ import * as React from "react";
  * Use: Portfolio, product showcase, interactive cards
  */
 
-export interface FlipCardProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface FlipCardEffectProps extends React.HTMLAttributes<HTMLDivElement> {
   front: React.ReactNode;
   back: React.ReactNode;
   trigger?: "hover" | "click";
 }
 
-export const FlipCard = React.forwardRef<HTMLDivElement, FlipCardProps>(
+export const FlipCardEffect = React.forwardRef<HTMLDivElement, FlipCardEffectProps>(
   (
     {
       front,
@@ -72,4 +72,4 @@ export const FlipCard = React.forwardRef<HTMLDivElement, FlipCardProps>(
   },
 );
 
-FlipCard.displayName = "FlipCard";
+FlipCardEffect.displayName = "FlipCardEffect";

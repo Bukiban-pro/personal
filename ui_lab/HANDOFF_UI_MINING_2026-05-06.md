@@ -9,6 +9,15 @@
 
 ## What Was Added In Recent Waves
 
+### Landing Product Legacy Foundation
+- LandingProductFeature.tsx
+- LandingProductFeatureKeyPoints.tsx
+- LandingProductFeaturesGrid.tsx
+- LandingProductProblemSolution.tsx
+- LandingProductSteps.tsx
+- LandingProductTour.tsx
+- LandingProductVideoFeature.tsx
+
 ### Landing Product Core Expansion
 - LandingProductProof.tsx
 - LandingProductComparison.tsx

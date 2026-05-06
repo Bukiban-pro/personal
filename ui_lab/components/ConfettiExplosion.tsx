@@ -13,14 +13,14 @@ import * as React from "react";
  * Use: Success states, celebrations, gamification
  */
 
-export interface ConfettiProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface ConfettiExplosionProps extends React.HTMLAttributes<HTMLDivElement> {
   particles?: string[];
   count?: number;
   trigger?: "click" | "mount";
   gravity?: number;
 }
 
-export const Confetti = React.forwardRef<HTMLDivElement, ConfettiProps>(
+export const ConfettiExplosion = React.forwardRef<HTMLDivElement, ConfettiExplosionProps>(
   (
     {
       particles = ["🎉", "🎊", "✨", "🎈"],
@@ -120,4 +120,4 @@ export const Confetti = React.forwardRef<HTMLDivElement, ConfettiProps>(
   },
 );
 
-Confetti.displayName = "Confetti";
+ConfettiExplosion.displayName = "ConfettiExplosion";
