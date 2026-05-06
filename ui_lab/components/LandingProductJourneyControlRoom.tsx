@@ -1,0 +1,82 @@
+import { cn } from "@/lib/utils";
+import * as React from "react";
+
+export interface JourneyControlRoomView {
+  title: string;
+  summary?: string;
+  metrics?: Array<{ label: string; value: string }>;
+  watchItems?: string[];
+}
+
+export interface LandingProductJourneyControlRoomProps extends React.HTMLAttributes<HTMLElement> {
+  title?: string;
+  description?: string;
+  views: JourneyControlRoomView[];
+}
+
+export const LandingProductJourneyControlRoom = React.forwardRef<HTMLElement, LandingProductJourneyControlRoomProps>(
+  ({ className, title = "Turn the journey into a control room, not a passive map", description, views, ...props }, ref) => {
+    const [activeIndex, setActiveIndex] = React.useState(0);
+    const activeView = views.length > 0 ? views[Math.min(activeIndex, views.length - 1)] : null;
+
+    return (
+      <section ref={ref} className={cn("w-full py-12 lg:py-16", className)} {...props}>
+        <div className="mx-auto flex w-full max-w-6xl flex-col gap-8 px-6">
+          <div className="flex flex-col gap-3">
+            <h2 className="text-3xl font-semibold tracking-tight md:text-4xl">{title}</h2>
+            {description ? <p className="max-w-2xl text-base text-muted-foreground md:text-lg">{description}</p> : null}
+          </div>
+          <div className="grid gap-6 lg:grid-cols-[0.32fr_0.68fr]">
+            <div className="space-y-3">
+              {views.map((view, index) => {
+                const isActive = index === Math.min(activeIndex, Math.max(views.length - 1, 0));
+
+                return (
+                  <button
+                    key={view.title}
+                    type="button"
+                    onClick={() => setActiveIndex(index)}
+                    className={cn(
+                      "w-full rounded-2xl border p-5 text-left transition-colors",
+                      isActive ? "border-primary bg-primary/5 shadow-sm" : "border-border bg-card hover:bg-muted/40",
+                    )}
+                  >
+                    <div className="text-base font-semibold tracking-tight">{view.title}</div>
+                    {view.summary ? <p className="mt-3 text-sm leading-6 text-muted-foreground">{view.summary}</p> : null}
+                  </button>
+                );
+              })}
+            </div>
+            <div className="rounded-3xl border border-border bg-card p-6 shadow-sm lg:p-8">
+              {activeView ? (
+                <>
+                  <h3 className="text-2xl font-semibold tracking-tight md:text-3xl">{activeView.title}</h3>
+                  {activeView.summary ? <p className="mt-3 text-sm leading-7 text-muted-foreground md:text-base">{activeView.summary}</p> : null}
+                  <div className="mt-6 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+                    {(activeView.metrics || []).map((metric) => (
+                      <div key={metric.label} className="rounded-2xl border border-border bg-muted/30 p-4">
+                        <div className="text-sm font-medium text-muted-foreground">{metric.label}</div>
+                        <div className="mt-2 text-2xl font-semibold tracking-tight">{metric.value}</div>
+                      </div>
+                    ))}
+                  </div>
+                  <div className="mt-6 grid gap-3">
+                    {(activeView.watchItems || []).map((item) => (
+                      <div key={item} className="rounded-2xl border border-border bg-background px-4 py-3 text-sm text-muted-foreground">
+                        {item}
+                      </div>
+                    ))}
+                  </div>
+                </>
+              ) : (
+                <div className="text-sm text-muted-foreground">Add views to populate the control room.</div>
+              )}
+            </div>
+          </div>
+        </div>
+      </section>
+    );
+  },
+);
+
+LandingProductJourneyControlRoom.displayName = "LandingProductJourneyControlRoom";
