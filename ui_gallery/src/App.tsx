@@ -297,6 +297,7 @@ const _nx = {
 }
 
 const _pick = (pool: string[], i: number) => pool[i % pool.length]
+const _hash = (s: string) => s.split('').reduce((a, c) => (a * 31 + c.charCodeAt(0)) & 0xffff, 0)
 
 // Detects generic placeholder strings from the auto-samples.json generator
 function _isPlaceholder(v: unknown): boolean {
@@ -422,18 +423,41 @@ function _nxDescription(componentName: string): string {
   for (const [k, v] of Object.entries(map)) {
     if (clean.includes(k)) return v
   }
-  return _pick(_nx.descriptions, 0)
+  return _pick(_nx.descriptions, _hash(clean))
 }
 
 // ─── Smart prop injection ─────────────────────────────────────────────────────
 function withHarnessDefaults(baseProps: Record<string, unknown>, componentName: string, shelf: string): Record<string, unknown> {
   const next = { ...baseProps }
 
+  // ── Universal pass: replace top-level placeholder strings on ALL shelves ───
+  if (_isPlaceholder(next.title)) next.title = componentName.replace(/([A-Z])/g, ' $1').trim()
+  if (_isPlaceholder(next.description)) next.description = _pick(_nx.descriptions, _hash(componentName))
+  if (_isPlaceholder(next.subtitle as string | undefined)) next.subtitle = _pick(_nx.descriptions, _hash(componentName) + 1)
+  // Walk all top-level arrays on all shelves — enriches items/strings in any component
+  for (const key of Object.keys(next)) {
+    const val = next[key]
+    if (!Array.isArray(val)) continue
+    next[key] = (val as unknown[]).map((item, i) => {
+      if (item && typeof item === 'object' && !Array.isArray(item)) {
+        return _enrichItem(item as Record<string, unknown>, i, key)
+      }
+      if (typeof item === 'string' && _isPlaceholder(item)) {
+        return _enrichField(key, i)
+      }
+      return item
+    })
+  }
+
   // ── Landing enrichment (covers all 321 LandingProduct* + 38 landing-marketing) ─
   if (shelf === 'landing-product-system' || shelf === 'landing-marketing') {
-    // Top-level title / description
+    // Top-level scalar fields
     if (_isPlaceholder(next.title)) next.title = _nxTitle(componentName)
     if (_isPlaceholder(next.description)) next.description = _nxDescription(componentName)
+    if (_isPlaceholder(next.subtitle as string | undefined)) next.subtitle = _nxDescription(componentName)
+    if (_isPlaceholder(next.tagline as string | undefined)) next.tagline = _pick(_nx.features, _hash(componentName))
+    if (_isPlaceholder(next.eyebrow as string | undefined)) next.eyebrow = _pick(_nx.features, _hash(componentName) + 3)
+    if (_isPlaceholder(next.caption as string | undefined)) next.caption = _nxDescription(componentName)
 
     // Walk all array props and enrich item objects / string values
     for (const key of Object.keys(next)) {
@@ -634,32 +658,38 @@ function withHarnessDefaults(baseProps: Record<string, unknown>, componentName: 
   ])
   if (TEXT_INLINE.has(componentName)) {
     if (!next.className) next.className = 'text-3xl font-bold text-white'
-    if (!next.children && !next.text) next.children = 'Build the future'
+    if (!next.children || _isPlaceholder(next.children as string)) next.children = 'Build the future'
+    if (!next.text || _isPlaceholder(next.text as string)) next.text = 'Build the future'
   }
 
-  if (componentName === 'KineticText' && typeof next.text !== 'string') next.text = 'Build the future'
-  if (componentName === 'LineShadowText' && !next.children) next.children = 'Ship fast'
+  if (componentName === 'KineticText' && (typeof next.text !== 'string' || _isPlaceholder(next.text as string))) next.text = 'Build the future'
+  if (componentName === 'LineShadowText' && (!next.children || _isPlaceholder(next.children as string))) next.children = 'Ship fast'
+
+  const _isPlaceholderArray = (v: unknown) => Array.isArray(v) && (v as unknown[]).every(item => typeof item === 'string' && _isPlaceholder(item))
 
   if (componentName === 'MorphingText') {
-    if (!next.texts) next.texts = ['Design', 'Build', 'Deploy', 'Scale']
+    if (!next.texts || _isPlaceholderArray(next.texts)) next.texts = ['Design', 'Build', 'Deploy', 'Scale']
     if (!next.className) next.className = 'text-3xl font-bold text-white'
   }
   if (componentName === 'TextLoop') {
-    if (!next.items && !next.children) next.items = ['Developers', 'Designers', 'Founders', 'Builders']
+    if ((!next.items && !next.children) || _isPlaceholderArray(next.items) || _isPlaceholderArray(next.words)) {
+      next.items = ['Developers', 'Designers', 'Founders', 'Builders']
+      next.words = next.items
+    }
     if (!next.className) next.className = 'text-3xl font-bold text-white'
   }
   if (componentName === 'TextMorph') {
-    if (!next.texts) next.texts = ['Hello', 'World', 'Ship', 'Fast']
+    if (!next.texts || _isPlaceholderArray(next.texts)) next.texts = ['Hello', 'World', 'Ship', 'Fast']
     if (!next.className) next.className = 'text-4xl font-bold text-white'
   }
   if (componentName === 'TypingAnimation') {
-    if (!next.children && !next.words) {
+    if ((!next.children && !next.words) || _isPlaceholderArray(next.words)) {
       next.words = ['Build the future', 'Design with intent', 'Ship with confidence']
     }
     if (!next.className) next.className = 'text-2xl font-bold text-white'
   }
   if (componentName === 'WordRotate') {
-    if (!next.words) next.words = ['Beautiful', 'Fast', 'Accessible', 'Modern']
+    if (!next.words || _isPlaceholderArray(next.words)) next.words = ['Beautiful', 'Fast', 'Accessible', 'Modern']
     if (!next.className) next.className = 'text-3xl font-bold text-white'
   }
   if (componentName === 'NumberTicker') {
@@ -677,12 +707,13 @@ function withHarnessDefaults(baseProps: Record<string, unknown>, componentName: 
     if (next.max === undefined) next.max = 100
   }
   if (componentName === 'CountUpStats') {
-    if (!next.stats) {
+    const statsHaveplaceholder = Array.isArray(next.stats) && (next.stats as Record<string, unknown>[]).some(s => _isPlaceholder(s.label as string))
+    if (!next.stats || statsHaveplaceholder) {
       next.stats = [
-        { value: 50000, label: 'Users', suffix: '+' },
-        { value: 99.9, label: 'Uptime', suffix: '%', decimals: 1 },
+        { value: 50000, label: 'Active Users', suffix: '+' },
+        { value: 99.9, label: 'Uptime SLA', suffix: '%', decimals: 1 },
         { value: 150, label: 'Countries' },
-        { value: 4.9, label: 'Rating', prefix: '★', decimals: 1 },
+        { value: 4.9, label: 'Avg Rating', prefix: '★', decimals: 1 },
       ]
     }
   }
@@ -832,6 +863,36 @@ function withHarnessDefaults(baseProps: Record<string, unknown>, componentName: 
   }
 
   // ── AnimatedBeam ─────────────────────────────────────────────────────────────
+
+  // ── AuroraText / DiaTextReveal: color arrays contain placeholders ─────────
+  if (componentName === 'AuroraText') {
+    if (!next.colors || _isPlaceholderArray(next.colors)) next.colors = ['#FF6B6B', '#4ECDC4', '#45B7D1', '#96CEB4', '#FFEAA7']
+    if (!next.children || _isPlaceholder(next.children as string)) next.children = 'Revenue Intelligence'
+  }
+  if (componentName === 'DiaTextReveal') {
+    if (!next.colors || _isPlaceholderArray(next.colors)) next.colors = ['#6366f1', '#8b5cf6', '#a78bfa']
+    if (!next.text || _isPlaceholder(next.text as string)) next.text = 'Build the future'
+    if (!next.textColor || _isPlaceholder(next.textColor as string)) next.textColor = '#ffffff'
+  }
+
+  // ── className fields polluted by placeholder strings (auto-samples bug) ───
+  if (_isPlaceholder(next.squaresClassName as string | undefined)) next.squaresClassName = 'fill-blue-500/30'
+  if (_isPlaceholder(next.segmentClassName as string | undefined)) next.segmentClassName = 'text-indigo-400'
+  if (_isPlaceholder(next.textClassName as string | undefined)) next.textClassName = 'text-white font-semibold'
+  if (_isPlaceholder(next.imageClassName as string | undefined)) next.imageClassName = 'rounded-md'
+  if (_isPlaceholder(next.itemClassName as string | undefined)) next.itemClassName = 'text-white/80'
+  if (_isPlaceholder(next.labelClassName as string | undefined)) next.labelClassName = 'text-white/60 text-sm'
+
+  // ── skeleton / loaders ───────────────────────────────────────────────────
+  if (componentName === 'skeleton' || componentName === 'Skeleton') {
+    if (_isPlaceholder(next.height as string | undefined)) next.height = '80px'
+    if (next.width === 'item-1') next.width = '100%'
+  }
+  if ((componentName === 'PageLoading' || componentName === 'PagePreloader') && _isPlaceholder(next.message as string | undefined)) {
+    next.message = 'Loading your workspace…'
+    next.text = next.message
+  }
+
   if (componentName === 'AnimatedBeam') {
     if (next.containerRef === undefined) next.containerRef = { current: null }
     if (next.fromRef === undefined) next.fromRef = { current: null }
