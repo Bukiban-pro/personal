@@ -3,7 +3,7 @@
 import * as React from "react"
 import { motion } from "framer-motion"
 import { cn } from "@/lib/utils"
-import { ExternalLink, Github } from "lucide-react"
+import { ExternalLink, GitBranch } from "lucide-react"
 
 // ── Types ──────────────────────────────────────────────────────────────
 interface Project {
@@ -96,7 +96,7 @@ export function ProjectShowcase({ projects, columns, className }: ProjectShowcas
                   className="flex size-10 items-center justify-center rounded-full bg-secondary text-secondary-foreground transition-transform hover:scale-110"
                   aria-label={`View ${project.title} source`}
                 >
-                  <Github className="size-4" />
+                  <GitBranch className="size-4" />
                 </a>
               )}
             </div>

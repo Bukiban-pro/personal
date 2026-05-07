@@ -336,5 +336,5 @@ const CollapseButton = forwardRef<
 })
 CollapseButton.displayName = "CollapseButton"
 
-export { CollapseButton, File, Folder, Tree, type TreeViewElement }
+export { CollapseButton, File, Folder, Tree, Tree as FileTree, type TreeViewElement }
 export type { TreeSortMode }

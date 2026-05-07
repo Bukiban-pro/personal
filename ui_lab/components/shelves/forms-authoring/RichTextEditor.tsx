@@ -25,7 +25,7 @@ export interface ToolbarAction {
 }
 
 export interface RichTextToolbarProps extends React.HTMLAttributes<HTMLDivElement> {
-  actions: ToolbarAction[];
+  actions?: ToolbarAction[];
   onBold?: () => void;
   onItalic?: () => void;
   onUnderline?: () => void;
@@ -72,7 +72,7 @@ export const RichTextToolbar = React.forwardRef<HTMLDivElement, RichTextToolbarP
       },
     ];
 
-    const allActions = actions.length > 0 ? actions : defaultActions;
+    const allActions = (actions && actions.length > 0) ? actions : defaultActions;
 
     return (
       <div
@@ -99,7 +99,7 @@ export const RichTextToolbar = React.forwardRef<HTMLDivElement, RichTextToolbarP
             </button>
 
             {/* Divider after groups */}
-            {(action.id === "underline" || (actions.length > 0 && i % 3 === 2)) && (
+            {(action.id === "underline" || ((actions?.length ?? 0) > 0 && i % 3 === 2)) && (
               <div className="w-px h-5 bg-border" />
             )}
           </React.Fragment>

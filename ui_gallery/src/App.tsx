@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState, Component, type ReactNode } from 'react'
+import { BarChart2, Target, Zap, Users, TrendingUp, Shield, Globe, Layers } from 'lucide-react'
 import samplesRaw from '../../ui_lab/configs/landing-product-live-samples.json'
 import autoSamplesRaw from '../../ui_lab/configs/auto-samples.json'
 
@@ -334,6 +335,12 @@ function _enrichField(key: string, idx: number, parentKey = ''): string {
   if (k === 'objection' || k === 'question') return _pick(_nx.objections, idx)
   if (k === 'answer') return _pick(_nx.objectionAnswers, idx)
   if (k === 'domain') return _pick(['Sales Execution', 'Revenue Operations', 'Customer Success', 'Finance & Planning'], idx)
+  // animated text rotation arrays — punchy short words, NOT long work-item sentences
+  if (k === 'words' || k === 'texts' || k === 'phrases') return _pick(['Build', 'Deploy', 'Scale', 'Ship', 'Grow', 'Launch', 'Win', 'Iterate'], idx)
+  // tag/category arrays
+  if (k === 'tags' || k === 'categories' || k === 'keywords') return _pick(['Revenue Ops', 'Pipeline', 'Analytics', 'GTM', 'Sales', 'CS', 'Finance'], idx)
+  // color arrays — use brand hex colors
+  if (k === 'colors' || k === 'colour' || k === 'particles') return _pick(['#6366f1', '#8b5cf6', '#06b6d4', '#10b981', '#f59e0b', '#ef4444'], idx)
   // list item strings (tasks, deliverables, checks, etc.)
   return _pick(_nx.workItems, idx)
 }
@@ -394,6 +401,37 @@ function _nxTitle(componentName: string): string {
     Announcement: 'Introducing Nexus AI',
     RiskReversal: 'We take on the risk so you can move fast',
     Guarantees: '30-day impact guarantee',
+    // landing-marketing specific (non-LandingProduct prefix)
+    CTASection: 'Start closing more revenue today',
+    CTA: 'Start closing more revenue today',
+    FAQSection: 'Common questions, answered',
+    HeroSection: 'Revenue intelligence for modern sales teams',
+    TextRotateHero: 'Revenue clarity starts here',
+    GradientMeshHero: 'Revenue clarity starts here',
+    SplitHero: 'Revenue clarity starts here',
+    VideoHero: 'See Nexus in 3 minutes',
+    Newsletter: 'Revenue insights, weekly',
+    ProjectShowcase: 'Built by revenue operators',
+    FeatureShowcase: 'Built for every revenue team',
+    FeatureGrid: 'Everything your revenue team needs',
+    LogoCloud: 'Trusted by industry leaders',
+    TechStackGrid: 'Integrates with your entire GTM stack',
+    StatsGrid: 'The numbers speak for themselves',
+    TestimonialGrid: 'What our customers say',
+    PricingCards: 'Simple, transparent pricing',
+    ProductSteps: 'Get started in three steps',
+    WelcomeSection: 'Welcome back',
+    Band: 'One platform. One truth. One revenue motion.',
+    Discount: 'Limited-time offer',
+    Marquee: 'Trusted across every industry',
+    Rating: 'Rated #1 by revenue teams',
+    Showcase: 'See Nexus in action',
+    SocialProofBand: 'Trusted worldwide',
+    Footer: 'Nexus — The OS for revenue teams',
+    PricingPlan: 'Plans that scale with you',
+    ReadMoreWrapper: 'Read the full story',
+    SaleCta: 'Don\'t miss this',
+    GenericLogo: 'Nexus',
   }
   for (const [k, v] of Object.entries(map)) {
     if (clean.includes(k)) return v
@@ -429,11 +467,40 @@ function _nxDescription(componentName: string): string {
 // ─── Smart prop injection ─────────────────────────────────────────────────────
 function withHarnessDefaults(baseProps: Record<string, unknown>, componentName: string, shelf: string): Record<string, unknown> {
   const next = { ...baseProps }
+  const _isPlaceholderArray = (v: unknown) => Array.isArray(v) && (v as unknown[]).every(item => typeof item === 'string' && _isPlaceholder(item))
 
   // ── Universal pass: replace top-level placeholder strings on ALL shelves ───
-  if (_isPlaceholder(next.title)) next.title = componentName.replace(/([A-Z])/g, ' $1').trim()
-  if (_isPlaceholder(next.description)) next.description = _pick(_nx.descriptions, _hash(componentName))
-  if (_isPlaceholder(next.subtitle as string | undefined)) next.subtitle = _pick(_nx.descriptions, _hash(componentName) + 1)
+  const _isLanding = shelf === 'landing-product-system' || shelf === 'landing-marketing'
+  if (_isPlaceholder(next.title)) {
+    next.title = _isLanding ? _nxTitle(componentName) : componentName.replace(/([A-Z])/g, ' $1').trim()
+  }
+  if (_isPlaceholder(next.description)) next.description = _isLanding ? _nxDescription(componentName) : _pick(_nx.descriptions, _hash(componentName))
+  if (_isPlaceholder(next.subtitle as string | undefined)) next.subtitle = _isLanding ? _nxDescription(componentName) : _pick(_nx.descriptions, _hash(componentName) + 1)
+  if (_isPlaceholder(next.tagline as string | undefined)) next.tagline = _pick(_nx.features, _hash(componentName))
+  if (_isPlaceholder(next.eyebrow as string | undefined)) next.eyebrow = _pick(_nx.features, _hash(componentName) + 3)
+  if (_isPlaceholder(next.caption as string | undefined)) next.caption = _isLanding ? _nxDescription(componentName) : _pick(_nx.descriptions, _hash(componentName) + 2)
+  if (_isPlaceholder(next.label as string | undefined)) next.label = _pick(_nx.metricLabels, _hash(componentName))
+  if (_isPlaceholder(next.placeholder as string | undefined)) next.placeholder = 'Search or enter value…'
+  if (_isPlaceholder(next.buttonText as string | undefined)) next.buttonText = 'Get started'
+  if (_isPlaceholder(next.ratingLabel as string | undefined)) next.ratingLabel = 'Based on 2,000+ reviews'
+  if (_isPlaceholder(next.alt as string | undefined)) next.alt = componentName
+  if (_isPlaceholder(next.ariaLabel as string | undefined)) next.ariaLabel = componentName
+  if (_isPlaceholder(next.leftLabel as string | undefined)) next.leftLabel = 'Before'
+  if (_isPlaceholder(next.rightLabel as string | undefined)) next.rightLabel = 'After'
+  if (_isPlaceholder(next.confirmLabel as string | undefined)) next.confirmLabel = 'Confirm'
+  if (_isPlaceholder(next.cancelLabel as string | undefined)) next.cancelLabel = 'Cancel'
+  if (_isPlaceholder(next.actionLabel as string | undefined)) next.actionLabel = 'Learn more'
+  if (_isPlaceholder(next.helperText as string | undefined)) next.helperText = undefined
+  if (_isPlaceholder(next.message as string | undefined)) next.message = _pick(_nx.descriptions, _hash(componentName) + 4)
+  if (_isPlaceholder(next.emptyMessage as string | undefined)) next.emptyMessage = 'No results found'
+  if (_isPlaceholder(next.name as string | undefined) && typeof next.name === 'string') next.name = _pick(_nx.personas, _hash(componentName))
+  // ── Pre-pass: fix animated text-rotation arrays BEFORE universal walk can corrupt them ──
+  if (componentName === 'MorphingText' && _isPlaceholderArray(next.texts)) next.texts = ['Design', 'Build', 'Deploy', 'Scale']
+  if (componentName === 'TextMorph' && _isPlaceholderArray(next.texts)) next.texts = ['Hello', 'World', 'Ship', 'Fast']
+  if (componentName === 'WordRotate' && _isPlaceholderArray(next.words)) next.words = ['Beautiful', 'Fast', 'Accessible', 'Modern']
+  if (componentName === 'TextLoop') { if (_isPlaceholderArray(next.words) || _isPlaceholderArray(next.items)) { next.words = ['Developers', 'Designers', 'Founders', 'Builders']; next.items = next.words } }
+  if (componentName === 'TypingAnimation' && _isPlaceholderArray(next.words)) next.words = ['Build the future', 'Design with intent', 'Ship with confidence']
+  if (componentName === 'TextRotateHero' && _isPlaceholderArray(next.words)) next.words = ['pipeline clarity', 'forecast confidence', 'deal velocity', 'revenue growth']
   // Walk all top-level arrays on all shelves — enriches items/strings in any component
   for (const key of Object.keys(next)) {
     const val = next[key]
@@ -448,35 +515,29 @@ function withHarnessDefaults(baseProps: Record<string, unknown>, componentName: 
       return item
     })
   }
+  // Walk top-level non-array plain objects (catches badge.text, primaryAction.label, action.label, etc.)
+  for (const key of Object.keys(next)) {
+    const val = next[key]
+    if (!val || typeof val !== 'object' || Array.isArray(val)) continue
+    const maybeReact = val as Record<string, unknown>
+    if (maybeReact.$$typeof || typeof maybeReact.type === 'function') continue
+    const obj = val as Record<string, unknown>
+    const patch: Record<string, unknown> = {}
+    for (const [k, v] of Object.entries(obj)) {
+      if (typeof v === 'string' && _isPlaceholder(v)) patch[k] = _enrichField(k, 0, key)
+    }
+    if (Object.keys(patch).length > 0) next[key] = { ...obj, ...patch }
+  }
 
   // ── Landing enrichment (covers all 321 LandingProduct* + 38 landing-marketing) ─
-  if (shelf === 'landing-product-system' || shelf === 'landing-marketing') {
-    // Top-level scalar fields
-    if (_isPlaceholder(next.title)) next.title = _nxTitle(componentName)
-    if (_isPlaceholder(next.description)) next.description = _nxDescription(componentName)
-    if (_isPlaceholder(next.subtitle as string | undefined)) next.subtitle = _nxDescription(componentName)
-    if (_isPlaceholder(next.tagline as string | undefined)) next.tagline = _pick(_nx.features, _hash(componentName))
-    if (_isPlaceholder(next.eyebrow as string | undefined)) next.eyebrow = _pick(_nx.features, _hash(componentName) + 3)
-    if (_isPlaceholder(next.caption as string | undefined)) next.caption = _nxDescription(componentName)
-
-    // Walk all array props and enrich item objects / string values
-    for (const key of Object.keys(next)) {
-      const val = next[key]
-      if (!Array.isArray(val)) continue
-      next[key] = (val as unknown[]).map((item, i) => {
-        if (item && typeof item === 'object' && !Array.isArray(item)) {
-          return _enrichItem(item as Record<string, unknown>, i, key)
-        }
-        if (typeof item === 'string' && _isPlaceholder(item)) {
-          return _enrichField(key, i)
-        }
-        return item
-      })
-    }
+  if (_isLanding) {
 
     // ── Specific landmark components — inject complete showcase data ──────────
     if (componentName === 'LandingProductMetrics' && (!next.metrics || _isPlaceholder((next.metrics as Record<string, unknown>[])[0]?.label))) {
       next.metrics = _nx.metrics
+    }
+    if (componentName === 'LandingProductFeatureKeyPoints' && (!next.keyPoints || !Array.isArray(next.keyPoints) || next.keyPoints.length === 0)) {
+      next.keyPoints = _nx.features.slice(0, 5).map((f, i) => ({ title: f, description: _pick(_nx.descriptions, i) }))
     }
     if (componentName === 'LandingProductROIModel') {
       if (!next.assumptions || _isPlaceholder((next.assumptions as Record<string, unknown>[])[0]?.label)) next.assumptions = _nx.roi.assumptions
@@ -493,49 +554,101 @@ function withHarnessDefaults(baseProps: Record<string, unknown>, componentName: 
     }
 
     // ── Landing-marketing specific ────────────────────────────────────────────
-    if (componentName === 'PricingCards' && !next.plans) {
+    if (componentName === 'PricingCards' && (!next.plans || _isPlaceholder((next.plans as Record<string, unknown>[])[0]?.name as string))) {
       next.plans = _nx.pricingTiers.map((t) => ({
         ...t, interval: 'month',
         cta: t.name === 'Enterprise' ? 'Talk to sales' : `Get started`,
       }))
     }
-    if (componentName === 'TestimonialGrid' && !next.testimonials) {
+    if (componentName === 'TestimonialGrid' && (!next.testimonials || _isPlaceholder((next.testimonials as Record<string, unknown>[])[0]?.quote as string))) {
       next.testimonials = _nx.testimonials.slice(0, 3)
     }
-    if (componentName === 'LandingTestimonialGrid' && !next.testimonials) {
-      next.testimonials = _nx.testimonials
+    if (componentName === 'LandingTestimonialGrid' && !next.testimonialItems) {
+      next.testimonialItems = _nx.testimonials
+      next.testimonials = _nx.testimonials // keep old prop for safety
     }
-    if (componentName === 'LandingTestimonial' && !next.testimonials) {
-      next.testimonials = _nx.testimonials.slice(0, 3)
+    if (componentName === 'LandingTestimonial' && !next.testimonialItems) {
+      next.testimonialItems = _nx.testimonials.slice(0, 3)
+      next.testimonials = _nx.testimonials.slice(0, 3) // keep old prop
     }
     if (componentName === 'SocialProof' && !next.testimonials) {
       next.testimonials = _nx.testimonials.slice(0, 3)
     }
+    if (componentName === 'SocialProof' && (!next.avatars || _isPlaceholderArray(next.avatars))) {
+      next.avatars = [
+        { src: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=40&q=80', alt: 'Sarah' },
+        { src: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=40&q=80', alt: 'Marcus' },
+        { src: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=40&q=80', alt: 'Priya' },
+      ]
+    }
     if (componentName === 'LandingSocialProof' && !next.testimonials) {
       next.testimonials = _nx.testimonials
+      next.avatarItems = [
+        { imageSrc: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=48&q=80', name: 'Sarah Chen' },
+        { imageSrc: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=48&q=80', name: 'Marcus Webb' },
+        { imageSrc: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=48&q=80', name: 'Priya Sharma' },
+        { imageSrc: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=48&q=80', name: 'Jordan Lee' },
+      ]
+      next.numberOfUsers = 2847
+      next.showRating = true
     }
-    if (componentName === 'StatsGrid' && !next.stats) {
+    if (componentName === 'StatsGrid' && (!next.stats || _isPlaceholder((next.stats as Record<string, unknown>[])[0]?.label as string))) {
       next.stats = _nx.metrics.map(({ label, value, detail }) => ({ label, value, description: detail }))
     }
     if (componentName === 'LandingProductStatsCarousel' && !next.stats) {
       next.stats = _nx.metrics
     }
-    if (componentName === 'FeatureGrid' && !next.features) {
-      next.features = _nx.features.slice(0, 6).map((f, i) => ({ title: f, description: _pick(_nx.descriptions, i) }))
+    if (componentName === 'FeatureGrid' && (!next.features || !(next.features as Record<string, unknown>[])[0]?.icon)) {
+      const _featureIcons = [BarChart2, Target, Zap, Users, TrendingUp, Shield, Globe, Layers]
+      next.features = _nx.features.slice(0, 6).map((f, i) => ({ icon: _featureIcons[i % _featureIcons.length], title: f, description: _pick(_nx.descriptions, i) }))
     }
-    if (componentName === 'LogoCloud' && !next.logos) {
+    if (componentName === 'FeatureShowcase' && (!next.features || !(next.features as Record<string, unknown>[])[0]?.icon)) {
+      const _featureIcons2 = [BarChart2, Target, Zap, Users]
+      next.features = _nx.features.slice(0, 4).map((f, i) => ({ icon: React.createElement(_featureIcons2[i % _featureIcons2.length], { className: 'size-5' }), title: f, description: _pick(_nx.descriptions, i) }))
+    }
+    if (componentName === 'WelcomeSection') {
+      if (!next.name || _isPlaceholder(next.name as string)) next.name = 'Sarah Chen'
+      if (!next.subtitle || _isPlaceholder(next.subtitle as string)) next.subtitle = 'CRO at Vertex Cloud'
+      if (!next.avatarUrl || next.avatarUrl === '#') next.avatarUrl = 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=80&q=80'
+      if (!next.actions || _isPlaceholder((next.actions as Record<string, unknown>[])[0]?.label as string)) {
+        next.actions = [
+          { label: 'View pipeline', description: 'Track all active deals', href: '#' },
+          { label: 'Run forecast', description: 'See confidence-scored predictions', href: '#' },
+          { label: 'Board report', description: 'Generate exec-ready summary', href: '#' },
+        ]
+      }
+    }
+    if ((componentName === 'SocialProof' || componentName === 'LandingSocialProof' || componentName === 'LandingSocialProofBand') && !next.testimonials) {
+      next.testimonials = _nx.testimonials.slice(0, 3)
+      if (!next.count || _isPlaceholder(next.count as string)) next.count = '2,000+'
+      if (!next.label || _isPlaceholder(next.label as string)) next.label = 'Revenue leaders trust Nexus'
+    }
+    if (componentName === 'ProjectShowcase' && (!next.projects || _isPlaceholder((next.projects as Record<string, unknown>[])[0]?.title as string))) {
+      next.projects = [
+        { title: 'Pipeline Intelligence', description: 'AI-scored deal signals for every rep.', image: 'https://images.unsplash.com/photo-1551434678-e076c223a692?w=400&q=70', tags: ['AI', 'Revenue Ops', 'Forecasting'], liveUrl: '#', sourceUrl: '#' },
+        { title: 'Buying Committee Graph', description: 'Map every stakeholder across every deal.', image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&q=70', tags: ['Graph', 'Relationships', 'Multi-thread'], liveUrl: '#', sourceUrl: '#' },
+        { title: 'Revenue Capacity Planner', description: 'Model headcount scenarios against ARR.', image: 'https://images.unsplash.com/photo-1553877522-43269d4ea984?w=400&q=70', tags: ['Planning', 'FP&A', 'Headcount'], liveUrl: '#', sourceUrl: '#' },
+      ]
+    }
+    if (componentName === 'LogoCloud' && (!next.logos || _isPlaceholder((next.logos as Record<string, unknown>[])[0]?.name as string))) {
       next.logos = _nx.partnerNames.map((name) => ({ name, src: `https://cdn.simpleicons.org/${name.toLowerCase().replace(/\s+/g, '')}/888888` }))
     }
     if (componentName === 'HeroSection') {
-      if (!next.title) next.title = 'Revenue intelligence for'
-      if (!next.titleAccent) next.titleAccent = 'modern sales teams'
-      if (!next.description) next.description = 'AI-powered signals that surface deal risk before it becomes revenue loss. Trusted by 2,000+ revenue teams.'
-      if (!next.badge) next.badge = { text: 'Now with AI Forecasting →' }
-      if (!next.stats) next.stats = _nx.metrics.slice(0, 3).map(({ label, value }) => ({ value, label }))
+      if (!next.title || _isPlaceholder(next.title as string)) next.title = 'Revenue intelligence for'
+      if (!next.titleAccent || _isPlaceholder(next.titleAccent as string)) next.titleAccent = 'modern sales teams'
+      if (!next.description || _isPlaceholder(next.description as string)) next.description = 'AI-powered signals that surface deal risk before it becomes revenue loss. Trusted by 2,000+ revenue teams.'
+      if (!next.badge || _isPlaceholder((next.badge as Record<string, unknown>)?.text as string)) next.badge = { text: 'Now with AI Forecasting →' }
+      if (!next.stats || _isPlaceholder((next.stats as Record<string, unknown>[])[0]?.label as string)) {
+        next.stats = _nx.metrics.slice(0, 3).map(({ label, value }) => ({ value, label }))
+      }
     }
     if (componentName === 'SplitHero' || componentName === 'GradientMeshHero' || componentName === 'TextRotateHero') {
-      if (!next.title && !next.headline) { next.title = 'Revenue clarity starts here'; next.headline = 'Revenue clarity starts here' }
-      if (!next.subtitle && !next.description) { next.subtitle = "Nexus gives every revenue team the signal-to-action layer they've been missing."; next.description = next.subtitle }
+      if (!next.title || _isPlaceholder(next.title as string)) { next.title = 'Revenue clarity starts here'; next.headline = 'Revenue clarity starts here' }
+      if (!next.subtitle || _isPlaceholder(next.subtitle as string)) { next.subtitle = "Nexus gives every revenue team the signal-to-action layer they've been missing."; next.description = next.subtitle }
+      if (componentName === 'TextRotateHero') {
+        if (!next.words || _isPlaceholderArray(next.words)) next.words = ['pipeline clarity', 'forecast confidence', 'deal velocity', 'revenue growth']
+        if (_isPlaceholder(next.wordClassName as string)) next.wordClassName = 'text-violet-400 font-bold'
+      }
     }
     if (componentName === 'VideoHero' && !next.videoSrc) {
       next.videoSrc = 'https://www.youtube.com/embed/dQw4w9WgXcQ'
@@ -543,26 +656,39 @@ function withHarnessDefaults(baseProps: Record<string, unknown>, componentName: 
       next.thumbnailAlt = 'Nexus product demo'
       if (!next.title) next.title = 'See Nexus in 3 minutes'
     }
-    if (componentName === 'Newsletter' && !next.title) {
-      next.title = 'Revenue insights, weekly'
-      next.description = 'Join 18,000 revenue leaders. Pipeline intelligence, GTM plays, and Nexus product updates.'
+    if (componentName === 'Newsletter') {
+      if (!next.title || _isPlaceholder(next.title as string)) next.title = 'Revenue insights, weekly'
+      if (!next.description || _isPlaceholder(next.description as string)) next.description = 'Join 18,000 revenue leaders. Pipeline intelligence, GTM plays, and Nexus product updates.'
+      if (!next.placeholder || _isPlaceholder(next.placeholder as string)) next.placeholder = 'Work email address'
+      if (!next.buttonText || _isPlaceholder(next.buttonText as string)) next.buttonText = 'Subscribe'
     }
     if (componentName === 'CTASection' || componentName === 'LandingCTA') {
-      if (!next.title) next.title = 'Start closing more revenue today'
-      if (!next.description && !next.subtitle) next.description = 'Join 2,000+ revenue teams. Free to start, no credit card required.'
-      if (!next.primaryCta && !next.cta) next.primaryCta = 'Get started free'
+      if (!next.title || _isPlaceholder(next.title as string)) next.title = 'Start closing more revenue today'
+      if ((!next.description && !next.subtitle) || _isPlaceholder(next.description as string)) next.description = 'Join 2,000+ revenue teams. Free to start, no credit card required.'
+      if ((!next.primaryCta && !next.cta) || _isPlaceholder(next.primaryCta as string)) next.primaryCta = 'Get started free'
+      if (next.primaryAction && typeof next.primaryAction === 'object') {
+        const pa = next.primaryAction as Record<string, unknown>
+        if (_isPlaceholder(pa.label as string)) pa.label = 'Get started free'
+      }
     }
-    if (componentName === 'AnnouncementBanner' && !next.message && !next.text) {
+    if (componentName === 'AnnouncementBanner' && (_isPlaceholder(next.message as string) || !next.message)) {
       next.message = '🎉 Nexus AI Forecasting is now generally available — '
       next.linkText = 'See what\'s new →'
       next.text = next.message
     }
-    if ((componentName === 'FAQSection' || componentName === 'LandingFAQ' || componentName === 'LandingFAQCollapsible') && !next.faqs && !next.items) {
+    if (componentName === 'GenericLogo') {
+      if (_isPlaceholder(next.text as string) || !next.text) next.text = 'Nexus'
+      if (!next.imageSrc || next.imageSrc === '#') next.imageSrc = 'https://placehold.co/40x40/6366f1/ffffff?text=N'
+      if (!next.imageAlt || (next.imageAlt as string).startsWith('https://placehold.co')) next.imageAlt = 'Nexus logo'
+      next.withText = true
+    }
+    if ((componentName === 'FAQSection' || componentName === 'LandingFAQ' || componentName === 'LandingFAQCollapsible') && (!next.faqs && !next.faqItems && (!next.items || _isPlaceholder((next.items as Record<string, unknown>[])[0]?.question as string)))) {
       const faqData = _nx.objections.map((q, i) => ({ question: q, answer: _nx.objectionAnswers[i] }))
-      next.faqs = faqData
+      next.faqItems = faqData // correct prop name for LandingFAQ/LandingFAQCollapsible
+      next.faqs = faqData    // for FAQSection
       next.items = faqData
     }
-    if (componentName === 'ProductSteps' && !next.steps && !next.items) {
+    if (componentName === 'ProductSteps' && (!next.steps || _isPlaceholder((next.steps as Record<string, unknown>[])[0]?.title as string))) {
       next.steps = [
         { title: 'Connect your CRM', description: 'Nexus syncs with Salesforce or HubSpot in under 5 minutes.', step: 1 },
         { title: 'Nexus learns your motion', description: 'AI maps your pipeline patterns, win signals, and team behavior.', step: 2 },
@@ -570,7 +696,7 @@ function withHarnessDefaults(baseProps: Record<string, unknown>, componentName: 
       ]
       next.items = next.steps
     }
-    if (componentName === 'TechStackGrid' && !next.technologies && !next.items) {
+    if (componentName === 'TechStackGrid' && (!next.technologies && (!next.items || _isPlaceholder((next.items as Record<string, unknown>[])[0]?.name as string)))) {
       next.technologies = _nx.partnerNames.map((name, i) => ({ name, description: _pick(_nx.descriptions, i) }))
       next.items = next.technologies
     }
@@ -595,6 +721,20 @@ function withHarnessDefaults(baseProps: Record<string, unknown>, componentName: 
   if (componentName === 'AuroraBackground' || componentName === 'AuroraBackgroundEffect') {
     if (!next.className) next.className = 'w-full h-full'
     if (!next.children) next.children = _demoHeroBg(componentName)
+    if (!next.colors || _isPlaceholderArray(next.colors)) next.colors = ['#6366f1', '#8b5cf6', '#06b6d4', '#10b981']
+  }
+  if (componentName === 'MeshGradient') {
+    if (!next.colors || _isPlaceholderArray(next.colors)) next.colors = ['#6366f1', '#8b5cf6', '#06b6d4', '#10b981', '#f59e0b']
+  }
+  if (componentName === 'WavyBackground') {
+    if (!next.colors || _isPlaceholderArray(next.colors)) next.colors = ['#6366f1', '#8b5cf6', '#06b6d4']
+    if (!next.className) next.className = 'w-full h-full'
+  }
+  if (componentName === 'GradientMeshHero') {
+    if (!next.colors || _isPlaceholderArray(next.colors)) next.colors = ['#6366f1', '#8b5cf6', '#06b6d4', '#10b981']
+  }
+  if (componentName === 'ConfettiExplosion') {
+    if (!next.particles || _isPlaceholderArray(next.particles)) next.particles = ['#6366f1', '#8b5cf6', '#ec4899', '#10b981', '#f59e0b', '#ef4444']
   }
   if (componentName === 'Spotlight' || componentName === 'SpotlightEffect') {
     if (!next.className) next.className = 'w-full h-full rounded-lg border border-border'
@@ -664,8 +804,6 @@ function withHarnessDefaults(baseProps: Record<string, unknown>, componentName: 
 
   if (componentName === 'KineticText' && (typeof next.text !== 'string' || _isPlaceholder(next.text as string))) next.text = 'Build the future'
   if (componentName === 'LineShadowText' && (!next.children || _isPlaceholder(next.children as string))) next.children = 'Ship fast'
-
-  const _isPlaceholderArray = (v: unknown) => Array.isArray(v) && (v as unknown[]).every(item => typeof item === 'string' && _isPlaceholder(item))
 
   if (componentName === 'MorphingText') {
     if (!next.texts || _isPlaceholderArray(next.texts)) next.texts = ['Design', 'Build', 'Deploy', 'Scale']
@@ -745,11 +883,13 @@ function withHarnessDefaults(baseProps: Record<string, unknown>, componentName: 
     )
   }
   if (componentName === 'Highlighter' || componentName === 'HighlightOnScroll') {
-    if (!next.children) next.children = 'The quick brown fox jumps over the lazy dog.'
+    if (!next.children || _isPlaceholder(next.children as string)) next.children = 'Align every buying committee member before procurement slows you down.'
+    if (!next.text || _isPlaceholder(next.text as string)) next.text = next.children
     if (!next.className) next.className = 'text-xl font-medium text-white max-w-sm text-center'
   }
   if (componentName === 'TextReveal' || componentName === 'TextRevealOnScroll') {
-    if (!next.text && !next.children) next.text = 'Craft extraordinary user experiences with motion.'
+    if (!next.text || _isPlaceholder(next.text as string)) next.text = 'Craft extraordinary user experiences with motion.'
+    if (!next.children || _isPlaceholder(next.children as string)) next.children = next.text
     if (!next.className) next.className = 'text-2xl font-bold text-white max-w-sm text-center'
   }
   if (componentName === 'ParallaxSection' && !next.children) {
@@ -768,6 +908,10 @@ function withHarnessDefaults(baseProps: Record<string, unknown>, componentName: 
   if (componentName === 'VideoText') {
     if (!next.text) next.text = 'MOTION'
     if (!next.className) next.className = 'text-6xl font-black text-white'
+    if (_isPlaceholder(next.fontSize as string)) next.fontSize = undefined
+    if (_isPlaceholder(next.fontWeight as string)) next.fontWeight = undefined
+    if (_isPlaceholder(next.textAnchor as string)) next.textAnchor = undefined
+    if (next.src === '#') next.src = 'https://www.w3schools.com/html/mov_bbb.mp4'
   }
   if (componentName === 'LottieAnimation' && !next.src && !next.url && !next.animationData) {
     // Lottie without source — mark for graceful fallback
@@ -795,7 +939,7 @@ function withHarnessDefaults(baseProps: Record<string, unknown>, componentName: 
     next.children = 'Click me'
   }
 
-  if (componentName === 'IconCloud' && !next.images) {
+  if (componentName === 'IconCloud' && (!next.images || _isPlaceholderArray(next.images))) {
     next.images = [
       'https://cdn.simpleicons.org/react/61DAFB',
       'https://cdn.simpleicons.org/typescript/3178C6',
@@ -831,16 +975,41 @@ function withHarnessDefaults(baseProps: Record<string, unknown>, componentName: 
     next.beforeImage = next.before
     next.afterImage = next.after
   }
-  if (componentName === 'TweetCard' && !next.tweet && !next.content) {
-    next.content = { text: 'This component gallery is absolutely 🔥', author: 'Dev Studio', username: '@devstudio', likes: 342, date: 'May 7, 2026' }
-    next.tweet = next.content
+  if (componentName === 'TweetCard') {
+    // MagicTweet is the first named export — expects react-tweet Tweet type
+    // enrichTweet parses entities array with indices — provide safe empty structure
+    if (!next.tweet || !(next.tweet as Record<string,unknown>).user) {
+      next.tweet = {
+        id_str: '1719530838827688153',
+        text: 'Pipeline intelligence just got smarter. AI-powered signals now available in every deal room.',
+        full_text: 'Pipeline intelligence just got smarter. AI-powered signals now available in every deal room.',
+        user: {
+          id_str: '123456',
+          name: 'Nexus Revenue',
+          screen_name: 'nexusrevenue',
+          profile_image_url_https: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=48&h=48&fit=crop',
+          url: 'https://twitter.com/nexusrevenue',
+          verified: false,
+          is_blue_verified: true,
+        },
+        entities: { urls: [], user_mentions: [], hashtags: [], symbols: [] },
+        created_at: 'Wed Nov 01 12:00:00 +0000 2023',
+        favorite_count: 342,
+        retweet_count: 87,
+        reply_count: 14,
+        quote_count: 23,
+        url: 'https://twitter.com/nexusrevenue/status/1719530838827688153',
+        display_text_range: [0, 89],
+      }
+    }
   }
 
   // ── feedback-state ──────────────────────────────────────────────────────────
   if (componentName === 'Alert') {
-    if (!next.title) next.title = 'System update available'
-    if (!next.description) next.description = 'A new version is ready. Refresh to apply.'
-    if (!next.type) next.type = 'info'
+    if (!next.title || _isPlaceholder(next.title as string)) next.title = 'New deal signal detected'
+    if (!next.description || _isPlaceholder(next.description as string)) next.description = 'Deal risk threshold exceeded for Acme Corp. Review signals now to prevent churn.'
+    if (!next.type) next.type = 'warning'
+    if (!next.label || _isPlaceholder(next.label as string)) next.label = 'Deal Alert'
   }
   if (componentName === 'Toast') {
     if (!next.title) next.title = 'File saved'
@@ -848,18 +1017,35 @@ function withHarnessDefaults(baseProps: Record<string, unknown>, componentName: 
     if (!next.type) next.type = 'success'
   }
   if (componentName === 'EmptyState') {
-    if (!next.title) next.title = 'No results found'
-    if (!next.description) next.description = 'Try adjusting your search filters.'
+    if (!next.title) next.title = 'No deals found'
+    if (!next.description) next.description = 'Try adjusting your filters or add a new opportunity.'
+    if (!next.actionLabel || _isPlaceholder(next.actionLabel as string)) next.actionLabel = 'Add opportunity'
   }
   if (componentName === 'ErrorState') {
-    if (!next.title) next.title = 'Something went wrong'
-    if (!next.description) next.description = 'Could not load the resource. Please retry.'
+    if (!next.title || _isPlaceholder(next.title as string)) next.title = 'Unable to load pipeline'
+    if (!next.description || _isPlaceholder(next.description as string)) next.description = 'Could not fetch deal data. Check your CRM connection and retry.'
+    if (!next.message || _isPlaceholder(next.message as string)) next.message = next.description
+  }
+  if (componentName === 'Loader') {
+    if (!next.label || _isPlaceholder(next.label as string)) next.label = 'Loading deal signals…'
+  }
+  if (componentName === 'OverlayLoader') {
+    if (!next.message || _isPlaceholder(next.message as string)) next.message = 'Syncing with Salesforce…'
+    if (!next.text || _isPlaceholder(next.text as string)) next.text = next.message
   }
   if (componentName === 'Modal' || componentName === 'ConfirmDialog' || componentName === 'AuthRequiredModal') {
     if (next.open === undefined && next.isOpen === undefined) { next.open = true; next.isOpen = true }
+    if (componentName === 'ConfirmDialog') {
+      if (!next.title || _isPlaceholder(next.title as string)) next.title = 'Archive this deal?'
+      if (!next.description || _isPlaceholder(next.description as string)) next.description = 'This deal will be moved to the archive. You can restore it at any time from Revenue Settings.'
+      if (!next.confirmLabel || _isPlaceholder(next.confirmLabel as string)) next.confirmLabel = 'Archive'
+      if (!next.cancelLabel || _isPlaceholder(next.cancelLabel as string)) next.cancelLabel = 'Cancel'
+    }
   }
   if (componentName === 'CookieConsent') {
     if (next.show === undefined) next.show = true
+    if (!next.message || _isPlaceholder(next.message as string)) next.message = 'We use cookies to provide personalized revenue insights and improve your experience.'
+    if (!next.description || _isPlaceholder(next.description as string)) next.description = next.message
   }
 
   // ── AnimatedBeam ─────────────────────────────────────────────────────────────
@@ -882,6 +1068,13 @@ function withHarnessDefaults(baseProps: Record<string, unknown>, componentName: 
   if (_isPlaceholder(next.imageClassName as string | undefined)) next.imageClassName = 'rounded-md'
   if (_isPlaceholder(next.itemClassName as string | undefined)) next.itemClassName = 'text-white/80'
   if (_isPlaceholder(next.labelClassName as string | undefined)) next.labelClassName = 'text-white/60 text-sm'
+  if (_isPlaceholder(next.wordClassName as string | undefined)) next.wordClassName = 'text-violet-400 font-bold'
+  if (_isPlaceholder(next.iconClassName as string | undefined)) next.iconClassName = 'text-indigo-400 w-5 h-5'
+  // containerClassName / innerClassName / wrapperClassName — CSS class props polluted by placeholder strings
+  if (_isPlaceholder(next.containerClassName as string | undefined)) next.containerClassName = undefined
+  if (_isPlaceholder(next.innerClassName as string | undefined)) next.innerClassName = undefined
+  if (_isPlaceholder(next.wrapperClassName as string | undefined)) next.wrapperClassName = undefined
+  if (_isPlaceholder(next.placeholderHeight as string | undefined)) next.placeholderHeight = '80px'
 
   // ── skeleton / loaders ───────────────────────────────────────────────────
   if (componentName === 'skeleton' || componentName === 'Skeleton') {
@@ -951,9 +1144,13 @@ function withHarnessDefaults(baseProps: Record<string, unknown>, componentName: 
       (name, i) => <span key={i} className="mx-4 flex-shrink-0 rounded-full border border-white/20 bg-white/5 px-5 py-2 text-sm font-semibold text-white/70">{name}</span>
     )
   }
-  if (componentName === 'CodeBlock' && !next.code) {
+  if (componentName === 'CodeBlock' && (!next.code || _isPlaceholder(next.code as string))) {
     next.code = `function greet(name: string) {\n  return \`Hello, \${name}!\`\n}\n\nconsole.log(greet("World"))`
     next.language = 'typescript'
+  }
+  if (componentName === 'CodeEditor' && (!next.code || _isPlaceholder(next.code as string))) {
+    next.code = `import { pipeline } from '@nexus/ai'\n\nconst forecast = await pipeline.run({\n  model: 'forecast-v3',\n  input: dealSignals,\n})`
+    next.language = next.language && !_isPlaceholder(next.language as string) ? next.language as string : 'typescript'
   }
   if ((componentName === 'LazyLoadComponent' || componentName === 'LazyLoad' || componentName === 'LazySection') && !next.children) {
     // threshold must be a valid 0–1 number, not placeholder
@@ -965,12 +1162,12 @@ function withHarnessDefaults(baseProps: Record<string, unknown>, componentName: 
     )
   }
   if (componentName === 'CodeComparison') {
-    if (!next.beforeCode) next.beforeCode = `function hello() {\n  console.log("Hello") // [!code --]\n}`
-    if (!next.afterCode) next.afterCode = `function hello(name: string) {\n  console.log(\`Hello \${name}\`) // [!code ++]\n}`
-    if (!next.language) next.language = 'typescript'
-    if (!next.filename) next.filename = 'hello.ts'
-    if (!next.lightTheme) next.lightTheme = 'github-light'
-    if (!next.darkTheme) next.darkTheme = 'github-dark'
+    if (!next.beforeCode || _isPlaceholder(next.beforeCode as string)) next.beforeCode = `function hello() {\n  console.log("Hello") // [!code --]\n}`
+    if (!next.afterCode || _isPlaceholder(next.afterCode as string)) next.afterCode = `function hello(name: string) {\n  console.log(\`Hello \${name}\`) // [!code ++]\n}`
+    if (!next.language || _isPlaceholder(next.language as string)) next.language = 'typescript'
+    if (!next.filename || _isPlaceholder(next.filename as string)) next.filename = 'hello.ts'
+    if (!next.lightTheme || _isPlaceholder(next.lightTheme as string)) next.lightTheme = 'github-light'
+    if (!next.darkTheme || _isPlaceholder(next.darkTheme as string)) next.darkTheme = 'github-dark'
   }
   if (componentName === 'Terminal' && !next.children) {
     // Terminal uses its own sub-components; inject plain string children as fallback
@@ -1028,6 +1225,34 @@ function withHarnessDefaults(baseProps: Record<string, unknown>, componentName: 
   }
 
   // ── data-admin ───────────────────────────────────────────────────────────────
+  if (componentName === 'FileTree' && !next.elements) {
+    next.elements = [
+      { id: 'src', name: 'src', type: 'folder', children: [
+        { id: 'comp', name: 'components', type: 'folder', children: [
+          { id: 'btn', name: 'Button.tsx', type: 'file' },
+          { id: 'inp', name: 'Input.tsx', type: 'file' },
+        ]},
+        { id: 'app', name: 'App.tsx', type: 'file' },
+        { id: 'main', name: 'main.tsx', type: 'file' },
+      ]},
+      { id: 'pkg', name: 'package.json', type: 'file' },
+      { id: 'tsconfig', name: 'tsconfig.json', type: 'file' },
+    ]
+  }
+  if (componentName === 'GanttChart') {
+    const _now = new Date('2026-05-01')
+    const _d = (offset: number) => new Date(_now.getTime() + offset * 24 * 60 * 60 * 1000)
+    next.startDate = _d(0)
+    next.endDate = _d(60)
+    next.tasks = [
+      { id: 'task-1', name: 'Discovery & Research', start: _d(0), end: _d(10), progress: 100, color: '#6366f1' },
+      { id: 'task-2', name: 'Design System', start: _d(8), end: _d(22), progress: 75, color: '#8b5cf6' },
+      { id: 'task-3', name: 'Frontend Build', start: _d(18), end: _d(40), progress: 45, color: '#06b6d4' },
+      { id: 'task-4', name: 'API Integration', start: _d(25), end: _d(45), progress: 20, color: '#10b981' },
+      { id: 'task-5', name: 'QA & Testing', start: _d(40), end: _d(55), progress: 0, color: '#f59e0b' },
+      { id: 'task-6', name: 'Launch', start: _d(55), end: _d(60), progress: 0, color: '#ef4444' },
+    ]
+  }
   if (componentName === 'BarChart' && !next.data) {
     next.data = [
       { label: 'Jan', value: 42, color: '#6366f1' },
@@ -1096,17 +1321,343 @@ function withHarnessDefaults(baseProps: Record<string, unknown>, componentName: 
       { title: 'Revenue', description: '$48k MRR' },
     ]
   }
-  if ((componentName === 'GaugeChart' || componentName === 'RadarChart') && next.value === undefined && !next.data) {
-    next.value = 72
+  if (componentName === 'GaugeChart') {
+    if (next.value === undefined) next.value = 72
+    if (!next.label || _isPlaceholder(next.label as string)) next.label = 'Forecast Score'
+    if (!next.name || _isPlaceholder(next.name as string)) next.name = 'Revenue Health'
+    if (!next.data) {
+      next.data = [
+        { label: 'Pipeline Coverage', value: 80 },
+        { label: 'Win Rate', value: 68 },
+        { label: 'Forecast Accuracy', value: 94 },
+        { label: 'NRR', value: 85 },
+      ]
+    }
+  }
+  if (componentName === 'RadarChart') {
+    // RadarChart expects: data: Array<{name: string, values: number[]}>, labels: string[]
     next.data = [
-      { label: 'Speed', value: 80 },
-      { label: 'Quality', value: 90 },
-      { label: 'Reliability', value: 85 },
-      { label: 'Usability', value: 78 },
+      { name: 'Pipeline Health', values: [80, 68, 94, 85, 76] },
+      { name: 'Last Quarter', values: [65, 55, 80, 72, 60] },
     ]
+    next.labels = ['Coverage', 'Win Rate', 'Accuracy', 'NRR', 'Velocity']
+    // clear old conflicting props
+    delete (next as Record<string, unknown>).values
+    delete (next as Record<string, unknown>).value
+    delete (next as Record<string, unknown>).label
+    delete (next as Record<string, unknown>).name
+  }
+  if (componentName === 'HeatmapVisualization' && (!next.data || !Array.isArray(next.data))) {
+    next.data = [
+      [85, 60, 45, 90, 55, 70, 40, 80, 65],
+      [70, 85, 30, 65, 75, 50, 90, 45, 60],
+      [55, 40, 95, 50, 85, 35, 70, 55, 80],
+      [90, 70, 55, 40, 60, 80, 25, 65, 50],
+      [45, 55, 75, 85, 35, 90, 60, 70, 40],
+    ]
+    next.labels = {
+      x: ['9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm'],
+      y: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri']
+    }
+    // clear conflicting top-level keys from auto-sample
+    delete (next as Record<string, unknown>).y
+    delete (next as Record<string, unknown>).x
+  }
+  if (componentName === 'AdvancedDataTable' && _isPlaceholder(next.emptyMessage as string | undefined)) {
+    next.emptyMessage = 'No deals found'
+  }
+
+  // ── forms-authoring ──────────────────────────────────────────────────────────
+  if (shelf === 'forms-authoring') {
+    // FormInput — needs label + placeholder
+    if (componentName === 'FormInput') {
+      if (!next.label || _isPlaceholder(next.label as string)) next.label = 'Email address'
+      if (!next.placeholder || _isPlaceholder(next.placeholder as string)) next.placeholder = 'team@nexus.io'
+      if (!next.helperText || _isPlaceholder(next.helperText as string)) next.helperText = "We'll never share your email."
+      if (!next.type) next.type = 'email'
+      if (_isPlaceholder(next.containerClassName as string)) next.containerClassName = undefined
+    }
+    // FormTextarea — needs label
+    if (componentName === 'FormTextarea') {
+      if (!next.label) next.label = 'Additional notes'
+      if (!next.placeholder) next.placeholder = 'Describe your revenue goals…'
+      if (!next.rows) next.rows = 4
+      if (!next.helperText || _isPlaceholder(next.helperText as string)) next.helperText = 'Max 500 characters.'
+      if (_isPlaceholder(next.containerClassName as string)) next.containerClassName = undefined
+    }
+    // FormSelect — REQUIRES options array (crashes without it)
+    if (componentName === 'FormSelect') {
+      if (!next.options || !Array.isArray(next.options) || (next.options as unknown[]).length === 0) {
+        next.options = [
+          { value: 'pipeline', label: 'Pipeline Intelligence' },
+          { value: 'forecast', label: 'Forecast Automation' },
+          { value: 'deal', label: 'Deal Execution' },
+          { value: 'territory', label: 'Territory Planning' },
+          { value: 'expansion', label: 'Account Expansion' },
+        ]
+      }
+      if (!next.label) next.label = 'Product module'
+      if (!next.placeholder) next.placeholder = 'Select a module…'
+      if (!next.helperText || _isPlaceholder(next.helperText as string)) next.helperText = 'Choose the module for this workspace.'
+    }
+    // FormCheckboxGroup — REQUIRES options array
+    if (componentName === 'FormCheckboxGroup') {
+      if (!next.options || !Array.isArray(next.options) || (next.options as unknown[]).length === 0) {
+        next.options = [
+          { value: 'crm', label: 'CRM Sync', description: 'Salesforce, HubSpot, Dynamics' },
+          { value: 'forecast', label: 'AI Forecasting', description: 'Confidence-scored predictions' },
+          { value: 'signals', label: 'Deal Signals', description: 'Risk and expansion alerts' },
+          { value: 'reports', label: 'Board Reports', description: 'Executive-ready summaries' },
+        ]
+      }
+      if (!next.label) next.label = 'Enabled features'
+      if (!next.helperText || _isPlaceholder(next.helperText as string)) next.helperText = 'Select the features to enable for your team.'
+    }
+    // FormRadioGroup — REQUIRES options array + name
+    if (componentName === 'FormRadioGroup') {
+      if (!next.options || !Array.isArray(next.options) || (next.options as unknown[]).length === 0) {
+        next.options = [
+          { value: 'starter', label: 'Starter', description: 'Up to 5 seats, CRM sync' },
+          { value: 'growth', label: 'Growth', description: 'Unlimited seats, AI forecasting' },
+          { value: 'enterprise', label: 'Enterprise', description: 'Custom SLA, dedicated CSM' },
+        ]
+      }
+      if (!next.name || _isPlaceholder(next.name as string)) next.name = 'pricing-tier'
+      if (!next.label) next.label = 'Select plan'
+      if (!next.helperText || _isPlaceholder(next.helperText as string)) next.helperText = 'You can change plans at any time.'
+    }
+    // FormToggle — needs label
+    if (componentName === 'FormToggle') {
+      if (!next.label) next.label = 'Enable real-time alerts'
+      if (!next.description) next.description = 'Receive deal risk notifications via Slack and email.'
+    }
+    // FormSlider — has good defaults but enrich
+    if (componentName === 'FormSlider') {
+      if (!next.label) next.label = 'Confidence threshold'
+      if (!next.helperText) next.helperText = 'Only surface signals above this confidence score.'
+    }
+    // FormFieldArray — needs label + fields
+    if (componentName === 'FormFieldArray') {
+      if (!next.label) next.label = 'Team members'
+      if (!next.fields && !next.items) {
+        next.fields = [
+          { id: '1', name: 'Sarah Chen', role: 'CRO' },
+          { id: '2', name: 'Marcus Webb', role: 'VP Revenue' },
+        ]
+      } else if (Array.isArray(next.fields) && next.fields.length > 0 && !(next.fields[0] as Record<string,unknown>).id) {
+        next.fields = (next.fields as Record<string,unknown>[]).map((f, i) => ({ id: String(i + 1), ...f }))
+      }
+      // children must be a render function (field, index) => ReactNode
+      next.children = (_field: Record<string, unknown>, _index: number) =>
+        React.createElement('div', { className: 'flex gap-2 text-sm' },
+          React.createElement('span', { className: 'font-medium' }, String(_field.name || `Item ${_index + 1}`)),
+          React.createElement('span', { className: 'text-muted-foreground' }, String(_field.role || ''))
+        )
+      if (!next.onAdd) next.onAdd = () => {}
+      if (!next.onRemove) next.onRemove = () => {}
+    }
+    // InputAddon — needs label
+    if (componentName === 'InputAddon') {
+      if (!next.label) next.label = 'Website'
+      if (!next.prefix && !next.addon) { next.prefix = 'https://'; next.addon = 'https://' }
+      if (!next.placeholder) next.placeholder = 'nexus.io'
+    }
+    // BadgeInput — needs label
+    if (componentName === 'BadgeInput') {
+      if (!next.label) next.label = 'Tags'
+      if (!next.placeholder) next.placeholder = 'Add a tag…'
+      const _badgePlaceholder = (v: unknown) => !v || _isPlaceholderArray(v as unknown[])
+      if (_badgePlaceholder(next.tags) && _badgePlaceholder(next.values) && _badgePlaceholder(next.items)) {
+        next.tags = ['Revenue Ops', 'Forecasting', 'Deal Signals']
+        next.values = next.tags
+        next.items = next.tags
+      }
+      if (!next.suggestions || _isPlaceholderArray(next.suggestions)) {
+        next.suggestions = ['Pipeline Intelligence', 'Forecast Automation', 'Deal Execution', 'Territory Planning']
+      }
+    }
+    // SearchFilter — needs some filters/sort to render fully
+    if (componentName === 'SearchFilter') {
+      if (!next.searchPlaceholder) next.searchPlaceholder = 'Search deals…'
+      if ((!next.sortOptions || (next.sortOptions as unknown[]).length === 0)) {
+        next.sortOptions = [
+          { label: 'Newest', value: 'newest' },
+          { label: 'Revenue', value: 'revenue' },
+          { label: 'Risk Score', value: 'risk' },
+        ]
+      }
+      if (next.resultCount === undefined) next.resultCount = 142
+    }
+    // FileUpload / DragDropZone
+    if (componentName === 'FileUpload' || componentName === 'DragDropZone') {
+      if (!next.label) next.label = 'Upload documents'
+      if (!next.accept) next.accept = '.csv,.xlsx,.pdf'
+      if (!next.description && !next.helperText) {
+        next.description = 'CSV, Excel, or PDF — up to 10MB'
+        next.helperText = next.description
+      }
+    }
+    // ColorPicker
+    if (componentName === 'ColorPicker') {
+      if (!next.label) next.label = 'Brand color'
+      if (!next.value && !next.color && !next.defaultValue) { next.value = '#6366f1'; next.color = '#6366f1'; next.defaultValue = '#6366f1' }
+      if (!next.palette || _isPlaceholderArray(next.palette)) next.palette = ['#6366f1', '#8b5cf6', '#06b6d4', '#10b981', '#f59e0b', '#ef4444', '#ffffff', '#000000']
+    }
+    // DateRangePicker
+    if (componentName === 'DateRangePicker') {
+      if (!next.label) next.label = 'Reporting period'
+    }
+    // MarkdownEditor / RichTextEditor
+    if (componentName === 'MarkdownEditor' || componentName === 'RichTextEditor') {
+      if (!next.label) next.label = 'Executive summary'
+      if (!next.placeholder) next.placeholder = 'Write your deal summary…'
+      if (!next.value && !next.content && !next.defaultValue) {
+        const md = '## Q3 Revenue Review\n\nPipeline coverage improved to **3.2×** with a 94% forecast accuracy.'
+        next.value = md; next.content = md; next.defaultValue = md
+      }
+      if (!next.onChange) next.onChange = () => {}
+      // Clear auto-sample `actions` that interfere with RichTextEditor (it goes to textarea props)
+      if (next.actions && !Array.isArray(next.actions) || (Array.isArray(next.actions) && (next.actions as Record<string,unknown>[])[0]?.icon?.toString().startsWith('http'))) {
+        delete (next as Record<string, unknown>).actions
+      }
+    }
+    // AdvancedAutocomplete
+    if (componentName === 'AdvancedAutocomplete') {
+      if (!next.label) next.label = 'Account lookup'
+      if (!next.placeholder) next.placeholder = 'Search accounts…'
+      if (!next.options && !next.suggestions && !next.items) {
+        const opts = [
+          { value: 'vertex', label: 'Vertex Cloud' },
+          { value: 'lattice', label: 'Lattice' },
+          { value: 'runway', label: 'Runway' },
+          { value: 'pave', label: 'Pave' },
+          { value: 'merge', label: 'Merge' },
+        ]
+        next.options = opts; next.suggestions = opts; next.items = opts
+      }
+    }
+    // QRCodeGenerator
+    if (componentName === 'QRCodeGenerator') {
+      if (!next.value && !next.data && !next.text) { next.value = 'https://nexus.io'; next.data = 'https://nexus.io'; next.text = 'https://nexus.io' }
+      if (!next.label) next.label = 'Share link'
+    }
+    // SignaturePad
+    if (componentName === 'SignaturePad') {
+      if (!next.label) next.label = 'Authorized signature'
+    }
+    // ResizablePanel — ResizableContainer is picked first (alphabetically); it needs panels[]
+    if (componentName === 'ResizablePanel') {
+      if (!next.panels || !Array.isArray(next.panels)) {
+        next.panels = [
+          { id: 'left', content: React.createElement('div', { className: 'h-full flex items-center justify-center p-4 text-sm text-white/50' }, 'Left panel — drag edge to resize') },
+          { id: 'right', content: React.createElement('div', { className: 'h-full flex items-center justify-center p-4 text-sm text-white/50' }, 'Right panel') },
+        ]
+      }
+      if (!next.children) next.children = (
+        React.createElement('div', { className: 'flex h-full items-center justify-center p-4 text-sm text-white/60 font-medium' }, 'Drag the edge to resize this panel')
+      )
+    }
+    // pagination (lowercase file name)
+    if (componentName === 'pagination' || componentName === 'Pagination') {
+      if (next.total === undefined && next.totalPages === undefined && next.pageCount === undefined) {
+        next.total = 142; next.totalPages = 15; next.pageCount = 15
+      }
+      if (next.page === undefined && next.currentPage === undefined) { next.page = 3; next.currentPage = 3 }
+      if (next.pageSize === undefined && next.perPage === undefined) { next.pageSize = 10; next.perPage = 10 }
+    }
+  }
+
+  // ── ui-primitives ───────────────────────────────────────────────────────────
+  if (shelf === 'ui-primitives') {
+    if (componentName === 'Avatar' || componentName === 'AvatarCircles') {
+      if (!next.src && !next.image) {
+        next.src = 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=80&q=80'
+        next.image = next.src
+      }
+      if (!next.alt) next.alt = 'User avatar'
+      if (!next.name && !next.fallback) { next.name = 'Sarah Chen'; next.fallback = 'SC' }
+    }
+    if (componentName === 'AvatarCircles') {
+      if (!next.avatars && !next.items) {
+        next.avatars = [
+          { src: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=80&q=80', alt: 'Sarah' },
+          { src: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=80&q=80', alt: 'Marcus' },
+          { src: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=80&q=80', alt: 'Priya' },
+        ]
+        next.items = next.avatars
+      }
+    }
+    if (componentName === 'badge' || componentName === 'Badge') {
+      if (!next.children) next.children = 'Revenue Ops'
+      if (!next.variant) next.variant = 'default'
+    }
+    if (componentName === 'StatusBadge') {
+      if (!next.status) next.status = 'active'
+      if (!next.children && !next.label) { next.children = 'Healthy'; next.label = 'Healthy' }
+    }
+    if (componentName === 'Divider') {
+      if (!next.label && !next.children) { next.label = 'or'; next.children = 'or' }
+    }
+    if (componentName === 'Menu') {
+      if (!next.items) {
+        next.items = [
+          { label: 'Dashboard', href: '#' },
+          { label: 'Pipeline', href: '#' },
+          { label: 'Reports', href: '#' },
+          { label: 'Settings', href: '#' },
+        ]
+      }
+    }
+    if (componentName === 'popover' || componentName === 'Popover') {
+      if (!next.children) next.children = (
+        <button className="rounded-md border border-white/20 bg-white/5 px-3 py-1.5 text-sm text-white/80 hover:bg-white/10 transition-colors">
+          Open Popover
+        </button>
+      )
+      if (!next.content) next.content = (
+        <div className="p-3 text-sm text-white/70">Popover content goes here</div>
+      )
+    }
+    if (componentName === 'sheet' || componentName === 'Sheet') {
+      if (next.open === undefined && next.isOpen === undefined) { next.open = false; next.isOpen = false }
+      if (!next.children) next.children = (
+        <button className="rounded-md border border-white/20 bg-white/5 px-3 py-1.5 text-sm text-white/80 hover:bg-white/10 transition-colors">
+          Open Sheet
+        </button>
+      )
+    }
+    if (componentName === 'tooltip' || componentName === 'Tooltip') {
+      if (!next.content && !next.text) { next.content = 'Pipeline Intelligence — AI-powered deal insights'; next.text = next.content }
+      if (!next.children) next.children = (
+        <span className="cursor-help border-b border-dashed border-white/30 text-sm text-white/80">Hover for details</span>
+      )
+    }
+    if (componentName === 'ThemeToggle') {
+      // Self-contained, no required props
+    }
+    if (componentName === 'ToggleGroup') {
+      if (!next.items && !next.options) {
+        const opts = [
+          { value: 'day', label: 'Day' },
+          { value: 'week', label: 'Week' },
+          { value: 'month', label: 'Month' },
+          { value: 'quarter', label: 'Quarter' },
+        ]
+        next.items = opts; next.options = opts
+      }
+    }
   }
 
   // ── navigation-command ───────────────────────────────────────────────────────
+  if (componentName === 'MorphingNav' && (!Array.isArray(next.links))) {
+    next.links = [
+      { label: 'Features', href: '#features' },
+      { label: 'Pricing', href: '#pricing' },
+      { label: 'Docs', href: '#docs' },
+      { label: 'Blog', href: '#blog' },
+    ]
+    next.logo = React.createElement('span', { className: 'text-sm font-bold text-white' }, 'Nexus')
+  }
   if (componentName === 'Breadcrumbs' && !next.items) {
     next.items = [
       { label: 'Home', href: '#' },
@@ -1184,17 +1735,20 @@ function withHarnessDefaults(baseProps: Record<string, unknown>, componentName: 
 function LazyComponentSlot({
   entry,
   mode,
+  scrollRoot,
   onStatus,
   onIssue,
 }: {
   entry: ComponentEntry
   mode: HarnessMode
+  scrollRoot?: React.RefObject<HTMLElement>
   onStatus: (path: string, status: SlotStatus) => void
   onIssue: (path: string, issue: SlotIssue | null) => void
 }) {
   const containerRef = useRef<HTMLDivElement>(null)
   const [inView, setInView] = useState(false)
   const [Comp, setComp] = useState<React.ComponentType<any> | null>(null)
+  const [CompProvider, setCompProvider] = useState<React.ComponentType<any> | null>(null)
   const [importErr, setImportErr] = useState<string | null>(null)
   const [runtimeErr, setRuntimeErr] = useState<string | null>(null)
 
@@ -1209,7 +1763,7 @@ function LazyComponentSlot({
           observer.disconnect()
         }
       },
-      { rootMargin: '280px' },
+      { root: scrollRoot?.current ?? null, rootMargin: '280px' },
     )
     observer.observe(el)
     return () => observer.disconnect()
@@ -1231,11 +1785,24 @@ function LazyComponentSlot({
         }
 
         const candidates = Object.entries(mod).filter(
-          ([key, val]) => key !== 'default' && !key.startsWith('__') && /^[A-Z]/.test(key) && isReactComponent(val),
+          ([key, val]) => {
+            if (key === 'default' || key.startsWith('__') || !/^[A-Z]/.test(key)) return false
+            if (!isReactComponent(val)) return false
+            // Exclude async functions — server components (async) cannot render in client context
+            if (typeof val === 'function' && (val as Function).constructor?.name === 'AsyncFunction') return false
+            return true
+          },
         )
 
         if (candidates.length > 0) {
-          setComp(() => candidates[0][1] as React.ComponentType<any>)
+          // Prefer the export whose name matches the filename-derived component name
+          const preferred = candidates.find(([key]) => key === entry.name) ?? candidates[0]
+          setComp(() => preferred[1] as React.ComponentType<any>)
+          // If module also exports a Provider, store it for context-dependent components
+          const providerEntry = candidates.find(([key]) => key.endsWith('Provider'))
+          if (providerEntry && providerEntry[0] !== candidates[0][0]) {
+            setCompProvider(() => providerEntry[1] as React.ComponentType<any>)
+          }
           setImportErr(null)
           onIssue(entry.path, null)
           return
@@ -1243,6 +1810,8 @@ function LazyComponentSlot({
 
         if (mod.default && isReactComponent(mod.default)) {
           setComp(() => mod.default as React.ComponentType<any>)
+          // Store named provider exports for components that require a context provider
+          if (mod.NotificationProvider) setCompProvider(() => mod.NotificationProvider as React.ComponentType<any>)
           setImportErr(null)
           onIssue(entry.path, null)
           return
@@ -1298,7 +1867,9 @@ function LazyComponentSlot({
   return (
     <div ref={containerRef} className="h-full">
       <ErrorBoundary key={`${entry.path}-${mode}`} name={entry.name} onError={onRuntime}>
-        <Comp {...compProps} />
+        {CompProvider
+          ? React.createElement(CompProvider, { children: React.createElement(Comp, compProps) })
+          : <Comp {...compProps} />}
       </ErrorBoundary>
       {runtimeErr && mode === 'strict' && (
         <div className="mt-1 px-2 pb-2 text-[10px] text-red-400/80">Strict mode: {runtimeErr}</div>
@@ -1312,6 +1883,7 @@ function ComponentCard({
   mode,
   previewClass,
   fitMode,
+  scrollRoot,
   onStatus,
   onIssue,
 }: {
@@ -1319,6 +1891,7 @@ function ComponentCard({
   mode: HarnessMode
   previewClass: string
   fitMode: FitMode
+  scrollRoot?: React.RefObject<HTMLElement>
   onStatus: (path: string, status: SlotStatus) => void
   onIssue: (path: string, issue: SlotIssue | null) => void
 }) {
@@ -1355,7 +1928,7 @@ function ComponentCard({
       </div>
       <div className={`component-frame ${previewClass} bg-black/20`}>
         <div className={getShelfFrameClass(entry.shelf, fitMode)}>
-          <LazyComponentSlot key={`${entry.path}-${mode}-${seed}`} entry={entry} mode={mode} onStatus={onStatus} onIssue={onIssue} />
+          <LazyComponentSlot key={`${entry.path}-${mode}-${seed}`} entry={entry} mode={mode} scrollRoot={scrollRoot} onStatus={onStatus} onIssue={onIssue} />
         </div>
       </div>
     </div>
@@ -1366,6 +1939,7 @@ export default function App() {
   const [search, setSearch] = useState('')
   const [activeShelf, setActiveShelf] = useState('all')
   const [sidebarOpen, setSidebarOpen] = useState(true)
+  const mainRef = useRef<HTMLElement>(null)
 
   const [mode, setMode] = useState<HarnessMode>('safe')
   const [fitMode, setFitMode] = useState<FitMode>('crop')
@@ -1388,6 +1962,10 @@ export default function App() {
       return next
     })
   }, [])
+
+  useEffect(() => {
+    if (mainRef.current) mainRef.current.scrollTop = 0
+  }, [activeShelf, search])
 
   const filtered = useMemo(() => {
     return entries.filter((e) => {
@@ -1598,7 +2176,7 @@ export default function App() {
           </div>
         )}
 
-        <main className="flex-1 overflow-y-auto bg-background/50">
+        <main ref={mainRef} className="flex-1 overflow-y-auto bg-background/50">
           <div className="p-5">
             {activeShelf === 'all'
               ? SHELF_ORDER.filter((s) => countByShelf.has(s)).map((shelf) => {
@@ -1629,6 +2207,7 @@ export default function App() {
                             mode={mode}
                             fitMode={fitMode}
                             previewClass={previewClass}
+                            scrollRoot={mainRef}
                             onStatus={onStatus}
                             onIssue={onIssue}
                           />
@@ -1651,6 +2230,7 @@ export default function App() {
                         mode={mode}
                         fitMode={fitMode}
                         previewClass={previewClass}
+                        scrollRoot={mainRef}
                         onStatus={onStatus}
                         onIssue={onIssue}
                       />
