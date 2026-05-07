@@ -8822,5 +8822,20 @@
   },
   "tooltip": {
     "placement": "top"
-  }
+  },
+  "LandingProductSpotlightGrid": {},
+  "LandingProductMarqueeBand": {},
+  "LandingProductLiveCounters": {},
+  "LandingProductBentoFeatures": {},
+  "LandingProductTerminalDemo": {},
+  "LandingProductGlowCTA": {},
+  "LandingProductPricingToggle": {},
+  "LandingProductScrollStory": {},
+  "LandingProductTickerStrip": {},
+  "LandingProductCompareColumns": {},
+  "LandingProductVideoQuote": {},
+  "LandingProductBlurReveal": {},
+  "LandingProductDashboardPreview": {},
+  "LandingProductInteractiveFAQ": {},
+  "LandingProductTimelineRoadmap": {}
 }
