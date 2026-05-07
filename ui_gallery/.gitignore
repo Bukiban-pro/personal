@@ -1,0 +1,6 @@
+# Covered by root .gitignore — kept for standalone use of this directory
+node_modules/
+dist/
+dist-ssr/
+*.local
+.vite/

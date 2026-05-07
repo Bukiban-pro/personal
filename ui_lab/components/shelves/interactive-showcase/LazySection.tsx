@@ -22,7 +22,7 @@ import { useEffect, useRef, useState, ReactNode, startTransition } from 'react'
  * </LazySection>
  *
  * <LazySection eager>
- *   <HeroSection /> {/* Above the fold — render immediately */}
+ *   <HeroSection /> // Above the fold — render immediately
  * </LazySection>
  */
 

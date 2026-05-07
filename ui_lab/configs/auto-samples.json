@@ -1,0 +1,8826 @@
+{
+  "AuroraBackground": {
+    "colors": [
+      "Alpha",
+      "Beta",
+      "Gamma"
+    ]
+  },
+  "AuroraBackgroundEffect": {
+    "colors": [
+      "Alpha",
+      "Beta",
+      "Gamma"
+    ]
+  },
+  "Backlight": {},
+  "BloomEffect": {},
+  "BorderBeam": {},
+  "BorderBeamEffect": {},
+  "ChromaticAberrationEffect": {
+    "trigger": "hover"
+  },
+  "Confetti": {},
+  "ConfettiEffect": {},
+  "ConfettiExplosion": {
+    "particles": [
+      "Alpha",
+      "Beta",
+      "Gamma"
+    ],
+    "trigger": "click"
+  },
+  "CoolMode": {
+    "options": {}
+  },
+  "CursorFollower": {},
+  "DotPattern": {},
+  "DottedMap": {},
+  "FlickeringGrid": {},
+  "GlareHover": {},
+  "Globe": {},
+  "GradientBlobs": {
+    "blobs": [
+      {
+        "color": "#6366f1 1"
+      },
+      {
+        "color": "#6366f1 2"
+      },
+      {
+        "color": "#6366f1 3"
+      }
+    ]
+  },
+  "GridPattern": {},
+  "InteractiveGridPattern": {
+    "squaresClassName": "Sample Title"
+  },
+  "Lens": {
+    "position": {
+      "x": 42,
+      "y": 42
+    },
+    "defaultPosition": {
+      "x": 42,
+      "y": 42
+    },
+    "ariaLabel": "Sample Label"
+  },
+  "LensMagnifier": {},
+  "MeshGradient": {
+    "colors": [
+      "Alpha",
+      "Beta",
+      "Gamma"
+    ]
+  },
+  "Meteors": {},
+  "MotionBlurEffect": {},
+  "MultiLayerParallax": {
+    "layers": [
+      {
+        "id": "item-1 1",
+        "depth": 42
+      },
+      {
+        "id": "item-1 2",
+        "depth": 42
+      },
+      {
+        "id": "item-1 3",
+        "depth": 42
+      }
+    ]
+  },
+  "NoiseOverlay": {},
+  "OrbitingCircles": {
+    "iconSize": 42
+  },
+  "Particles": {},
+  "Pointer": {},
+  "ProgressiveBlur": {
+    "position": "top",
+    "blurLevels": [
+      1,
+      2,
+      3
+    ]
+  },
+  "RetroGrid": {},
+  "Ripple": {},
+  "ShineBorder": {
+    "shineColor": "#6366f1"
+  },
+  "SparklesEffect": {},
+  "Spotlight": {},
+  "SpotlightEffect": {},
+  "VHSEffect": {},
+  "WarpBackground": {},
+  "WavyBackground": {
+    "colors": [
+      "Alpha",
+      "Beta",
+      "Gamma"
+    ]
+  },
+  "AdvancedDataTable": {
+    "columns": [
+      {
+        "key": "item-1 1",
+        "label": "Sample Label 1"
+      },
+      {
+        "key": "item-1 2",
+        "label": "Sample Label 2"
+      },
+      {
+        "key": "item-1 3",
+        "label": "Sample Label 3"
+      }
+    ],
+    "rows": [
+      {
+        "id": "item-1 1"
+      },
+      {
+        "id": "item-1 2"
+      },
+      {
+        "id": "item-1 3"
+      }
+    ],
+    "emptyMessage": "Sample text"
+  },
+  "AdvancedFilter": {
+    "groups": [
+      {
+        "id": "item-1 1",
+        "name": "Sample Title 1",
+        "type": "checkbox 1",
+        "options": [
+          {
+            "id": "item-1 1",
+            "label": "Sample Label 1",
+            "value": "99% 1"
+          },
+          {
+            "id": "item-1 2",
+            "label": "Sample Label 2",
+            "value": "99% 2"
+          },
+          {
+            "id": "item-1 3",
+            "label": "Sample Label 3",
+            "value": "99% 3"
+          }
+        ],
+        "value": "99% 1"
+      },
+      {
+        "id": "item-1 2",
+        "name": "Sample Title 2",
+        "type": "checkbox 2",
+        "options": [
+          {
+            "id": "item-1 1",
+            "label": "Sample Label 1",
+            "value": "99% 1"
+          },
+          {
+            "id": "item-1 2",
+            "label": "Sample Label 2",
+            "value": "99% 2"
+          },
+          {
+            "id": "item-1 3",
+            "label": "Sample Label 3",
+            "value": "99% 3"
+          }
+        ],
+        "value": "99% 2"
+      },
+      {
+        "id": "item-1 3",
+        "name": "Sample Title 3",
+        "type": "checkbox 3",
+        "options": [
+          {
+            "id": "item-1 1",
+            "label": "Sample Label 1",
+            "value": "99% 1"
+          },
+          {
+            "id": "item-1 2",
+            "label": "Sample Label 2",
+            "value": "99% 2"
+          },
+          {
+            "id": "item-1 3",
+            "label": "Sample Label 3",
+            "value": "99% 3"
+          }
+        ],
+        "value": "99% 3"
+      }
+    ]
+  },
+  "AdvancedTabs": {
+    "tabs": [
+      {
+        "value": "99% 1",
+        "label": "Sample Label 1",
+        "badge": "New 1"
+      },
+      {
+        "value": "99% 2",
+        "label": "Sample Label 2",
+        "badge": "New 2"
+      },
+      {
+        "value": "99% 3",
+        "label": "Sample Label 3",
+        "badge": "New 3"
+      }
+    ],
+    "value": "99%",
+    "variant": "default",
+    "size": "sm"
+  },
+  "BarChart": {
+    "data": [
+      {
+        "label": "Sample Label 1",
+        "value": 42
+      },
+      {
+        "label": "Sample Label 2",
+        "value": 42
+      },
+      {
+        "label": "Sample Label 3",
+        "value": 42
+      }
+    ],
+    "maxValue": 42,
+    "variant": "horizontal",
+    "showLabels": false
+  },
+  "BentoGrid": {},
+  "DataTable": {},
+  "FileTree": {},
+  "FileTreeExplorer": {
+    "nodes": [
+      {
+        "id": "item-1 1",
+        "name": "Sample Title 1",
+        "type": "file 1",
+        "children": [
+          {},
+          {},
+          {}
+        ]
+      },
+      {
+        "id": "item-1 2",
+        "name": "Sample Title 2",
+        "type": "file 2",
+        "children": [
+          {},
+          {},
+          {}
+        ]
+      },
+      {
+        "id": "item-1 3",
+        "name": "Sample Title 3",
+        "type": "file 3",
+        "children": [
+          {},
+          {},
+          {}
+        ]
+      }
+    ]
+  },
+  "GanttChart": {
+    "tasks": [
+      {
+        "id": "item-1 1",
+        "name": "Sample Title 1",
+        "progress": 42,
+        "dependencies": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "id": "item-1 2",
+        "name": "Sample Title 2",
+        "progress": 42,
+        "dependencies": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "id": "item-1 3",
+        "name": "Sample Title 3",
+        "progress": 42,
+        "dependencies": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      }
+    ]
+  },
+  "GaugeChart": {
+    "value": 42,
+    "label": "Sample Label",
+    "max": 42,
+    "color": "#6366f1"
+  },
+  "HeatmapVisualization": {
+    "labels": {
+      "x": [
+        "Alpha",
+        "Beta",
+        "Gamma"
+      ]
+    },
+    "y": [
+      "Alpha",
+      "Beta",
+      "Gamma"
+    ]
+  },
+  "KPICard": {
+    "title": "Sample Title",
+    "value": "99%",
+    "trend": "up",
+    "changeLabel": "Sample Label"
+  },
+  "LineChart": {
+    "data": [
+      {
+        "label": "Sample Label 1",
+        "points": [
+          1,
+          2,
+          3
+        ]
+      },
+      {
+        "label": "Sample Label 2",
+        "points": [
+          1,
+          2,
+          3
+        ]
+      },
+      {
+        "label": "Sample Label 3",
+        "points": [
+          1,
+          2,
+          3
+        ]
+      }
+    ],
+    "showLabels": false
+  },
+  "MetricsDashboard": {
+    "metrics": [
+      {
+        "id": "item-1 1",
+        "label": "Sample Label 1",
+        "value": 42,
+        "trend": "up 1",
+        "trendValue": 42,
+        "color": "primary 1",
+        "history": [
+          1,
+          2,
+          3
+        ]
+      },
+      {
+        "id": "item-1 2",
+        "label": "Sample Label 2",
+        "value": 42,
+        "trend": "up 2",
+        "trendValue": 42,
+        "color": "primary 2",
+        "history": [
+          1,
+          2,
+          3
+        ]
+      },
+      {
+        "id": "item-1 3",
+        "label": "Sample Label 3",
+        "value": 42,
+        "trend": "up 3",
+        "trendValue": 42,
+        "color": "primary 3",
+        "history": [
+          1,
+          2,
+          3
+        ]
+      }
+    ]
+  },
+  "NetworkGraph": {
+    "nodes": [
+      {
+        "id": "item-1 1",
+        "label": "Sample Label 1"
+      },
+      {
+        "id": "item-1 2",
+        "label": "Sample Label 2"
+      },
+      {
+        "id": "item-1 3",
+        "label": "Sample Label 3"
+      }
+    ],
+    "edges": [
+      {
+        "from": "Sample text 1",
+        "to": "Sample text 1",
+        "label": "Sample Label 1"
+      },
+      {
+        "from": "Sample text 2",
+        "to": "Sample text 2",
+        "label": "Sample Label 2"
+      },
+      {
+        "from": "Sample text 3",
+        "to": "Sample text 3",
+        "label": "Sample Label 3"
+      }
+    ]
+  },
+  "NotificationCenter": {},
+  "PerformanceMonitor": {
+    "position": "top-left"
+  },
+  "RadarChart": {
+    "name": "Sample Title",
+    "values": [
+      1,
+      2,
+      3
+    ]
+  },
+  "ScrollProgress": {
+    "position": "top"
+  },
+  "ScrollProgressBar": {},
+  "ScrollProgressIndicator": {
+    "variant": "bar",
+    "position": "top"
+  },
+  "StepIndicator": {
+    "steps": [
+      {
+        "label": "Sample Label 1",
+        "description": "A brief description of this feature. 1"
+      },
+      {
+        "label": "Sample Label 2",
+        "description": "A brief description of this feature. 2"
+      },
+      {
+        "label": "Sample Label 3",
+        "description": "A brief description of this feature. 3"
+      }
+    ],
+    "currentStep": 42,
+    "variant": "horizontal"
+  },
+  "Stepper": {
+    "steps": [
+      {
+        "id": "item-1 1",
+        "label": "Sample Label 1",
+        "description": "A brief description of this feature. 1",
+        "state": "default 1"
+      },
+      {
+        "id": "item-1 2",
+        "label": "Sample Label 2",
+        "description": "A brief description of this feature. 2",
+        "state": "default 2"
+      },
+      {
+        "id": "item-1 3",
+        "label": "Sample Label 3",
+        "description": "A brief description of this feature. 3",
+        "state": "default 3"
+      }
+    ],
+    "variant": "vertical"
+  },
+  "Timeline": {
+    "items": [
+      {
+        "title": "Sample Title 1",
+        "description": "A brief description of this feature. 1",
+        "variant": "default 1"
+      },
+      {
+        "title": "Sample Title 2",
+        "description": "A brief description of this feature. 2",
+        "variant": "default 2"
+      },
+      {
+        "title": "Sample Title 3",
+        "description": "A brief description of this feature. 3",
+        "variant": "default 3"
+      }
+    ]
+  },
+  "TimelineComponent": {
+    "events": [
+      {
+        "id": "item-1 1",
+        "title": "Sample Title 1",
+        "description": "A brief description of this feature. 1",
+        "date": "2025-01-01 1",
+        "status": "completed 1"
+      },
+      {
+        "id": "item-1 2",
+        "title": "Sample Title 2",
+        "description": "A brief description of this feature. 2",
+        "date": "2025-01-01 2",
+        "status": "completed 2"
+      },
+      {
+        "id": "item-1 3",
+        "title": "Sample Title 3",
+        "description": "A brief description of this feature. 3",
+        "date": "2025-01-01 3",
+        "status": "completed 3"
+      }
+    ],
+    "orientation": "vertical"
+  },
+  "Alert": {
+    "type": "info",
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "action": {
+      "label": "Get Started",
+      "href": "#"
+    },
+    "label": "Sample Label"
+  },
+  "AuthRequiredModal": {
+    "isOpen": false
+  },
+  "ConfirmDialog": {
+    "open": false,
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "confirmLabel": "Sample Label",
+    "cancelLabel": "Sample Label",
+    "variant": "default"
+  },
+  "CookieConsent": {
+    "position": "bottom",
+    "message": "Sample text",
+    "privacyHref": "#"
+  },
+  "EmptyState": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "actionLabel": "Sample Label",
+    "actionHref": "#"
+  },
+  "ErrorBoundary": {},
+  "ErrorState": {
+    "title": "Sample Title",
+    "message": "Sample text",
+    "homeHref": "#"
+  },
+  "Loader": {
+    "variant": "spinner",
+    "size": "sm",
+    "label": "Sample Label"
+  },
+  "Modal": {
+    "size": "sm"
+  },
+  "OfflineBanner": {},
+  "OverlayLoader": {
+    "message": "Sample text"
+  },
+  "PageLoading": {
+    "message": "Sample text"
+  },
+  "PagePreloader": {
+    "isLoading": false,
+    "text": "Sample text"
+  },
+  "ScrollToTop": {},
+  "skeleton": {
+    "variant": "text",
+    "width": "item-1",
+    "height": "Sample text",
+    "animation": "pulse"
+  },
+  "Toast": {
+    "position": "top-left"
+  },
+  "TopLoadingBar": {
+    "isLoading": false
+  },
+  "AdvancedAutocomplete": {
+    "options": [
+      {
+        "id": "item-1 1",
+        "label": "Sample Label 1",
+        "value": "99% 1"
+      },
+      {
+        "id": "item-1 2",
+        "label": "Sample Label 2",
+        "value": "99% 2"
+      },
+      {
+        "id": "item-1 3",
+        "label": "Sample Label 3",
+        "value": "99% 3"
+      }
+    ],
+    "placeholder": "Sample text"
+  },
+  "BadgeInput": {
+    "values": [
+      "Alpha",
+      "Beta",
+      "Gamma"
+    ],
+    "suggestions": [
+      "Alpha",
+      "Beta",
+      "Gamma"
+    ]
+  },
+  "ColorPicker": {
+    "value": "99%",
+    "palette": [
+      "Alpha",
+      "Beta",
+      "Gamma"
+    ]
+  },
+  "DateRangePicker": {
+    "value": {}
+  },
+  "DragDropZone": {
+    "label": "Sample Label",
+    "description": "A brief description of this feature."
+  },
+  "FileUpload": {},
+  "FormCheckboxGroup": {
+    "options": [
+      {
+        "value": "99% 1",
+        "label": "Sample Label 1",
+        "description": "A brief description of this feature. 1"
+      },
+      {
+        "value": "99% 2",
+        "label": "Sample Label 2",
+        "description": "A brief description of this feature. 2"
+      },
+      {
+        "value": "99% 3",
+        "label": "Sample Label 3",
+        "description": "A brief description of this feature. 3"
+      }
+    ],
+    "label": "Sample Label",
+    "helperText": "Sample text",
+    "direction": "horizontal",
+    "size": "sm",
+    "state": "default"
+  },
+  "FormFieldArray": {},
+  "FormInput": {
+    "label": "Sample Label",
+    "helperText": "Sample text",
+    "size": "sm",
+    "state": "default",
+    "floatingLabel": false,
+    "containerClassName": "Sample Title"
+  },
+  "FormRadioGroup": {
+    "options": [
+      {
+        "value": "99% 1",
+        "label": "Sample Label 1",
+        "description": "A brief description of this feature. 1"
+      },
+      {
+        "value": "99% 2",
+        "label": "Sample Label 2",
+        "description": "A brief description of this feature. 2"
+      },
+      {
+        "value": "99% 3",
+        "label": "Sample Label 3",
+        "description": "A brief description of this feature. 3"
+      }
+    ],
+    "value": "99%",
+    "name": "Sample Title",
+    "label": "Sample Label",
+    "helperText": "Sample text",
+    "direction": "horizontal",
+    "size": "sm",
+    "state": "default"
+  },
+  "FormSelect": {
+    "options": [
+      {
+        "value": "99% 1",
+        "label": "Sample Label 1"
+      },
+      {
+        "value": "99% 2",
+        "label": "Sample Label 2"
+      },
+      {
+        "value": "99% 3",
+        "label": "Sample Label 3"
+      }
+    ],
+    "value": "99%",
+    "placeholder": "Sample text",
+    "label": "Sample Label",
+    "helperText": "Sample text",
+    "size": "sm",
+    "state": "default"
+  },
+  "FormSlider": {
+    "value": 42,
+    "label": "Sample Label",
+    "helperText": "Sample text",
+    "showValue": false,
+    "size": "sm",
+    "variant": "primary"
+  },
+  "FormTextarea": {
+    "label": "Sample Label",
+    "helperText": "Sample text",
+    "size": "sm",
+    "state": "default",
+    "containerClassName": "Sample Title"
+  },
+  "FormToggle": {
+    "label": "Sample Label",
+    "description": "A brief description of this feature.",
+    "size": "sm"
+  },
+  "InputAddon": {
+    "helperText": "Sample text",
+    "size": "sm"
+  },
+  "MarkdownEditor": {
+    "initialValue": "99%"
+  },
+  "pagination": {
+    "currentPage": 42,
+    "totalPages": 42,
+    "pageSizeOptions": [
+      1,
+      2,
+      3
+    ]
+  },
+  "QRCodeGenerator": {
+    "value": "99%"
+  },
+  "ResizablePanel": {},
+  "RichTextEditor": {
+    "actions": [
+      {
+        "id": "item-1 1",
+        "label": "Sample Label 1",
+        "icon": "https://placehold.co/40x40/1f2937/6b7280?text=img"
+      },
+      {
+        "id": "item-1 2",
+        "label": "Sample Label 2",
+        "icon": "https://placehold.co/40x40/1f2937/6b7280?text=img"
+      },
+      {
+        "id": "item-1 3",
+        "label": "Sample Label 3",
+        "icon": "https://placehold.co/40x40/1f2937/6b7280?text=img"
+      }
+    ]
+  },
+  "SearchFilter": {
+    "searchPlaceholder": "Sample text",
+    "value": "99%"
+  },
+  "SignaturePad": {},
+  "Accordion3D": {
+    "items": [
+      {
+        "id": "item-1 1",
+        "title": "Sample Title 1"
+      },
+      {
+        "id": "item-1 2",
+        "title": "Sample Title 2"
+      },
+      {
+        "id": "item-1 3",
+        "title": "Sample Title 3"
+      }
+    ]
+  },
+  "AdvancedCarousel": {
+    "effect": "fade"
+  },
+  "AndroidMockup": {
+    "src": "#",
+    "videoSrc": "#"
+  },
+  "CardImage": {
+    "image": {},
+    "src": "#",
+    "alt": "Sample text"
+  },
+  "CodeBlock": {
+    "code": "Sample text",
+    "highlightLines": [
+      1,
+      2,
+      3
+    ],
+    "copyable": false
+  },
+  "CodeComparison": {
+    "beforeCode": "Sample text",
+    "afterCode": "Sample text",
+    "language": "Sample text",
+    "filename": "Sample Title",
+    "lightTheme": "Sample text",
+    "darkTheme": "Sample text"
+  },
+  "CodeEditor": {
+    "code": "Sample text"
+  },
+  "ComparisonSlider": {
+    "beforeSrc": "#",
+    "afterSrc": "#",
+    "beforeLabel": "Sample Label",
+    "afterLabel": "Sample Label"
+  },
+  "CurtainReveal": {
+    "isOpen": false,
+    "direction": "horizontal"
+  },
+  "DraggableCards": {
+    "items": {
+      "id": "item-1"
+    }
+  },
+  "ExpandableCard": {},
+  "FlipCard": {
+    "trigger": "hover",
+    "direction": "horizontal"
+  },
+  "FlipCardEffect": {
+    "trigger": "hover"
+  },
+  "GlassmorphismCard": {},
+  "GlowCard": {},
+  "HeroVideoDialog": {
+    "videoSrc": "#",
+    "thumbnailSrc": "#"
+  },
+  "HolographicCard": {},
+  "HorizontalScrollSection": {
+    "innerClassName": "Sample Title"
+  },
+  "IconCloud": {
+    "images": [
+      "Alpha",
+      "Beta",
+      "Gamma"
+    ]
+  },
+  "ImageGallery": {
+    "images": [
+      {
+        "src": "#",
+        "alt": "Sample text 1"
+      },
+      {
+        "src": "#",
+        "alt": "Sample text 2"
+      },
+      {
+        "src": "#",
+        "alt": "Sample text 3"
+      }
+    ]
+  },
+  "ImageLightbox": {
+    "src": "#",
+    "alt": "Sample text"
+  },
+  "ImageReveal": {
+    "containerClassName": "Sample Title"
+  },
+  "ImageWithFallback": {
+    "fallbackSrc": "#"
+  },
+  "InfiniteCarousel": {
+    "direction": "left"
+  },
+  "InteractiveGrid": {},
+  "InteractiveHoverButton": {},
+  "Iphone": {
+    "src": "#",
+    "videoSrc": "#"
+  },
+  "LazyLoadComponent": {
+    "threshold": 42
+  },
+  "LazySection": {
+    "placeholderHeight": "Sample text",
+    "priority": "high"
+  },
+  "LongPressDetector": {},
+  "MagicCard": {},
+  "MagneticButton": {},
+  "MagneticButtonEffect": {},
+  "NeonCard": {
+    "variant": "primary"
+  },
+  "NeonGradientCard": {
+    "neonColors": {
+      "firstColor": "#6366f1 1",
+      "secondColor": "#6366f1 1"
+    }
+  },
+  "PinchZoom": {},
+  "PixelImage": {
+    "src": "#",
+    "customGrid": {
+      "rows": 42,
+      "cols": 42
+    }
+  },
+  "ProductCarousel": {
+    "items": [
+      {
+        "id": 42,
+        "title": "Sample Title 1",
+        "subtitle": "Sample Title 1",
+        "price": 42,
+        "image": "https://placehold.co/40x40/1f2937/6b7280?text=img"
+      },
+      {
+        "id": 42,
+        "title": "Sample Title 2",
+        "subtitle": "Sample Title 2",
+        "price": 42,
+        "image": "https://placehold.co/40x40/1f2937/6b7280?text=img"
+      },
+      {
+        "id": 42,
+        "title": "Sample Title 3",
+        "subtitle": "Sample Title 3",
+        "price": 42,
+        "image": "https://placehold.co/40x40/1f2937/6b7280?text=img"
+      }
+    ],
+    "title": "Sample Title",
+    "primaryActionLabel": "Sample Label"
+  },
+  "ProgressRing": {
+    "value": 42,
+    "color": "primary",
+    "label": "Sample Label"
+  },
+  "PulsatingButton": {
+    "variant": "pulse"
+  },
+  "RainbowButton": {},
+  "RippleButton": {},
+  "Safari": {
+    "url": "#",
+    "imageSrc": "#",
+    "videoSrc": "#"
+  },
+  "SafariMockup": {
+    "url": "#",
+    "imageSrc": "#",
+    "videoSrc": "#"
+  },
+  "ScrollPinSection": {},
+  "ScrollSnapContainer": {
+    "snapAlign": "start",
+    "indicatorPosition": "right"
+  },
+  "ScrollVideoPlayer": {
+    "src": "#",
+    "containerClassName": "Sample Title"
+  },
+  "ShimmerButton": {},
+  "ShinyButton": {},
+  "SkillBars": {
+    "skills": [
+      {
+        "name": "Sample Title 1"
+      },
+      {
+        "name": "Sample Title 2"
+      },
+      {
+        "name": "Sample Title 3"
+      }
+    ],
+    "barHeight": "sm"
+  },
+  "SpotlightCards": {},
+  "StackedCards": {},
+  "StarRating": {
+    "value": 42,
+    "size": "sm",
+    "showValue": false,
+    "label": "Sample Label"
+  },
+  "SwipeDetector": {},
+  "Terminal": {},
+  "TiltCard": {},
+  "TweetCard": {},
+  "ZoomHero": {},
+  "AnnouncementBanner": {
+    "message": "Sample text",
+    "href": "#",
+    "linkText": "Sample text",
+    "variant": "default"
+  },
+  "CTASection": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "primaryAction": {
+      "label": "Sample Label",
+      "href": "#"
+    },
+    "href": "#"
+  },
+  "FAQSection": {
+    "items": [
+      {
+        "question": "Sample text 1",
+        "answer": "Sample text 1"
+      },
+      {
+        "question": "Sample text 2",
+        "answer": "Sample text 2"
+      },
+      {
+        "question": "Sample text 3",
+        "answer": "Sample text 3"
+      }
+    ],
+    "title": "Sample Title",
+    "subtitle": "Sample Title"
+  },
+  "FeatureGrid": {
+    "features": [
+      {
+        "title": "Sample Title 1",
+        "description": "A brief description of this feature. 1"
+      },
+      {
+        "title": "Sample Title 2",
+        "description": "A brief description of this feature. 2"
+      },
+      {
+        "title": "Sample Title 3",
+        "description": "A brief description of this feature. 3"
+      }
+    ],
+    "title": "Sample Title",
+    "subtitle": "Sample Title"
+  },
+  "FeatureShowcase": {
+    "features": [
+      {
+        "title": "Sample Title 1",
+        "description": "A brief description of this feature. 1"
+      },
+      {
+        "title": "Sample Title 2",
+        "description": "A brief description of this feature. 2"
+      },
+      {
+        "title": "Sample Title 3",
+        "description": "A brief description of this feature. 3"
+      }
+    ],
+    "visualSide": "left"
+  },
+  "GenericLogo": {
+    "imageSrc": "#",
+    "imageAlt": "https://placehold.co/40x40/1f2937/6b7280?text=img",
+    "text": "Sample text",
+    "href": "#",
+    "withText": false,
+    "textClassName": "Sample Title",
+    "imageClassName": "Sample Title"
+  },
+  "GradientMeshHero": {
+    "colors": [
+      "Alpha",
+      "Beta",
+      "Gamma"
+    ]
+  },
+  "HeroSection": {
+    "badge": {
+      "text": "Sample text 1"
+    },
+    "title": "Sample Title",
+    "titleAccent": "Sample Title",
+    "description": "A brief description of this feature.",
+    "stats": [
+      {
+        "value": "99% 1",
+        "label": "Sample Label 1"
+      },
+      {
+        "value": "99% 2",
+        "label": "Sample Label 2"
+      },
+      {
+        "value": "99% 3",
+        "label": "Sample Label 3"
+      }
+    ]
+  },
+  "LandingBand": {},
+  "LandingCTA": {},
+  "LandingDiscount": {},
+  "LandingFAQ": {},
+  "LandingFAQCollapsible": {},
+  "LandingFeature": {},
+  "LandingFooter": {},
+  "LandingMarquee": {},
+  "LandingPricingPlan": {},
+  "LandingRating": {},
+  "LandingReadMoreWrapper": {},
+  "LandingSaleCta": {},
+  "LandingShowcase": {},
+  "LandingSocialProof": {},
+  "LandingSocialProofBand": {},
+  "LandingTestimonial": {},
+  "LandingTestimonialGrid": {},
+  "LogoCloud": {
+    "logos": [
+      {
+        "name": "Sample Title 1",
+        "src": "#",
+        "href": "#"
+      },
+      {
+        "name": "Sample Title 2",
+        "src": "#",
+        "href": "#"
+      },
+      {
+        "name": "Sample Title 3",
+        "src": "#",
+        "href": "#"
+      }
+    ],
+    "title": "Sample Title"
+  },
+  "Newsletter": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "placeholder": "Sample text",
+    "buttonText": "Sample text",
+    "variant": "inline"
+  },
+  "PricingCards": {
+    "plans": [
+      {
+        "name": "Sample Title 1",
+        "description": "A brief description of this feature. 1",
+        "price": "Sample text 1",
+        "features": [
+          {
+            "text": "Sample text 1",
+            "included": false
+          },
+          {
+            "text": "Sample text 2",
+            "included": false
+          },
+          {
+            "text": "Sample text 3",
+            "included": false
+          }
+        ],
+        "cta": "Get Started 1"
+      },
+      {
+        "name": "Sample Title 2",
+        "description": "A brief description of this feature. 2",
+        "price": "Sample text 2",
+        "features": [
+          {
+            "text": "Sample text 1",
+            "included": false
+          },
+          {
+            "text": "Sample text 2",
+            "included": false
+          },
+          {
+            "text": "Sample text 3",
+            "included": false
+          }
+        ],
+        "cta": "Get Started 2"
+      },
+      {
+        "name": "Sample Title 3",
+        "description": "A brief description of this feature. 3",
+        "price": "Sample text 3",
+        "features": [
+          {
+            "text": "Sample text 1",
+            "included": false
+          },
+          {
+            "text": "Sample text 2",
+            "included": false
+          },
+          {
+            "text": "Sample text 3",
+            "included": false
+          }
+        ],
+        "cta": "Get Started 3"
+      }
+    ],
+    "title": "Sample Title",
+    "subtitle": "Sample Title"
+  },
+  "ProductSteps": {
+    "steps": [
+      {
+        "step": 42,
+        "title": "Sample Title 1",
+        "description": "A brief description of this feature. 1"
+      },
+      {
+        "step": 42,
+        "title": "Sample Title 2",
+        "description": "A brief description of this feature. 2"
+      },
+      {
+        "step": 42,
+        "title": "Sample Title 3",
+        "description": "A brief description of this feature. 3"
+      }
+    ],
+    "title": "Sample Title",
+    "subtitle": "Sample Title",
+    "variant": "horizontal"
+  },
+  "ProjectShowcase": {
+    "projects": [
+      {
+        "title": "Sample Title 1",
+        "description": "A brief description of this feature. 1",
+        "image": "https://placehold.co/40x40/1f2937/6b7280?text=img",
+        "tags": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ],
+        "liveUrl": "#",
+        "sourceUrl": "#"
+      },
+      {
+        "title": "Sample Title 2",
+        "description": "A brief description of this feature. 2",
+        "image": "https://placehold.co/40x40/1f2937/6b7280?text=img",
+        "tags": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ],
+        "liveUrl": "#",
+        "sourceUrl": "#"
+      },
+      {
+        "title": "Sample Title 3",
+        "description": "A brief description of this feature. 3",
+        "image": "https://placehold.co/40x40/1f2937/6b7280?text=img",
+        "tags": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ],
+        "liveUrl": "#",
+        "sourceUrl": "#"
+      }
+    ]
+  },
+  "SocialProof": {
+    "count": "99%",
+    "label": "Sample Label",
+    "avatars": [
+      "Alpha",
+      "Beta",
+      "Gamma"
+    ],
+    "ratingLabel": "Sample Label"
+  },
+  "SplitHero": {
+    "textSide": "left",
+    "align": "center"
+  },
+  "StatsGrid": {
+    "stats": [
+      {
+        "formatted": "1,234 1",
+        "value": "99% 1",
+        "label": "Sample Label 1",
+        "trend": {
+          "value": 42,
+          "direction": "up 1"
+        },
+        "iconClassName": "Sample Title"
+      },
+      {
+        "formatted": "1,234 2",
+        "value": "99% 2",
+        "label": "Sample Label 2",
+        "trend": {
+          "value": 42,
+          "direction": "up 1"
+        },
+        "iconClassName": "Sample Title"
+      },
+      {
+        "formatted": "1,234 3",
+        "value": "99% 3",
+        "label": "Sample Label 3",
+        "trend": {
+          "value": 42,
+          "direction": "up 1"
+        },
+        "iconClassName": "Sample Title"
+      }
+    ]
+  },
+  "TechStackGrid": {
+    "items": [
+      {
+        "name": "Sample Title 1"
+      },
+      {
+        "name": "Sample Title 2"
+      },
+      {
+        "name": "Sample Title 3"
+      }
+    ],
+    "iconSize": 42
+  },
+  "TestimonialGrid": {
+    "testimonials": [
+      {
+        "quote": "Sample text 1",
+        "author": "Alex Johnson 1",
+        "avatarUrl": "#"
+      },
+      {
+        "quote": "Sample text 2",
+        "author": "Alex Johnson 2",
+        "avatarUrl": "#"
+      },
+      {
+        "quote": "Sample text 3",
+        "author": "Alex Johnson 3",
+        "avatarUrl": "#"
+      }
+    ],
+    "title": "Sample Title",
+    "subtitle": "Sample Title"
+  },
+  "TextRotateHero": {
+    "words": [
+      "Alpha",
+      "Beta",
+      "Gamma"
+    ],
+    "animation": "slideUp",
+    "wordClassName": "Sample Title"
+  },
+  "VideoHero": {
+    "src": "#",
+    "align": "center",
+    "fallbackImage": "https://placehold.co/40x40/1f2937/6b7280?text=img"
+  },
+  "WelcomeSection": {
+    "name": "Sample Title",
+    "avatarUrl": "#",
+    "subtitle": "Sample Title",
+    "actions": [
+      {
+        "label": "Sample Label 1",
+        "description": "A brief description of this feature. 1",
+        "href": "#"
+      },
+      {
+        "label": "Sample Label 2",
+        "description": "A brief description of this feature. 2",
+        "href": "#"
+      },
+      {
+        "label": "Sample Label 3",
+        "description": "A brief description of this feature. 3",
+        "href": "#"
+      }
+    ]
+  },
+  "LandingProductAccountExpansionMap": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "paths": [
+      {
+        "title": "Sample Title 1",
+        "description": "A brief description of this feature. 1"
+      },
+      {
+        "title": "Sample Title 2",
+        "description": "A brief description of this feature. 2"
+      },
+      {
+        "title": "Sample Title 3",
+        "description": "A brief description of this feature. 3"
+      }
+    ]
+  },
+  "LandingProductAccountPlanning": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "items": [
+      {
+        "title": "Sample Title 1"
+      },
+      {
+        "title": "Sample Title 2"
+      },
+      {
+        "title": "Sample Title 3"
+      }
+    ]
+  },
+  "LandingProductAdminControls": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "controls": [
+      {
+        "title": "Sample Title 1"
+      },
+      {
+        "title": "Sample Title 2"
+      },
+      {
+        "title": "Sample Title 3"
+      }
+    ]
+  },
+  "LandingProductAdoptionBlueprint": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "rows": [
+      {
+        "audience": "Sample text 1"
+      },
+      {
+        "audience": "Sample text 2"
+      },
+      {
+        "audience": "Sample text 3"
+      }
+    ]
+  },
+  "LandingProductAdoptionDashboard": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "metrics": [
+      {
+        "label": "Sample Label 1",
+        "value": "99% 1"
+      },
+      {
+        "label": "Sample Label 2",
+        "value": "99% 2"
+      },
+      {
+        "label": "Sample Label 3",
+        "value": "99% 3"
+      }
+    ]
+  },
+  "LandingProductAdoptionMilestones": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "milestones": [
+      {
+        "title": "Sample Title 1",
+        "description": "A brief description of this feature. 1"
+      },
+      {
+        "title": "Sample Title 2",
+        "description": "A brief description of this feature. 2"
+      },
+      {
+        "title": "Sample Title 3",
+        "description": "A brief description of this feature. 3"
+      }
+    ]
+  },
+  "LandingProductAdoptionSignals": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "items": [
+      {
+        "title": "Sample Title 1"
+      },
+      {
+        "title": "Sample Title 2"
+      },
+      {
+        "title": "Sample Title 3"
+      }
+    ]
+  },
+  "LandingProductAdvocacyLoop": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "steps": [
+      {
+        "title": "Sample Title 1",
+        "description": "A brief description of this feature. 1",
+        "assets": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 2",
+        "description": "A brief description of this feature. 2",
+        "assets": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 3",
+        "description": "A brief description of this feature. 3",
+        "assets": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      }
+    ]
+  },
+  "LandingProductAnnouncement": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature."
+  },
+  "LandingProductAuditTrail": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "entries": [
+      {
+        "title": "Sample Title 1",
+        "description": "A brief description of this feature. 1"
+      },
+      {
+        "title": "Sample Title 2",
+        "description": "A brief description of this feature. 2"
+      },
+      {
+        "title": "Sample Title 3",
+        "description": "A brief description of this feature. 3"
+      }
+    ]
+  },
+  "LandingProductBeforeAfter": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "items": [
+      {
+        "label": "Sample Label 1",
+        "before": "Sample text 1",
+        "after": "Sample text 1"
+      },
+      {
+        "label": "Sample Label 2",
+        "before": "Sample text 2",
+        "after": "Sample text 2"
+      },
+      {
+        "label": "Sample Label 3",
+        "before": "Sample text 3",
+        "after": "Sample text 3"
+      }
+    ]
+  },
+  "LandingProductBeliefCompiler": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "stages": [
+      {
+        "title": "Sample Title 1"
+      },
+      {
+        "title": "Sample Title 2"
+      },
+      {
+        "title": "Sample Title 3"
+      }
+    ]
+  },
+  "LandingProductBeliefGraph": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "nodes": [
+      {
+        "title": "Sample Title 1",
+        "dependencies": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 2",
+        "dependencies": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 3",
+        "dependencies": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      }
+    ]
+  },
+  "LandingProductBeliefRuntime": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "modes": [
+      {
+        "title": "Sample Title 1",
+        "stateChanges": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 2",
+        "stateChanges": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 3",
+        "stateChanges": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      }
+    ]
+  },
+  "LandingProductBenchmarkCards": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "benchmarks": [
+      {
+        "metric": "99% 1",
+        "ourValue": "99% 1",
+        "baselineValue": "99% 1"
+      },
+      {
+        "metric": "99% 2",
+        "ourValue": "99% 2",
+        "baselineValue": "99% 2"
+      },
+      {
+        "metric": "99% 3",
+        "ourValue": "99% 3",
+        "baselineValue": "99% 3"
+      }
+    ]
+  },
+  "LandingProductBoardReporting": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "metrics": [
+      {
+        "label": "Sample Label 1",
+        "value": "99% 1"
+      },
+      {
+        "label": "Sample Label 2",
+        "value": "99% 2"
+      },
+      {
+        "label": "Sample Label 3",
+        "value": "99% 3"
+      }
+    ],
+    "narratives": [
+      {
+        "title": "Sample Title 1",
+        "detail": "Detail info 1"
+      },
+      {
+        "title": "Sample Title 2",
+        "detail": "Detail info 2"
+      },
+      {
+        "title": "Sample Title 3",
+        "detail": "Detail info 3"
+      }
+    ]
+  },
+  "LandingProductBoardroomSystem": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "seats": [
+      {
+        "title": "Sample Title 1"
+      },
+      {
+        "title": "Sample Title 2"
+      },
+      {
+        "title": "Sample Title 3"
+      }
+    ]
+  },
+  "LandingProductBusinessCaseBuilder": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "levers": [
+      {
+        "label": "Sample Label 1",
+        "value": "99% 1"
+      },
+      {
+        "label": "Sample Label 2",
+        "value": "99% 2"
+      },
+      {
+        "label": "Sample Label 3",
+        "value": "99% 3"
+      }
+    ],
+    "assumptions": [
+      "Alpha",
+      "Beta",
+      "Gamma"
+    ]
+  },
+  "LandingProductBusinessContinuity": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "pillars": [
+      {
+        "title": "Sample Title 1",
+        "description": "A brief description of this feature. 1"
+      },
+      {
+        "title": "Sample Title 2",
+        "description": "A brief description of this feature. 2"
+      },
+      {
+        "title": "Sample Title 3",
+        "description": "A brief description of this feature. 3"
+      }
+    ]
+  },
+  "LandingProductBuyingCommitteeSimulator": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "scenarios": [
+      {
+        "title": "Sample Title 1",
+        "proof": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 2",
+        "proof": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 3",
+        "proof": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      }
+    ]
+  },
+  "LandingProductCapabilityGrid": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "columns": [
+      {
+        "title": "Sample Title 1",
+        "capabilities": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 2",
+        "capabilities": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 3",
+        "capabilities": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      }
+    ]
+  },
+  "LandingProductCapabilityNarrative": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "items": [
+      {
+        "title": "Sample Title 1",
+        "description": "A brief description of this feature. 1"
+      },
+      {
+        "title": "Sample Title 2",
+        "description": "A brief description of this feature. 2"
+      },
+      {
+        "title": "Sample Title 3",
+        "description": "A brief description of this feature. 3"
+      }
+    ]
+  },
+  "LandingProductCaseStudy": {
+    "title": "Sample Title",
+    "subtitle": "Sample Title",
+    "stats": [
+      {
+        "label": "Sample Label 1",
+        "value": "99% 1"
+      },
+      {
+        "label": "Sample Label 2",
+        "value": "99% 2"
+      },
+      {
+        "label": "Sample Label 3",
+        "value": "99% 3"
+      }
+    ]
+  },
+  "LandingProductChampionToolkit": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "assets": [
+      {
+        "title": "Sample Title 1",
+        "description": "A brief description of this feature. 1"
+      },
+      {
+        "title": "Sample Title 2",
+        "description": "A brief description of this feature. 2"
+      },
+      {
+        "title": "Sample Title 3",
+        "description": "A brief description of this feature. 3"
+      }
+    ]
+  },
+  "LandingProductChangeAdvisoryBoard": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "items": [
+      {
+        "title": "Sample Title 1",
+        "description": "A brief description of this feature. 1"
+      },
+      {
+        "title": "Sample Title 2",
+        "description": "A brief description of this feature. 2"
+      },
+      {
+        "title": "Sample Title 3",
+        "description": "A brief description of this feature. 3"
+      }
+    ]
+  },
+  "LandingProductChangelogFeed": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "entries": [
+      {
+        "version": "Sample text 1",
+        "title": "Sample Title 1",
+        "date": "2025-01-01 1",
+        "description": "A brief description of this feature. 1",
+        "items": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ],
+        "type": "feature 1"
+      },
+      {
+        "version": "Sample text 2",
+        "title": "Sample Title 2",
+        "date": "2025-01-01 2",
+        "description": "A brief description of this feature. 2",
+        "items": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ],
+        "type": "feature 2"
+      },
+      {
+        "version": "Sample text 3",
+        "title": "Sample Title 3",
+        "date": "2025-01-01 3",
+        "description": "A brief description of this feature. 3",
+        "items": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ],
+        "type": "feature 3"
+      }
+    ]
+  },
+  "LandingProductChangeManagement": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "workstreams": [
+      {
+        "title": "Sample Title 1",
+        "description": "A brief description of this feature. 1",
+        "tactics": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 2",
+        "description": "A brief description of this feature. 2",
+        "tactics": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 3",
+        "description": "A brief description of this feature. 3",
+        "tactics": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      }
+    ]
+  },
+  "LandingProductChangeStory": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "stages": [
+      {
+        "title": "Sample Title 1"
+      },
+      {
+        "title": "Sample Title 2"
+      },
+      {
+        "title": "Sample Title 3"
+      }
+    ]
+  },
+  "LandingProductChannelSalesKit": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "assets": [
+      {
+        "title": "Sample Title 1",
+        "description": "A brief description of this feature. 1"
+      },
+      {
+        "title": "Sample Title 2",
+        "description": "A brief description of this feature. 2"
+      },
+      {
+        "title": "Sample Title 3",
+        "description": "A brief description of this feature. 3"
+      }
+    ]
+  },
+  "LandingProductCommandBriefing": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "sections": [
+      {
+        "title": "Sample Title 1",
+        "value": "99% 1"
+      },
+      {
+        "title": "Sample Title 2",
+        "value": "99% 2"
+      },
+      {
+        "title": "Sample Title 3",
+        "value": "99% 3"
+      }
+    ]
+  },
+  "LandingProductCommandSurface": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "modes": [
+      {
+        "title": "Sample Title 1",
+        "value": "99% 1"
+      },
+      {
+        "title": "Sample Title 2",
+        "value": "99% 2"
+      },
+      {
+        "title": "Sample Title 3",
+        "value": "99% 3"
+      }
+    ]
+  },
+  "LandingProductCommercialModel": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "tiers": [
+      {
+        "title": "Sample Title 1",
+        "description": "A brief description of this feature. 1"
+      },
+      {
+        "title": "Sample Title 2",
+        "description": "A brief description of this feature. 2"
+      },
+      {
+        "title": "Sample Title 3",
+        "description": "A brief description of this feature. 3"
+      }
+    ]
+  },
+  "LandingProductComparison": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "rows": [
+      {
+        "label": "Sample Label 1",
+        "ours": "Sample text 1",
+        "theirs": "Sample text 1"
+      },
+      {
+        "label": "Sample Label 2",
+        "ours": "Sample text 2",
+        "theirs": "Sample text 2"
+      },
+      {
+        "label": "Sample Label 3",
+        "ours": "Sample text 3",
+        "theirs": "Sample text 3"
+      }
+    ],
+    "leftLabel": "Sample Label",
+    "rightLabel": "Sample Label"
+  },
+  "LandingProductComparisonChecklist": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "items": [
+      {
+        "label": "Sample Label 1",
+        "ours": false,
+        "theirs": false
+      },
+      {
+        "label": "Sample Label 2",
+        "ours": false,
+        "theirs": false
+      },
+      {
+        "label": "Sample Label 3",
+        "ours": false,
+        "theirs": false
+      }
+    ],
+    "leftLabel": "Sample Label",
+    "rightLabel": "Sample Label"
+  },
+  "LandingProductComplianceMappings": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "rows": [
+      {
+        "framework": "Sample text 1",
+        "control": "Sample text 1"
+      },
+      {
+        "framework": "Sample text 2",
+        "control": "Sample text 2"
+      },
+      {
+        "framework": "Sample text 3",
+        "control": "Sample text 3"
+      }
+    ]
+  },
+  "LandingProductConfidenceGraph": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "nodes": [
+      {
+        "title": "Sample Title 1"
+      },
+      {
+        "title": "Sample Title 2"
+      },
+      {
+        "title": "Sample Title 3"
+      }
+    ]
+  },
+  "LandingProductConfidenceKernel": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "primitives": [
+      {
+        "title": "Sample Title 1"
+      },
+      {
+        "title": "Sample Title 2"
+      },
+      {
+        "title": "Sample Title 3"
+      }
+    ]
+  },
+  "LandingProductConfidenceMesh": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "nodes": [
+      {
+        "title": "Sample Title 1"
+      },
+      {
+        "title": "Sample Title 2"
+      },
+      {
+        "title": "Sample Title 3"
+      }
+    ]
+  },
+  "LandingProductConfidenceRuntime": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "views": [
+      {
+        "title": "Sample Title 1",
+        "value": "99% 1"
+      },
+      {
+        "title": "Sample Title 2",
+        "value": "99% 2"
+      },
+      {
+        "title": "Sample Title 3",
+        "value": "99% 3"
+      }
+    ]
+  },
+  "LandingProductConstraintAtlas": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "regions": [
+      {
+        "title": "Sample Title 1"
+      },
+      {
+        "title": "Sample Title 2"
+      },
+      {
+        "title": "Sample Title 3"
+      }
+    ]
+  },
+  "LandingProductConstraintEngine": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "modes": [
+      {
+        "title": "Sample Title 1",
+        "outputs": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 2",
+        "outputs": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 3",
+        "outputs": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      }
+    ]
+  },
+  "LandingProductConstraintProtocol": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "rules": [
+      {
+        "title": "Sample Title 1"
+      },
+      {
+        "title": "Sample Title 2"
+      },
+      {
+        "title": "Sample Title 3"
+      }
+    ]
+  },
+  "LandingProductConstraintRuntime": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "views": [
+      {
+        "title": "Sample Title 1",
+        "conditions": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ],
+        "impacts": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 2",
+        "conditions": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ],
+        "impacts": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 3",
+        "conditions": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ],
+        "impacts": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      }
+    ]
+  },
+  "LandingProductControlBridge": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "lanes": [
+      {
+        "title": "Sample Title 1",
+        "value": "99% 1"
+      },
+      {
+        "title": "Sample Title 2",
+        "value": "99% 2"
+      },
+      {
+        "title": "Sample Title 3",
+        "value": "99% 3"
+      }
+    ]
+  },
+  "LandingProductCoordinationFabric": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "threads": [
+      {
+        "title": "Sample Title 1",
+        "participants": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 2",
+        "participants": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 3",
+        "participants": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      }
+    ]
+  },
+  "LandingProductCoordinationKernel": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "threads": [
+      {
+        "title": "Sample Title 1",
+        "participants": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 2",
+        "participants": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 3",
+        "participants": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      }
+    ]
+  },
+  "LandingProductCoordinationMap": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "lanes": [
+      {
+        "title": "Sample Title 1"
+      },
+      {
+        "title": "Sample Title 2"
+      },
+      {
+        "title": "Sample Title 3"
+      }
+    ]
+  },
+  "LandingProductCostAllocation": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "models": [
+      {
+        "name": "Sample Title 1",
+        "description": "A brief description of this feature. 1",
+        "signals": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "name": "Sample Title 2",
+        "description": "A brief description of this feature. 2",
+        "signals": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "name": "Sample Title 3",
+        "description": "A brief description of this feature. 3",
+        "signals": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      }
+    ]
+  },
+  "LandingProductCTAStack": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature."
+  },
+  "LandingProductCustomerHealth": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "summaryValue": "A brief description of this feature.",
+    "summaryLabel": "A brief description of this feature.",
+    "factors": [
+      {
+        "label": "Sample Label 1",
+        "value": "99% 1"
+      },
+      {
+        "label": "Sample Label 2",
+        "value": "99% 2"
+      },
+      {
+        "label": "Sample Label 3",
+        "value": "99% 3"
+      }
+    ]
+  },
+  "LandingProductCustomerJourneyMap": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "stages": [
+      {
+        "title": "Sample Title 1"
+      },
+      {
+        "title": "Sample Title 2"
+      },
+      {
+        "title": "Sample Title 3"
+      }
+    ]
+  },
+  "LandingProductCustomerMarketingKit": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "assets": [
+      {
+        "title": "Sample Title 1",
+        "description": "A brief description of this feature. 1"
+      },
+      {
+        "title": "Sample Title 2",
+        "description": "A brief description of this feature. 2"
+      },
+      {
+        "title": "Sample Title 3",
+        "description": "A brief description of this feature. 3"
+      }
+    ]
+  },
+  "LandingProductCustomerOperationsDesk": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "queues": [
+      {
+        "title": "Sample Title 1",
+        "description": "A brief description of this feature. 1"
+      },
+      {
+        "title": "Sample Title 2",
+        "description": "A brief description of this feature. 2"
+      },
+      {
+        "title": "Sample Title 3",
+        "description": "A brief description of this feature. 3"
+      }
+    ]
+  },
+  "LandingProductCustomerReferenceProgram": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "steps": [
+      {
+        "title": "Sample Title 1",
+        "description": "A brief description of this feature. 1"
+      },
+      {
+        "title": "Sample Title 2",
+        "description": "A brief description of this feature. 2"
+      },
+      {
+        "title": "Sample Title 3",
+        "description": "A brief description of this feature. 3"
+      }
+    ]
+  },
+  "LandingProductDataResidency": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "regions": [
+      {
+        "region": "Sample text 1"
+      },
+      {
+        "region": "Sample text 2"
+      },
+      {
+        "region": "Sample text 3"
+      }
+    ]
+  },
+  "LandingProductDealDeskAlignment": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "items": [
+      {
+        "stage": "New 1"
+      },
+      {
+        "stage": "New 2"
+      },
+      {
+        "stage": "New 3"
+      }
+    ]
+  },
+  "LandingProductDecisionArray": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "rows": [
+      {
+        "title": "Sample Title 1"
+      },
+      {
+        "title": "Sample Title 2"
+      },
+      {
+        "title": "Sample Title 3"
+      }
+    ]
+  },
+  "LandingProductDecisionBoard": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "criteria": [
+      {
+        "label": "Sample Label 1",
+        "owner": "Sample text 1"
+      },
+      {
+        "label": "Sample Label 2",
+        "owner": "Sample text 2"
+      },
+      {
+        "label": "Sample Label 3",
+        "owner": "Sample text 3"
+      }
+    ]
+  },
+  "LandingProductDecisionCanvas": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "blocks": [
+      {
+        "title": "Sample Title 1",
+        "description": "A brief description of this feature. 1",
+        "prompts": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 2",
+        "description": "A brief description of this feature. 2",
+        "prompts": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 3",
+        "description": "A brief description of this feature. 3",
+        "prompts": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      }
+    ]
+  },
+  "LandingProductDecisionCompiler": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "stages": [
+      {
+        "title": "Sample Title 1"
+      },
+      {
+        "title": "Sample Title 2"
+      },
+      {
+        "title": "Sample Title 3"
+      }
+    ]
+  },
+  "LandingProductDecisionCouncil": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "motions": [
+      {
+        "title": "Sample Title 1"
+      },
+      {
+        "title": "Sample Title 2"
+      },
+      {
+        "title": "Sample Title 3"
+      }
+    ]
+  },
+  "LandingProductDecisionEngine": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "modes": [
+      {
+        "title": "Sample Title 1",
+        "inputs": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 2",
+        "inputs": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 3",
+        "inputs": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      }
+    ]
+  },
+  "LandingProductDecisionGraph": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "nodes": [
+      {
+        "title": "Sample Title 1"
+      },
+      {
+        "title": "Sample Title 2"
+      },
+      {
+        "title": "Sample Title 3"
+      }
+    ]
+  },
+  "LandingProductDecisionHarbor": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "entries": [
+      {
+        "title": "Sample Title 1"
+      },
+      {
+        "title": "Sample Title 2"
+      },
+      {
+        "title": "Sample Title 3"
+      }
+    ]
+  },
+  "LandingProductDecisionInterpreter": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "perspectives": [
+      {
+        "title": "Sample Title 1"
+      },
+      {
+        "title": "Sample Title 2"
+      },
+      {
+        "title": "Sample Title 3"
+      }
+    ]
+  },
+  "LandingProductDecisionKernel": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "primitives": [
+      {
+        "title": "Sample Title 1"
+      },
+      {
+        "title": "Sample Title 2"
+      },
+      {
+        "title": "Sample Title 3"
+      }
+    ]
+  },
+  "LandingProductDecisionLedger": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "entries": [
+      {
+        "title": "Sample Title 1"
+      },
+      {
+        "title": "Sample Title 2"
+      },
+      {
+        "title": "Sample Title 3"
+      }
+    ]
+  },
+  "LandingProductDecisionOrbit": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "nodes": [
+      {
+        "title": "Sample Title 1"
+      },
+      {
+        "title": "Sample Title 2"
+      },
+      {
+        "title": "Sample Title 3"
+      }
+    ]
+  },
+  "LandingProductDecisionPipeline": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "stages": [
+      {
+        "title": "Sample Title 1"
+      },
+      {
+        "title": "Sample Title 2"
+      },
+      {
+        "title": "Sample Title 3"
+      }
+    ]
+  },
+  "LandingProductDecisionProtocol": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "rules": [
+      {
+        "title": "Sample Title 1"
+      },
+      {
+        "title": "Sample Title 2"
+      },
+      {
+        "title": "Sample Title 3"
+      }
+    ]
+  },
+  "LandingProductDecisionRuntime": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "modes": [
+      {
+        "title": "Sample Title 1",
+        "outputs": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 2",
+        "outputs": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 3",
+        "outputs": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      }
+    ]
+  },
+  "LandingProductDecisionStack": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "layers": [
+      {
+        "title": "Sample Title 1"
+      },
+      {
+        "title": "Sample Title 2"
+      },
+      {
+        "title": "Sample Title 3"
+      }
+    ]
+  },
+  "LandingProductDecisionSwitchyard": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "routes": [
+      {
+        "title": "Sample Title 1"
+      },
+      {
+        "title": "Sample Title 2"
+      },
+      {
+        "title": "Sample Title 3"
+      }
+    ]
+  },
+  "LandingProductDecisionTerminal": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "sessions": [
+      {
+        "title": "Sample Title 1",
+        "context": "Sample text 1",
+        "prompts": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 2",
+        "context": "Sample text 2",
+        "prompts": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 3",
+        "context": "Sample text 3",
+        "prompts": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      }
+    ]
+  },
+  "LandingProductDecisionTheater": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "scenes": [
+      {
+        "title": "Sample Title 1",
+        "proof": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 2",
+        "proof": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 3",
+        "proof": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      }
+    ]
+  },
+  "LandingProductDecisionWorkbench": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "views": [
+      {
+        "title": "Sample Title 1",
+        "tradeoffs": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ],
+        "evidence": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 2",
+        "tradeoffs": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ],
+        "evidence": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 3",
+        "tradeoffs": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ],
+        "evidence": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      }
+    ]
+  },
+  "LandingProductDeliveryCapacity": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "items": [
+      {
+        "title": "Sample Title 1",
+        "capacity": "Sample text 1"
+      },
+      {
+        "title": "Sample Title 2",
+        "capacity": "Sample text 2"
+      },
+      {
+        "title": "Sample Title 3",
+        "capacity": "Sample text 3"
+      }
+    ]
+  },
+  "LandingProductDeploymentOptions": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "options": [
+      {
+        "name": "Sample Title 1",
+        "description": "A brief description of this feature. 1",
+        "requirements": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "name": "Sample Title 2",
+        "description": "A brief description of this feature. 2",
+        "requirements": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "name": "Sample Title 3",
+        "description": "A brief description of this feature. 3",
+        "requirements": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      }
+    ]
+  },
+  "LandingProductEnablementTracks": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "tracks": [
+      {
+        "title": "Sample Title 1",
+        "description": "A brief description of this feature. 1",
+        "modules": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 2",
+        "description": "A brief description of this feature. 2",
+        "modules": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 3",
+        "description": "A brief description of this feature. 3",
+        "modules": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      }
+    ]
+  },
+  "LandingProductEnterpriseReadiness": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "items": [
+      {
+        "area": "Sample text 1",
+        "description": "A brief description of this feature. 1"
+      },
+      {
+        "area": "Sample text 2",
+        "description": "A brief description of this feature. 2"
+      },
+      {
+        "area": "Sample text 3",
+        "description": "A brief description of this feature. 3"
+      }
+    ]
+  },
+  "LandingProductEscalationPaths": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "paths": [
+      {
+        "severity": "Sample text 1",
+        "description": "A brief description of this feature. 1"
+      },
+      {
+        "severity": "Sample text 2",
+        "description": "A brief description of this feature. 2"
+      },
+      {
+        "severity": "Sample text 3",
+        "description": "A brief description of this feature. 3"
+      }
+    ]
+  },
+  "LandingProductEvaluationCriteria": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "items": [
+      {
+        "criterion": "Sample text 1",
+        "weight": "Sample text 1"
+      },
+      {
+        "criterion": "Sample text 2",
+        "weight": "Sample text 2"
+      },
+      {
+        "criterion": "Sample text 3",
+        "weight": "Sample text 3"
+      }
+    ]
+  },
+  "LandingProductEvidenceAssembly": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "units": [
+      {
+        "title": "Sample Title 1"
+      },
+      {
+        "title": "Sample Title 2"
+      },
+      {
+        "title": "Sample Title 3"
+      }
+    ]
+  },
+  "LandingProductEvidenceKernel": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "modules": [
+      {
+        "title": "Sample Title 1"
+      },
+      {
+        "title": "Sample Title 2"
+      },
+      {
+        "title": "Sample Title 3"
+      }
+    ]
+  },
+  "LandingProductExecutionAtlas": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "zones": [
+      {
+        "title": "Sample Title 1"
+      },
+      {
+        "title": "Sample Title 2"
+      },
+      {
+        "title": "Sample Title 3"
+      }
+    ]
+  },
+  "LandingProductExecutionBoard": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "columns": [
+      {
+        "title": "Sample Title 1",
+        "items": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 2",
+        "items": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 3",
+        "items": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      }
+    ]
+  },
+  "LandingProductExecutionFlywheel": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "stages": [
+      {
+        "title": "Sample Title 1"
+      },
+      {
+        "title": "Sample Title 2"
+      },
+      {
+        "title": "Sample Title 3"
+      }
+    ]
+  },
+  "LandingProductExecutionProtocol": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "rules": [
+      {
+        "title": "Sample Title 1"
+      },
+      {
+        "title": "Sample Title 2"
+      },
+      {
+        "title": "Sample Title 3"
+      }
+    ]
+  },
+  "LandingProductExecutionRisks": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "items": [
+      {
+        "title": "Sample Title 1"
+      },
+      {
+        "title": "Sample Title 2"
+      },
+      {
+        "title": "Sample Title 3"
+      }
+    ]
+  },
+  "LandingProductExecutiveBridge": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "lanes": [
+      {
+        "title": "Sample Title 1",
+        "value": "99% 1"
+      },
+      {
+        "title": "Sample Title 2",
+        "value": "99% 2"
+      },
+      {
+        "title": "Sample Title 3",
+        "value": "99% 3"
+      }
+    ]
+  },
+  "LandingProductExecutiveNarrative": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "blocks": [
+      {
+        "title": "Sample Title 1",
+        "message": "Sample text 1"
+      },
+      {
+        "title": "Sample Title 2",
+        "message": "Sample text 2"
+      },
+      {
+        "title": "Sample Title 3",
+        "message": "Sample text 3"
+      }
+    ]
+  },
+  "LandingProductExecutiveReviewPack": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "items": [
+      {
+        "title": "Sample Title 1",
+        "description": "A brief description of this feature. 1",
+        "outputs": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 2",
+        "description": "A brief description of this feature. 2",
+        "outputs": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 3",
+        "description": "A brief description of this feature. 3",
+        "outputs": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      }
+    ]
+  },
+  "LandingProductExecutiveSponsorMap": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "sponsors": [
+      {
+        "name": "Sample Title 1"
+      },
+      {
+        "name": "Sample Title 2"
+      },
+      {
+        "name": "Sample Title 3"
+      }
+    ]
+  },
+  "LandingProductExecutiveSteeringCommittee": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "members": [
+      {
+        "name": "Sample Title 1"
+      },
+      {
+        "name": "Sample Title 2"
+      },
+      {
+        "name": "Sample Title 3"
+      }
+    ]
+  },
+  "LandingProductExecutiveSummary": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "stats": [
+      {
+        "label": "Sample Label 1",
+        "value": "99% 1",
+        "context": "Sample text 1"
+      },
+      {
+        "label": "Sample Label 2",
+        "value": "99% 2",
+        "context": "Sample text 2"
+      },
+      {
+        "label": "Sample Label 3",
+        "value": "99% 3",
+        "context": "Sample text 3"
+      }
+    ],
+    "highlights": [
+      {
+        "title": "Sample Title 1",
+        "detail": "Detail info 1"
+      },
+      {
+        "title": "Sample Title 2",
+        "detail": "Detail info 2"
+      },
+      {
+        "title": "Sample Title 3",
+        "detail": "Detail info 3"
+      }
+    ]
+  },
+  "LandingProductExpansionPaths": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "paths": [
+      {
+        "title": "Sample Title 1",
+        "description": "A brief description of this feature. 1",
+        "outcomes": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 2",
+        "description": "A brief description of this feature. 2",
+        "outcomes": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 3",
+        "description": "A brief description of this feature. 3",
+        "outcomes": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      }
+    ]
+  },
+  "LandingProductExpansionScorecard": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "rows": [
+      {
+        "segment": "Sample text 1",
+        "readiness": "Sample text 1",
+        "opportunity": "Sample text 1"
+      },
+      {
+        "segment": "Sample text 2",
+        "readiness": "Sample text 2",
+        "opportunity": "Sample text 2"
+      },
+      {
+        "segment": "Sample text 3",
+        "readiness": "Sample text 3",
+        "opportunity": "Sample text 3"
+      }
+    ]
+  },
+  "LandingProductExperienceBlueprint": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "rows": [
+      {
+        "moment": "Sample text 1"
+      },
+      {
+        "moment": "Sample text 2"
+      },
+      {
+        "moment": "Sample text 3"
+      }
+    ]
+  },
+  "LandingProductExperienceLoop": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "beats": [
+      {
+        "title": "Sample Title 1"
+      },
+      {
+        "title": "Sample Title 2"
+      },
+      {
+        "title": "Sample Title 3"
+      }
+    ]
+  },
+  "LandingProductExperienceMatrix": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "rows": [
+      {
+        "moment": "Sample text 1"
+      },
+      {
+        "moment": "Sample text 2"
+      },
+      {
+        "moment": "Sample text 3"
+      }
+    ]
+  },
+  "LandingProductFAQColumns": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "items": [
+      {
+        "question": "Sample text 1",
+        "answer": "Sample text 1"
+      },
+      {
+        "question": "Sample text 2",
+        "answer": "Sample text 2"
+      },
+      {
+        "question": "Sample text 3",
+        "answer": "Sample text 3"
+      }
+    ]
+  },
+  "LandingProductFeature": {},
+  "LandingProductFeatureKeyPoints": {},
+  "LandingProductFeatureMatrix": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "columns": [
+      {
+        "label": "Sample Label 1",
+        "description": "A brief description of this feature. 1"
+      },
+      {
+        "label": "Sample Label 2",
+        "description": "A brief description of this feature. 2"
+      },
+      {
+        "label": "Sample Label 3",
+        "description": "A brief description of this feature. 3"
+      }
+    ],
+    "rows": [
+      {
+        "label": "Sample Label 1",
+        "cells": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "label": "Sample Label 2",
+        "cells": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "label": "Sample Label 3",
+        "cells": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      }
+    ]
+  },
+  "LandingProductFeatureRail": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "items": [
+      {
+        "title": "Sample Title 1",
+        "description": "A brief description of this feature. 1"
+      },
+      {
+        "title": "Sample Title 2",
+        "description": "A brief description of this feature. 2"
+      },
+      {
+        "title": "Sample Title 3",
+        "description": "A brief description of this feature. 3"
+      }
+    ]
+  },
+  "LandingProductFeaturesGrid": {},
+  "LandingProductFrictionMap": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "items": [
+      {
+        "title": "Sample Title 1"
+      },
+      {
+        "title": "Sample Title 2"
+      },
+      {
+        "title": "Sample Title 3"
+      }
+    ]
+  },
+  "LandingProductGoToMarketCircuit": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "nodes": [
+      {
+        "title": "Sample Title 1"
+      },
+      {
+        "title": "Sample Title 2"
+      },
+      {
+        "title": "Sample Title 3"
+      }
+    ]
+  },
+  "LandingProductGovernanceCalendar": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "entries": [
+      {
+        "title": "Sample Title 1",
+        "description": "A brief description of this feature. 1"
+      },
+      {
+        "title": "Sample Title 2",
+        "description": "A brief description of this feature. 2"
+      },
+      {
+        "title": "Sample Title 3",
+        "description": "A brief description of this feature. 3"
+      }
+    ]
+  },
+  "LandingProductGovernanceModel": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "layers": [
+      {
+        "title": "Sample Title 1",
+        "responsibilities": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 2",
+        "responsibilities": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 3",
+        "responsibilities": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      }
+    ]
+  },
+  "LandingProductIdentityAccess": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "items": [
+      {
+        "title": "Sample Title 1",
+        "description": "A brief description of this feature. 1"
+      },
+      {
+        "title": "Sample Title 2",
+        "description": "A brief description of this feature. 2"
+      },
+      {
+        "title": "Sample Title 3",
+        "description": "A brief description of this feature. 3"
+      }
+    ]
+  },
+  "LandingProductImplementationOffice": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "workstreams": [
+      {
+        "title": "Sample Title 1",
+        "description": "A brief description of this feature. 1",
+        "outputs": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 2",
+        "description": "A brief description of this feature. 2",
+        "outputs": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 3",
+        "description": "A brief description of this feature. 3",
+        "outputs": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      }
+    ]
+  },
+  "LandingProductImplementationPlayback": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "scenes": [
+      {
+        "title": "Sample Title 1",
+        "description": "A brief description of this feature. 1",
+        "checkpoints": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 2",
+        "description": "A brief description of this feature. 2",
+        "checkpoints": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 3",
+        "description": "A brief description of this feature. 3",
+        "checkpoints": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      }
+    ]
+  },
+  "LandingProductImplementationRisks": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "risks": [
+      {
+        "risk": "Sample text 1",
+        "mitigation": "Sample text 1"
+      },
+      {
+        "risk": "Sample text 2",
+        "mitigation": "Sample text 2"
+      },
+      {
+        "risk": "Sample text 3",
+        "mitigation": "Sample text 3"
+      }
+    ]
+  },
+  "LandingProductImplementationTimeline": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "stages": [
+      {
+        "title": "Sample Title 1",
+        "timeframe": "2025-01-01 1",
+        "description": "A brief description of this feature. 1",
+        "deliverables": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 2",
+        "timeframe": "2025-01-01 2",
+        "description": "A brief description of this feature. 2",
+        "deliverables": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 3",
+        "timeframe": "2025-01-01 3",
+        "description": "A brief description of this feature. 3",
+        "deliverables": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      }
+    ]
+  },
+  "LandingProductIncidentResponse": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "steps": [
+      {
+        "title": "Sample Title 1",
+        "description": "A brief description of this feature. 1",
+        "outputs": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 2",
+        "description": "A brief description of this feature. 2",
+        "outputs": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 3",
+        "description": "A brief description of this feature. 3",
+        "outputs": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      }
+    ]
+  },
+  "LandingProductInfluenceBoard": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "lanes": [
+      {
+        "title": "Sample Title 1",
+        "moves": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ],
+        "blockers": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 2",
+        "moves": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ],
+        "blockers": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 3",
+        "moves": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ],
+        "blockers": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      }
+    ]
+  },
+  "LandingProductInfluenceConsole": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "panes": [
+      {
+        "title": "Sample Title 1",
+        "value": "99% 1"
+      },
+      {
+        "title": "Sample Title 2",
+        "value": "99% 2"
+      },
+      {
+        "title": "Sample Title 3",
+        "value": "99% 3"
+      }
+    ]
+  },
+  "LandingProductInfluenceCouncil": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "motions": [
+      {
+        "title": "Sample Title 1"
+      },
+      {
+        "title": "Sample Title 2"
+      },
+      {
+        "title": "Sample Title 3"
+      }
+    ]
+  },
+  "LandingProductInfluenceFabric": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "threads": [
+      {
+        "title": "Sample Title 1"
+      },
+      {
+        "title": "Sample Title 2"
+      },
+      {
+        "title": "Sample Title 3"
+      }
+    ]
+  },
+  "LandingProductInfluenceMap": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "nodes": [
+      {
+        "title": "Sample Title 1"
+      },
+      {
+        "title": "Sample Title 2"
+      },
+      {
+        "title": "Sample Title 3"
+      }
+    ]
+  },
+  "LandingProductInfluenceMatrix": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "cells": [
+      {
+        "title": "Sample Title 1"
+      },
+      {
+        "title": "Sample Title 2"
+      },
+      {
+        "title": "Sample Title 3"
+      }
+    ]
+  },
+  "LandingProductInfluenceProtocol": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "rules": [
+      {
+        "title": "Sample Title 1"
+      },
+      {
+        "title": "Sample Title 2"
+      },
+      {
+        "title": "Sample Title 3"
+      }
+    ]
+  },
+  "LandingProductInfluenceRelay": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "nodes": [
+      {
+        "title": "Sample Title 1"
+      },
+      {
+        "title": "Sample Title 2"
+      },
+      {
+        "title": "Sample Title 3"
+      }
+    ]
+  },
+  "LandingProductInfluenceRuntime": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "views": [
+      {
+        "title": "Sample Title 1",
+        "moves": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 2",
+        "moves": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 3",
+        "moves": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      }
+    ]
+  },
+  "LandingProductInfluenceTerminal": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "sessions": [
+      {
+        "title": "Sample Title 1",
+        "prompts": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 2",
+        "prompts": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 3",
+        "prompts": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      }
+    ]
+  },
+  "LandingProductIntegrationReadiness": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "items": [
+      {
+        "title": "Sample Title 1",
+        "description": "A brief description of this feature. 1"
+      },
+      {
+        "title": "Sample Title 2",
+        "description": "A brief description of this feature. 2"
+      },
+      {
+        "title": "Sample Title 3",
+        "description": "A brief description of this feature. 3"
+      }
+    ]
+  },
+  "LandingProductIntegrationsWall": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "integrations": [
+      {
+        "name": "Sample Title 1"
+      },
+      {
+        "name": "Sample Title 2"
+      },
+      {
+        "name": "Sample Title 3"
+      }
+    ]
+  },
+  "LandingProductInteractiveShowcase": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "panels": [
+      {
+        "title": "Sample Title 1",
+        "description": "A brief description of this feature. 1"
+      },
+      {
+        "title": "Sample Title 2",
+        "description": "A brief description of this feature. 2"
+      },
+      {
+        "title": "Sample Title 3",
+        "description": "A brief description of this feature. 3"
+      }
+    ]
+  },
+  "LandingProductInternalCommsKit": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "assets": [
+      {
+        "title": "Sample Title 1",
+        "description": "A brief description of this feature. 1"
+      },
+      {
+        "title": "Sample Title 2",
+        "description": "A brief description of this feature. 2"
+      },
+      {
+        "title": "Sample Title 3",
+        "description": "A brief description of this feature. 3"
+      }
+    ]
+  },
+  "LandingProductJourney": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "stages": [
+      {
+        "title": "Sample Title 1",
+        "description": "A brief description of this feature. 1",
+        "status": "complete 1"
+      },
+      {
+        "title": "Sample Title 2",
+        "description": "A brief description of this feature. 2",
+        "status": "complete 2"
+      },
+      {
+        "title": "Sample Title 3",
+        "description": "A brief description of this feature. 3",
+        "status": "complete 3"
+      }
+    ]
+  },
+  "LandingProductJourneyControlRoom": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "views": [
+      {
+        "title": "Sample Title 1",
+        "value": "99% 1"
+      },
+      {
+        "title": "Sample Title 2",
+        "value": "99% 2"
+      },
+      {
+        "title": "Sample Title 3",
+        "value": "99% 3"
+      }
+    ]
+  },
+  "LandingProductLaunchDependencies": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "items": [
+      {
+        "title": "Sample Title 1"
+      },
+      {
+        "title": "Sample Title 2"
+      },
+      {
+        "title": "Sample Title 3"
+      }
+    ]
+  },
+  "LandingProductLaunchStrip": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "items": [
+      {
+        "label": "Sample Label 1",
+        "value": "99% 1"
+      },
+      {
+        "label": "Sample Label 2",
+        "value": "99% 2"
+      },
+      {
+        "label": "Sample Label 3",
+        "value": "99% 3"
+      }
+    ]
+  },
+  "LandingProductLegalChecklist": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "items": [
+      {
+        "title": "Sample Title 1",
+        "description": "A brief description of this feature. 1"
+      },
+      {
+        "title": "Sample Title 2",
+        "description": "A brief description of this feature. 2"
+      },
+      {
+        "title": "Sample Title 3",
+        "description": "A brief description of this feature. 3"
+      }
+    ]
+  },
+  "LandingProductMessageStack": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "layers": [
+      {
+        "title": "Sample Title 1",
+        "message": "Sample text 1"
+      },
+      {
+        "title": "Sample Title 2",
+        "message": "Sample text 2"
+      },
+      {
+        "title": "Sample Title 3",
+        "message": "Sample text 3"
+      }
+    ]
+  },
+  "LandingProductMessageTopology": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "clusters": [
+      {
+        "title": "Sample Title 1",
+        "messages": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 2",
+        "messages": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 3",
+        "messages": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      }
+    ]
+  },
+  "LandingProductMetrics": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "metrics": [
+      {
+        "label": "Sample Label 1",
+        "value": "99% 1"
+      },
+      {
+        "label": "Sample Label 2",
+        "value": "99% 2"
+      },
+      {
+        "label": "Sample Label 3",
+        "value": "99% 3"
+      }
+    ]
+  },
+  "LandingProductMigrationPlan": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "phases": [
+      {
+        "title": "Sample Title 1",
+        "description": "A brief description of this feature. 1",
+        "tasks": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 2",
+        "description": "A brief description of this feature. 2",
+        "tasks": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 3",
+        "description": "A brief description of this feature. 3",
+        "tasks": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      }
+    ]
+  },
+  "LandingProductMomentumArchitecture": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "layers": [
+      {
+        "title": "Sample Title 1"
+      },
+      {
+        "title": "Sample Title 2"
+      },
+      {
+        "title": "Sample Title 3"
+      }
+    ]
+  },
+  "LandingProductMomentumLoop": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "beats": [
+      {
+        "title": "Sample Title 1"
+      },
+      {
+        "title": "Sample Title 2"
+      },
+      {
+        "title": "Sample Title 3"
+      }
+    ]
+  },
+  "LandingProductMultiteamRollout": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "waves": [
+      {
+        "title": "Sample Title 1",
+        "teams": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ],
+        "description": "A brief description of this feature. 1"
+      },
+      {
+        "title": "Sample Title 2",
+        "teams": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ],
+        "description": "A brief description of this feature. 2"
+      },
+      {
+        "title": "Sample Title 3",
+        "teams": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ],
+        "description": "A brief description of this feature. 3"
+      }
+    ]
+  },
+  "LandingProductNarrativeBriefing": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "cards": [
+      {
+        "title": "Sample Title 1",
+        "message": "Sample text 1"
+      },
+      {
+        "title": "Sample Title 2",
+        "message": "Sample text 2"
+      },
+      {
+        "title": "Sample Title 3",
+        "message": "Sample text 3"
+      }
+    ]
+  },
+  "LandingProductNarrativeCompiler": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "stages": [
+      {
+        "title": "Sample Title 1"
+      },
+      {
+        "title": "Sample Title 2"
+      },
+      {
+        "title": "Sample Title 3"
+      }
+    ]
+  },
+  "LandingProductNarrativeControlPanel": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "panels": [
+      {
+        "title": "Sample Title 1",
+        "priorities": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ],
+        "outputs": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 2",
+        "priorities": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ],
+        "outputs": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 3",
+        "priorities": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ],
+        "outputs": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      }
+    ]
+  },
+  "LandingProductNarrativeInterpreter": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "views": [
+      {
+        "title": "Sample Title 1"
+      },
+      {
+        "title": "Sample Title 2"
+      },
+      {
+        "title": "Sample Title 3"
+      }
+    ]
+  },
+  "LandingProductNarrativeKernel": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "views": [
+      {
+        "title": "Sample Title 1",
+        "outputs": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 2",
+        "outputs": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 3",
+        "outputs": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      }
+    ]
+  },
+  "LandingProductNarrativeProof": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "items": [
+      {
+        "claim": "Sample text 1"
+      },
+      {
+        "claim": "Sample text 2"
+      },
+      {
+        "claim": "Sample text 3"
+      }
+    ]
+  },
+  "LandingProductNarrativeSequence": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "chapters": [
+      {
+        "title": "Sample Title 1",
+        "proof": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 2",
+        "proof": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 3",
+        "proof": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      }
+    ]
+  },
+  "LandingProductNarrativeSystem": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "modules": [
+      {
+        "title": "Sample Title 1"
+      },
+      {
+        "title": "Sample Title 2"
+      },
+      {
+        "title": "Sample Title 3"
+      }
+    ]
+  },
+  "LandingProductNarrativeWorkbench": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "modes": [
+      {
+        "title": "Sample Title 1",
+        "constraints": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ],
+        "outputs": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 2",
+        "constraints": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ],
+        "outputs": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 3",
+        "constraints": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ],
+        "outputs": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      }
+    ]
+  },
+  "LandingProductObjectionHandling": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "items": [
+      {
+        "objection": "Sample text 1",
+        "answer": "Sample text 1"
+      },
+      {
+        "objection": "Sample text 2",
+        "answer": "Sample text 2"
+      },
+      {
+        "objection": "Sample text 3",
+        "answer": "Sample text 3"
+      }
+    ]
+  },
+  "LandingProductObjectionNetwork": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "nodes": [
+      {
+        "title": "Sample Title 1"
+      },
+      {
+        "title": "Sample Title 2"
+      },
+      {
+        "title": "Sample Title 3"
+      }
+    ]
+  },
+  "LandingProductOnboardingChecklist": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "items": [
+      {
+        "title": "Sample Title 1",
+        "description": "A brief description of this feature. 1",
+        "status": "complete 1"
+      },
+      {
+        "title": "Sample Title 2",
+        "description": "A brief description of this feature. 2",
+        "status": "complete 2"
+      },
+      {
+        "title": "Sample Title 3",
+        "description": "A brief description of this feature. 3",
+        "status": "complete 3"
+      }
+    ]
+  },
+  "LandingProductOperatingAtlas": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "regions": [
+      {
+        "title": "Sample Title 1",
+        "risks": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 2",
+        "risks": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 3",
+        "risks": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      }
+    ]
+  },
+  "LandingProductOperatingCanvas": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "panels": [
+      {
+        "title": "Sample Title 1",
+        "decisions": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ],
+        "signals": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 2",
+        "decisions": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ],
+        "signals": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 3",
+        "decisions": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ],
+        "signals": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      }
+    ]
+  },
+  "LandingProductOperatingChoreography": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "moves": [
+      {
+        "title": "Sample Title 1",
+        "participants": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 2",
+        "participants": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 3",
+        "participants": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      }
+    ]
+  },
+  "LandingProductOperatingConsole": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "panes": [
+      {
+        "title": "Sample Title 1",
+        "value": "99% 1"
+      },
+      {
+        "title": "Sample Title 2",
+        "value": "99% 2"
+      },
+      {
+        "title": "Sample Title 3",
+        "value": "99% 3"
+      }
+    ]
+  },
+  "LandingProductOperatingConstellation": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "nodes": [
+      {
+        "title": "Sample Title 1"
+      },
+      {
+        "title": "Sample Title 2"
+      },
+      {
+        "title": "Sample Title 3"
+      }
+    ]
+  },
+  "LandingProductOperatingFabric": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "threads": [
+      {
+        "title": "Sample Title 1"
+      },
+      {
+        "title": "Sample Title 2"
+      },
+      {
+        "title": "Sample Title 3"
+      }
+    ]
+  },
+  "LandingProductOperatingGenome": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "traits": [
+      {
+        "title": "Sample Title 1"
+      },
+      {
+        "title": "Sample Title 2"
+      },
+      {
+        "title": "Sample Title 3"
+      }
+    ]
+  },
+  "LandingProductOperatingHorizon": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "zones": [
+      {
+        "title": "Sample Title 1",
+        "watchpoints": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 2",
+        "watchpoints": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 3",
+        "watchpoints": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      }
+    ]
+  },
+  "LandingProductOperatingInterpreter": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "panes": [
+      {
+        "title": "Sample Title 1"
+      },
+      {
+        "title": "Sample Title 2"
+      },
+      {
+        "title": "Sample Title 3"
+      }
+    ]
+  },
+  "LandingProductOperatingKernel": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "primitives": [
+      {
+        "title": "Sample Title 1"
+      },
+      {
+        "title": "Sample Title 2"
+      },
+      {
+        "title": "Sample Title 3"
+      }
+    ]
+  },
+  "LandingProductOperatingModel": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "layers": [
+      {
+        "title": "Sample Title 1",
+        "description": "A brief description of this feature. 1",
+        "mechanics": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 2",
+        "description": "A brief description of this feature. 2",
+        "mechanics": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 3",
+        "description": "A brief description of this feature. 3",
+        "mechanics": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      }
+    ]
+  },
+  "LandingProductOperatingRhythm": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "beats": [
+      {
+        "title": "Sample Title 1"
+      },
+      {
+        "title": "Sample Title 2"
+      },
+      {
+        "title": "Sample Title 3"
+      }
+    ]
+  },
+  "LandingProductOperatingRuntime": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "views": [
+      {
+        "title": "Sample Title 1",
+        "loops": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ],
+        "outputs": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 2",
+        "loops": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ],
+        "outputs": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 3",
+        "loops": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ],
+        "outputs": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      }
+    ]
+  },
+  "LandingProductOperatingStoryboard": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "scenes": [
+      {
+        "title": "Sample Title 1"
+      },
+      {
+        "title": "Sample Title 2"
+      },
+      {
+        "title": "Sample Title 3"
+      }
+    ]
+  },
+  "LandingProductOperatingSwitchboard": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "panes": [
+      {
+        "title": "Sample Title 1",
+        "value": "99% 1"
+      },
+      {
+        "title": "Sample Title 2",
+        "value": "99% 2"
+      },
+      {
+        "title": "Sample Title 3",
+        "value": "99% 3"
+      }
+    ]
+  },
+  "LandingProductOperatingSystem": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "domains": [
+      {
+        "title": "Sample Title 1"
+      },
+      {
+        "title": "Sample Title 2"
+      },
+      {
+        "title": "Sample Title 3"
+      }
+    ]
+  },
+  "LandingProductOperatingWorkbench": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "panels": [
+      {
+        "title": "Sample Title 1",
+        "constraints": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ],
+        "outputs": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 2",
+        "constraints": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ],
+        "outputs": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 3",
+        "constraints": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ],
+        "outputs": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      }
+    ]
+  },
+  "LandingProductOperationalChecklist": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "items": [
+      {
+        "title": "Sample Title 1",
+        "status": "complete 1",
+        "description": "A brief description of this feature. 1"
+      },
+      {
+        "title": "Sample Title 2",
+        "status": "complete 2",
+        "description": "A brief description of this feature. 2"
+      },
+      {
+        "title": "Sample Title 3",
+        "status": "complete 3",
+        "description": "A brief description of this feature. 3"
+      }
+    ]
+  },
+  "LandingProductOrgDesign": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "roles": [
+      {
+        "role": "Product Manager 1",
+        "description": "A brief description of this feature. 1",
+        "metrics": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "role": "Product Manager 2",
+        "description": "A brief description of this feature. 2",
+        "metrics": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "role": "Product Manager 3",
+        "description": "A brief description of this feature. 3",
+        "metrics": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      }
+    ]
+  },
+  "LandingProductOutcomeConsole": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "views": [
+      {
+        "title": "Sample Title 1",
+        "value": "99% 1"
+      },
+      {
+        "title": "Sample Title 2",
+        "value": "99% 2"
+      },
+      {
+        "title": "Sample Title 3",
+        "value": "99% 3"
+      }
+    ]
+  },
+  "LandingProductOutcomeMesh": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "nodes": [
+      {
+        "title": "Sample Title 1"
+      },
+      {
+        "title": "Sample Title 2"
+      },
+      {
+        "title": "Sample Title 3"
+      }
+    ]
+  },
+  "LandingProductOwnershipGrid": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "rows": [
+      {
+        "title": "Sample Title 1"
+      },
+      {
+        "title": "Sample Title 2"
+      },
+      {
+        "title": "Sample Title 3"
+      }
+    ]
+  },
+  "LandingProductPartnerEcosystem": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "partners": [
+      {
+        "name": "Sample Title 1",
+        "description": "A brief description of this feature. 1"
+      },
+      {
+        "name": "Sample Title 2",
+        "description": "A brief description of this feature. 2"
+      },
+      {
+        "name": "Sample Title 3",
+        "description": "A brief description of this feature. 3"
+      }
+    ]
+  },
+  "LandingProductPartnerEnablementFlow": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "items": [
+      {
+        "title": "Sample Title 1",
+        "description": "A brief description of this feature. 1"
+      },
+      {
+        "title": "Sample Title 2",
+        "description": "A brief description of this feature. 2"
+      },
+      {
+        "title": "Sample Title 3",
+        "description": "A brief description of this feature. 3"
+      }
+    ]
+  },
+  "LandingProductPartnerLaunchPlan": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "steps": [
+      {
+        "title": "Sample Title 1",
+        "description": "A brief description of this feature. 1",
+        "deliverables": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 2",
+        "description": "A brief description of this feature. 2",
+        "deliverables": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 3",
+        "description": "A brief description of this feature. 3",
+        "deliverables": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      }
+    ]
+  },
+  "LandingProductPersonaSwitcher": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "personas": [
+      {
+        "name": "Sample Title 1",
+        "challenges": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ],
+        "wins": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "name": "Sample Title 2",
+        "challenges": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ],
+        "wins": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "name": "Sample Title 3",
+        "challenges": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ],
+        "wins": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      }
+    ]
+  },
+  "LandingProductPilotProgram": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "phases": [
+      {
+        "title": "Sample Title 1",
+        "outputs": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 2",
+        "outputs": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 3",
+        "outputs": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      }
+    ]
+  },
+  "LandingProductPortfolioCoverage": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "items": [
+      {
+        "title": "Sample Title 1",
+        "description": "A brief description of this feature. 1"
+      },
+      {
+        "title": "Sample Title 2",
+        "description": "A brief description of this feature. 2"
+      },
+      {
+        "title": "Sample Title 3",
+        "description": "A brief description of this feature. 3"
+      }
+    ]
+  },
+  "LandingProductPortfolioGovernance": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "items": [
+      {
+        "title": "Sample Title 1",
+        "description": "A brief description of this feature. 1"
+      },
+      {
+        "title": "Sample Title 2",
+        "description": "A brief description of this feature. 2"
+      },
+      {
+        "title": "Sample Title 3",
+        "description": "A brief description of this feature. 3"
+      }
+    ]
+  },
+  "LandingProductPricingComparison": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "tiers": [
+      {
+        "name": "Sample Title 1",
+        "price": "Sample text 1",
+        "description": "A brief description of this feature. 1",
+        "features": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "name": "Sample Title 2",
+        "price": "Sample text 2",
+        "description": "A brief description of this feature. 2",
+        "features": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "name": "Sample Title 3",
+        "price": "Sample text 3",
+        "description": "A brief description of this feature. 3",
+        "features": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      }
+    ]
+  },
+  "LandingProductPricingControls": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "controls": [
+      {
+        "title": "Sample Title 1",
+        "description": "A brief description of this feature. 1"
+      },
+      {
+        "title": "Sample Title 2",
+        "description": "A brief description of this feature. 2"
+      },
+      {
+        "title": "Sample Title 3",
+        "description": "A brief description of this feature. 3"
+      }
+    ]
+  },
+  "LandingProductPricingFAQ": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "items": [
+      {
+        "question": "Sample text 1",
+        "answer": "Sample text 1"
+      },
+      {
+        "question": "Sample text 2",
+        "answer": "Sample text 2"
+      },
+      {
+        "question": "Sample text 3",
+        "answer": "Sample text 3"
+      }
+    ]
+  },
+  "LandingProductPricingOps": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "items": [
+      {
+        "title": "Sample Title 1",
+        "description": "A brief description of this feature. 1"
+      },
+      {
+        "title": "Sample Title 2",
+        "description": "A brief description of this feature. 2"
+      },
+      {
+        "title": "Sample Title 3",
+        "description": "A brief description of this feature. 3"
+      }
+    ]
+  },
+  "LandingProductPriorityMatrix": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "items": [
+      {
+        "title": "Sample Title 1",
+        "impact": "Sample text 1",
+        "effort": "Sample text 1"
+      },
+      {
+        "title": "Sample Title 2",
+        "impact": "Sample text 2",
+        "effort": "Sample text 2"
+      },
+      {
+        "title": "Sample Title 3",
+        "impact": "Sample text 3",
+        "effort": "Sample text 3"
+      }
+    ]
+  },
+  "LandingProductProblemSolution": {},
+  "LandingProductProcurementObjections": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "items": [
+      {
+        "objection": "Sample text 1",
+        "answer": "Sample text 1"
+      },
+      {
+        "objection": "Sample text 2",
+        "answer": "Sample text 2"
+      },
+      {
+        "objection": "Sample text 3",
+        "answer": "Sample text 3"
+      }
+    ]
+  },
+  "LandingProductProcurementPack": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "items": [
+      {
+        "title": "Sample Title 1",
+        "description": "A brief description of this feature. 1"
+      },
+      {
+        "title": "Sample Title 2",
+        "description": "A brief description of this feature. 2"
+      },
+      {
+        "title": "Sample Title 3",
+        "description": "A brief description of this feature. 3"
+      }
+    ]
+  },
+  "LandingProductProcurementTimeline": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "items": [
+      {
+        "title": "Sample Title 1",
+        "description": "A brief description of this feature. 1"
+      },
+      {
+        "title": "Sample Title 2",
+        "description": "A brief description of this feature. 2"
+      },
+      {
+        "title": "Sample Title 3",
+        "description": "A brief description of this feature. 3"
+      }
+    ]
+  },
+  "LandingProductProgramMap": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "tracks": [
+      {
+        "title": "Sample Title 1",
+        "milestones": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 2",
+        "milestones": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 3",
+        "milestones": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      }
+    ]
+  },
+  "LandingProductProof": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "items": [
+      {
+        "label": "Sample Label 1",
+        "value": "99% 1"
+      },
+      {
+        "label": "Sample Label 2",
+        "value": "99% 2"
+      },
+      {
+        "label": "Sample Label 3",
+        "value": "99% 3"
+      }
+    ]
+  },
+  "LandingProductProofCartography": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "regions": [
+      {
+        "title": "Sample Title 1"
+      },
+      {
+        "title": "Sample Title 2"
+      },
+      {
+        "title": "Sample Title 3"
+      }
+    ]
+  },
+  "LandingProductProofEngine": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "modes": [
+      {
+        "title": "Sample Title 1",
+        "claims": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 2",
+        "claims": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 3",
+        "claims": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      }
+    ]
+  },
+  "LandingProductProofMap": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "items": [
+      {
+        "claim": "Sample text 1"
+      },
+      {
+        "claim": "Sample text 2"
+      },
+      {
+        "claim": "Sample text 3"
+      }
+    ]
+  },
+  "LandingProductProofOrchestra": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "sections": [
+      {
+        "title": "Sample Title 1"
+      },
+      {
+        "title": "Sample Title 2"
+      },
+      {
+        "title": "Sample Title 3"
+      }
+    ]
+  },
+  "LandingProductProtocolEngine": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "modes": [
+      {
+        "title": "Sample Title 1",
+        "rules": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ],
+        "outputs": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 2",
+        "rules": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ],
+        "outputs": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 3",
+        "rules": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ],
+        "outputs": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      }
+    ]
+  },
+  "LandingProductProtocolRuntime": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "lanes": [
+      {
+        "title": "Sample Title 1",
+        "inputs": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ],
+        "outputs": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 2",
+        "inputs": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ],
+        "outputs": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 3",
+        "inputs": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ],
+        "outputs": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      }
+    ]
+  },
+  "LandingProductQBRFramework": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "items": [
+      {
+        "title": "Sample Title 1",
+        "deliverables": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 2",
+        "deliverables": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 3",
+        "deliverables": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      }
+    ]
+  },
+  "LandingProductReadinessScore": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "items": [
+      {
+        "title": "Sample Title 1",
+        "score": "Sample text 1"
+      },
+      {
+        "title": "Sample Title 2",
+        "score": "Sample text 2"
+      },
+      {
+        "title": "Sample Title 3",
+        "score": "Sample text 3"
+      }
+    ]
+  },
+  "LandingProductRecoveryCircuit": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "stages": [
+      {
+        "title": "Sample Title 1"
+      },
+      {
+        "title": "Sample Title 2"
+      },
+      {
+        "title": "Sample Title 3"
+      }
+    ]
+  },
+  "LandingProductRecoveryCompiler": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "stages": [
+      {
+        "title": "Sample Title 1"
+      },
+      {
+        "title": "Sample Title 2"
+      },
+      {
+        "title": "Sample Title 3"
+      }
+    ]
+  },
+  "LandingProductRecoveryConsole": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "views": [
+      {
+        "title": "Sample Title 1",
+        "checks": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ],
+        "responses": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 2",
+        "checks": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ],
+        "responses": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 3",
+        "checks": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ],
+        "responses": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      }
+    ]
+  },
+  "LandingProductRecoveryDock": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "stages": [
+      {
+        "title": "Sample Title 1",
+        "checks": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 2",
+        "checks": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 3",
+        "checks": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      }
+    ]
+  },
+  "LandingProductRecoveryEngine": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "modes": [
+      {
+        "title": "Sample Title 1",
+        "phases": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 2",
+        "phases": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 3",
+        "phases": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      }
+    ]
+  },
+  "LandingProductRecoveryHarbor": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "stages": [
+      {
+        "title": "Sample Title 1"
+      },
+      {
+        "title": "Sample Title 2"
+      },
+      {
+        "title": "Sample Title 3"
+      }
+    ]
+  },
+  "LandingProductRecoveryKernel": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "primitives": [
+      {
+        "title": "Sample Title 1"
+      },
+      {
+        "title": "Sample Title 2"
+      },
+      {
+        "title": "Sample Title 3"
+      }
+    ]
+  },
+  "LandingProductRecoveryMesh": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "nodes": [
+      {
+        "title": "Sample Title 1"
+      },
+      {
+        "title": "Sample Title 2"
+      },
+      {
+        "title": "Sample Title 3"
+      }
+    ]
+  },
+  "LandingProductRecoveryProtocol": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "phases": [
+      {
+        "title": "Sample Title 1"
+      },
+      {
+        "title": "Sample Title 2"
+      },
+      {
+        "title": "Sample Title 3"
+      }
+    ]
+  },
+  "LandingProductRecoveryRuntime": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "views": [
+      {
+        "title": "Sample Title 1",
+        "checks": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ],
+        "repairs": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 2",
+        "checks": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ],
+        "repairs": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 3",
+        "checks": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ],
+        "repairs": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      }
+    ]
+  },
+  "LandingProductRecoveryTabletop": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "scenarios": [
+      {
+        "title": "Sample Title 1",
+        "participants": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 2",
+        "participants": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 3",
+        "participants": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      }
+    ]
+  },
+  "LandingProductRecoveryTerminal": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "sessions": [
+      {
+        "title": "Sample Title 1",
+        "checks": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 2",
+        "checks": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 3",
+        "checks": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      }
+    ]
+  },
+  "LandingProductRecoveryWorkbench": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "modes": [
+      {
+        "title": "Sample Title 1",
+        "checks": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ],
+        "responses": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 2",
+        "checks": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ],
+        "responses": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 3",
+        "checks": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ],
+        "responses": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      }
+    ]
+  },
+  "LandingProductReferenceStoryBank": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "stories": [
+      {
+        "title": "Sample Title 1"
+      },
+      {
+        "title": "Sample Title 2"
+      },
+      {
+        "title": "Sample Title 3"
+      }
+    ]
+  },
+  "LandingProductReferenceWorkflow": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "stages": [
+      {
+        "title": "Sample Title 1",
+        "description": "A brief description of this feature. 1"
+      },
+      {
+        "title": "Sample Title 2",
+        "description": "A brief description of this feature. 2"
+      },
+      {
+        "title": "Sample Title 3",
+        "description": "A brief description of this feature. 3"
+      }
+    ]
+  },
+  "LandingProductRegionalRollout": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "items": [
+      {
+        "region": "Sample text 1",
+        "description": "A brief description of this feature. 1"
+      },
+      {
+        "region": "Sample text 2",
+        "description": "A brief description of this feature. 2"
+      },
+      {
+        "region": "Sample text 3",
+        "description": "A brief description of this feature. 3"
+      }
+    ]
+  },
+  "LandingProductReleaseGovernance": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "checkpoints": [
+      {
+        "title": "Sample Title 1",
+        "description": "A brief description of this feature. 1"
+      },
+      {
+        "title": "Sample Title 2",
+        "description": "A brief description of this feature. 2"
+      },
+      {
+        "title": "Sample Title 3",
+        "description": "A brief description of this feature. 3"
+      }
+    ]
+  },
+  "LandingProductRenewalPlan": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "items": [
+      {
+        "title": "Sample Title 1",
+        "description": "A brief description of this feature. 1"
+      },
+      {
+        "title": "Sample Title 2",
+        "description": "A brief description of this feature. 2"
+      },
+      {
+        "title": "Sample Title 3",
+        "description": "A brief description of this feature. 3"
+      }
+    ]
+  },
+  "LandingProductRenewalSignals": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "signals": [
+      {
+        "label": "Sample Label 1",
+        "value": "99% 1",
+        "status": "strong 1"
+      },
+      {
+        "label": "Sample Label 2",
+        "value": "99% 2",
+        "status": "strong 2"
+      },
+      {
+        "label": "Sample Label 3",
+        "value": "99% 3",
+        "status": "strong 3"
+      }
+    ]
+  },
+  "LandingProductResponsibilityMesh": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "rows": [
+      {
+        "domain": "Sample text 1"
+      },
+      {
+        "domain": "Sample text 2"
+      },
+      {
+        "domain": "Sample text 3"
+      }
+    ]
+  },
+  "LandingProductRetentionLevers": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "levers": [
+      {
+        "title": "Sample Title 1",
+        "impact": "Sample text 1",
+        "description": "A brief description of this feature. 1"
+      },
+      {
+        "title": "Sample Title 2",
+        "impact": "Sample text 2",
+        "description": "A brief description of this feature. 2"
+      },
+      {
+        "title": "Sample Title 3",
+        "impact": "Sample text 3",
+        "description": "A brief description of this feature. 3"
+      }
+    ]
+  },
+  "LandingProductRevenueAlignment": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "items": [
+      {
+        "team": "Acme Corp 1",
+        "description": "A brief description of this feature. 1"
+      },
+      {
+        "team": "Acme Corp 2",
+        "description": "A brief description of this feature. 2"
+      },
+      {
+        "team": "Acme Corp 3",
+        "description": "A brief description of this feature. 3"
+      }
+    ]
+  },
+  "LandingProductRevenueArchitecture": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "layers": [
+      {
+        "title": "Sample Title 1"
+      },
+      {
+        "title": "Sample Title 2"
+      },
+      {
+        "title": "Sample Title 3"
+      }
+    ]
+  },
+  "LandingProductRevenueMotion": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "items": [
+      {
+        "title": "Sample Title 1"
+      },
+      {
+        "title": "Sample Title 2"
+      },
+      {
+        "title": "Sample Title 3"
+      }
+    ]
+  },
+  "LandingProductReviewCadence": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "items": [
+      {
+        "title": "Sample Title 1"
+      },
+      {
+        "title": "Sample Title 2"
+      },
+      {
+        "title": "Sample Title 3"
+      }
+    ]
+  },
+  "LandingProductRiskNarrative": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "items": [
+      {
+        "title": "Sample Title 1"
+      },
+      {
+        "title": "Sample Title 2"
+      },
+      {
+        "title": "Sample Title 3"
+      }
+    ]
+  },
+  "LandingProductRiskReversal": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "guarantees": [
+      {
+        "title": "Sample Title 1",
+        "detail": "Detail info 1"
+      },
+      {
+        "title": "Sample Title 2",
+        "detail": "Detail info 2"
+      },
+      {
+        "title": "Sample Title 3",
+        "detail": "Detail info 3"
+      }
+    ]
+  },
+  "LandingProductRoadmap": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "items": [
+      {
+        "title": "Sample Title 1",
+        "description": "A brief description of this feature. 1",
+        "status": "done 1"
+      },
+      {
+        "title": "Sample Title 2",
+        "description": "A brief description of this feature. 2",
+        "status": "done 2"
+      },
+      {
+        "title": "Sample Title 3",
+        "description": "A brief description of this feature. 3",
+        "status": "done 3"
+      }
+    ]
+  },
+  "LandingProductROIModel": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "assumptions": [
+      {
+        "label": "Sample Label 1",
+        "value": "99% 1"
+      },
+      {
+        "label": "Sample Label 2",
+        "value": "99% 2"
+      },
+      {
+        "label": "Sample Label 3",
+        "value": "99% 3"
+      }
+    ],
+    "outcomes": [
+      {
+        "label": "Sample Label 1",
+        "value": "99% 1",
+        "emphasis": "primary 1"
+      },
+      {
+        "label": "Sample Label 2",
+        "value": "99% 2",
+        "emphasis": "primary 2"
+      },
+      {
+        "label": "Sample Label 3",
+        "value": "99% 3",
+        "emphasis": "primary 3"
+      }
+    ],
+    "summaryTitle": "Sample Title"
+  },
+  "LandingProductRolloutPhases": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "phases": [
+      {
+        "title": "Sample Title 1",
+        "description": "A brief description of this feature. 1"
+      },
+      {
+        "title": "Sample Title 2",
+        "description": "A brief description of this feature. 2"
+      },
+      {
+        "title": "Sample Title 3",
+        "description": "A brief description of this feature. 3"
+      }
+    ]
+  },
+  "LandingProductRolloutSignals": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "items": [
+      {
+        "title": "Sample Title 1"
+      },
+      {
+        "title": "Sample Title 2"
+      },
+      {
+        "title": "Sample Title 3"
+      }
+    ]
+  },
+  "LandingProductSandboxEnvironment": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "items": [
+      {
+        "title": "Sample Title 1",
+        "description": "A brief description of this feature. 1",
+        "features": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 2",
+        "description": "A brief description of this feature. 2",
+        "features": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 3",
+        "description": "A brief description of this feature. 3",
+        "features": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      }
+    ]
+  },
+  "LandingProductScenarioPlanner": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "scenarios": [
+      {
+        "name": "Sample Title 1",
+        "metrics": [
+          {
+            "label": "Sample Label 1",
+            "value": "99% 1"
+          },
+          {
+            "label": "Sample Label 2",
+            "value": "99% 2"
+          },
+          {
+            "label": "Sample Label 3",
+            "value": "99% 3"
+          }
+        ],
+        "considerations": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "name": "Sample Title 2",
+        "metrics": [
+          {
+            "label": "Sample Label 1",
+            "value": "99% 1"
+          },
+          {
+            "label": "Sample Label 2",
+            "value": "99% 2"
+          },
+          {
+            "label": "Sample Label 3",
+            "value": "99% 3"
+          }
+        ],
+        "considerations": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "name": "Sample Title 3",
+        "metrics": [
+          {
+            "label": "Sample Label 1",
+            "value": "99% 1"
+          },
+          {
+            "label": "Sample Label 2",
+            "value": "99% 2"
+          },
+          {
+            "label": "Sample Label 3",
+            "value": "99% 3"
+          }
+        ],
+        "considerations": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      }
+    ]
+  },
+  "LandingProductSeatExpansionPlanner": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "rows": [
+      {
+        "team": "Acme Corp 1",
+        "currentSeats": "Sample text 1",
+        "projectedSeats": "Sample text 1"
+      },
+      {
+        "team": "Acme Corp 2",
+        "currentSeats": "Sample text 2",
+        "projectedSeats": "Sample text 2"
+      },
+      {
+        "team": "Acme Corp 3",
+        "currentSeats": "Sample text 3",
+        "projectedSeats": "Sample text 3"
+      }
+    ]
+  },
+  "LandingProductSecurityCompliance": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "certifications": [
+      {
+        "name": "Sample Title 1"
+      },
+      {
+        "name": "Sample Title 2"
+      },
+      {
+        "name": "Sample Title 3"
+      }
+    ],
+    "controls": [
+      {
+        "title": "Sample Title 1",
+        "description": "A brief description of this feature. 1"
+      },
+      {
+        "title": "Sample Title 2",
+        "description": "A brief description of this feature. 2"
+      },
+      {
+        "title": "Sample Title 3",
+        "description": "A brief description of this feature. 3"
+      }
+    ]
+  },
+  "LandingProductSecurityFAQ": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "items": [
+      {
+        "question": "Sample text 1",
+        "answer": "Sample text 1"
+      },
+      {
+        "question": "Sample text 2",
+        "answer": "Sample text 2"
+      },
+      {
+        "question": "Sample text 3",
+        "answer": "Sample text 3"
+      }
+    ]
+  },
+  "LandingProductServiceBlueprint": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "rows": [
+      {
+        "layer": "Sample text 1",
+        "frontstage": "New 1",
+        "backstage": "New 1"
+      },
+      {
+        "layer": "Sample text 2",
+        "frontstage": "New 2",
+        "backstage": "New 2"
+      },
+      {
+        "layer": "Sample text 3",
+        "frontstage": "New 3",
+        "backstage": "New 3"
+      }
+    ]
+  },
+  "LandingProductServiceControlTower": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "views": [
+      {
+        "title": "Sample Title 1",
+        "watchItems": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 2",
+        "watchItems": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 3",
+        "watchItems": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      }
+    ]
+  },
+  "LandingProductServiceDeliveryModel": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "layers": [
+      {
+        "title": "Sample Title 1",
+        "description": "A brief description of this feature. 1",
+        "motions": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 2",
+        "description": "A brief description of this feature. 2",
+        "motions": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 3",
+        "description": "A brief description of this feature. 3",
+        "motions": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      }
+    ]
+  },
+  "LandingProductServiceMoments": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "items": [
+      {
+        "title": "Sample Title 1"
+      },
+      {
+        "title": "Sample Title 2"
+      },
+      {
+        "title": "Sample Title 3"
+      }
+    ]
+  },
+  "LandingProductServiceRecovery": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "steps": [
+      {
+        "title": "Sample Title 1"
+      },
+      {
+        "title": "Sample Title 2"
+      },
+      {
+        "title": "Sample Title 3"
+      }
+    ]
+  },
+  "LandingProductSignalBeacon": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "pulses": [
+      {
+        "title": "Sample Title 1",
+        "readings": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 2",
+        "readings": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 3",
+        "readings": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      }
+    ]
+  },
+  "LandingProductSignalBroker": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "channels": [
+      {
+        "title": "Sample Title 1",
+        "signals": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 2",
+        "signals": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 3",
+        "signals": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      }
+    ]
+  },
+  "LandingProductSignalChamber": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "lenses": [
+      {
+        "title": "Sample Title 1",
+        "findings": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 2",
+        "findings": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 3",
+        "findings": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      }
+    ]
+  },
+  "LandingProductSignalConsole": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "panes": [
+      {
+        "title": "Sample Title 1",
+        "value": "99% 1"
+      },
+      {
+        "title": "Sample Title 2",
+        "value": "99% 2"
+      },
+      {
+        "title": "Sample Title 3",
+        "value": "99% 3"
+      }
+    ]
+  },
+  "LandingProductSignalEngine": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "modes": [
+      {
+        "title": "Sample Title 1",
+        "transforms": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 2",
+        "transforms": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 3",
+        "transforms": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      }
+    ]
+  },
+  "LandingProductSignalInterpreter": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "perspectives": [
+      {
+        "title": "Sample Title 1"
+      },
+      {
+        "title": "Sample Title 2"
+      },
+      {
+        "title": "Sample Title 3"
+      }
+    ]
+  },
+  "LandingProductSignalKernel": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "primitives": [
+      {
+        "title": "Sample Title 1"
+      },
+      {
+        "title": "Sample Title 2"
+      },
+      {
+        "title": "Sample Title 3"
+      }
+    ]
+  },
+  "LandingProductSignalLattice": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "nodes": [
+      {
+        "title": "Sample Title 1"
+      },
+      {
+        "title": "Sample Title 2"
+      },
+      {
+        "title": "Sample Title 3"
+      }
+    ]
+  },
+  "LandingProductSignalMap": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "items": [
+      {
+        "title": "Sample Title 1"
+      },
+      {
+        "title": "Sample Title 2"
+      },
+      {
+        "title": "Sample Title 3"
+      }
+    ]
+  },
+  "LandingProductSignalObservatory": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "lenses": [
+      {
+        "title": "Sample Title 1"
+      },
+      {
+        "title": "Sample Title 2"
+      },
+      {
+        "title": "Sample Title 3"
+      }
+    ]
+  },
+  "LandingProductSignalProtocol": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "rules": [
+      {
+        "title": "Sample Title 1"
+      },
+      {
+        "title": "Sample Title 2"
+      },
+      {
+        "title": "Sample Title 3"
+      }
+    ]
+  },
+  "LandingProductSignalRadar": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "sweeps": [
+      {
+        "title": "Sample Title 1",
+        "readings": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 2",
+        "readings": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 3",
+        "readings": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      }
+    ]
+  },
+  "LandingProductSignalRuntime": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "views": [
+      {
+        "title": "Sample Title 1",
+        "outputs": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 2",
+        "outputs": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 3",
+        "outputs": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      }
+    ]
+  },
+  "LandingProductSignalStudio": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "panels": [
+      {
+        "title": "Sample Title 1"
+      },
+      {
+        "title": "Sample Title 2"
+      },
+      {
+        "title": "Sample Title 3"
+      }
+    ]
+  },
+  "LandingProductSignalTelescope": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "lenses": [
+      {
+        "title": "Sample Title 1",
+        "findings": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 2",
+        "findings": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 3",
+        "findings": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      }
+    ]
+  },
+  "LandingProductSLACommitments": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "items": [
+      {
+        "name": "Sample Title 1",
+        "commitment": "Sample text 1"
+      },
+      {
+        "name": "Sample Title 2",
+        "commitment": "Sample text 2"
+      },
+      {
+        "name": "Sample Title 3",
+        "commitment": "Sample text 3"
+      }
+    ]
+  },
+  "LandingProductSocialProof": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "quotes": [
+      {
+        "quote": "Sample text 1",
+        "author": "Alex Johnson 1"
+      },
+      {
+        "quote": "Sample text 2",
+        "author": "Alex Johnson 2"
+      },
+      {
+        "quote": "Sample text 3",
+        "author": "Alex Johnson 3"
+      }
+    ]
+  },
+  "LandingProductStakeholderBrief": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "items": [
+      {
+        "title": "Sample Title 1"
+      },
+      {
+        "title": "Sample Title 2"
+      },
+      {
+        "title": "Sample Title 3"
+      }
+    ]
+  },
+  "LandingProductStakeholderMap": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "stakeholders": [
+      {
+        "name": "Sample Title 1",
+        "goals": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "name": "Sample Title 2",
+        "goals": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "name": "Sample Title 3",
+        "goals": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      }
+    ]
+  },
+  "LandingProductStatsCarousel": {
+    "title": "Sample Title",
+    "items": [
+      {
+        "label": "Sample Label 1",
+        "value": "99% 1"
+      },
+      {
+        "label": "Sample Label 2",
+        "value": "99% 2"
+      },
+      {
+        "label": "Sample Label 3",
+        "value": "99% 3"
+      }
+    ]
+  },
+  "LandingProductSteps": {},
+  "LandingProductStoryArchitecture": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "pillars": [
+      {
+        "title": "Sample Title 1"
+      },
+      {
+        "title": "Sample Title 2"
+      },
+      {
+        "title": "Sample Title 3"
+      }
+    ]
+  },
+  "LandingProductStoryBoardroom": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "seats": [
+      {
+        "title": "Sample Title 1"
+      },
+      {
+        "title": "Sample Title 2"
+      },
+      {
+        "title": "Sample Title 3"
+      }
+    ]
+  },
+  "LandingProductStoryCeremony": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "phases": [
+      {
+        "title": "Sample Title 1",
+        "inputs": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 2",
+        "inputs": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 3",
+        "inputs": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      }
+    ]
+  },
+  "LandingProductStoryConsole": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "panels": [
+      {
+        "title": "Sample Title 1",
+        "toggles": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 2",
+        "toggles": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 3",
+        "toggles": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      }
+    ]
+  },
+  "LandingProductStoryDeck": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "cards": [
+      {
+        "title": "Sample Title 1"
+      },
+      {
+        "title": "Sample Title 2"
+      },
+      {
+        "title": "Sample Title 3"
+      }
+    ]
+  },
+  "LandingProductStoryEngine": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "modes": [
+      {
+        "title": "Sample Title 1",
+        "fragments": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 2",
+        "fragments": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 3",
+        "fragments": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      }
+    ]
+  },
+  "LandingProductStoryKernel": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "primitives": [
+      {
+        "title": "Sample Title 1"
+      },
+      {
+        "title": "Sample Title 2"
+      },
+      {
+        "title": "Sample Title 3"
+      }
+    ]
+  },
+  "LandingProductStoryProtocol": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "rules": [
+      {
+        "title": "Sample Title 1"
+      },
+      {
+        "title": "Sample Title 2"
+      },
+      {
+        "title": "Sample Title 3"
+      }
+    ]
+  },
+  "LandingProductStorySwitchboard": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "channels": [
+      {
+        "title": "Sample Title 1",
+        "message": "Sample text 1",
+        "proofPoints": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 2",
+        "message": "Sample text 2",
+        "proofPoints": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 3",
+        "message": "Sample text 3",
+        "proofPoints": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      }
+    ]
+  },
+  "LandingProductStoryTimeline": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "steps": [
+      {
+        "title": "Sample Title 1",
+        "description": "A brief description of this feature. 1"
+      },
+      {
+        "title": "Sample Title 2",
+        "description": "A brief description of this feature. 2"
+      },
+      {
+        "title": "Sample Title 3",
+        "description": "A brief description of this feature. 3"
+      }
+    ]
+  },
+  "LandingProductSuccessCapacityPlan": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "items": [
+      {
+        "segment": "Sample text 1",
+        "currentCapacity": "Sample text 1",
+        "plannedCapacity": "Sample text 1"
+      },
+      {
+        "segment": "Sample text 2",
+        "currentCapacity": "Sample text 2",
+        "plannedCapacity": "Sample text 2"
+      },
+      {
+        "segment": "Sample text 3",
+        "currentCapacity": "Sample text 3",
+        "plannedCapacity": "Sample text 3"
+      }
+    ]
+  },
+  "LandingProductSuccessPlaybook": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "plays": [
+      {
+        "title": "Sample Title 1",
+        "description": "A brief description of this feature. 1",
+        "checklist": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 2",
+        "description": "A brief description of this feature. 2",
+        "checklist": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 3",
+        "description": "A brief description of this feature. 3",
+        "checklist": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      }
+    ]
+  },
+  "LandingProductSupportCoverage": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "channels": [
+      {
+        "name": "Sample Title 1",
+        "availability": "Sample text 1"
+      },
+      {
+        "name": "Sample Title 2",
+        "availability": "Sample text 2"
+      },
+      {
+        "name": "Sample Title 3",
+        "availability": "Sample text 3"
+      }
+    ]
+  },
+  "LandingProductTeamTopology": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "nodes": [
+      {
+        "title": "Sample Title 1",
+        "description": "A brief description of this feature. 1"
+      },
+      {
+        "title": "Sample Title 2",
+        "description": "A brief description of this feature. 2"
+      },
+      {
+        "title": "Sample Title 3",
+        "description": "A brief description of this feature. 3"
+      }
+    ]
+  },
+  "LandingProductTechnicalValidation": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "checks": [
+      {
+        "title": "Sample Title 1",
+        "description": "A brief description of this feature. 1"
+      },
+      {
+        "title": "Sample Title 2",
+        "description": "A brief description of this feature. 2"
+      },
+      {
+        "title": "Sample Title 3",
+        "description": "A brief description of this feature. 3"
+      }
+    ],
+    "artifacts": [
+      {
+        "title": "Sample Title 1"
+      },
+      {
+        "title": "Sample Title 2"
+      },
+      {
+        "title": "Sample Title 3"
+      }
+    ]
+  },
+  "LandingProductTerritoryCapacityModel": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "rows": [
+      {
+        "territory": "Sample text 1",
+        "current": "Sample text 1",
+        "planned": "Sample text 1"
+      },
+      {
+        "territory": "Sample text 2",
+        "current": "Sample text 2",
+        "planned": "Sample text 2"
+      },
+      {
+        "territory": "Sample text 3",
+        "current": "Sample text 3",
+        "planned": "Sample text 3"
+      }
+    ]
+  },
+  "LandingProductTour": {},
+  "LandingProductTrainingHub": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "resources": [
+      {
+        "title": "Sample Title 1",
+        "description": "A brief description of this feature. 1",
+        "bullets": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 2",
+        "description": "A brief description of this feature. 2",
+        "bullets": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 3",
+        "description": "A brief description of this feature. 3",
+        "bullets": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      }
+    ]
+  },
+  "LandingProductTrialConversion": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "steps": [
+      {
+        "title": "Sample Title 1",
+        "description": "A brief description of this feature. 1"
+      },
+      {
+        "title": "Sample Title 2",
+        "description": "A brief description of this feature. 2"
+      },
+      {
+        "title": "Sample Title 3",
+        "description": "A brief description of this feature. 3"
+      }
+    ]
+  },
+  "LandingProductTrustArchitecture": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "layers": [
+      {
+        "title": "Sample Title 1"
+      },
+      {
+        "title": "Sample Title 2"
+      },
+      {
+        "title": "Sample Title 3"
+      }
+    ]
+  },
+  "LandingProductTrustArchive": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "records": [
+      {
+        "title": "Sample Title 1"
+      },
+      {
+        "title": "Sample Title 2"
+      },
+      {
+        "title": "Sample Title 3"
+      }
+    ]
+  },
+  "LandingProductTrustBar": {
+    "title": "Sample Title",
+    "items": [
+      {
+        "name": "Sample Title 1"
+      },
+      {
+        "name": "Sample Title 2"
+      },
+      {
+        "name": "Sample Title 3"
+      }
+    ]
+  },
+  "LandingProductTrustBeacon": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "signals": [
+      {
+        "title": "Sample Title 1"
+      },
+      {
+        "title": "Sample Title 2"
+      },
+      {
+        "title": "Sample Title 3"
+      }
+    ]
+  },
+  "LandingProductTrustCommandCenter": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "panels": [
+      {
+        "title": "Sample Title 1",
+        "value": "99% 1"
+      },
+      {
+        "title": "Sample Title 2",
+        "value": "99% 2"
+      },
+      {
+        "title": "Sample Title 3",
+        "value": "99% 3"
+      }
+    ]
+  },
+  "LandingProductTrustCompiler": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "stages": [
+      {
+        "title": "Sample Title 1"
+      },
+      {
+        "title": "Sample Title 2"
+      },
+      {
+        "title": "Sample Title 3"
+      }
+    ]
+  },
+  "LandingProductTrustControlRoom": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "views": [
+      {
+        "title": "Sample Title 1",
+        "value": "99% 1"
+      },
+      {
+        "title": "Sample Title 2",
+        "value": "99% 2"
+      },
+      {
+        "title": "Sample Title 3",
+        "value": "99% 3"
+      }
+    ]
+  },
+  "LandingProductTrustDossier": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "entries": [
+      {
+        "title": "Sample Title 1"
+      },
+      {
+        "title": "Sample Title 2"
+      },
+      {
+        "title": "Sample Title 3"
+      }
+    ]
+  },
+  "LandingProductTrustEngine": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "modes": [
+      {
+        "title": "Sample Title 1",
+        "mechanisms": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 2",
+        "mechanisms": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 3",
+        "mechanisms": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      }
+    ]
+  },
+  "LandingProductTrustFabric": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "threads": [
+      {
+        "title": "Sample Title 1"
+      },
+      {
+        "title": "Sample Title 2"
+      },
+      {
+        "title": "Sample Title 3"
+      }
+    ]
+  },
+  "LandingProductTrustInterpreter": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "modes": [
+      {
+        "title": "Sample Title 1"
+      },
+      {
+        "title": "Sample Title 2"
+      },
+      {
+        "title": "Sample Title 3"
+      }
+    ]
+  },
+  "LandingProductTrustKernel": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "primitives": [
+      {
+        "title": "Sample Title 1"
+      },
+      {
+        "title": "Sample Title 2"
+      },
+      {
+        "title": "Sample Title 3"
+      }
+    ]
+  },
+  "LandingProductTrustLedger": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "entries": [
+      {
+        "title": "Sample Title 1"
+      },
+      {
+        "title": "Sample Title 2"
+      },
+      {
+        "title": "Sample Title 3"
+      }
+    ]
+  },
+  "LandingProductTrustMesh": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "nodes": [
+      {
+        "title": "Sample Title 1"
+      },
+      {
+        "title": "Sample Title 2"
+      },
+      {
+        "title": "Sample Title 3"
+      }
+    ]
+  },
+  "LandingProductTrustProtocol": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "rules": [
+      {
+        "title": "Sample Title 1"
+      },
+      {
+        "title": "Sample Title 2"
+      },
+      {
+        "title": "Sample Title 3"
+      }
+    ]
+  },
+  "LandingProductTrustRegistry": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "entries": [
+      {
+        "title": "Sample Title 1"
+      },
+      {
+        "title": "Sample Title 2"
+      },
+      {
+        "title": "Sample Title 3"
+      }
+    ]
+  },
+  "LandingProductTrustRuntime": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "views": [
+      {
+        "title": "Sample Title 1",
+        "value": "99% 1"
+      },
+      {
+        "title": "Sample Title 2",
+        "value": "99% 2"
+      },
+      {
+        "title": "Sample Title 3",
+        "value": "99% 3"
+      }
+    ]
+  },
+  "LandingProductUsageAnomalyAlerts": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "alerts": [
+      {
+        "signal": "Sample text 1"
+      },
+      {
+        "signal": "Sample text 2"
+      },
+      {
+        "signal": "Sample text 3"
+      }
+    ]
+  },
+  "LandingProductUseCases": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "cases": [
+      {
+        "role": "Product Manager 1",
+        "challenge": "Sample text 1",
+        "outcome": "Sample text 1"
+      },
+      {
+        "role": "Product Manager 2",
+        "challenge": "Sample text 2",
+        "outcome": "Sample text 2"
+      },
+      {
+        "role": "Product Manager 3",
+        "challenge": "Sample text 3",
+        "outcome": "Sample text 3"
+      }
+    ]
+  },
+  "LandingProductValueCartography": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "regions": [
+      {
+        "title": "Sample Title 1"
+      },
+      {
+        "title": "Sample Title 2"
+      },
+      {
+        "title": "Sample Title 3"
+      }
+    ]
+  },
+  "LandingProductValueChain": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "links": [
+      {
+        "title": "Sample Title 1"
+      },
+      {
+        "title": "Sample Title 2"
+      },
+      {
+        "title": "Sample Title 3"
+      }
+    ]
+  },
+  "LandingProductValueCompiler": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "stages": [
+      {
+        "title": "Sample Title 1"
+      },
+      {
+        "title": "Sample Title 2"
+      },
+      {
+        "title": "Sample Title 3"
+      }
+    ]
+  },
+  "LandingProductValueEngine": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "modes": [
+      {
+        "title": "Sample Title 1",
+        "value": "99% 1"
+      },
+      {
+        "title": "Sample Title 2",
+        "value": "99% 2"
+      },
+      {
+        "title": "Sample Title 3",
+        "value": "99% 3"
+      }
+    ]
+  },
+  "LandingProductValueExpedition": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "legs": [
+      {
+        "title": "Sample Title 1",
+        "obstacles": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 2",
+        "obstacles": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 3",
+        "obstacles": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      }
+    ]
+  },
+  "LandingProductValueFrontier": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "zones": [
+      {
+        "title": "Sample Title 1",
+        "hazards": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 2",
+        "hazards": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 3",
+        "hazards": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      }
+    ]
+  },
+  "LandingProductValueInterpreter": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "modes": [
+      {
+        "title": "Sample Title 1"
+      },
+      {
+        "title": "Sample Title 2"
+      },
+      {
+        "title": "Sample Title 3"
+      }
+    ]
+  },
+  "LandingProductValueKernel": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "layers": [
+      {
+        "title": "Sample Title 1"
+      },
+      {
+        "title": "Sample Title 2"
+      },
+      {
+        "title": "Sample Title 3"
+      }
+    ]
+  },
+  "LandingProductValueMesh": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "nodes": [
+      {
+        "title": "Sample Title 1"
+      },
+      {
+        "title": "Sample Title 2"
+      },
+      {
+        "title": "Sample Title 3"
+      }
+    ]
+  },
+  "LandingProductValueNarrative": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "items": [
+      {
+        "title": "Sample Title 1"
+      },
+      {
+        "title": "Sample Title 2"
+      },
+      {
+        "title": "Sample Title 3"
+      }
+    ]
+  },
+  "LandingProductValuePilot": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "modes": [
+      {
+        "title": "Sample Title 1",
+        "value": "99% 1"
+      },
+      {
+        "title": "Sample Title 2",
+        "value": "99% 2"
+      },
+      {
+        "title": "Sample Title 3",
+        "value": "99% 3"
+      }
+    ]
+  },
+  "LandingProductValueProtocol": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "rules": [
+      {
+        "title": "Sample Title 1"
+      },
+      {
+        "title": "Sample Title 2"
+      },
+      {
+        "title": "Sample Title 3"
+      }
+    ]
+  },
+  "LandingProductValueRuntime": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "modes": [
+      {
+        "title": "Sample Title 1",
+        "outputs": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 2",
+        "outputs": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 3",
+        "outputs": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      }
+    ]
+  },
+  "LandingProductValueTopology": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "clusters": [
+      {
+        "title": "Sample Title 1"
+      },
+      {
+        "title": "Sample Title 2"
+      },
+      {
+        "title": "Sample Title 3"
+      }
+    ]
+  },
+  "LandingProductValueTrackingBoard": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "metrics": [
+      {
+        "label": "Sample Label 1",
+        "baseline": "Sample text 1",
+        "current": "Sample text 1"
+      },
+      {
+        "label": "Sample Label 2",
+        "baseline": "Sample text 2",
+        "current": "Sample text 2"
+      },
+      {
+        "label": "Sample Label 3",
+        "baseline": "Sample text 3",
+        "current": "Sample text 3"
+      }
+    ]
+  },
+  "LandingProductValueWeatherMap": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "zones": [
+      {
+        "title": "Sample Title 1",
+        "indicators": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 2",
+        "indicators": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 3",
+        "indicators": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      }
+    ]
+  },
+  "LandingProductVendorTransition": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "phases": [
+      {
+        "title": "Sample Title 1",
+        "description": "A brief description of this feature. 1"
+      },
+      {
+        "title": "Sample Title 2",
+        "description": "A brief description of this feature. 2"
+      },
+      {
+        "title": "Sample Title 3",
+        "description": "A brief description of this feature. 3"
+      }
+    ]
+  },
+  "LandingProductVideoFeature": {},
+  "LandingProductWorkflowTemplates": {
+    "title": "Sample Title",
+    "description": "A brief description of this feature.",
+    "templates": [
+      {
+        "title": "Sample Title 1",
+        "description": "A brief description of this feature. 1",
+        "includes": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 2",
+        "description": "A brief description of this feature. 2",
+        "includes": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      },
+      {
+        "title": "Sample Title 3",
+        "description": "A brief description of this feature. 3",
+        "includes": [
+          "Alpha",
+          "Beta",
+          "Gamma"
+        ]
+      }
+    ]
+  },
+  "AnimatedBeam": {},
+  "AnimatedCircularProgressBar": {
+    "value": 42,
+    "gaugePrimaryColor": "#6366f1",
+    "gaugeSecondaryColor": "#6366f1"
+  },
+  "AnimatedCounter": {
+    "from": 42,
+    "to": 42,
+    "trigger": "intersection",
+    "easing": "linear"
+  },
+  "AnimatedGradientText": {
+    "colors": [
+      "Alpha",
+      "Beta",
+      "Gamma"
+    ]
+  },
+  "AnimatedGridPattern": {},
+  "AnimatedList": {
+    "direction": "up"
+  },
+  "AnimatedShinyText": {},
+  "AnimatedText": {
+    "messages": [
+      "Alpha",
+      "Beta",
+      "Gamma"
+    ],
+    "loop": 42
+  },
+  "AnimatedThemeToggler": {},
+  "AuroraText": {
+    "colors": [
+      "Alpha",
+      "Beta",
+      "Gamma"
+    ]
+  },
+  "BlurFade": {},
+  "ComicText": {
+    "children": "Sample text"
+  },
+  "CountUpStats": {
+    "stats": [
+      {
+        "value": 42,
+        "label": "Sample Label 1"
+      },
+      {
+        "value": 42,
+        "label": "Sample Label 2"
+      },
+      {
+        "value": 42,
+        "label": "Sample Label 3"
+      }
+    ]
+  },
+  "DiaTextReveal": {
+    "text": "Sample text",
+    "colors": [
+      "Alpha",
+      "Beta",
+      "Gamma"
+    ],
+    "textColor": "Sample text"
+  },
+  "FlipText": {
+    "text": "Sample text",
+    "as": "span"
+  },
+  "GlitchText": {
+    "text": "Sample text",
+    "as": "span"
+  },
+  "Highlighter": {},
+  "HighlightOnScroll": {
+    "text": "Sample text",
+    "as": "p"
+  },
+  "HyperText": {
+    "children": "Sample text"
+  },
+  "KineticText": {},
+  "LineShadowText": {
+    "children": "Sample text"
+  },
+  "LottieAnimation": {
+    "width": 42,
+    "height": 42
+  },
+  "Marquee": {
+    "direction": "left"
+  },
+  "MorphingText": {
+    "texts": [
+      "Alpha",
+      "Beta",
+      "Gamma"
+    ]
+  },
+  "NumberTicker": {
+    "value": 42
+  },
+  "PageTransition": {},
+  "ParallaxSection": {
+    "direction": "vertical"
+  },
+  "RevealOnScroll": {
+    "default": "up"
+  },
+  "ScrollVelocity": {},
+  "SmoothCursor": {
+    "springConfig": {},
+    "damping": 42,
+    "stiffness": 42,
+    "mass": 42,
+    "restDelta": 42
+  },
+  "SparklesText": {
+    "first": "#9E7AFF"
+  },
+  "SpinningText": {
+    "children": "Sample text",
+    "variants": {}
+  },
+  "StaggerAnimation": {},
+  "Text3DFlip": {},
+  "TextAnimate": {
+    "children": "Sample text",
+    "segmentClassName": "Sample Title"
+  },
+  "TextLoop": {
+    "words": [
+      "Alpha",
+      "Beta",
+      "Gamma"
+    ],
+    "animation": "slide"
+  },
+  "TextMorph": {
+    "texts": [
+      "Alpha",
+      "Beta",
+      "Gamma"
+    ]
+  },
+  "TextReveal": {
+    "text": "Sample text",
+    "splitBy": "word",
+    "as": "h1"
+  },
+  "TextRevealOnScroll": {
+    "text": "Sample text",
+    "direction": "ltr"
+  },
+  "TextScramble": {
+    "text": "Sample text",
+    "as": "span"
+  },
+  "TypingAnimation": {
+    "words": [
+      "Alpha",
+      "Beta",
+      "Gamma"
+    ],
+    "cursorStyle": "line"
+  },
+  "TypingEffect": {
+    "text": "Sample text",
+    "cursorClassName": "Sample Title"
+  },
+  "VideoText": {
+    "src": "#",
+    "preload": "auto",
+    "fontSize": "Sample text",
+    "fontWeight": "Sample text",
+    "textAnchor": "Sample text"
+  },
+  "WordRotate": {
+    "words": [
+      "Alpha",
+      "Beta",
+      "Gamma"
+    ]
+  },
+  "Breadcrumbs": {
+    "items": [
+      {
+        "label": "Sample Label 1",
+        "href": "#"
+      },
+      {
+        "label": "Sample Label 2",
+        "href": "#"
+      },
+      {
+        "label": "Sample Label 3",
+        "href": "#"
+      }
+    ],
+    "showHomeIcon": false
+  },
+  "CommandMenu": {
+    "groups": [
+      {
+        "heading": "Sample Title 1",
+        "actions": [
+          {
+            "id": "item-1 1",
+            "label": "Sample Label 1"
+          },
+          {
+            "id": "item-1 2",
+            "label": "Sample Label 2"
+          },
+          {
+            "id": "item-1 3",
+            "label": "Sample Label 3"
+          }
+        ]
+      },
+      {
+        "heading": "Sample Title 2",
+        "actions": [
+          {
+            "id": "item-1 1",
+            "label": "Sample Label 1"
+          },
+          {
+            "id": "item-1 2",
+            "label": "Sample Label 2"
+          },
+          {
+            "id": "item-1 3",
+            "label": "Sample Label 3"
+          }
+        ]
+      },
+      {
+        "heading": "Sample Title 3",
+        "actions": [
+          {
+            "id": "item-1 1",
+            "label": "Sample Label 1"
+          },
+          {
+            "id": "item-1 2",
+            "label": "Sample Label 2"
+          },
+          {
+            "id": "item-1 3",
+            "label": "Sample Label 3"
+          }
+        ]
+      }
+    ],
+    "placeholder": "Sample text"
+  },
+  "CommandPalette": {
+    "commands": [
+      {
+        "id": "item-1 1",
+        "label": "Sample Label 1",
+        "description": "A brief description of this feature. 1"
+      },
+      {
+        "id": "item-1 2",
+        "label": "Sample Label 2",
+        "description": "A brief description of this feature. 2"
+      },
+      {
+        "id": "item-1 3",
+        "label": "Sample Label 3",
+        "description": "A brief description of this feature. 3"
+      }
+    ],
+    "placeholder": "Sample text"
+  },
+  "ContextMenu": {
+    "items": [
+      {
+        "label": "Sample Label 1",
+        "submenu": [
+          {},
+          {},
+          {}
+        ]
+      },
+      {
+        "label": "Sample Label 2",
+        "submenu": [
+          {},
+          {},
+          {}
+        ]
+      },
+      {
+        "label": "Sample Label 3",
+        "submenu": [
+          {},
+          {},
+          {}
+        ]
+      }
+    ]
+  },
+  "Dock": {
+    "items": [
+      {
+        "label": "Sample Label 1",
+        "href": "#"
+      },
+      {
+        "label": "Sample Label 2",
+        "href": "#"
+      },
+      {
+        "label": "Sample Label 3",
+        "href": "#"
+      }
+    ],
+    "position": "bottom"
+  },
+  "FloatingNav": {
+    "items": [
+      {
+        "label": "Sample Label 1",
+        "href": "#"
+      },
+      {
+        "label": "Sample Label 2",
+        "href": "#"
+      },
+      {
+        "label": "Sample Label 3",
+        "href": "#"
+      }
+    ]
+  },
+  "MegaMenu": {
+    "groups": [
+      {
+        "trigger": "Detail info 1",
+        "featured": {},
+        "title": "Sample Title 1",
+        "description": "A brief description of this feature. 1",
+        "image": "https://placehold.co/40x40/1f2937/6b7280?text=img",
+        "href": "#"
+      },
+      {
+        "trigger": "Detail info 2",
+        "featured": {},
+        "title": "Sample Title 2",
+        "description": "A brief description of this feature. 2",
+        "image": "https://placehold.co/40x40/1f2937/6b7280?text=img",
+        "href": "#"
+      },
+      {
+        "trigger": "Detail info 3",
+        "featured": {},
+        "title": "Sample Title 3",
+        "description": "A brief description of this feature. 3",
+        "image": "https://placehold.co/40x40/1f2937/6b7280?text=img",
+        "href": "#"
+      }
+    ]
+  },
+  "MegaMenuComponent": {
+    "title": "Sample Title",
+    "items": [
+      {
+        "label": "Sample Label 1",
+        "href": "#",
+        "description": "A brief description of this feature. 1",
+        "submenu": [
+          {},
+          {},
+          {}
+        ]
+      },
+      {
+        "label": "Sample Label 2",
+        "href": "#",
+        "description": "A brief description of this feature. 2",
+        "submenu": [
+          {},
+          {},
+          {}
+        ]
+      },
+      {
+        "label": "Sample Label 3",
+        "href": "#",
+        "description": "A brief description of this feature. 3",
+        "submenu": [
+          {},
+          {},
+          {}
+        ]
+      }
+    ]
+  },
+  "MorphingNav": {
+    "links": {
+      "label": "Sample Label"
+    },
+    "href": "#"
+  },
+  "SideMenu": {
+    "items": [
+      {
+        "label": "Sample Label 1",
+        "href": "#"
+      },
+      {
+        "label": "Sample Label 2",
+        "href": "#"
+      },
+      {
+        "label": "Sample Label 3",
+        "href": "#"
+      }
+    ],
+    "side": "left"
+  },
+  "SlideTabs": {
+    "tabs": [
+      {
+        "id": "item-1 1",
+        "label": "Sample Label 1"
+      },
+      {
+        "id": "item-1 2",
+        "label": "Sample Label 2"
+      },
+      {
+        "id": "item-1 3",
+        "label": "Sample Label 3"
+      }
+    ],
+    "activeTab": "Sample text",
+    "variant": "pill",
+    "size": "sm"
+  },
+  "StickyHeader": {},
+  "Avatar": {
+    "name": "Sample Title",
+    "size": "xs",
+    "shape": "circle",
+    "status": "online"
+  },
+  "AvatarCircles": {
+    "avatarUrls": [
+      {
+        "imageUrl": "#",
+        "profileUrl": "#"
+      },
+      {
+        "imageUrl": "#",
+        "profileUrl": "#"
+      },
+      {
+        "imageUrl": "#",
+        "profileUrl": "#"
+      }
+    ]
+  },
+  "badge": {
+    "variant": "default",
+    "size": "xs",
+    "shape": "rounded"
+  },
+  "Divider": {
+    "orientation": "horizontal",
+    "label": "Sample Label",
+    "variant": "default"
+  },
+  "Menu": {
+    "items": [
+      {
+        "label": "Sample Label 1",
+        "submenu": [
+          {},
+          {},
+          {}
+        ]
+      },
+      {
+        "label": "Sample Label 2",
+        "submenu": [
+          {},
+          {},
+          {}
+        ]
+      },
+      {
+        "label": "Sample Label 3",
+        "submenu": [
+          {},
+          {},
+          {}
+        ]
+      }
+    ],
+    "align": "left"
+  },
+  "popover": {
+    "placement": "top",
+    "triggerMode": "click"
+  },
+  "sheet": {
+    "side": "left",
+    "size": "sm"
+  },
+  "StatusBadge": {
+    "status": "info",
+    "label": "Sample Label",
+    "size": "sm"
+  },
+  "ThemeToggle": {
+    "theme": "light"
+  },
+  "ToggleGroup": {
+    "items": [
+      {
+        "value": "99% 1",
+        "label": "Sample Label 1"
+      },
+      {
+        "value": "99% 2",
+        "label": "Sample Label 2"
+      },
+      {
+        "value": "99% 3",
+        "label": "Sample Label 3"
+      }
+    ],
+    "value": "99%",
+    "type": "single",
+    "size": "sm",
+    "variant": "default"
+  },
+  "tooltip": {
+    "placement": "top"
+  }
+}
