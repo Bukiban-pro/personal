@@ -38,8 +38,13 @@ This repo started as a ~221-file React pattern stash. It now contains a much lar
 9. Read `ui_lab/docs/UI_LAB_CURATION_QUEUE.md` for the active admin backlog around the remaining naming ambiguity.
 10. Read `ui_lab/docs/LANDING_PRODUCT_LIBRARY_GUIDE.md` when you are specifically entering the 321-file LandingProduct subsystem.
 11. Use `ui_lab/configs/landing-product-registry.json` for the machine-readable LandingProduct inventory.
-12. Use `ui_lab/HANDOFF_UI_MINING_2026-05-06.md` as the full LandingProduct archive and source inventory.
-13. Rerun `ui_lab/docs/generate-ui-lab-library-catalog.ps1` and `ui_lab/docs/generate-landing-product-catalog.ps1` after future inventory changes so the guides, registries, grouped folders, exact barrels, metadata files, and by-name index stay honest.
+12. Read `ui_lab/docs/LANDING_PRODUCT_VISUAL_GALLERY_MAP.md` for a human visual-first wall map across the landing-product shelf.
+13. Read `ui_lab/docs/LANDING_PRODUCT_VISUAL_PLAYBOOK.md` for chapter-level visual defaults, anti-repeat primary picks, and full wall browse links.
+14. Open `ui_lab/library/landing-product-live-gallery.html` when you want actual rendered LandingProduct sections instead of file browse surfaces.
+15. Use `ui_lab/library/landing-product-gallery.json` when you need machine-readable chapter color defaults and curated picks.
+16. Use `ui_lab/configs/landing-product-live-samples.json` when you need the curated sample props that power the live render gallery.
+17. Use `ui_lab/HANDOFF_UI_MINING_2026-05-06.md` as the full LandingProduct archive and source inventory.
+18. Rerun `ui_lab/docs/generate-ui-lab-library-catalog.ps1`, `ui_lab/docs/generate-landing-product-catalog.ps1`, `ui_lab/docs/generate-landing-product-visual-gallery.ps1`, and `ui_lab/docs/generate-landing-product-live-gallery.ps1` after future inventory changes so guides and registries stay honest.
 
 ## What This README Still Covers
 

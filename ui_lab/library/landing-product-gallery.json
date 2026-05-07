@@ -1,0 +1,2278 @@
+﻿{
+    "generatedAt":  "2026-05-07T09:16:08.9789627+07:00",
+    "source":  {
+                   "registry":  "C:\\Users\\YOGA\\Desktop\\personal\\ui_lab\\docs\\..\\configs\\landing-product-registry.json",
+                   "profiles":  "C:\\Users\\YOGA\\Desktop\\personal\\ui_lab\\docs\\..\\configs\\landing-product-gallery-profiles.json",
+                   "shelf":  "ui_lab/components/shelves/landing-product-system"
+               },
+    "stats":  {
+                  "chapters":  6,
+                  "totalComponents":  321
+              },
+    "chapters":  [
+                     {
+                         "key":  "conversion-proof",
+                         "label":  "Conversion and Proof",
+                         "description":  "Start here for sane landing pages: proof, comparison, metrics, pricing, objections, and direct conversion scaffolding.",
+                         "tone":  "clarity",
+                         "visualDefaults":  {
+                                                "classes":  {
+                                                                "surface":  "bg-background text-foreground border-border",
+                                                                "accent":  "text-emerald-600 dark:text-emerald-400",
+                                                                "chip":  "bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 border-emerald-500/20"
+                                                            },
+                                                "cssVars":  {
+                                                                "--gallery-accent":  "146 70% 42%"
+                                                            }
+                                            },
+                         "stats":  {
+                                       "components":  41,
+                                       "families":  36,
+                                       "primaryPicks":  36
+                                   },
+                         "primaryPicks":  [
+                                              "LandingProductAnnouncement",
+                                              "LandingProductBeforeAfter",
+                                              "LandingProductBenchmarkCards",
+                                              "LandingProductCaseStudy",
+                                              "LandingProductChangelogFeed",
+                                              "LandingProductComparison",
+                                              "LandingProductCTAStack",
+                                              "LandingProductFAQColumns",
+                                              "LandingProductFeature",
+                                              "LandingProductFeaturesGrid",
+                                              "LandingProductImplementationTimeline",
+                                              "LandingProductIntegrationsWall",
+                                              "LandingProductInteractiveShowcase",
+                                              "LandingProductJourney",
+                                              "LandingProductLaunchStrip",
+                                              "LandingProductMetrics",
+                                              "LandingProductMigrationPlan",
+                                              "LandingProductObjectionHandling",
+                                              "LandingProductPersonaSwitcher",
+                                              "LandingProductPricingComparison",
+                                              "LandingProductProblemSolution",
+                                              "LandingProductProcurementPack",
+                                              "LandingProductProof",
+                                              "LandingProductRiskReversal",
+                                              "LandingProductRoadmap",
+                                              "LandingProductROIModel",
+                                              "LandingProductSecurityCompliance",
+                                              "LandingProductSocialProof",
+                                              "LandingProductStatsCarousel",
+                                              "LandingProductSteps",
+                                              "LandingProductStoryTimeline",
+                                              "LandingProductSuccessPlaybook",
+                                              "LandingProductTour",
+                                              "LandingProductTrustBar",
+                                              "LandingProductUseCases",
+                                              "LandingProductVideoFeature"
+                                          ],
+                         "components":  [
+                                            {
+                                                "name":  "LandingProductAnnouncement",
+                                                "file":  "LandingProductAnnouncement.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductAnnouncement.tsx",
+                                                "family":  "announcement"
+                                            },
+                                            {
+                                                "name":  "LandingProductBeforeAfter",
+                                                "file":  "LandingProductBeforeAfter.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductBeforeAfter.tsx",
+                                                "family":  "before"
+                                            },
+                                            {
+                                                "name":  "LandingProductBenchmarkCards",
+                                                "file":  "LandingProductBenchmarkCards.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductBenchmarkCards.tsx",
+                                                "family":  "benchmark"
+                                            },
+                                            {
+                                                "name":  "LandingProductCaseStudy",
+                                                "file":  "LandingProductCaseStudy.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductCaseStudy.tsx",
+                                                "family":  "case"
+                                            },
+                                            {
+                                                "name":  "LandingProductChangelogFeed",
+                                                "file":  "LandingProductChangelogFeed.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductChangelogFeed.tsx",
+                                                "family":  "changelog"
+                                            },
+                                            {
+                                                "name":  "LandingProductComparison",
+                                                "file":  "LandingProductComparison.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductComparison.tsx",
+                                                "family":  "comparison"
+                                            },
+                                            {
+                                                "name":  "LandingProductComparisonChecklist",
+                                                "file":  "LandingProductComparisonChecklist.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductComparisonChecklist.tsx",
+                                                "family":  "comparison"
+                                            },
+                                            {
+                                                "name":  "LandingProductCTAStack",
+                                                "file":  "LandingProductCTAStack.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductCTAStack.tsx",
+                                                "family":  "cta"
+                                            },
+                                            {
+                                                "name":  "LandingProductFAQColumns",
+                                                "file":  "LandingProductFAQColumns.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductFAQColumns.tsx",
+                                                "family":  "faq"
+                                            },
+                                            {
+                                                "name":  "LandingProductFeature",
+                                                "file":  "LandingProductFeature.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductFeature.tsx",
+                                                "family":  "feature"
+                                            },
+                                            {
+                                                "name":  "LandingProductFeatureKeyPoints",
+                                                "file":  "LandingProductFeatureKeyPoints.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductFeatureKeyPoints.tsx",
+                                                "family":  "feature"
+                                            },
+                                            {
+                                                "name":  "LandingProductFeatureMatrix",
+                                                "file":  "LandingProductFeatureMatrix.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductFeatureMatrix.tsx",
+                                                "family":  "feature"
+                                            },
+                                            {
+                                                "name":  "LandingProductFeatureRail",
+                                                "file":  "LandingProductFeatureRail.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductFeatureRail.tsx",
+                                                "family":  "feature"
+                                            },
+                                            {
+                                                "name":  "LandingProductFeaturesGrid",
+                                                "file":  "LandingProductFeaturesGrid.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductFeaturesGrid.tsx",
+                                                "family":  "features"
+                                            },
+                                            {
+                                                "name":  "LandingProductImplementationTimeline",
+                                                "file":  "LandingProductImplementationTimeline.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductImplementationTimeline.tsx",
+                                                "family":  "implementation"
+                                            },
+                                            {
+                                                "name":  "LandingProductIntegrationsWall",
+                                                "file":  "LandingProductIntegrationsWall.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductIntegrationsWall.tsx",
+                                                "family":  "integrations"
+                                            },
+                                            {
+                                                "name":  "LandingProductInteractiveShowcase",
+                                                "file":  "LandingProductInteractiveShowcase.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductInteractiveShowcase.tsx",
+                                                "family":  "interactive"
+                                            },
+                                            {
+                                                "name":  "LandingProductJourney",
+                                                "file":  "LandingProductJourney.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductJourney.tsx",
+                                                "family":  "journey"
+                                            },
+                                            {
+                                                "name":  "LandingProductLaunchStrip",
+                                                "file":  "LandingProductLaunchStrip.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductLaunchStrip.tsx",
+                                                "family":  "launch"
+                                            },
+                                            {
+                                                "name":  "LandingProductMetrics",
+                                                "file":  "LandingProductMetrics.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductMetrics.tsx",
+                                                "family":  "metrics"
+                                            },
+                                            {
+                                                "name":  "LandingProductMigrationPlan",
+                                                "file":  "LandingProductMigrationPlan.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductMigrationPlan.tsx",
+                                                "family":  "migration"
+                                            },
+                                            {
+                                                "name":  "LandingProductObjectionHandling",
+                                                "file":  "LandingProductObjectionHandling.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductObjectionHandling.tsx",
+                                                "family":  "objection"
+                                            },
+                                            {
+                                                "name":  "LandingProductPersonaSwitcher",
+                                                "file":  "LandingProductPersonaSwitcher.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductPersonaSwitcher.tsx",
+                                                "family":  "persona"
+                                            },
+                                            {
+                                                "name":  "LandingProductPricingComparison",
+                                                "file":  "LandingProductPricingComparison.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductPricingComparison.tsx",
+                                                "family":  "pricing"
+                                            },
+                                            {
+                                                "name":  "LandingProductPricingFAQ",
+                                                "file":  "LandingProductPricingFAQ.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductPricingFAQ.tsx",
+                                                "family":  "pricing"
+                                            },
+                                            {
+                                                "name":  "LandingProductProblemSolution",
+                                                "file":  "LandingProductProblemSolution.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductProblemSolution.tsx",
+                                                "family":  "problem"
+                                            },
+                                            {
+                                                "name":  "LandingProductProcurementPack",
+                                                "file":  "LandingProductProcurementPack.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductProcurementPack.tsx",
+                                                "family":  "procurement"
+                                            },
+                                            {
+                                                "name":  "LandingProductProof",
+                                                "file":  "LandingProductProof.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductProof.tsx",
+                                                "family":  "proof"
+                                            },
+                                            {
+                                                "name":  "LandingProductRiskReversal",
+                                                "file":  "LandingProductRiskReversal.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductRiskReversal.tsx",
+                                                "family":  "risk"
+                                            },
+                                            {
+                                                "name":  "LandingProductRoadmap",
+                                                "file":  "LandingProductRoadmap.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductRoadmap.tsx",
+                                                "family":  "roadmap"
+                                            },
+                                            {
+                                                "name":  "LandingProductROIModel",
+                                                "file":  "LandingProductROIModel.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductROIModel.tsx",
+                                                "family":  "roi"
+                                            },
+                                            {
+                                                "name":  "LandingProductSecurityCompliance",
+                                                "file":  "LandingProductSecurityCompliance.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductSecurityCompliance.tsx",
+                                                "family":  "security"
+                                            },
+                                            {
+                                                "name":  "LandingProductSocialProof",
+                                                "file":  "LandingProductSocialProof.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductSocialProof.tsx",
+                                                "family":  "social"
+                                            },
+                                            {
+                                                "name":  "LandingProductStatsCarousel",
+                                                "file":  "LandingProductStatsCarousel.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductStatsCarousel.tsx",
+                                                "family":  "stats"
+                                            },
+                                            {
+                                                "name":  "LandingProductSteps",
+                                                "file":  "LandingProductSteps.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductSteps.tsx",
+                                                "family":  "steps"
+                                            },
+                                            {
+                                                "name":  "LandingProductStoryTimeline",
+                                                "file":  "LandingProductStoryTimeline.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductStoryTimeline.tsx",
+                                                "family":  "story"
+                                            },
+                                            {
+                                                "name":  "LandingProductSuccessPlaybook",
+                                                "file":  "LandingProductSuccessPlaybook.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductSuccessPlaybook.tsx",
+                                                "family":  "success"
+                                            },
+                                            {
+                                                "name":  "LandingProductTour",
+                                                "file":  "LandingProductTour.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductTour.tsx",
+                                                "family":  "tour"
+                                            },
+                                            {
+                                                "name":  "LandingProductTrustBar",
+                                                "file":  "LandingProductTrustBar.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductTrustBar.tsx",
+                                                "family":  "trust"
+                                            },
+                                            {
+                                                "name":  "LandingProductUseCases",
+                                                "file":  "LandingProductUseCases.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductUseCases.tsx",
+                                                "family":  "use"
+                                            },
+                                            {
+                                                "name":  "LandingProductVideoFeature",
+                                                "file":  "LandingProductVideoFeature.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductVideoFeature.tsx",
+                                                "family":  "video"
+                                            }
+                                        ]
+                     },
+                     {
+                         "key":  "enterprise-buying",
+                         "label":  "Enterprise Buying",
+                         "description":  "Use this chapter when the page has to survive procurement, security review, rollout friction, and buyer-committee scrutiny.",
+                         "tone":  "assurance",
+                         "visualDefaults":  {
+                                                "classes":  {
+                                                                "surface":  "bg-background text-foreground border-border",
+                                                                "accent":  "text-sky-600 dark:text-sky-400",
+                                                                "chip":  "bg-sky-500/10 text-sky-700 dark:text-sky-300 border-sky-500/20"
+                                                            },
+                                                "cssVars":  {
+                                                                "--gallery-accent":  "199 89% 48%"
+                                                            }
+                                            },
+                         "stats":  {
+                                       "components":  48,
+                                       "families":  44,
+                                       "primaryPicks":  44
+                                   },
+                         "primaryPicks":  [
+                                              "LandingProductAdminControls",
+                                              "LandingProductAdoptionDashboard",
+                                              "LandingProductAuditTrail",
+                                              "LandingProductBoardReporting",
+                                              "LandingProductBusinessCaseBuilder",
+                                              "LandingProductChampionToolkit",
+                                              "LandingProductChangeManagement",
+                                              "LandingProductComplianceMappings",
+                                              "LandingProductCostAllocation",
+                                              "LandingProductCustomerMarketingKit",
+                                              "LandingProductDataResidency",
+                                              "LandingProductDecisionBoard",
+                                              "LandingProductDeploymentOptions",
+                                              "LandingProductEnterpriseReadiness",
+                                              "LandingProductEvaluationCriteria",
+                                              "LandingProductExecutiveReviewPack",
+                                              "LandingProductExpansionPaths",
+                                              "LandingProductGovernanceModel",
+                                              "LandingProductIdentityAccess",
+                                              "LandingProductImplementationRisks",
+                                              "LandingProductIncidentResponse",
+                                              "LandingProductIntegrationReadiness",
+                                              "LandingProductInternalCommsKit",
+                                              "LandingProductLegalChecklist",
+                                              "LandingProductMultiteamRollout",
+                                              "LandingProductPartnerEcosystem",
+                                              "LandingProductPilotProgram",
+                                              "LandingProductPricingControls",
+                                              "LandingProductProcurementObjections",
+                                              "LandingProductRegionalRollout",
+                                              "LandingProductReleaseGovernance",
+                                              "LandingProductRenewalPlan",
+                                              "LandingProductRevenueAlignment",
+                                              "LandingProductRolloutPhases",
+                                              "LandingProductSandboxEnvironment",
+                                              "LandingProductSeatExpansionPlanner",
+                                              "LandingProductSecurityFAQ",
+                                              "LandingProductSLACommitments",
+                                              "LandingProductStakeholderMap",
+                                              "LandingProductSupportCoverage",
+                                              "LandingProductTechnicalValidation",
+                                              "LandingProductTrialConversion",
+                                              "LandingProductValueTrackingBoard",
+                                              "LandingProductVendorTransition"
+                                          ],
+                         "components":  [
+                                            {
+                                                "name":  "LandingProductAdminControls",
+                                                "file":  "LandingProductAdminControls.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductAdminControls.tsx",
+                                                "family":  "admin"
+                                            },
+                                            {
+                                                "name":  "LandingProductAdoptionDashboard",
+                                                "file":  "LandingProductAdoptionDashboard.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductAdoptionDashboard.tsx",
+                                                "family":  "adoption"
+                                            },
+                                            {
+                                                "name":  "LandingProductAuditTrail",
+                                                "file":  "LandingProductAuditTrail.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductAuditTrail.tsx",
+                                                "family":  "audit"
+                                            },
+                                            {
+                                                "name":  "LandingProductBoardReporting",
+                                                "file":  "LandingProductBoardReporting.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductBoardReporting.tsx",
+                                                "family":  "board"
+                                            },
+                                            {
+                                                "name":  "LandingProductBusinessCaseBuilder",
+                                                "file":  "LandingProductBusinessCaseBuilder.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductBusinessCaseBuilder.tsx",
+                                                "family":  "business"
+                                            },
+                                            {
+                                                "name":  "LandingProductBusinessContinuity",
+                                                "file":  "LandingProductBusinessContinuity.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductBusinessContinuity.tsx",
+                                                "family":  "business"
+                                            },
+                                            {
+                                                "name":  "LandingProductChampionToolkit",
+                                                "file":  "LandingProductChampionToolkit.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductChampionToolkit.tsx",
+                                                "family":  "champion"
+                                            },
+                                            {
+                                                "name":  "LandingProductChangeManagement",
+                                                "file":  "LandingProductChangeManagement.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductChangeManagement.tsx",
+                                                "family":  "change"
+                                            },
+                                            {
+                                                "name":  "LandingProductComplianceMappings",
+                                                "file":  "LandingProductComplianceMappings.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductComplianceMappings.tsx",
+                                                "family":  "compliance"
+                                            },
+                                            {
+                                                "name":  "LandingProductCostAllocation",
+                                                "file":  "LandingProductCostAllocation.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductCostAllocation.tsx",
+                                                "family":  "cost"
+                                            },
+                                            {
+                                                "name":  "LandingProductCustomerMarketingKit",
+                                                "file":  "LandingProductCustomerMarketingKit.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductCustomerMarketingKit.tsx",
+                                                "family":  "customer"
+                                            },
+                                            {
+                                                "name":  "LandingProductCustomerReferenceProgram",
+                                                "file":  "LandingProductCustomerReferenceProgram.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductCustomerReferenceProgram.tsx",
+                                                "family":  "customer"
+                                            },
+                                            {
+                                                "name":  "LandingProductDataResidency",
+                                                "file":  "LandingProductDataResidency.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductDataResidency.tsx",
+                                                "family":  "data"
+                                            },
+                                            {
+                                                "name":  "LandingProductDecisionBoard",
+                                                "file":  "LandingProductDecisionBoard.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductDecisionBoard.tsx",
+                                                "family":  "decision"
+                                            },
+                                            {
+                                                "name":  "LandingProductDeploymentOptions",
+                                                "file":  "LandingProductDeploymentOptions.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductDeploymentOptions.tsx",
+                                                "family":  "deployment"
+                                            },
+                                            {
+                                                "name":  "LandingProductEnterpriseReadiness",
+                                                "file":  "LandingProductEnterpriseReadiness.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductEnterpriseReadiness.tsx",
+                                                "family":  "enterprise"
+                                            },
+                                            {
+                                                "name":  "LandingProductEvaluationCriteria",
+                                                "file":  "LandingProductEvaluationCriteria.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductEvaluationCriteria.tsx",
+                                                "family":  "evaluation"
+                                            },
+                                            {
+                                                "name":  "LandingProductExecutiveReviewPack",
+                                                "file":  "LandingProductExecutiveReviewPack.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductExecutiveReviewPack.tsx",
+                                                "family":  "executive"
+                                            },
+                                            {
+                                                "name":  "LandingProductExpansionPaths",
+                                                "file":  "LandingProductExpansionPaths.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductExpansionPaths.tsx",
+                                                "family":  "expansion"
+                                            },
+                                            {
+                                                "name":  "LandingProductGovernanceModel",
+                                                "file":  "LandingProductGovernanceModel.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductGovernanceModel.tsx",
+                                                "family":  "governance"
+                                            },
+                                            {
+                                                "name":  "LandingProductIdentityAccess",
+                                                "file":  "LandingProductIdentityAccess.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductIdentityAccess.tsx",
+                                                "family":  "identity"
+                                            },
+                                            {
+                                                "name":  "LandingProductImplementationRisks",
+                                                "file":  "LandingProductImplementationRisks.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductImplementationRisks.tsx",
+                                                "family":  "implementation"
+                                            },
+                                            {
+                                                "name":  "LandingProductIncidentResponse",
+                                                "file":  "LandingProductIncidentResponse.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductIncidentResponse.tsx",
+                                                "family":  "incident"
+                                            },
+                                            {
+                                                "name":  "LandingProductIntegrationReadiness",
+                                                "file":  "LandingProductIntegrationReadiness.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductIntegrationReadiness.tsx",
+                                                "family":  "integration"
+                                            },
+                                            {
+                                                "name":  "LandingProductInternalCommsKit",
+                                                "file":  "LandingProductInternalCommsKit.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductInternalCommsKit.tsx",
+                                                "family":  "internal"
+                                            },
+                                            {
+                                                "name":  "LandingProductLegalChecklist",
+                                                "file":  "LandingProductLegalChecklist.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductLegalChecklist.tsx",
+                                                "family":  "legal"
+                                            },
+                                            {
+                                                "name":  "LandingProductMultiteamRollout",
+                                                "file":  "LandingProductMultiteamRollout.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductMultiteamRollout.tsx",
+                                                "family":  "multiteam"
+                                            },
+                                            {
+                                                "name":  "LandingProductPartnerEcosystem",
+                                                "file":  "LandingProductPartnerEcosystem.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductPartnerEcosystem.tsx",
+                                                "family":  "partner"
+                                            },
+                                            {
+                                                "name":  "LandingProductPilotProgram",
+                                                "file":  "LandingProductPilotProgram.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductPilotProgram.tsx",
+                                                "family":  "pilot"
+                                            },
+                                            {
+                                                "name":  "LandingProductPricingControls",
+                                                "file":  "LandingProductPricingControls.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductPricingControls.tsx",
+                                                "family":  "pricing"
+                                            },
+                                            {
+                                                "name":  "LandingProductPricingOps",
+                                                "file":  "LandingProductPricingOps.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductPricingOps.tsx",
+                                                "family":  "pricing"
+                                            },
+                                            {
+                                                "name":  "LandingProductProcurementObjections",
+                                                "file":  "LandingProductProcurementObjections.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductProcurementObjections.tsx",
+                                                "family":  "procurement"
+                                            },
+                                            {
+                                                "name":  "LandingProductProcurementTimeline",
+                                                "file":  "LandingProductProcurementTimeline.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductProcurementTimeline.tsx",
+                                                "family":  "procurement"
+                                            },
+                                            {
+                                                "name":  "LandingProductRegionalRollout",
+                                                "file":  "LandingProductRegionalRollout.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductRegionalRollout.tsx",
+                                                "family":  "regional"
+                                            },
+                                            {
+                                                "name":  "LandingProductReleaseGovernance",
+                                                "file":  "LandingProductReleaseGovernance.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductReleaseGovernance.tsx",
+                                                "family":  "release"
+                                            },
+                                            {
+                                                "name":  "LandingProductRenewalPlan",
+                                                "file":  "LandingProductRenewalPlan.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductRenewalPlan.tsx",
+                                                "family":  "renewal"
+                                            },
+                                            {
+                                                "name":  "LandingProductRevenueAlignment",
+                                                "file":  "LandingProductRevenueAlignment.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductRevenueAlignment.tsx",
+                                                "family":  "revenue"
+                                            },
+                                            {
+                                                "name":  "LandingProductRolloutPhases",
+                                                "file":  "LandingProductRolloutPhases.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductRolloutPhases.tsx",
+                                                "family":  "rollout"
+                                            },
+                                            {
+                                                "name":  "LandingProductSandboxEnvironment",
+                                                "file":  "LandingProductSandboxEnvironment.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductSandboxEnvironment.tsx",
+                                                "family":  "sandbox"
+                                            },
+                                            {
+                                                "name":  "LandingProductSeatExpansionPlanner",
+                                                "file":  "LandingProductSeatExpansionPlanner.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductSeatExpansionPlanner.tsx",
+                                                "family":  "seat"
+                                            },
+                                            {
+                                                "name":  "LandingProductSecurityFAQ",
+                                                "file":  "LandingProductSecurityFAQ.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductSecurityFAQ.tsx",
+                                                "family":  "security"
+                                            },
+                                            {
+                                                "name":  "LandingProductSLACommitments",
+                                                "file":  "LandingProductSLACommitments.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductSLACommitments.tsx",
+                                                "family":  "sla"
+                                            },
+                                            {
+                                                "name":  "LandingProductStakeholderMap",
+                                                "file":  "LandingProductStakeholderMap.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductStakeholderMap.tsx",
+                                                "family":  "stakeholder"
+                                            },
+                                            {
+                                                "name":  "LandingProductSupportCoverage",
+                                                "file":  "LandingProductSupportCoverage.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductSupportCoverage.tsx",
+                                                "family":  "support"
+                                            },
+                                            {
+                                                "name":  "LandingProductTechnicalValidation",
+                                                "file":  "LandingProductTechnicalValidation.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductTechnicalValidation.tsx",
+                                                "family":  "technical"
+                                            },
+                                            {
+                                                "name":  "LandingProductTrialConversion",
+                                                "file":  "LandingProductTrialConversion.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductTrialConversion.tsx",
+                                                "family":  "trial"
+                                            },
+                                            {
+                                                "name":  "LandingProductValueTrackingBoard",
+                                                "file":  "LandingProductValueTrackingBoard.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductValueTrackingBoard.tsx",
+                                                "family":  "value"
+                                            },
+                                            {
+                                                "name":  "LandingProductVendorTransition",
+                                                "file":  "LandingProductVendorTransition.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductVendorTransition.tsx",
+                                                "family":  "vendor"
+                                            }
+                                        ]
+                     },
+                     {
+                         "key":  "adoption-operations",
+                         "label":  "Adoption and Operations",
+                         "description":  "Pull from this chapter for onboarding, enablement, QBR, renewal, account planning, change management, and operating rhythm.",
+                         "tone":  "momentum",
+                         "visualDefaults":  {
+                                                "classes":  {
+                                                                "surface":  "bg-background text-foreground border-border",
+                                                                "accent":  "text-violet-600 dark:text-violet-400",
+                                                                "chip":  "bg-violet-500/10 text-violet-700 dark:text-violet-300 border-violet-500/20"
+                                                            },
+                                                "cssVars":  {
+                                                                "--gallery-accent":  "262 83% 58%"
+                                                            }
+                                            },
+                         "stats":  {
+                                       "components":  36,
+                                       "families":  31,
+                                       "primaryPicks":  31
+                                   },
+                         "primaryPicks":  [
+                                              "LandingProductAccountExpansionMap",
+                                              "LandingProductAdoptionMilestones",
+                                              "LandingProductAdvocacyLoop",
+                                              "LandingProductChangeAdvisoryBoard",
+                                              "LandingProductChannelSalesKit",
+                                              "LandingProductCustomerHealth",
+                                              "LandingProductDealDeskAlignment",
+                                              "LandingProductDecisionCanvas",
+                                              "LandingProductEnablementTracks",
+                                              "LandingProductEscalationPaths",
+                                              "LandingProductExecutiveSponsorMap",
+                                              "LandingProductExpansionScorecard",
+                                              "LandingProductGovernanceCalendar",
+                                              "LandingProductImplementationOffice",
+                                              "LandingProductOnboardingChecklist",
+                                              "LandingProductOperatingRhythm",
+                                              "LandingProductOrgDesign",
+                                              "LandingProductPartnerLaunchPlan",
+                                              "LandingProductPortfolioGovernance",
+                                              "LandingProductQBRFramework",
+                                              "LandingProductReferenceStoryBank",
+                                              "LandingProductRenewalSignals",
+                                              "LandingProductRetentionLevers",
+                                              "LandingProductScenarioPlanner",
+                                              "LandingProductServiceDeliveryModel",
+                                              "LandingProductSignalMap",
+                                              "LandingProductSuccessCapacityPlan",
+                                              "LandingProductTerritoryCapacityModel",
+                                              "LandingProductTrainingHub",
+                                              "LandingProductUsageAnomalyAlerts",
+                                              "LandingProductWorkflowTemplates"
+                                          ],
+                         "components":  [
+                                            {
+                                                "name":  "LandingProductAccountExpansionMap",
+                                                "file":  "LandingProductAccountExpansionMap.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductAccountExpansionMap.tsx",
+                                                "family":  "account"
+                                            },
+                                            {
+                                                "name":  "LandingProductAccountPlanning",
+                                                "file":  "LandingProductAccountPlanning.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductAccountPlanning.tsx",
+                                                "family":  "account"
+                                            },
+                                            {
+                                                "name":  "LandingProductAdoptionMilestones",
+                                                "file":  "LandingProductAdoptionMilestones.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductAdoptionMilestones.tsx",
+                                                "family":  "adoption"
+                                            },
+                                            {
+                                                "name":  "LandingProductAdvocacyLoop",
+                                                "file":  "LandingProductAdvocacyLoop.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductAdvocacyLoop.tsx",
+                                                "family":  "advocacy"
+                                            },
+                                            {
+                                                "name":  "LandingProductChangeAdvisoryBoard",
+                                                "file":  "LandingProductChangeAdvisoryBoard.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductChangeAdvisoryBoard.tsx",
+                                                "family":  "change"
+                                            },
+                                            {
+                                                "name":  "LandingProductChannelSalesKit",
+                                                "file":  "LandingProductChannelSalesKit.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductChannelSalesKit.tsx",
+                                                "family":  "channel"
+                                            },
+                                            {
+                                                "name":  "LandingProductCustomerHealth",
+                                                "file":  "LandingProductCustomerHealth.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductCustomerHealth.tsx",
+                                                "family":  "customer"
+                                            },
+                                            {
+                                                "name":  "LandingProductCustomerOperationsDesk",
+                                                "file":  "LandingProductCustomerOperationsDesk.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductCustomerOperationsDesk.tsx",
+                                                "family":  "customer"
+                                            },
+                                            {
+                                                "name":  "LandingProductDealDeskAlignment",
+                                                "file":  "LandingProductDealDeskAlignment.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductDealDeskAlignment.tsx",
+                                                "family":  "deal"
+                                            },
+                                            {
+                                                "name":  "LandingProductDecisionCanvas",
+                                                "file":  "LandingProductDecisionCanvas.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductDecisionCanvas.tsx",
+                                                "family":  "decision"
+                                            },
+                                            {
+                                                "name":  "LandingProductEnablementTracks",
+                                                "file":  "LandingProductEnablementTracks.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductEnablementTracks.tsx",
+                                                "family":  "enablement"
+                                            },
+                                            {
+                                                "name":  "LandingProductEscalationPaths",
+                                                "file":  "LandingProductEscalationPaths.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductEscalationPaths.tsx",
+                                                "family":  "escalation"
+                                            },
+                                            {
+                                                "name":  "LandingProductExecutiveSponsorMap",
+                                                "file":  "LandingProductExecutiveSponsorMap.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductExecutiveSponsorMap.tsx",
+                                                "family":  "executive"
+                                            },
+                                            {
+                                                "name":  "LandingProductExecutiveSteeringCommittee",
+                                                "file":  "LandingProductExecutiveSteeringCommittee.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductExecutiveSteeringCommittee.tsx",
+                                                "family":  "executive"
+                                            },
+                                            {
+                                                "name":  "LandingProductExecutiveSummary",
+                                                "file":  "LandingProductExecutiveSummary.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductExecutiveSummary.tsx",
+                                                "family":  "executive"
+                                            },
+                                            {
+                                                "name":  "LandingProductExpansionScorecard",
+                                                "file":  "LandingProductExpansionScorecard.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductExpansionScorecard.tsx",
+                                                "family":  "expansion"
+                                            },
+                                            {
+                                                "name":  "LandingProductGovernanceCalendar",
+                                                "file":  "LandingProductGovernanceCalendar.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductGovernanceCalendar.tsx",
+                                                "family":  "governance"
+                                            },
+                                            {
+                                                "name":  "LandingProductImplementationOffice",
+                                                "file":  "LandingProductImplementationOffice.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductImplementationOffice.tsx",
+                                                "family":  "implementation"
+                                            },
+                                            {
+                                                "name":  "LandingProductOnboardingChecklist",
+                                                "file":  "LandingProductOnboardingChecklist.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductOnboardingChecklist.tsx",
+                                                "family":  "onboarding"
+                                            },
+                                            {
+                                                "name":  "LandingProductOperatingRhythm",
+                                                "file":  "LandingProductOperatingRhythm.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductOperatingRhythm.tsx",
+                                                "family":  "operating"
+                                            },
+                                            {
+                                                "name":  "LandingProductOrgDesign",
+                                                "file":  "LandingProductOrgDesign.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductOrgDesign.tsx",
+                                                "family":  "org"
+                                            },
+                                            {
+                                                "name":  "LandingProductPartnerLaunchPlan",
+                                                "file":  "LandingProductPartnerLaunchPlan.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductPartnerLaunchPlan.tsx",
+                                                "family":  "partner"
+                                            },
+                                            {
+                                                "name":  "LandingProductPortfolioGovernance",
+                                                "file":  "LandingProductPortfolioGovernance.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductPortfolioGovernance.tsx",
+                                                "family":  "portfolio"
+                                            },
+                                            {
+                                                "name":  "LandingProductQBRFramework",
+                                                "file":  "LandingProductQBRFramework.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductQBRFramework.tsx",
+                                                "family":  "qbr"
+                                            },
+                                            {
+                                                "name":  "LandingProductReferenceStoryBank",
+                                                "file":  "LandingProductReferenceStoryBank.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductReferenceStoryBank.tsx",
+                                                "family":  "reference"
+                                            },
+                                            {
+                                                "name":  "LandingProductReferenceWorkflow",
+                                                "file":  "LandingProductReferenceWorkflow.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductReferenceWorkflow.tsx",
+                                                "family":  "reference"
+                                            },
+                                            {
+                                                "name":  "LandingProductRenewalSignals",
+                                                "file":  "LandingProductRenewalSignals.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductRenewalSignals.tsx",
+                                                "family":  "renewal"
+                                            },
+                                            {
+                                                "name":  "LandingProductRetentionLevers",
+                                                "file":  "LandingProductRetentionLevers.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductRetentionLevers.tsx",
+                                                "family":  "retention"
+                                            },
+                                            {
+                                                "name":  "LandingProductScenarioPlanner",
+                                                "file":  "LandingProductScenarioPlanner.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductScenarioPlanner.tsx",
+                                                "family":  "scenario"
+                                            },
+                                            {
+                                                "name":  "LandingProductServiceDeliveryModel",
+                                                "file":  "LandingProductServiceDeliveryModel.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductServiceDeliveryModel.tsx",
+                                                "family":  "service"
+                                            },
+                                            {
+                                                "name":  "LandingProductSignalMap",
+                                                "file":  "LandingProductSignalMap.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductSignalMap.tsx",
+                                                "family":  "signal"
+                                            },
+                                            {
+                                                "name":  "LandingProductSuccessCapacityPlan",
+                                                "file":  "LandingProductSuccessCapacityPlan.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductSuccessCapacityPlan.tsx",
+                                                "family":  "success"
+                                            },
+                                            {
+                                                "name":  "LandingProductTerritoryCapacityModel",
+                                                "file":  "LandingProductTerritoryCapacityModel.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductTerritoryCapacityModel.tsx",
+                                                "family":  "territory"
+                                            },
+                                            {
+                                                "name":  "LandingProductTrainingHub",
+                                                "file":  "LandingProductTrainingHub.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductTrainingHub.tsx",
+                                                "family":  "training"
+                                            },
+                                            {
+                                                "name":  "LandingProductUsageAnomalyAlerts",
+                                                "file":  "LandingProductUsageAnomalyAlerts.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductUsageAnomalyAlerts.tsx",
+                                                "family":  "usage"
+                                            },
+                                            {
+                                                "name":  "LandingProductWorkflowTemplates",
+                                                "file":  "LandingProductWorkflowTemplates.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductWorkflowTemplates.tsx",
+                                                "family":  "workflow"
+                                            }
+                                        ]
+                     },
+                     {
+                         "key":  "narrative-systems",
+                         "label":  "Narrative Systems",
+                         "description":  "This is the bridge from ordinary SaaS sections into operating-model, storyline, topology, and executive-systems language.",
+                         "tone":  "structure",
+                         "visualDefaults":  {
+                                                "classes":  {
+                                                                "surface":  "bg-background text-foreground border-border",
+                                                                "accent":  "text-amber-600 dark:text-amber-400",
+                                                                "chip":  "bg-amber-500/10 text-amber-700 dark:text-amber-300 border-amber-500/20"
+                                                            },
+                                                "cssVars":  {
+                                                                "--gallery-accent":  "38 92% 50%"
+                                                            }
+                                            },
+                         "stats":  {
+                                       "components":  76,
+                                       "families":  44,
+                                       "primaryPicks":  44
+                                   },
+                         "primaryPicks":  [
+                                              "LandingProductAdoptionBlueprint",
+                                              "LandingProductBuyingCommitteeSimulator",
+                                              "LandingProductCapabilityGrid",
+                                              "LandingProductChangeStory",
+                                              "LandingProductCommercialModel",
+                                              "LandingProductCoordinationMap",
+                                              "LandingProductCustomerJourneyMap",
+                                              "LandingProductDecisionGraph",
+                                              "LandingProductDeliveryCapacity",
+                                              "LandingProductExecutionAtlas",
+                                              "LandingProductExecutiveNarrative",
+                                              "LandingProductExperienceBlueprint",
+                                              "LandingProductFrictionMap",
+                                              "LandingProductGoToMarketCircuit",
+                                              "LandingProductImplementationPlayback",
+                                              "LandingProductJourneyControlRoom",
+                                              "LandingProductLaunchDependencies",
+                                              "LandingProductMessageStack",
+                                              "LandingProductMomentumArchitecture",
+                                              "LandingProductNarrativeBriefing",
+                                              "LandingProductObjectionNetwork",
+                                              "LandingProductOperatingCanvas",
+                                              "LandingProductOperationalChecklist",
+                                              "LandingProductOutcomeConsole",
+                                              "LandingProductOwnershipGrid",
+                                              "LandingProductPartnerEnablementFlow",
+                                              "LandingProductPortfolioCoverage",
+                                              "LandingProductPriorityMatrix",
+                                              "LandingProductProgramMap",
+                                              "LandingProductProofEngine",
+                                              "LandingProductReadinessScore",
+                                              "LandingProductRecoveryMesh",
+                                              "LandingProductResponsibilityMesh",
+                                              "LandingProductRevenueArchitecture",
+                                              "LandingProductReviewCadence",
+                                              "LandingProductRiskNarrative",
+                                              "LandingProductRolloutSignals",
+                                              "LandingProductServiceBlueprint",
+                                              "LandingProductSignalLattice",
+                                              "LandingProductStakeholderBrief",
+                                              "LandingProductStoryArchitecture",
+                                              "LandingProductTeamTopology",
+                                              "LandingProductTrustArchitecture",
+                                              "LandingProductValueChain"
+                                          ],
+                         "components":  [
+                                            {
+                                                "name":  "LandingProductAdoptionBlueprint",
+                                                "file":  "LandingProductAdoptionBlueprint.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductAdoptionBlueprint.tsx",
+                                                "family":  "adoption"
+                                            },
+                                            {
+                                                "name":  "LandingProductAdoptionSignals",
+                                                "file":  "LandingProductAdoptionSignals.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductAdoptionSignals.tsx",
+                                                "family":  "adoption"
+                                            },
+                                            {
+                                                "name":  "LandingProductBuyingCommitteeSimulator",
+                                                "file":  "LandingProductBuyingCommitteeSimulator.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductBuyingCommitteeSimulator.tsx",
+                                                "family":  "buying"
+                                            },
+                                            {
+                                                "name":  "LandingProductCapabilityGrid",
+                                                "file":  "LandingProductCapabilityGrid.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductCapabilityGrid.tsx",
+                                                "family":  "capability"
+                                            },
+                                            {
+                                                "name":  "LandingProductCapabilityNarrative",
+                                                "file":  "LandingProductCapabilityNarrative.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductCapabilityNarrative.tsx",
+                                                "family":  "capability"
+                                            },
+                                            {
+                                                "name":  "LandingProductChangeStory",
+                                                "file":  "LandingProductChangeStory.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductChangeStory.tsx",
+                                                "family":  "change"
+                                            },
+                                            {
+                                                "name":  "LandingProductCommercialModel",
+                                                "file":  "LandingProductCommercialModel.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductCommercialModel.tsx",
+                                                "family":  "commercial"
+                                            },
+                                            {
+                                                "name":  "LandingProductCoordinationMap",
+                                                "file":  "LandingProductCoordinationMap.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductCoordinationMap.tsx",
+                                                "family":  "coordination"
+                                            },
+                                            {
+                                                "name":  "LandingProductCustomerJourneyMap",
+                                                "file":  "LandingProductCustomerJourneyMap.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductCustomerJourneyMap.tsx",
+                                                "family":  "customer"
+                                            },
+                                            {
+                                                "name":  "LandingProductDecisionGraph",
+                                                "file":  "LandingProductDecisionGraph.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductDecisionGraph.tsx",
+                                                "family":  "decision"
+                                            },
+                                            {
+                                                "name":  "LandingProductDecisionLedger",
+                                                "file":  "LandingProductDecisionLedger.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductDecisionLedger.tsx",
+                                                "family":  "decision"
+                                            },
+                                            {
+                                                "name":  "LandingProductDecisionOrbit",
+                                                "file":  "LandingProductDecisionOrbit.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductDecisionOrbit.tsx",
+                                                "family":  "decision"
+                                            },
+                                            {
+                                                "name":  "LandingProductDecisionPipeline",
+                                                "file":  "LandingProductDecisionPipeline.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductDecisionPipeline.tsx",
+                                                "family":  "decision"
+                                            },
+                                            {
+                                                "name":  "LandingProductDecisionStack",
+                                                "file":  "LandingProductDecisionStack.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductDecisionStack.tsx",
+                                                "family":  "decision"
+                                            },
+                                            {
+                                                "name":  "LandingProductDecisionTheater",
+                                                "file":  "LandingProductDecisionTheater.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductDecisionTheater.tsx",
+                                                "family":  "decision"
+                                            },
+                                            {
+                                                "name":  "LandingProductDeliveryCapacity",
+                                                "file":  "LandingProductDeliveryCapacity.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductDeliveryCapacity.tsx",
+                                                "family":  "delivery"
+                                            },
+                                            {
+                                                "name":  "LandingProductExecutionAtlas",
+                                                "file":  "LandingProductExecutionAtlas.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductExecutionAtlas.tsx",
+                                                "family":  "execution"
+                                            },
+                                            {
+                                                "name":  "LandingProductExecutionBoard",
+                                                "file":  "LandingProductExecutionBoard.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductExecutionBoard.tsx",
+                                                "family":  "execution"
+                                            },
+                                            {
+                                                "name":  "LandingProductExecutionFlywheel",
+                                                "file":  "LandingProductExecutionFlywheel.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductExecutionFlywheel.tsx",
+                                                "family":  "execution"
+                                            },
+                                            {
+                                                "name":  "LandingProductExecutionRisks",
+                                                "file":  "LandingProductExecutionRisks.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductExecutionRisks.tsx",
+                                                "family":  "execution"
+                                            },
+                                            {
+                                                "name":  "LandingProductExecutiveNarrative",
+                                                "file":  "LandingProductExecutiveNarrative.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductExecutiveNarrative.tsx",
+                                                "family":  "executive"
+                                            },
+                                            {
+                                                "name":  "LandingProductExperienceBlueprint",
+                                                "file":  "LandingProductExperienceBlueprint.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductExperienceBlueprint.tsx",
+                                                "family":  "experience"
+                                            },
+                                            {
+                                                "name":  "LandingProductExperienceLoop",
+                                                "file":  "LandingProductExperienceLoop.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductExperienceLoop.tsx",
+                                                "family":  "experience"
+                                            },
+                                            {
+                                                "name":  "LandingProductExperienceMatrix",
+                                                "file":  "LandingProductExperienceMatrix.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductExperienceMatrix.tsx",
+                                                "family":  "experience"
+                                            },
+                                            {
+                                                "name":  "LandingProductFrictionMap",
+                                                "file":  "LandingProductFrictionMap.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductFrictionMap.tsx",
+                                                "family":  "friction"
+                                            },
+                                            {
+                                                "name":  "LandingProductGoToMarketCircuit",
+                                                "file":  "LandingProductGoToMarketCircuit.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductGoToMarketCircuit.tsx",
+                                                "family":  "go"
+                                            },
+                                            {
+                                                "name":  "LandingProductImplementationPlayback",
+                                                "file":  "LandingProductImplementationPlayback.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductImplementationPlayback.tsx",
+                                                "family":  "implementation"
+                                            },
+                                            {
+                                                "name":  "LandingProductJourneyControlRoom",
+                                                "file":  "LandingProductJourneyControlRoom.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductJourneyControlRoom.tsx",
+                                                "family":  "journey"
+                                            },
+                                            {
+                                                "name":  "LandingProductLaunchDependencies",
+                                                "file":  "LandingProductLaunchDependencies.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductLaunchDependencies.tsx",
+                                                "family":  "launch"
+                                            },
+                                            {
+                                                "name":  "LandingProductMessageStack",
+                                                "file":  "LandingProductMessageStack.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductMessageStack.tsx",
+                                                "family":  "message"
+                                            },
+                                            {
+                                                "name":  "LandingProductMessageTopology",
+                                                "file":  "LandingProductMessageTopology.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductMessageTopology.tsx",
+                                                "family":  "message"
+                                            },
+                                            {
+                                                "name":  "LandingProductMomentumArchitecture",
+                                                "file":  "LandingProductMomentumArchitecture.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductMomentumArchitecture.tsx",
+                                                "family":  "momentum"
+                                            },
+                                            {
+                                                "name":  "LandingProductMomentumLoop",
+                                                "file":  "LandingProductMomentumLoop.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductMomentumLoop.tsx",
+                                                "family":  "momentum"
+                                            },
+                                            {
+                                                "name":  "LandingProductNarrativeBriefing",
+                                                "file":  "LandingProductNarrativeBriefing.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductNarrativeBriefing.tsx",
+                                                "family":  "narrative"
+                                            },
+                                            {
+                                                "name":  "LandingProductNarrativeControlPanel",
+                                                "file":  "LandingProductNarrativeControlPanel.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductNarrativeControlPanel.tsx",
+                                                "family":  "narrative"
+                                            },
+                                            {
+                                                "name":  "LandingProductNarrativeProof",
+                                                "file":  "LandingProductNarrativeProof.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductNarrativeProof.tsx",
+                                                "family":  "narrative"
+                                            },
+                                            {
+                                                "name":  "LandingProductNarrativeSequence",
+                                                "file":  "LandingProductNarrativeSequence.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductNarrativeSequence.tsx",
+                                                "family":  "narrative"
+                                            },
+                                            {
+                                                "name":  "LandingProductNarrativeSystem",
+                                                "file":  "LandingProductNarrativeSystem.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductNarrativeSystem.tsx",
+                                                "family":  "narrative"
+                                            },
+                                            {
+                                                "name":  "LandingProductObjectionNetwork",
+                                                "file":  "LandingProductObjectionNetwork.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductObjectionNetwork.tsx",
+                                                "family":  "objection"
+                                            },
+                                            {
+                                                "name":  "LandingProductOperatingCanvas",
+                                                "file":  "LandingProductOperatingCanvas.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductOperatingCanvas.tsx",
+                                                "family":  "operating"
+                                            },
+                                            {
+                                                "name":  "LandingProductOperatingModel",
+                                                "file":  "LandingProductOperatingModel.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductOperatingModel.tsx",
+                                                "family":  "operating"
+                                            },
+                                            {
+                                                "name":  "LandingProductOperatingStoryboard",
+                                                "file":  "LandingProductOperatingStoryboard.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductOperatingStoryboard.tsx",
+                                                "family":  "operating"
+                                            },
+                                            {
+                                                "name":  "LandingProductOperatingSystem",
+                                                "file":  "LandingProductOperatingSystem.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductOperatingSystem.tsx",
+                                                "family":  "operating"
+                                            },
+                                            {
+                                                "name":  "LandingProductOperationalChecklist",
+                                                "file":  "LandingProductOperationalChecklist.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductOperationalChecklist.tsx",
+                                                "family":  "operational"
+                                            },
+                                            {
+                                                "name":  "LandingProductOutcomeConsole",
+                                                "file":  "LandingProductOutcomeConsole.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductOutcomeConsole.tsx",
+                                                "family":  "outcome"
+                                            },
+                                            {
+                                                "name":  "LandingProductOwnershipGrid",
+                                                "file":  "LandingProductOwnershipGrid.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductOwnershipGrid.tsx",
+                                                "family":  "ownership"
+                                            },
+                                            {
+                                                "name":  "LandingProductPartnerEnablementFlow",
+                                                "file":  "LandingProductPartnerEnablementFlow.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductPartnerEnablementFlow.tsx",
+                                                "family":  "partner"
+                                            },
+                                            {
+                                                "name":  "LandingProductPortfolioCoverage",
+                                                "file":  "LandingProductPortfolioCoverage.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductPortfolioCoverage.tsx",
+                                                "family":  "portfolio"
+                                            },
+                                            {
+                                                "name":  "LandingProductPriorityMatrix",
+                                                "file":  "LandingProductPriorityMatrix.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductPriorityMatrix.tsx",
+                                                "family":  "priority"
+                                            },
+                                            {
+                                                "name":  "LandingProductProgramMap",
+                                                "file":  "LandingProductProgramMap.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductProgramMap.tsx",
+                                                "family":  "program"
+                                            },
+                                            {
+                                                "name":  "LandingProductProofEngine",
+                                                "file":  "LandingProductProofEngine.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductProofEngine.tsx",
+                                                "family":  "proof"
+                                            },
+                                            {
+                                                "name":  "LandingProductProofMap",
+                                                "file":  "LandingProductProofMap.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductProofMap.tsx",
+                                                "family":  "proof"
+                                            },
+                                            {
+                                                "name":  "LandingProductReadinessScore",
+                                                "file":  "LandingProductReadinessScore.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductReadinessScore.tsx",
+                                                "family":  "readiness"
+                                            },
+                                            {
+                                                "name":  "LandingProductRecoveryMesh",
+                                                "file":  "LandingProductRecoveryMesh.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductRecoveryMesh.tsx",
+                                                "family":  "recovery"
+                                            },
+                                            {
+                                                "name":  "LandingProductResponsibilityMesh",
+                                                "file":  "LandingProductResponsibilityMesh.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductResponsibilityMesh.tsx",
+                                                "family":  "responsibility"
+                                            },
+                                            {
+                                                "name":  "LandingProductRevenueArchitecture",
+                                                "file":  "LandingProductRevenueArchitecture.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductRevenueArchitecture.tsx",
+                                                "family":  "revenue"
+                                            },
+                                            {
+                                                "name":  "LandingProductRevenueMotion",
+                                                "file":  "LandingProductRevenueMotion.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductRevenueMotion.tsx",
+                                                "family":  "revenue"
+                                            },
+                                            {
+                                                "name":  "LandingProductReviewCadence",
+                                                "file":  "LandingProductReviewCadence.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductReviewCadence.tsx",
+                                                "family":  "review"
+                                            },
+                                            {
+                                                "name":  "LandingProductRiskNarrative",
+                                                "file":  "LandingProductRiskNarrative.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductRiskNarrative.tsx",
+                                                "family":  "risk"
+                                            },
+                                            {
+                                                "name":  "LandingProductRolloutSignals",
+                                                "file":  "LandingProductRolloutSignals.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductRolloutSignals.tsx",
+                                                "family":  "rollout"
+                                            },
+                                            {
+                                                "name":  "LandingProductServiceBlueprint",
+                                                "file":  "LandingProductServiceBlueprint.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductServiceBlueprint.tsx",
+                                                "family":  "service"
+                                            },
+                                            {
+                                                "name":  "LandingProductServiceControlTower",
+                                                "file":  "LandingProductServiceControlTower.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductServiceControlTower.tsx",
+                                                "family":  "service"
+                                            },
+                                            {
+                                                "name":  "LandingProductServiceMoments",
+                                                "file":  "LandingProductServiceMoments.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductServiceMoments.tsx",
+                                                "family":  "service"
+                                            },
+                                            {
+                                                "name":  "LandingProductServiceRecovery",
+                                                "file":  "LandingProductServiceRecovery.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductServiceRecovery.tsx",
+                                                "family":  "service"
+                                            },
+                                            {
+                                                "name":  "LandingProductSignalLattice",
+                                                "file":  "LandingProductSignalLattice.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductSignalLattice.tsx",
+                                                "family":  "signal"
+                                            },
+                                            {
+                                                "name":  "LandingProductSignalStudio",
+                                                "file":  "LandingProductSignalStudio.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductSignalStudio.tsx",
+                                                "family":  "signal"
+                                            },
+                                            {
+                                                "name":  "LandingProductStakeholderBrief",
+                                                "file":  "LandingProductStakeholderBrief.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductStakeholderBrief.tsx",
+                                                "family":  "stakeholder"
+                                            },
+                                            {
+                                                "name":  "LandingProductStoryArchitecture",
+                                                "file":  "LandingProductStoryArchitecture.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductStoryArchitecture.tsx",
+                                                "family":  "story"
+                                            },
+                                            {
+                                                "name":  "LandingProductTeamTopology",
+                                                "file":  "LandingProductTeamTopology.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductTeamTopology.tsx",
+                                                "family":  "team"
+                                            },
+                                            {
+                                                "name":  "LandingProductTrustArchitecture",
+                                                "file":  "LandingProductTrustArchitecture.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductTrustArchitecture.tsx",
+                                                "family":  "trust"
+                                            },
+                                            {
+                                                "name":  "LandingProductTrustCommandCenter",
+                                                "file":  "LandingProductTrustCommandCenter.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductTrustCommandCenter.tsx",
+                                                "family":  "trust"
+                                            },
+                                            {
+                                                "name":  "LandingProductTrustControlRoom",
+                                                "file":  "LandingProductTrustControlRoom.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductTrustControlRoom.tsx",
+                                                "family":  "trust"
+                                            },
+                                            {
+                                                "name":  "LandingProductTrustMesh",
+                                                "file":  "LandingProductTrustMesh.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductTrustMesh.tsx",
+                                                "family":  "trust"
+                                            },
+                                            {
+                                                "name":  "LandingProductValueChain",
+                                                "file":  "LandingProductValueChain.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductValueChain.tsx",
+                                                "family":  "value"
+                                            },
+                                            {
+                                                "name":  "LandingProductValueNarrative",
+                                                "file":  "LandingProductValueNarrative.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductValueNarrative.tsx",
+                                                "family":  "value"
+                                            },
+                                            {
+                                                "name":  "LandingProductValueTopology",
+                                                "file":  "LandingProductValueTopology.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductValueTopology.tsx",
+                                                "family":  "value"
+                                            }
+                                        ]
+                     },
+                     {
+                         "key":  "runtime-frontier",
+                         "label":  "Runtime Frontier",
+                         "description":  "Treat this as a specialized layer. It is powerful, but it should be used intentionally after the page already has clear business structure.",
+                         "tone":  "precision",
+                         "visualDefaults":  {
+                                                "classes":  {
+                                                                "surface":  "bg-background text-foreground border-border",
+                                                                "accent":  "text-cyan-600 dark:text-cyan-400",
+                                                                "chip":  "bg-cyan-500/10 text-cyan-700 dark:text-cyan-300 border-cyan-500/20"
+                                                            },
+                                                "cssVars":  {
+                                                                "--gallery-accent":  "188 95% 43%"
+                                                            }
+                                            },
+                         "stats":  {
+                                       "components":  70,
+                                       "families":  17,
+                                       "primaryPicks":  17
+                                   },
+                         "primaryPicks":  [
+                                              "LandingProductBeliefCompiler",
+                                              "LandingProductConfidenceKernel",
+                                              "LandingProductConstraintEngine",
+                                              "LandingProductCoordinationFabric",
+                                              "LandingProductDecisionCompiler",
+                                              "LandingProductEvidenceKernel",
+                                              "LandingProductExecutionProtocol",
+                                              "LandingProductInfluenceConsole",
+                                              "LandingProductNarrativeCompiler",
+                                              "LandingProductOperatingConsole",
+                                              "LandingProductOutcomeMesh",
+                                              "LandingProductProtocolEngine",
+                                              "LandingProductRecoveryCompiler",
+                                              "LandingProductSignalBroker",
+                                              "LandingProductStoryEngine",
+                                              "LandingProductTrustCompiler",
+                                              "LandingProductValueCompiler"
+                                          ],
+                         "components":  [
+                                            {
+                                                "name":  "LandingProductBeliefCompiler",
+                                                "file":  "LandingProductBeliefCompiler.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductBeliefCompiler.tsx",
+                                                "family":  "belief"
+                                            },
+                                            {
+                                                "name":  "LandingProductBeliefGraph",
+                                                "file":  "LandingProductBeliefGraph.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductBeliefGraph.tsx",
+                                                "family":  "belief"
+                                            },
+                                            {
+                                                "name":  "LandingProductBeliefRuntime",
+                                                "file":  "LandingProductBeliefRuntime.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductBeliefRuntime.tsx",
+                                                "family":  "belief"
+                                            },
+                                            {
+                                                "name":  "LandingProductConfidenceKernel",
+                                                "file":  "LandingProductConfidenceKernel.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductConfidenceKernel.tsx",
+                                                "family":  "confidence"
+                                            },
+                                            {
+                                                "name":  "LandingProductConfidenceMesh",
+                                                "file":  "LandingProductConfidenceMesh.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductConfidenceMesh.tsx",
+                                                "family":  "confidence"
+                                            },
+                                            {
+                                                "name":  "LandingProductConfidenceRuntime",
+                                                "file":  "LandingProductConfidenceRuntime.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductConfidenceRuntime.tsx",
+                                                "family":  "confidence"
+                                            },
+                                            {
+                                                "name":  "LandingProductConstraintEngine",
+                                                "file":  "LandingProductConstraintEngine.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductConstraintEngine.tsx",
+                                                "family":  "constraint"
+                                            },
+                                            {
+                                                "name":  "LandingProductConstraintProtocol",
+                                                "file":  "LandingProductConstraintProtocol.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductConstraintProtocol.tsx",
+                                                "family":  "constraint"
+                                            },
+                                            {
+                                                "name":  "LandingProductConstraintRuntime",
+                                                "file":  "LandingProductConstraintRuntime.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductConstraintRuntime.tsx",
+                                                "family":  "constraint"
+                                            },
+                                            {
+                                                "name":  "LandingProductCoordinationFabric",
+                                                "file":  "LandingProductCoordinationFabric.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductCoordinationFabric.tsx",
+                                                "family":  "coordination"
+                                            },
+                                            {
+                                                "name":  "LandingProductCoordinationKernel",
+                                                "file":  "LandingProductCoordinationKernel.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductCoordinationKernel.tsx",
+                                                "family":  "coordination"
+                                            },
+                                            {
+                                                "name":  "LandingProductDecisionCompiler",
+                                                "file":  "LandingProductDecisionCompiler.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductDecisionCompiler.tsx",
+                                                "family":  "decision"
+                                            },
+                                            {
+                                                "name":  "LandingProductDecisionEngine",
+                                                "file":  "LandingProductDecisionEngine.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductDecisionEngine.tsx",
+                                                "family":  "decision"
+                                            },
+                                            {
+                                                "name":  "LandingProductDecisionInterpreter",
+                                                "file":  "LandingProductDecisionInterpreter.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductDecisionInterpreter.tsx",
+                                                "family":  "decision"
+                                            },
+                                            {
+                                                "name":  "LandingProductDecisionKernel",
+                                                "file":  "LandingProductDecisionKernel.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductDecisionKernel.tsx",
+                                                "family":  "decision"
+                                            },
+                                            {
+                                                "name":  "LandingProductDecisionProtocol",
+                                                "file":  "LandingProductDecisionProtocol.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductDecisionProtocol.tsx",
+                                                "family":  "decision"
+                                            },
+                                            {
+                                                "name":  "LandingProductDecisionRuntime",
+                                                "file":  "LandingProductDecisionRuntime.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductDecisionRuntime.tsx",
+                                                "family":  "decision"
+                                            },
+                                            {
+                                                "name":  "LandingProductDecisionWorkbench",
+                                                "file":  "LandingProductDecisionWorkbench.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductDecisionWorkbench.tsx",
+                                                "family":  "decision"
+                                            },
+                                            {
+                                                "name":  "LandingProductEvidenceKernel",
+                                                "file":  "LandingProductEvidenceKernel.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductEvidenceKernel.tsx",
+                                                "family":  "evidence"
+                                            },
+                                            {
+                                                "name":  "LandingProductExecutionProtocol",
+                                                "file":  "LandingProductExecutionProtocol.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductExecutionProtocol.tsx",
+                                                "family":  "execution"
+                                            },
+                                            {
+                                                "name":  "LandingProductInfluenceConsole",
+                                                "file":  "LandingProductInfluenceConsole.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductInfluenceConsole.tsx",
+                                                "family":  "influence"
+                                            },
+                                            {
+                                                "name":  "LandingProductInfluenceFabric",
+                                                "file":  "LandingProductInfluenceFabric.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductInfluenceFabric.tsx",
+                                                "family":  "influence"
+                                            },
+                                            {
+                                                "name":  "LandingProductInfluenceMap",
+                                                "file":  "LandingProductInfluenceMap.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductInfluenceMap.tsx",
+                                                "family":  "influence"
+                                            },
+                                            {
+                                                "name":  "LandingProductInfluenceProtocol",
+                                                "file":  "LandingProductInfluenceProtocol.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductInfluenceProtocol.tsx",
+                                                "family":  "influence"
+                                            },
+                                            {
+                                                "name":  "LandingProductInfluenceRuntime",
+                                                "file":  "LandingProductInfluenceRuntime.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductInfluenceRuntime.tsx",
+                                                "family":  "influence"
+                                            },
+                                            {
+                                                "name":  "LandingProductNarrativeCompiler",
+                                                "file":  "LandingProductNarrativeCompiler.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductNarrativeCompiler.tsx",
+                                                "family":  "narrative"
+                                            },
+                                            {
+                                                "name":  "LandingProductNarrativeInterpreter",
+                                                "file":  "LandingProductNarrativeInterpreter.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductNarrativeInterpreter.tsx",
+                                                "family":  "narrative"
+                                            },
+                                            {
+                                                "name":  "LandingProductNarrativeKernel",
+                                                "file":  "LandingProductNarrativeKernel.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductNarrativeKernel.tsx",
+                                                "family":  "narrative"
+                                            },
+                                            {
+                                                "name":  "LandingProductNarrativeWorkbench",
+                                                "file":  "LandingProductNarrativeWorkbench.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductNarrativeWorkbench.tsx",
+                                                "family":  "narrative"
+                                            },
+                                            {
+                                                "name":  "LandingProductOperatingConsole",
+                                                "file":  "LandingProductOperatingConsole.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductOperatingConsole.tsx",
+                                                "family":  "operating"
+                                            },
+                                            {
+                                                "name":  "LandingProductOperatingFabric",
+                                                "file":  "LandingProductOperatingFabric.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductOperatingFabric.tsx",
+                                                "family":  "operating"
+                                            },
+                                            {
+                                                "name":  "LandingProductOperatingGenome",
+                                                "file":  "LandingProductOperatingGenome.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductOperatingGenome.tsx",
+                                                "family":  "operating"
+                                            },
+                                            {
+                                                "name":  "LandingProductOperatingInterpreter",
+                                                "file":  "LandingProductOperatingInterpreter.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductOperatingInterpreter.tsx",
+                                                "family":  "operating"
+                                            },
+                                            {
+                                                "name":  "LandingProductOperatingKernel",
+                                                "file":  "LandingProductOperatingKernel.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductOperatingKernel.tsx",
+                                                "family":  "operating"
+                                            },
+                                            {
+                                                "name":  "LandingProductOperatingRuntime",
+                                                "file":  "LandingProductOperatingRuntime.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductOperatingRuntime.tsx",
+                                                "family":  "operating"
+                                            },
+                                            {
+                                                "name":  "LandingProductOperatingWorkbench",
+                                                "file":  "LandingProductOperatingWorkbench.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductOperatingWorkbench.tsx",
+                                                "family":  "operating"
+                                            },
+                                            {
+                                                "name":  "LandingProductOutcomeMesh",
+                                                "file":  "LandingProductOutcomeMesh.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductOutcomeMesh.tsx",
+                                                "family":  "outcome"
+                                            },
+                                            {
+                                                "name":  "LandingProductProtocolEngine",
+                                                "file":  "LandingProductProtocolEngine.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductProtocolEngine.tsx",
+                                                "family":  "protocol"
+                                            },
+                                            {
+                                                "name":  "LandingProductProtocolRuntime",
+                                                "file":  "LandingProductProtocolRuntime.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductProtocolRuntime.tsx",
+                                                "family":  "protocol"
+                                            },
+                                            {
+                                                "name":  "LandingProductRecoveryCompiler",
+                                                "file":  "LandingProductRecoveryCompiler.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductRecoveryCompiler.tsx",
+                                                "family":  "recovery"
+                                            },
+                                            {
+                                                "name":  "LandingProductRecoveryConsole",
+                                                "file":  "LandingProductRecoveryConsole.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductRecoveryConsole.tsx",
+                                                "family":  "recovery"
+                                            },
+                                            {
+                                                "name":  "LandingProductRecoveryEngine",
+                                                "file":  "LandingProductRecoveryEngine.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductRecoveryEngine.tsx",
+                                                "family":  "recovery"
+                                            },
+                                            {
+                                                "name":  "LandingProductRecoveryKernel",
+                                                "file":  "LandingProductRecoveryKernel.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductRecoveryKernel.tsx",
+                                                "family":  "recovery"
+                                            },
+                                            {
+                                                "name":  "LandingProductRecoveryProtocol",
+                                                "file":  "LandingProductRecoveryProtocol.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductRecoveryProtocol.tsx",
+                                                "family":  "recovery"
+                                            },
+                                            {
+                                                "name":  "LandingProductRecoveryRuntime",
+                                                "file":  "LandingProductRecoveryRuntime.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductRecoveryRuntime.tsx",
+                                                "family":  "recovery"
+                                            },
+                                            {
+                                                "name":  "LandingProductRecoveryWorkbench",
+                                                "file":  "LandingProductRecoveryWorkbench.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductRecoveryWorkbench.tsx",
+                                                "family":  "recovery"
+                                            },
+                                            {
+                                                "name":  "LandingProductSignalBroker",
+                                                "file":  "LandingProductSignalBroker.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductSignalBroker.tsx",
+                                                "family":  "signal"
+                                            },
+                                            {
+                                                "name":  "LandingProductSignalConsole",
+                                                "file":  "LandingProductSignalConsole.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductSignalConsole.tsx",
+                                                "family":  "signal"
+                                            },
+                                            {
+                                                "name":  "LandingProductSignalEngine",
+                                                "file":  "LandingProductSignalEngine.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductSignalEngine.tsx",
+                                                "family":  "signal"
+                                            },
+                                            {
+                                                "name":  "LandingProductSignalInterpreter",
+                                                "file":  "LandingProductSignalInterpreter.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductSignalInterpreter.tsx",
+                                                "family":  "signal"
+                                            },
+                                            {
+                                                "name":  "LandingProductSignalKernel",
+                                                "file":  "LandingProductSignalKernel.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductSignalKernel.tsx",
+                                                "family":  "signal"
+                                            },
+                                            {
+                                                "name":  "LandingProductSignalProtocol",
+                                                "file":  "LandingProductSignalProtocol.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductSignalProtocol.tsx",
+                                                "family":  "signal"
+                                            },
+                                            {
+                                                "name":  "LandingProductSignalRuntime",
+                                                "file":  "LandingProductSignalRuntime.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductSignalRuntime.tsx",
+                                                "family":  "signal"
+                                            },
+                                            {
+                                                "name":  "LandingProductStoryEngine",
+                                                "file":  "LandingProductStoryEngine.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductStoryEngine.tsx",
+                                                "family":  "story"
+                                            },
+                                            {
+                                                "name":  "LandingProductStoryKernel",
+                                                "file":  "LandingProductStoryKernel.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductStoryKernel.tsx",
+                                                "family":  "story"
+                                            },
+                                            {
+                                                "name":  "LandingProductStoryProtocol",
+                                                "file":  "LandingProductStoryProtocol.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductStoryProtocol.tsx",
+                                                "family":  "story"
+                                            },
+                                            {
+                                                "name":  "LandingProductTrustCompiler",
+                                                "file":  "LandingProductTrustCompiler.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductTrustCompiler.tsx",
+                                                "family":  "trust"
+                                            },
+                                            {
+                                                "name":  "LandingProductTrustEngine",
+                                                "file":  "LandingProductTrustEngine.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductTrustEngine.tsx",
+                                                "family":  "trust"
+                                            },
+                                            {
+                                                "name":  "LandingProductTrustFabric",
+                                                "file":  "LandingProductTrustFabric.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductTrustFabric.tsx",
+                                                "family":  "trust"
+                                            },
+                                            {
+                                                "name":  "LandingProductTrustInterpreter",
+                                                "file":  "LandingProductTrustInterpreter.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductTrustInterpreter.tsx",
+                                                "family":  "trust"
+                                            },
+                                            {
+                                                "name":  "LandingProductTrustKernel",
+                                                "file":  "LandingProductTrustKernel.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductTrustKernel.tsx",
+                                                "family":  "trust"
+                                            },
+                                            {
+                                                "name":  "LandingProductTrustProtocol",
+                                                "file":  "LandingProductTrustProtocol.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductTrustProtocol.tsx",
+                                                "family":  "trust"
+                                            },
+                                            {
+                                                "name":  "LandingProductTrustRuntime",
+                                                "file":  "LandingProductTrustRuntime.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductTrustRuntime.tsx",
+                                                "family":  "trust"
+                                            },
+                                            {
+                                                "name":  "LandingProductValueCompiler",
+                                                "file":  "LandingProductValueCompiler.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductValueCompiler.tsx",
+                                                "family":  "value"
+                                            },
+                                            {
+                                                "name":  "LandingProductValueEngine",
+                                                "file":  "LandingProductValueEngine.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductValueEngine.tsx",
+                                                "family":  "value"
+                                            },
+                                            {
+                                                "name":  "LandingProductValueInterpreter",
+                                                "file":  "LandingProductValueInterpreter.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductValueInterpreter.tsx",
+                                                "family":  "value"
+                                            },
+                                            {
+                                                "name":  "LandingProductValueKernel",
+                                                "file":  "LandingProductValueKernel.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductValueKernel.tsx",
+                                                "family":  "value"
+                                            },
+                                            {
+                                                "name":  "LandingProductValueMesh",
+                                                "file":  "LandingProductValueMesh.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductValueMesh.tsx",
+                                                "family":  "value"
+                                            },
+                                            {
+                                                "name":  "LandingProductValueProtocol",
+                                                "file":  "LandingProductValueProtocol.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductValueProtocol.tsx",
+                                                "family":  "value"
+                                            },
+                                            {
+                                                "name":  "LandingProductValueRuntime",
+                                                "file":  "LandingProductValueRuntime.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductValueRuntime.tsx",
+                                                "family":  "value"
+                                            }
+                                        ]
+                     },
+                     {
+                         "key":  "ritual-finale",
+                         "label":  "Ritual Finale",
+                         "description":  "These are the sharpest page-scale surfaces: command rooms, archives, bridges, cartography, councils, dossiers, ceremony, and boardroom systems.",
+                         "tone":  "theater",
+                         "visualDefaults":  {
+                                                "classes":  {
+                                                                "surface":  "bg-background text-foreground border-border",
+                                                                "accent":  "text-rose-600 dark:text-rose-400",
+                                                                "chip":  "bg-rose-500/10 text-rose-700 dark:text-rose-300 border-rose-500/20"
+                                                            },
+                                                "cssVars":  {
+                                                                "--gallery-accent":  "346 77% 49%"
+                                                            }
+                                            },
+                         "stats":  {
+                                       "components":  50,
+                                       "families":  16,
+                                       "primaryPicks":  16
+                                   },
+                         "primaryPicks":  [
+                                              "LandingProductBoardroomSystem",
+                                              "LandingProductCommandBriefing",
+                                              "LandingProductConfidenceGraph",
+                                              "LandingProductConstraintAtlas",
+                                              "LandingProductControlBridge",
+                                              "LandingProductDecisionArray",
+                                              "LandingProductEvidenceAssembly",
+                                              "LandingProductExecutiveBridge",
+                                              "LandingProductInfluenceBoard",
+                                              "LandingProductOperatingAtlas",
+                                              "LandingProductProofCartography",
+                                              "LandingProductRecoveryCircuit",
+                                              "LandingProductSignalBeacon",
+                                              "LandingProductStoryBoardroom",
+                                              "LandingProductTrustArchive",
+                                              "LandingProductValueCartography"
+                                          ],
+                         "components":  [
+                                            {
+                                                "name":  "LandingProductBoardroomSystem",
+                                                "file":  "LandingProductBoardroomSystem.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductBoardroomSystem.tsx",
+                                                "family":  "boardroom"
+                                            },
+                                            {
+                                                "name":  "LandingProductCommandBriefing",
+                                                "file":  "LandingProductCommandBriefing.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductCommandBriefing.tsx",
+                                                "family":  "command"
+                                            },
+                                            {
+                                                "name":  "LandingProductCommandSurface",
+                                                "file":  "LandingProductCommandSurface.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductCommandSurface.tsx",
+                                                "family":  "command"
+                                            },
+                                            {
+                                                "name":  "LandingProductConfidenceGraph",
+                                                "file":  "LandingProductConfidenceGraph.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductConfidenceGraph.tsx",
+                                                "family":  "confidence"
+                                            },
+                                            {
+                                                "name":  "LandingProductConstraintAtlas",
+                                                "file":  "LandingProductConstraintAtlas.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductConstraintAtlas.tsx",
+                                                "family":  "constraint"
+                                            },
+                                            {
+                                                "name":  "LandingProductControlBridge",
+                                                "file":  "LandingProductControlBridge.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductControlBridge.tsx",
+                                                "family":  "control"
+                                            },
+                                            {
+                                                "name":  "LandingProductDecisionArray",
+                                                "file":  "LandingProductDecisionArray.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductDecisionArray.tsx",
+                                                "family":  "decision"
+                                            },
+                                            {
+                                                "name":  "LandingProductDecisionCouncil",
+                                                "file":  "LandingProductDecisionCouncil.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductDecisionCouncil.tsx",
+                                                "family":  "decision"
+                                            },
+                                            {
+                                                "name":  "LandingProductDecisionHarbor",
+                                                "file":  "LandingProductDecisionHarbor.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductDecisionHarbor.tsx",
+                                                "family":  "decision"
+                                            },
+                                            {
+                                                "name":  "LandingProductDecisionSwitchyard",
+                                                "file":  "LandingProductDecisionSwitchyard.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductDecisionSwitchyard.tsx",
+                                                "family":  "decision"
+                                            },
+                                            {
+                                                "name":  "LandingProductDecisionTerminal",
+                                                "file":  "LandingProductDecisionTerminal.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductDecisionTerminal.tsx",
+                                                "family":  "decision"
+                                            },
+                                            {
+                                                "name":  "LandingProductEvidenceAssembly",
+                                                "file":  "LandingProductEvidenceAssembly.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductEvidenceAssembly.tsx",
+                                                "family":  "evidence"
+                                            },
+                                            {
+                                                "name":  "LandingProductExecutiveBridge",
+                                                "file":  "LandingProductExecutiveBridge.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductExecutiveBridge.tsx",
+                                                "family":  "executive"
+                                            },
+                                            {
+                                                "name":  "LandingProductInfluenceBoard",
+                                                "file":  "LandingProductInfluenceBoard.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductInfluenceBoard.tsx",
+                                                "family":  "influence"
+                                            },
+                                            {
+                                                "name":  "LandingProductInfluenceCouncil",
+                                                "file":  "LandingProductInfluenceCouncil.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductInfluenceCouncil.tsx",
+                                                "family":  "influence"
+                                            },
+                                            {
+                                                "name":  "LandingProductInfluenceMatrix",
+                                                "file":  "LandingProductInfluenceMatrix.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductInfluenceMatrix.tsx",
+                                                "family":  "influence"
+                                            },
+                                            {
+                                                "name":  "LandingProductInfluenceRelay",
+                                                "file":  "LandingProductInfluenceRelay.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductInfluenceRelay.tsx",
+                                                "family":  "influence"
+                                            },
+                                            {
+                                                "name":  "LandingProductInfluenceTerminal",
+                                                "file":  "LandingProductInfluenceTerminal.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductInfluenceTerminal.tsx",
+                                                "family":  "influence"
+                                            },
+                                            {
+                                                "name":  "LandingProductOperatingAtlas",
+                                                "file":  "LandingProductOperatingAtlas.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductOperatingAtlas.tsx",
+                                                "family":  "operating"
+                                            },
+                                            {
+                                                "name":  "LandingProductOperatingChoreography",
+                                                "file":  "LandingProductOperatingChoreography.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductOperatingChoreography.tsx",
+                                                "family":  "operating"
+                                            },
+                                            {
+                                                "name":  "LandingProductOperatingConstellation",
+                                                "file":  "LandingProductOperatingConstellation.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductOperatingConstellation.tsx",
+                                                "family":  "operating"
+                                            },
+                                            {
+                                                "name":  "LandingProductOperatingHorizon",
+                                                "file":  "LandingProductOperatingHorizon.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductOperatingHorizon.tsx",
+                                                "family":  "operating"
+                                            },
+                                            {
+                                                "name":  "LandingProductOperatingSwitchboard",
+                                                "file":  "LandingProductOperatingSwitchboard.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductOperatingSwitchboard.tsx",
+                                                "family":  "operating"
+                                            },
+                                            {
+                                                "name":  "LandingProductProofCartography",
+                                                "file":  "LandingProductProofCartography.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductProofCartography.tsx",
+                                                "family":  "proof"
+                                            },
+                                            {
+                                                "name":  "LandingProductProofOrchestra",
+                                                "file":  "LandingProductProofOrchestra.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductProofOrchestra.tsx",
+                                                "family":  "proof"
+                                            },
+                                            {
+                                                "name":  "LandingProductRecoveryCircuit",
+                                                "file":  "LandingProductRecoveryCircuit.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductRecoveryCircuit.tsx",
+                                                "family":  "recovery"
+                                            },
+                                            {
+                                                "name":  "LandingProductRecoveryDock",
+                                                "file":  "LandingProductRecoveryDock.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductRecoveryDock.tsx",
+                                                "family":  "recovery"
+                                            },
+                                            {
+                                                "name":  "LandingProductRecoveryHarbor",
+                                                "file":  "LandingProductRecoveryHarbor.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductRecoveryHarbor.tsx",
+                                                "family":  "recovery"
+                                            },
+                                            {
+                                                "name":  "LandingProductRecoveryTabletop",
+                                                "file":  "LandingProductRecoveryTabletop.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductRecoveryTabletop.tsx",
+                                                "family":  "recovery"
+                                            },
+                                            {
+                                                "name":  "LandingProductRecoveryTerminal",
+                                                "file":  "LandingProductRecoveryTerminal.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductRecoveryTerminal.tsx",
+                                                "family":  "recovery"
+                                            },
+                                            {
+                                                "name":  "LandingProductSignalBeacon",
+                                                "file":  "LandingProductSignalBeacon.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductSignalBeacon.tsx",
+                                                "family":  "signal"
+                                            },
+                                            {
+                                                "name":  "LandingProductSignalChamber",
+                                                "file":  "LandingProductSignalChamber.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductSignalChamber.tsx",
+                                                "family":  "signal"
+                                            },
+                                            {
+                                                "name":  "LandingProductSignalObservatory",
+                                                "file":  "LandingProductSignalObservatory.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductSignalObservatory.tsx",
+                                                "family":  "signal"
+                                            },
+                                            {
+                                                "name":  "LandingProductSignalRadar",
+                                                "file":  "LandingProductSignalRadar.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductSignalRadar.tsx",
+                                                "family":  "signal"
+                                            },
+                                            {
+                                                "name":  "LandingProductSignalTelescope",
+                                                "file":  "LandingProductSignalTelescope.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductSignalTelescope.tsx",
+                                                "family":  "signal"
+                                            },
+                                            {
+                                                "name":  "LandingProductStoryBoardroom",
+                                                "file":  "LandingProductStoryBoardroom.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductStoryBoardroom.tsx",
+                                                "family":  "story"
+                                            },
+                                            {
+                                                "name":  "LandingProductStoryCeremony",
+                                                "file":  "LandingProductStoryCeremony.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductStoryCeremony.tsx",
+                                                "family":  "story"
+                                            },
+                                            {
+                                                "name":  "LandingProductStoryConsole",
+                                                "file":  "LandingProductStoryConsole.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductStoryConsole.tsx",
+                                                "family":  "story"
+                                            },
+                                            {
+                                                "name":  "LandingProductStoryDeck",
+                                                "file":  "LandingProductStoryDeck.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductStoryDeck.tsx",
+                                                "family":  "story"
+                                            },
+                                            {
+                                                "name":  "LandingProductStorySwitchboard",
+                                                "file":  "LandingProductStorySwitchboard.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductStorySwitchboard.tsx",
+                                                "family":  "story"
+                                            },
+                                            {
+                                                "name":  "LandingProductTrustArchive",
+                                                "file":  "LandingProductTrustArchive.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductTrustArchive.tsx",
+                                                "family":  "trust"
+                                            },
+                                            {
+                                                "name":  "LandingProductTrustBeacon",
+                                                "file":  "LandingProductTrustBeacon.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductTrustBeacon.tsx",
+                                                "family":  "trust"
+                                            },
+                                            {
+                                                "name":  "LandingProductTrustDossier",
+                                                "file":  "LandingProductTrustDossier.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductTrustDossier.tsx",
+                                                "family":  "trust"
+                                            },
+                                            {
+                                                "name":  "LandingProductTrustLedger",
+                                                "file":  "LandingProductTrustLedger.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductTrustLedger.tsx",
+                                                "family":  "trust"
+                                            },
+                                            {
+                                                "name":  "LandingProductTrustRegistry",
+                                                "file":  "LandingProductTrustRegistry.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductTrustRegistry.tsx",
+                                                "family":  "trust"
+                                            },
+                                            {
+                                                "name":  "LandingProductValueCartography",
+                                                "file":  "LandingProductValueCartography.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductValueCartography.tsx",
+                                                "family":  "value"
+                                            },
+                                            {
+                                                "name":  "LandingProductValueExpedition",
+                                                "file":  "LandingProductValueExpedition.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductValueExpedition.tsx",
+                                                "family":  "value"
+                                            },
+                                            {
+                                                "name":  "LandingProductValueFrontier",
+                                                "file":  "LandingProductValueFrontier.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductValueFrontier.tsx",
+                                                "family":  "value"
+                                            },
+                                            {
+                                                "name":  "LandingProductValuePilot",
+                                                "file":  "LandingProductValuePilot.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductValuePilot.tsx",
+                                                "family":  "value"
+                                            },
+                                            {
+                                                "name":  "LandingProductValueWeatherMap",
+                                                "file":  "LandingProductValueWeatherMap.tsx",
+                                                "path":  "ui_lab/components/shelves/landing-product-system/LandingProductValueWeatherMap.tsx",
+                                                "family":  "value"
+                                            }
+                                        ]
+                     }
+                 ]
+}

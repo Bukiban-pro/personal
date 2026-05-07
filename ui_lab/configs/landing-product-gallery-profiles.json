@@ -1,0 +1,83 @@
+{
+  "default": {
+    "tone": "neutral",
+    "classes": {
+      "surface": "bg-background text-foreground border-border",
+      "accent": "text-primary",
+      "chip": "bg-primary/10 text-primary border-primary/20"
+    },
+    "cssVars": {
+      "--gallery-surface": "hsl(var(--background))",
+      "--gallery-ink": "hsl(var(--foreground))",
+      "--gallery-accent": "hsl(var(--primary))"
+    }
+  },
+  "chapters": {
+    "conversion-proof": {
+      "tone": "clarity",
+      "classes": {
+        "surface": "bg-background text-foreground border-border",
+        "accent": "text-emerald-600 dark:text-emerald-400",
+        "chip": "bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 border-emerald-500/20"
+      },
+      "cssVars": {
+        "--gallery-accent": "146 70% 42%"
+      }
+    },
+    "enterprise-buying": {
+      "tone": "assurance",
+      "classes": {
+        "surface": "bg-background text-foreground border-border",
+        "accent": "text-sky-600 dark:text-sky-400",
+        "chip": "bg-sky-500/10 text-sky-700 dark:text-sky-300 border-sky-500/20"
+      },
+      "cssVars": {
+        "--gallery-accent": "199 89% 48%"
+      }
+    },
+    "adoption-operations": {
+      "tone": "momentum",
+      "classes": {
+        "surface": "bg-background text-foreground border-border",
+        "accent": "text-violet-600 dark:text-violet-400",
+        "chip": "bg-violet-500/10 text-violet-700 dark:text-violet-300 border-violet-500/20"
+      },
+      "cssVars": {
+        "--gallery-accent": "262 83% 58%"
+      }
+    },
+    "narrative-systems": {
+      "tone": "structure",
+      "classes": {
+        "surface": "bg-background text-foreground border-border",
+        "accent": "text-amber-600 dark:text-amber-400",
+        "chip": "bg-amber-500/10 text-amber-700 dark:text-amber-300 border-amber-500/20"
+      },
+      "cssVars": {
+        "--gallery-accent": "38 92% 50%"
+      }
+    },
+    "runtime-frontier": {
+      "tone": "precision",
+      "classes": {
+        "surface": "bg-background text-foreground border-border",
+        "accent": "text-cyan-600 dark:text-cyan-400",
+        "chip": "bg-cyan-500/10 text-cyan-700 dark:text-cyan-300 border-cyan-500/20"
+      },
+      "cssVars": {
+        "--gallery-accent": "188 95% 43%"
+      }
+    },
+    "ritual-finale": {
+      "tone": "theater",
+      "classes": {
+        "surface": "bg-background text-foreground border-border",
+        "accent": "text-rose-600 dark:text-rose-400",
+        "chip": "bg-rose-500/10 text-rose-700 dark:text-rose-300 border-rose-500/20"
+      },
+      "cssVars": {
+        "--gallery-accent": "346 77% 49%"
+      }
+    }
+  }
+}

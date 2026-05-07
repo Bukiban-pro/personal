@@ -1,0 +1,503 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Landing Product Live Gallery</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #071019;
+      --panel: rgba(255,255,255,.045);
+      --line: rgba(255,255,255,.08);
+      --ink: #edf3fb;
+      --muted: rgba(237,243,251,.7);
+      --accent: #7cd1ff;
+      --accent-2: #80ffcf;
+      --shadow: 0 26px 90px rgba(0,0,0,.32);
+    }
+
+    body {
+      margin: 0;
+      font-family: Aptos, "Trebuchet MS", "Segoe UI", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top left, rgba(55, 120, 188, 0.28), transparent 28%),
+        radial-gradient(circle at top right, rgba(33, 117, 92, 0.16), transparent 24%),
+        linear-gradient(180deg, #09111a 0%, #050b12 100%);
+    }
+
+    .shell {
+      max-width: 1560px;
+      margin: 0 auto;
+      padding: 28px 18px 88px;
+    }
+
+    .hero {
+      display: grid;
+      gap: 18px;
+      grid-template-columns: 1.1fr .9fr;
+      padding: 28px;
+      border: 1px solid var(--line);
+      border-radius: 32px;
+      background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.025));
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(14px);
+    }
+
+    .eyebrow {
+      margin: 0 0 12px;
+      color: var(--accent);
+      font-size: 11px;
+      letter-spacing: .26em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(2.8rem, 6vw, 5.6rem);
+      line-height: .92;
+      letter-spacing: -.06em;
+      max-width: 10ch;
+    }
+
+    .hero p {
+      margin: 0;
+      max-width: 64ch;
+      line-height: 1.75;
+      color: var(--muted);
+      font-size: 1rem;
+    }
+
+    .hero-grid {
+      display: grid;
+      gap: 12px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      align-content: start;
+    }
+
+    .hero-card {
+      padding: 16px 18px;
+      border-radius: 18px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.035);
+    }
+
+    .hero-card strong {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 1rem;
+    }
+
+    .hero-card span {
+      display: block;
+      color: var(--muted);
+      font-size: .94rem;
+      line-height: 1.55;
+    }
+
+    .gallery {
+      display: grid;
+      gap: 24px;
+      margin-top: 28px;
+    }
+
+    .sample {
+      overflow: hidden;
+      border-radius: 30px;
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(255,255,255,.045), rgba(255,255,255,.02));
+      box-shadow: var(--shadow);
+    }
+
+    .sample-head {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 20px;
+      border-bottom: 1px solid var(--line);
+      background: rgba(4,10,15,.34);
+      backdrop-filter: blur(14px);
+    }
+
+    .sample-head strong {
+      display: block;
+      margin-bottom: 4px;
+      font-size: 1.15rem;
+      letter-spacing: -.02em;
+    }
+
+    .sample-head span {
+      color: var(--muted);
+      font-size: .94rem;
+    }
+
+    .sample-head a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 42px;
+      padding: 0 16px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.04);
+      color: var(--ink);
+      text-decoration: none;
+      font-size: .92rem;
+      font-weight: 600;
+    }
+
+    .sample-head a:hover {
+      border-color: rgba(124,209,255,.35);
+      background: rgba(124,209,255,.12);
+    }
+
+    .sample-body {
+      padding: 10px;
+    }
+
+    .status {
+      margin-top: 14px;
+      padding: 14px 16px;
+      border-radius: 18px;
+      border: 1px solid rgba(255, 131, 131, .18);
+      background: rgba(255, 131, 131, .08);
+      color: #ffd0d0;
+      line-height: 1.5;
+    }
+
+    @media (max-width: 1024px) {
+      .hero { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 720px) {
+      .hero-grid { grid-template-columns: 1fr; }
+      .shell { padding-inline: 12px; }
+      .sample-head { align-items: start; }
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+  <script>
+    window.__LIVE_SAMPLE_ENTRIES__ = [
+    {
+        "componentName":  "LandingProductPilotProgram",
+        "title":  "Pilot Program",
+        "chapter":  "Enterprise Buying",
+        "sourcePath":  "components/shelves/landing-product-system/LandingProductPilotProgram.tsx",
+        "props":  {
+                      "title":  "Pilot program architecture",
+                      "description":  "Show the operating shape of the pilot before the buyer asks how success will actually be measured.",
+                      "phases":  [
+                                     {
+                                         "title":  "Decision framing",
+                                         "duration":  "Week 1",
+                                         "goal":  "Lock executive success criteria and boundary conditions.",
+                                         "outputs":  [
+                                                         "Success memo",
+                                                         "Risk register",
+                                                         "Named sponsors"
+                                                     ]
+                                     },
+                                     {
+                                         "title":  "Operational embed",
+                                         "duration":  "Weeks 2-4",
+                                         "goal":  "Put the workflow inside the actual team rhythm instead of a demo bubble.",
+                                         "outputs":  [
+                                                         "Runbook",
+                                                         "Owner matrix",
+                                                         "Instrumentation plan"
+                                                     ]
+                                     },
+                                     {
+                                         "title":  "Proof handoff",
+                                         "duration":  "Week 5",
+                                         "goal":  "Convert results into procurement-ready proof for the next committee.",
+                                         "outputs":  [
+                                                         "Outcomes review",
+                                                         "Expansion narrative",
+                                                         "Board-ready summary"
+                                                     ]
+                                     }
+                                 ]
+                  }
+    },
+    {
+        "componentName":  "LandingProductPricingControls",
+        "title":  "Pricing Controls",
+        "chapter":  "Enterprise Buying",
+        "sourcePath":  "components/shelves/landing-product-system/LandingProductPricingControls.tsx",
+        "props":  {
+                      "title":  "Pricing controls",
+                      "description":  "Prove the commercial model can be governed, not just sold.",
+                      "controls":  [
+                                       {
+                                           "title":  "Usage guardrails",
+                                           "impact":  "Margin",
+                                           "owner":  "RevOps + Finance",
+                                           "description":  "Alert before overage patterns turn pilot goodwill into surprise billing."
+                                       },
+                                       {
+                                           "title":  "Approval lanes",
+                                           "impact":  "Control",
+                                           "owner":  "Deal Desk",
+                                           "description":  "Define who can discount, who can extend terms, and who signs off on exceptions."
+                                       },
+                                       {
+                                           "title":  "Renewal triggers",
+                                           "impact":  "Expansion",
+                                           "owner":  "CS Leadership",
+                                           "description":  "Tie commercial motion to adoption thresholds instead of calendar hope."
+                                       }
+                                   ]
+                  }
+    },
+    {
+        "componentName":  "LandingProductRegionalRollout",
+        "title":  "Regional Rollout",
+        "chapter":  "Adoption and Operations",
+        "sourcePath":  "components/shelves/landing-product-system/LandingProductRegionalRollout.tsx",
+        "props":  {
+                      "title":  "Regional rollout plan",
+                      "description":  "Roll out by sponsor strength, readiness, and support coverage instead of blasting every market at once.",
+                      "items":  [
+                                    {
+                                        "region":  "North America",
+                                        "timing":  "Wave 1",
+                                        "sponsor":  "VP Operations",
+                                        "description":  "Baseline market with deepest support coverage and fastest feedback loop."
+                                    },
+                                    {
+                                        "region":  "EMEA",
+                                        "timing":  "Wave 2",
+                                        "sponsor":  "Regional GM",
+                                        "description":  "Launch after playbook localization and partner enablement are validated."
+                                    },
+                                    {
+                                        "region":  "APAC",
+                                        "timing":  "Wave 3",
+                                        "sponsor":  "Expansion Lead",
+                                        "description":  "Stage the rollout behind support hours, documentation maturity, and implementation readiness."
+                                    }
+                                ]
+                  }
+    },
+    {
+        "componentName":  "LandingProductStakeholderMap",
+        "title":  "Stakeholder Map",
+        "chapter":  "Enterprise Buying",
+        "sourcePath":  "components/shelves/landing-product-system/LandingProductStakeholderMap.tsx",
+        "props":  {
+                      "title":  "Buying committee map",
+                      "description":  "Surface the internal coalition before consensus becomes a late-stage risk.",
+                      "stakeholders":  [
+                                           {
+                                               "name":  "Maya Chen",
+                                               "role":  "CIO",
+                                               "priority":  "Executive",
+                                               "summary":  "Needs proof that the platform reduces operational drag without creating another governance project.",
+                                               "goals":  [
+                                                             "Board narrative",
+                                                             "Security posture",
+                                                             "Portfolio fit"
+                                                         ]
+                                           },
+                                           {
+                                               "name":  "Jordan Alvarez",
+                                               "role":  "VP Operations",
+                                               "priority":  "Operator",
+                                               "summary":  "Optimizes for rollout realism, support coverage, and predictable adoption inside existing workflows.",
+                                               "goals":  [
+                                                             "Owner clarity",
+                                                             "Rollout sequencing",
+                                                             "Usage telemetry"
+                                                         ]
+                                           },
+                                           {
+                                               "name":  "Priya Raman",
+                                               "role":  "Procurement Lead",
+                                               "priority":  "Commercial",
+                                               "summary":  "Cares about discount controls, renewal logic, and whether pricing expands cleanly with value.",
+                                               "goals":  [
+                                                             "Approval matrix",
+                                                             "Pricing controls",
+                                                             "Renewal guardrails"
+                                                         ]
+                                           }
+                                       ]
+                  }
+    },
+    {
+        "componentName":  "LandingProductOnboardingChecklist",
+        "title":  "Onboarding Checklist",
+        "chapter":  "Adoption and Operations",
+        "sourcePath":  "components/shelves/landing-product-system/LandingProductOnboardingChecklist.tsx",
+        "props":  {
+                      "title":  "Operator onboarding checklist",
+                      "description":  "Give the buyer a rollout checklist they can forward without rewriting it for every internal team.",
+                      "items":  [
+                                    {
+                                        "title":  "Workspace setup",
+                                        "owner":  "Platform admin",
+                                        "description":  "Create the environment, provision roles, and validate the control surface.",
+                                        "status":  "complete"
+                                    },
+                                    {
+                                        "title":  "Success instrumentation",
+                                        "owner":  "Ops analyst",
+                                        "description":  "Turn on event capture and define the three metrics leadership will actually use.",
+                                        "status":  "active"
+                                    },
+                                    {
+                                        "title":  "Expansion briefing",
+                                        "owner":  "Executive sponsor",
+                                        "description":  "Prepare the narrative for the next region, team, or use-case expansion request.",
+                                        "status":  "upcoming"
+                                    }
+                                ]
+                  }
+    },
+    {
+        "componentName":  "LandingProductStoryTimeline",
+        "title":  "Story Timeline",
+        "chapter":  "Narrative Systems",
+        "sourcePath":  "components/shelves/landing-product-system/LandingProductStoryTimeline.tsx",
+        "props":  {
+                      "title":  "Executive story timeline",
+                      "description":  "Frame the narrative arc from pressure to proof to operating leverage.",
+                      "steps":  [
+                                    {
+                                        "title":  "Pressure",
+                                        "accent":  "Board",
+                                        "description":  "The team cannot keep scaling with fragmented workflows and inconsistent proof."
+                                    },
+                                    {
+                                        "title":  "Pilot",
+                                        "accent":  "Ops",
+                                        "description":  "A controlled launch proves where the product changes the motion, not just the slides."
+                                    },
+                                    {
+                                        "title":  "Expansion",
+                                        "accent":  "Revenue",
+                                        "description":  "The results become the operating argument for rollout, renewal, and broader adoption."
+                                    }
+                                ]
+                  }
+    }
+];
+    window.__LIVE_SOURCE_MAP__ = {
+    "LandingProductPilotProgram":  "import { cn } from \"@/lib/utils\";\r\nimport * as React from \"react\";\r\n\r\nexport interface PilotProgramPhase {\r\n  title: string;\r\n  duration?: string;\r\n  goal?: string;\r\n  outputs?: string[];\r\n}\r\n\r\nexport interface LandingProductPilotProgramProps\r\n  extends React.HTMLAttributes\u003cHTMLElement\u003e {\r\n  title?: string;\r\n  description?: string;\r\n  phases: PilotProgramPhase[];\r\n  action?: React.ReactNode;\r\n}\r\n\r\nexport const LandingProductPilotProgram = React.forwardRef\u003c\r\n  HTMLElement,\r\n  LandingProductPilotProgramProps\r\n\u003e(({ className, title = \"Structure the pilot before anyone asks for proof\", description, phases, action, ...props }, ref) =\u003e {\r\n  return (\r\n    \u003csection ref={ref} className={cn(\"w-full py-12 lg:py-16\", className)} {...props}\u003e\r\n      \u003cdiv className=\"mx-auto flex w-full max-w-6xl flex-col gap-8 px-6\"\u003e\r\n        \u003cdiv className=\"flex flex-col gap-4 md:flex-row md:items-end md:justify-between\"\u003e\r\n          \u003cdiv className=\"flex flex-col gap-3\"\u003e\r\n            \u003ch2 className=\"text-3xl font-semibold tracking-tight md:text-4xl\"\u003e{title}\u003c/h2\u003e\r\n            {description ? (\r\n              \u003cp className=\"max-w-2xl text-base text-muted-foreground md:text-lg\"\u003e{description}\u003c/p\u003e\r\n            ) : null}\r\n          \u003c/div\u003e\r\n          {action ? \u003cdiv className=\"shrink-0\"\u003e{action}\u003c/div\u003e : null}\r\n        \u003c/div\u003e\r\n\r\n        \u003cdiv className=\"grid gap-4 lg:grid-cols-3\"\u003e\r\n          {phases.map((phase, index) =\u003e (\r\n            \u003carticle key={phase.title} className=\"rounded-2xl border border-border bg-card p-6 shadow-sm\"\u003e\r\n              \u003cdiv className=\"flex items-start justify-between gap-3\"\u003e\r\n                \u003cdiv className=\"flex h-10 w-10 items-center justify-center rounded-full border border-border bg-background text-sm font-semibold\"\u003e\r\n                  {index + 1}\r\n                \u003c/div\u003e\r\n                {phase.duration ? (\r\n                  \u003cspan className=\"text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground\"\u003e\r\n                    {phase.duration}\r\n                  \u003c/span\u003e\r\n                ) : null}\r\n              \u003c/div\u003e\r\n              \u003ch3 className=\"mt-4 text-base font-semibold tracking-tight\"\u003e{phase.title}\u003c/h3\u003e\r\n              {phase.goal ? \u003cp className=\"mt-2 text-sm leading-6 text-muted-foreground\"\u003e{phase.goal}\u003c/p\u003e : null}\r\n              {phase.outputs?.length ? (\r\n                \u003cul className=\"mt-4 grid gap-2\"\u003e\r\n                  {phase.outputs.map((output) =\u003e (\r\n                    \u003cli key={output} className=\"rounded-xl border border-border bg-muted/30 px-4 py-3 text-sm text-muted-foreground\"\u003e\r\n                      {output}\r\n                    \u003c/li\u003e\r\n                  ))}\r\n                \u003c/ul\u003e\r\n              ) : null}\r\n            \u003c/article\u003e\r\n          ))}\r\n        \u003c/div\u003e\r\n      \u003c/div\u003e\r\n    \u003c/section\u003e\r\n  );\r\n});\r\n\r\nLandingProductPilotProgram.displayName = \"LandingProductPilotProgram\";",
+    "LandingProductPricingControls":  "import { cn } from \"@/lib/utils\";\r\nimport * as React from \"react\";\r\n\r\nexport interface PricingControlItem {\r\n  title: string;\r\n  impact?: string;\r\n  description?: string;\r\n  owner?: string;\r\n}\r\n\r\nexport interface LandingProductPricingControlsProps extends React.HTMLAttributes\u003cHTMLElement\u003e {\r\n  title?: string;\r\n  description?: string;\r\n  controls: PricingControlItem[];\r\n}\r\n\r\nexport const LandingProductPricingControls = React.forwardRef\u003cHTMLElement, LandingProductPricingControlsProps\u003e(\r\n  ({ className, title = \"Show pricing governance instead of just list price\", description, controls, ...props }, ref) =\u003e {\r\n    return (\r\n      \u003csection ref={ref} className={cn(\"w-full py-12 lg:py-16\", className)} {...props}\u003e\r\n        \u003cdiv className=\"mx-auto flex w-full max-w-6xl flex-col gap-8 px-6\"\u003e\r\n          \u003cdiv className=\"flex flex-col gap-3\"\u003e\r\n            \u003ch2 className=\"text-3xl font-semibold tracking-tight md:text-4xl\"\u003e{title}\u003c/h2\u003e\r\n            {description ? \u003cp className=\"max-w-2xl text-base text-muted-foreground md:text-lg\"\u003e{description}\u003c/p\u003e : null}\r\n          \u003c/div\u003e\r\n\r\n          \u003cdiv className=\"grid gap-4 lg:grid-cols-3\"\u003e\r\n            {controls.map((control) =\u003e (\r\n              \u003carticle key={control.title} className=\"rounded-2xl border border-border bg-card p-6 shadow-sm\"\u003e\r\n                \u003cdiv className=\"flex items-start justify-between gap-3\"\u003e\r\n                  \u003ch3 className=\"text-base font-semibold tracking-tight\"\u003e{control.title}\u003c/h3\u003e\r\n                  {control.impact ? \u003cdiv className=\"text-xs uppercase tracking-[0.2em] text-muted-foreground\"\u003e{control.impact}\u003c/div\u003e : null}\r\n                \u003c/div\u003e\r\n                {control.owner ? \u003cdiv className=\"mt-2 text-sm text-muted-foreground\"\u003e{control.owner}\u003c/div\u003e : null}\r\n                {control.description ? \u003cp className=\"mt-3 text-sm leading-6 text-muted-foreground\"\u003e{control.description}\u003c/p\u003e : null}\r\n              \u003c/article\u003e\r\n            ))}\r\n          \u003c/div\u003e\r\n        \u003c/div\u003e\r\n      \u003c/section\u003e\r\n    );\r\n  },\r\n);\r\n\r\nLandingProductPricingControls.displayName = \"LandingProductPricingControls\";",
+    "LandingProductRegionalRollout":  "import { cn } from \"@/lib/utils\";\r\nimport * as React from \"react\";\r\n\r\nexport interface RegionalRolloutItem {\r\n  region: string;\r\n  timing?: string;\r\n  sponsor?: string;\r\n  description?: string;\r\n}\r\n\r\nexport interface LandingProductRegionalRolloutProps extends React.HTMLAttributes\u003cHTMLElement\u003e {\r\n  title?: string;\r\n  description?: string;\r\n  items: RegionalRolloutItem[];\r\n}\r\n\r\nexport const LandingProductRegionalRollout = React.forwardRef\u003cHTMLElement, LandingProductRegionalRolloutProps\u003e(\r\n  ({ className, title = \"Scale rollout by region instead of one blunt launch\", description, items, ...props }, ref) =\u003e {\r\n    return (\r\n      \u003csection ref={ref} className={cn(\"w-full py-12 lg:py-16\", className)} {...props}\u003e\r\n        \u003cdiv className=\"mx-auto flex w-full max-w-6xl flex-col gap-8 px-6\"\u003e\r\n          \u003cdiv className=\"flex flex-col gap-3\"\u003e\r\n            \u003ch2 className=\"text-3xl font-semibold tracking-tight md:text-4xl\"\u003e{title}\u003c/h2\u003e\r\n            {description ? \u003cp className=\"max-w-2xl text-base text-muted-foreground md:text-lg\"\u003e{description}\u003c/p\u003e : null}\r\n          \u003c/div\u003e\r\n          \u003cdiv className=\"grid gap-4 lg:grid-cols-3\"\u003e\r\n            {items.map((item) =\u003e (\r\n              \u003carticle key={item.region} className=\"rounded-2xl border border-border bg-card p-6 shadow-sm\"\u003e\r\n                \u003cdiv className=\"flex items-start justify-between gap-3\"\u003e\r\n                  \u003ch3 className=\"text-lg font-semibold tracking-tight\"\u003e{item.region}\u003c/h3\u003e\r\n                  \u003cdiv className=\"text-right text-xs uppercase tracking-[0.2em] text-muted-foreground\"\u003e\r\n                    {item.timing ? \u003cdiv\u003e{item.timing}\u003c/div\u003e : null}\r\n                    {item.sponsor ? \u003cdiv className=\"mt-1\"\u003e{item.sponsor}\u003c/div\u003e : null}\r\n                  \u003c/div\u003e\r\n                \u003c/div\u003e\r\n                {item.description ? \u003cp className=\"mt-3 text-sm leading-6 text-muted-foreground\"\u003e{item.description}\u003c/p\u003e : null}\r\n              \u003c/article\u003e\r\n            ))}\r\n          \u003c/div\u003e\r\n        \u003c/div\u003e\r\n      \u003c/section\u003e\r\n    );\r\n  },\r\n);\r\n\r\nLandingProductRegionalRollout.displayName = \"LandingProductRegionalRollout\";",
+    "LandingProductStakeholderMap":  "import { cn } from \"@/lib/utils\";\r\nimport * as React from \"react\";\r\n\r\nexport interface StakeholderMapItem {\r\n  name: string;\r\n  role?: string;\r\n  priority?: string;\r\n  summary?: string;\r\n  goals?: string[];\r\n}\r\n\r\nexport interface LandingProductStakeholderMapProps\r\n  extends React.HTMLAttributes\u003cHTMLElement\u003e {\r\n  title?: string;\r\n  description?: string;\r\n  stakeholders: StakeholderMapItem[];\r\n}\r\n\r\nexport const LandingProductStakeholderMap = React.forwardRef\u003c\r\n  HTMLElement,\r\n  LandingProductStakeholderMapProps\r\n\u003e(({ className, title = \"Map the buying committee before consensus slows down\", description, stakeholders, ...props }, ref) =\u003e {\r\n  const [activeIndex, setActiveIndex] = React.useState(0);\r\n  const activeStakeholder = stakeholders[activeIndex];\r\n\r\n  return (\r\n    \u003csection ref={ref} className={cn(\"w-full py-12 lg:py-16\", className)} {...props}\u003e\r\n      \u003cdiv className=\"mx-auto flex w-full max-w-6xl flex-col gap-8 px-6\"\u003e\r\n        \u003cdiv className=\"flex flex-col gap-3\"\u003e\r\n          \u003ch2 className=\"text-3xl font-semibold tracking-tight md:text-4xl\"\u003e{title}\u003c/h2\u003e\r\n          {description ? (\r\n            \u003cp className=\"max-w-2xl text-base text-muted-foreground md:text-lg\"\u003e{description}\u003c/p\u003e\r\n          ) : null}\r\n        \u003c/div\u003e\r\n\r\n        \u003cdiv className=\"grid gap-6 lg:grid-cols-[0.42fr_0.58fr]\"\u003e\r\n          \u003cdiv className=\"space-y-3\"\u003e\r\n            {stakeholders.map((item, index) =\u003e {\r\n              const isActive = index === activeIndex;\r\n\r\n              return (\r\n                \u003cbutton\r\n                  key={item.name}\r\n                  type=\"button\"\r\n                  onClick={() =\u003e setActiveIndex(index)}\r\n                  className={cn(\r\n                    \"w-full rounded-2xl border p-5 text-left transition-colors\",\r\n                    isActive ? \"border-primary bg-primary/5 shadow-sm\" : \"border-border bg-card hover:bg-muted/40\",\r\n                  )}\r\n                \u003e\r\n                  \u003cdiv className=\"flex items-start justify-between gap-3\"\u003e\r\n                    \u003cdiv\u003e\r\n                      \u003cdiv className=\"text-base font-semibold tracking-tight\"\u003e{item.name}\u003c/div\u003e\r\n                      {item.role ? \u003cdiv className=\"mt-1 text-sm text-muted-foreground\"\u003e{item.role}\u003c/div\u003e : null}\r\n                    \u003c/div\u003e\r\n                    {item.priority ? (\r\n                      \u003cspan className=\"text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground\"\u003e\r\n                        {item.priority}\r\n                      \u003c/span\u003e\r\n                    ) : null}\r\n                  \u003c/div\u003e\r\n                  {item.summary ? \u003cp className=\"mt-3 text-sm leading-6 text-muted-foreground\"\u003e{item.summary}\u003c/p\u003e : null}\r\n                \u003c/button\u003e\r\n              );\r\n            })}\r\n          \u003c/div\u003e\r\n\r\n          \u003cdiv className=\"rounded-3xl border border-border bg-card p-6 shadow-sm lg:p-8\"\u003e\r\n            {activeStakeholder ? (\r\n              \u003c\u003e\r\n                \u003cdiv className=\"border-b border-border pb-5\"\u003e\r\n                  \u003cdiv className=\"text-sm font-medium uppercase tracking-[0.2em] text-muted-foreground\"\u003e\r\n                    {activeStakeholder.priority || \"Stakeholder\"}\r\n                  \u003c/div\u003e\r\n                  \u003ch3 className=\"mt-2 text-2xl font-semibold tracking-tight md:text-3xl\"\u003e\r\n                    {activeStakeholder.name}\r\n                  \u003c/h3\u003e\r\n                  {activeStakeholder.role ? (\r\n                    \u003cdiv className=\"mt-2 text-sm text-muted-foreground\"\u003e{activeStakeholder.role}\u003c/div\u003e\r\n                  ) : null}\r\n                  {activeStakeholder.summary ? (\r\n                    \u003cp className=\"mt-4 text-sm leading-7 text-muted-foreground md:text-base\"\u003e\r\n                      {activeStakeholder.summary}\r\n                    \u003c/p\u003e\r\n                  ) : null}\r\n                \u003c/div\u003e\r\n\r\n                \u003cdiv className=\"mt-6 grid gap-3\"\u003e\r\n                  {(activeStakeholder.goals || []).map((goal) =\u003e (\r\n                    \u003cdiv key={goal} className=\"rounded-2xl border border-border bg-muted/30 px-4 py-3 text-sm text-muted-foreground\"\u003e\r\n                      {goal}\r\n                    \u003c/div\u003e\r\n                  ))}\r\n                \u003c/div\u003e\r\n              \u003c/\u003e\r\n            ) : null}\r\n          \u003c/div\u003e\r\n        \u003c/div\u003e\r\n      \u003c/div\u003e\r\n    \u003c/section\u003e\r\n  );\r\n});\r\n\r\nLandingProductStakeholderMap.displayName = \"LandingProductStakeholderMap\";",
+    "LandingProductOnboardingChecklist":  "import { cn } from \"@/lib/utils\";\r\nimport * as React from \"react\";\r\n\r\nexport interface OnboardingChecklistItem {\r\n  title: string;\r\n  owner?: string;\r\n  description?: string;\r\n  status?: \"complete\" | \"active\" | \"upcoming\";\r\n}\r\n\r\nexport interface LandingProductOnboardingChecklistProps\r\n  extends React.HTMLAttributes\u003cHTMLElement\u003e {\r\n  title?: string;\r\n  description?: string;\r\n  items: OnboardingChecklistItem[];\r\n  action?: React.ReactNode;\r\n}\r\n\r\nexport const LandingProductOnboardingChecklist = React.forwardRef\u003c\r\n  HTMLElement,\r\n  LandingProductOnboardingChecklistProps\r\n\u003e(({ className, title = \"Onboarding checklist buyers can forward internally\", description, items, action, ...props }, ref) =\u003e {\r\n  const statusStyles = {\r\n    complete: \"border-emerald-500/30 bg-emerald-500/10\",\r\n    active: \"border-primary/30 bg-primary/10\",\r\n    upcoming: \"border-border bg-card\",\r\n  } as const;\r\n\r\n  return (\r\n    \u003csection ref={ref} className={cn(\"w-full py-12 lg:py-16\", className)} {...props}\u003e\r\n      \u003cdiv className=\"mx-auto flex w-full max-w-6xl flex-col gap-8 px-6\"\u003e\r\n        \u003cdiv className=\"flex flex-col gap-4 md:flex-row md:items-end md:justify-between\"\u003e\r\n          \u003cdiv className=\"flex flex-col gap-3\"\u003e\r\n            \u003ch2 className=\"text-3xl font-semibold tracking-tight md:text-4xl\"\u003e{title}\u003c/h2\u003e\r\n            {description ? \u003cp className=\"max-w-2xl text-base text-muted-foreground md:text-lg\"\u003e{description}\u003c/p\u003e : null}\r\n          \u003c/div\u003e\r\n          {action ? \u003cdiv className=\"shrink-0\"\u003e{action}\u003c/div\u003e : null}\r\n        \u003c/div\u003e\r\n\r\n        \u003cdiv className=\"grid gap-4 lg:grid-cols-3\"\u003e\r\n          {items.map((item, index) =\u003e {\r\n            const status = item.status || (index === 0 ? \"active\" : \"upcoming\");\r\n\r\n            return (\r\n              \u003carticle key={item.title} className={cn(\"rounded-2xl border p-6 shadow-sm\", statusStyles[status])}\u003e\r\n                \u003cdiv className=\"flex items-start justify-between gap-3\"\u003e\r\n                  \u003cdiv className=\"flex h-10 w-10 items-center justify-center rounded-full border border-current/20 bg-background text-sm font-semibold\"\u003e\r\n                    {index + 1}\r\n                  \u003c/div\u003e\r\n                  \u003cdiv className=\"text-xs uppercase tracking-[0.2em] text-muted-foreground\"\u003e{status}\u003c/div\u003e\r\n                \u003c/div\u003e\r\n                \u003ch3 className=\"mt-4 text-base font-semibold tracking-tight\"\u003e{item.title}\u003c/h3\u003e\r\n                {item.owner ? \u003cdiv className=\"mt-2 text-sm text-muted-foreground\"\u003e{item.owner}\u003c/div\u003e : null}\r\n                {item.description ? \u003cp className=\"mt-3 text-sm leading-6 text-muted-foreground\"\u003e{item.description}\u003c/p\u003e : null}\r\n              \u003c/article\u003e\r\n            );\r\n          })}\r\n        \u003c/div\u003e\r\n      \u003c/div\u003e\r\n    \u003c/section\u003e\r\n  );\r\n});\r\n\r\nLandingProductOnboardingChecklist.displayName = \"LandingProductOnboardingChecklist\";",
+    "LandingProductStoryTimeline":  "import { cn } from \"@/lib/utils\";\r\nimport * as React from \"react\";\r\n\r\nexport interface StoryStep {\r\n  title: string;\r\n  description?: string;\r\n  accent?: string;\r\n}\r\n\r\nexport interface LandingProductStoryTimelineProps extends React.HTMLAttributes\u003cHTMLElement\u003e {\r\n  title?: string;\r\n  description?: string;\r\n  steps: StoryStep[];\r\n}\r\n\r\nexport const LandingProductStoryTimeline = React.forwardRef\u003cHTMLElement, LandingProductStoryTimelineProps\u003e(\r\n  ({ className, title, description, steps, ...props }, ref) =\u003e {\r\n    return (\r\n      \u003csection ref={ref} className={cn(\"w-full py-12 lg:py-16\", className)} {...props}\u003e\r\n        \u003cdiv className=\"mx-auto flex w-full max-w-6xl flex-col gap-8 px-6\"\u003e\r\n          \u003cdiv className=\"flex flex-col gap-3\"\u003e\r\n            {title ? \u003ch2 className=\"text-3xl font-semibold tracking-tight md:text-4xl\"\u003e{title}\u003c/h2\u003e : null}\r\n            {description ? \u003cp className=\"max-w-2xl text-base text-muted-foreground md:text-lg\"\u003e{description}\u003c/p\u003e : null}\r\n          \u003c/div\u003e\r\n\r\n          \u003cdiv className=\"relative space-y-4\"\u003e\r\n            \u003cdiv className=\"absolute left-5 top-3 bottom-3 w-px bg-border\" aria-hidden=\"true\" /\u003e\r\n            {steps.map((step, index) =\u003e (\r\n              \u003cdiv key={step.title} className=\"relative flex gap-4 rounded-2xl border border-border bg-card p-5 shadow-sm\"\u003e\r\n                \u003cdiv className=\"relative z-10 flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-border bg-background text-sm font-semibold\"\u003e\r\n                  {index + 1}\r\n                \u003c/div\u003e\r\n                \u003cdiv className=\"flex flex-col gap-2\"\u003e\r\n                  \u003cdiv className=\"flex items-center gap-3\"\u003e\r\n                    \u003ch3 className=\"text-base font-semibold tracking-tight\"\u003e{step.title}\u003c/h3\u003e\r\n                    {step.accent ? \u003cspan className=\"text-xs font-medium uppercase tracking-wide text-muted-foreground\"\u003e{step.accent}\u003c/span\u003e : null}\r\n                  \u003c/div\u003e\r\n                  {step.description ? \u003cp className=\"text-sm leading-6 text-muted-foreground\"\u003e{step.description}\u003c/p\u003e : null}\r\n                \u003c/div\u003e\r\n              \u003c/div\u003e\r\n            ))}\r\n          \u003c/div\u003e\r\n        \u003c/div\u003e\r\n      \u003c/section\u003e\r\n    );\r\n  },\r\n);\r\n\r\nLandingProductStoryTimeline.displayName = \"LandingProductStoryTimeline\";\r\n"
+};
+  </script>
+  <script type="text/babel" data-presets="env,react">
+    const cn = (...inputs) => inputs.filter(Boolean).join(" ");
+    const entries = window.__LIVE_SAMPLE_ENTRIES__;
+    const sourceMap = window.__LIVE_SOURCE_MAP__;
+
+    const transformSource = (source) => {
+      return source
+        .replace(/import\s+\{\s*cn\s*\}\s+from\s+["']@\/lib\/utils["'];?\s*/g, "")
+        .replace(/import\s+\*\s+as\s+React\s+from\s+["']react["'];?\s*/g, "")
+        .replace(/export\s+interface\s+[\s\S]*?\n}\s*/g, "")
+        .replace(/export\s+type\s+[^;]+;\s*/g, "")
+        .replace(/export\s+const\s+/g, "const ")
+        .replace(/export\s+default\s+/g, "")
+        .replace(/export\s+\{[^}]+\};?/g, "")
+        .replace(/\n[A-Za-z0-9_]+\.displayName\s*=\s*"[^"]+";?/g, "")
+        .replace(/\r\n/g, "\n");
+    };
+
+    const getCompiledComponent = (entry) => {
+      const cleaned = transformSource(sourceMap[entry.componentName]);
+      const compiled = Babel.transform(cleaned, {
+        presets: [["typescript", { allExtensions: true, isTSX: true }], ["react", { runtime: "classic" }]],
+      }).code;
+
+      return new Function("React", "cn", compiled + "; return " + entry.componentName + ";")(React, cn);
+    };
+
+    const renderers = new Map();
+    const errors = new Map();
+
+    entries.forEach((entry) => {
+      try {
+        renderers.set(entry.componentName, getCompiledComponent(entry));
+      } catch (error) {
+        errors.set(entry.componentName, error instanceof Error ? error.message : String(error));
+      }
+    });
+
+    const LiveSample = ({ entry }) => {
+      const Component = renderers.get(entry.componentName);
+      const error = errors.get(entry.componentName);
+
+      return (
+        <section className="sample">
+          <div className="sample-head">
+            <div>
+              <strong>{entry.title}</strong>
+              <span>{entry.chapter} - {entry.componentName}</span>
+            </div>
+            <a href={"../" + entry.sourcePath} target="_blank" rel="noreferrer">Open source</a>
+          </div>
+          <div className="sample-body">
+            {Component ? <Component {...entry.props} /> : <div className="status">Render failed: {error}</div>}
+          </div>
+        </section>
+      );
+    };
+
+    const App = () => (
+      <div className="shell">
+        <section className="hero">
+          <div className="flex flex-col gap-6">
+            <div>
+              <p className="eyebrow">Live Gallery</p>
+              <h1>Actual LandingProduct renders.</h1>
+            </div>
+            <p>
+              This is the real thing: live React rendering for curated LandingProduct sections pulled from the stash itself. It is not a poster, not a file index, and not a fake approximation. Source remains one click away, but the primary surface is now the component output.
+            </p>
+          </div>
+          <div className="hero-grid">
+            <div className="hero-card">
+              <strong>What this solves</strong>
+              <span>The archive can finally be reviewed as UI, with real JSX execution and real component layout.</span>
+            </div>
+            <div className="hero-card">
+              <strong>Current scope</strong>
+              <span>Curated live samples across enterprise buying, adoption operations, and narrative systems.</span>
+            </div>
+            <div className="hero-card">
+              <strong>Why curated first</strong>
+              <span>Sample data is still required, so the honest path is to render a strong, deliberate subset instead of faking completeness.</span>
+            </div>
+            <div className="hero-card">
+              <strong>Companion surface</strong>
+              <span>Use the static gallery for wide browse and this live gallery for actual component inspection.</span>
+            </div>
+          </div>
+        </section>
+
+        <div className="gallery">
+          {entries.map((entry) => <LiveSample key={entry.componentName} entry={entry} />)}
+        </div>
+      </div>
+    );
+
+    ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+  </script>
+</body>
+</html>
