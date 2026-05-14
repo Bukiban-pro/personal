@@ -1,4 +1,4 @@
-﻿# UI Lab Library Guide
+# UI Lab Library Guide
 
 This is the repo-level entrypoint. Use it to decide where to start before you dive into any single subsystem.
 
@@ -23,6 +23,7 @@ This is the repo-level entrypoint. Use it to decide where to start before you di
 - LandingProduct subsystem guide: `ui_lab/docs/LANDING_PRODUCT_LIBRARY_GUIDE.md`
 - Curation queue: `ui_lab/docs/UI_LAB_CURATION_QUEUE.md`
 - Generator: `ui_lab/docs/generate-ui-lab-library-catalog.ps1`
+- Metadata Specification (v2): `ui_lab/docs/UI_LIBRARY_METADATA_V2.md`
 
 ## First Stops
 1. Start with the starter lanes if you are building a page or product surface from scratch.
@@ -45,7 +46,7 @@ This is the repo-level entrypoint. Use it to decide where to start before you di
 - Providers: `4` files in `ui_lab/providers` (recursive folder count)
 - Store: `2` files in `ui_lab/store` (recursive folder count)
 - Configs: `5` files in `ui_lab/configs` (recursive folder count)
-- Docs: `8` files in `ui_lab/docs` (recursive folder count)
+- Docs: `9` files in `ui_lab/docs` (recursive folder count)
 - Styling: `1` files in `ui_lab/styling` (recursive folder count)
 
 ## Starter Lanes
