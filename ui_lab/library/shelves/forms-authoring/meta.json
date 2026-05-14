@@ -30,7 +30,7 @@
                        "FormToggle",
                        "InputAddon",
                        "MarkdownEditor",
-                       "Pagination",
+                       "pagination",
                        "QRCodeGenerator",
                        "ResizablePanel",
                        "RichTextEditor",

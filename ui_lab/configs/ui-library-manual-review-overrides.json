@@ -2,7 +2,24 @@
     {
         "name":  "Avatar",
         "profileOverrides":  {
+                                 "allowedContexts":  [
+                                                         "authenticated_identity_rows",
+                                                         "profile_headers_with_visible_names",
+                                                         "participant_lists"
+                                                     ],
                                  "accessibilityConfidence":  4,
+                                 "avoidWhen":  [
+                                                     "avatar_is_only_identity_signal",
+                                                     "trust_decision_surfaces_without_supporting_text"
+                                                 ],
+                                 "bestFor":  [
+                                                 "lightweight_identity_cues"
+                                             ],
+                                 "disallowedContexts":  [
+                                                            "identity_without_visible_name",
+                                                            "decorative_chrome_only",
+                                                            "critical_approval_steps_without_text_labels"
+                                                        ],
                                  "failureCost":  2,
                                  "opinionation":  2,
                                  "expressiveness":  2,
@@ -39,9 +56,26 @@
                            }
     },
     {
-        "name":  "Badge",
+        "name":  "badge",
         "profileOverrides":  {
+                                 "allowedContexts":  [
+                                                         "status_chips",
+                                                         "category_labels",
+                                                         "small_counts"
+                                                     ],
                                  "accessibilityConfidence":  4,
+                                 "avoidWhen":  [
+                                                     "copy_should_carry_the_meaning",
+                                                     "critical_decisions_depend_on_chip_color"
+                                                 ],
+                                 "bestFor":  [
+                                                 "compact_status_communication"
+                                             ],
+                                 "disallowedContexts":  [
+                                                            "color_only_critical_meaning",
+                                                            "primary_explanation",
+                                                            "decorative_noise"
+                                                        ],
                                  "failureCost":  2,
                                  "opinionation":  2,
                                  "expressiveness":  1,
@@ -80,7 +114,24 @@
     {
         "name":  "CommandPalette",
         "profileOverrides":  {
+                                 "allowedContexts":  [
+                                                         "power_user_command_access",
+                                                         "high_frequency_keyboard_workflows",
+                                                         "discoverable_command_sets"
+                                                     ],
                                  "accessibilityConfidence":  4,
+                                 "avoidWhen":  [
+                                                     "information_architecture_is_already_opaque",
+                                                     "command_grammar_is_weak"
+                                                 ],
+                                 "bestFor":  [
+                                                 "accelerated_recall_based_workflows"
+                                             ],
+                                 "disallowedContexts":  [
+                                                            "primary_navigation_replacement",
+                                                            "unindexed_actions",
+                                                            "novelty_shells"
+                                                        ],
                                  "failureCost":  3,
                                  "opinionation":  3,
                                  "expressiveness":  2,
@@ -106,7 +157,7 @@
                                               ],
                                "whyNow":  "High leverage surface that can become performative complexity if command grammar is weak.",
                                "evidenceRefs":  [
-                                                    "ui_lab/components/shelves/navigation-and-command/CommandPalette.tsx",
+                                                    "ui_lab/components/shelves/navigation-command/CommandPalette.tsx",
                                                     "ui_lab/docs/UI_LIBRARY_METADATA_V2.md"
                                                 ],
                                "stance":  "pilot_only",
@@ -119,7 +170,24 @@
     {
         "name":  "CommandMenu",
         "profileOverrides":  {
+                                 "allowedContexts":  [
+                                                         "secondary_action_clusters",
+                                                         "dense_toolbar_overflow",
+                                                         "contextual_action_sets"
+                                                     ],
                                  "accessibilityConfidence":  4,
+                                 "avoidWhen":  [
+                                                     "core_actions_are_hidden_from_visible_ia",
+                                                     "labels_require_guesswork"
+                                                 ],
+                                 "bestFor":  [
+                                                 "dense_secondary_action_access"
+                                             ],
+                                 "disallowedContexts":  [
+                                                            "primary_navigation_replacement",
+                                                            "hidden_core_actions",
+                                                            "ambiguous_action_labels"
+                                                        ],
                                  "failureCost":  3,
                                  "opinionation":  3,
                                  "expressiveness":  2,
@@ -145,7 +213,7 @@
                                               ],
                                "whyNow":  "Useful for dense action sets but dangerous when it hides primary actions.",
                                "evidenceRefs":  [
-                                                    "ui_lab/components/shelves/navigation-and-command/CommandMenu.tsx",
+                                                    "ui_lab/components/shelves/navigation-command/CommandMenu.tsx",
                                                     "ui_lab/docs/UI_LIBRARY_METADATA_V2.md"
                                                 ],
                                "stance":  "pilot_only",
@@ -158,9 +226,27 @@
     {
         "name":  "ConfirmDialog",
         "profileOverrides":  {
+                                 "allowedContexts":  [
+                                                         "destructive_confirmation",
+                                                         "irreversible_action_confirmation",
+                                                         "high_consequence_user_actions"
+                                                     ],
                                  "accessibilityConfidence":  4,
+                                 "avoidWhen":  [
+                                                     "generic_confirmation_copy",
+                                                     "routine_acknowledgement"
+                                                 ],
+                                 "bestFor":  [
+                                                 "high_consequence_confirmation"
+                                             ],
+                                 "disallowedContexts":  [
+                                                            "status_updates",
+                                                            "low_risk_confirmation",
+                                                            "decorative_feedback"
+                                                        ],
                                  "failureCost":  5,
                                  "opinionation":  3,
+                                 "primaryJob":  "confirm_irreversible_or_high_consequence_actions",
                                  "expressiveness":  1,
                                  "formality":  5,
                                  "interactionIntensity":  3,
@@ -197,9 +283,27 @@
     {
         "name":  "CookieConsent",
         "profileOverrides":  {
+                                 "allowedContexts":  [
+                                                         "privacy_consent",
+                                                         "cookie_preference_management",
+                                                         "compliance_required_disclosure"
+                                                     ],
                                  "accessibilityConfidence":  4,
+                                 "avoidWhen":  [
+                                                     "dark_patterned_growth_surfaces",
+                                                     "accept_only_bias"
+                                                 ],
+                                 "bestFor":  [
+                                                 "policy_required_consent_collection"
+                                             ],
+                                 "disallowedContexts":  [
+                                                            "status_updates",
+                                                            "marketing_prompts",
+                                                            "decorative_feedback"
+                                                        ],
                                  "failureCost":  5,
                                  "opinionation":  3,
+                                 "primaryJob":  "capture_policy_sensitive_consent_choices",
                                  "expressiveness":  1,
                                  "formality":  5,
                                  "interactionIntensity":  2,
@@ -236,7 +340,24 @@
     {
         "name":  "DataTable",
         "profileOverrides":  {
+                                 "allowedContexts":  [
+                                                         "operational_browse_surfaces",
+                                                         "high_density_record_inspection",
+                                                         "sortable_filterable_datasets"
+                                                     ],
                                  "accessibilityConfidence":  3,
+                                 "avoidWhen":  [
+                                                     "users_need_guided_explanation",
+                                                     "content_is_unstructured"
+                                                 ],
+                                 "bestFor":  [
+                                                 "multi_record_operational_analysis"
+                                             ],
+                                 "disallowedContexts":  [
+                                                            "narrative_decision_explanation",
+                                                            "single_critical_decision_copy",
+                                                            "unstructured_storytelling"
+                                                        ],
                                  "failureCost":  4,
                                  "opinionation":  3,
                                  "expressiveness":  2,
@@ -275,7 +396,24 @@
     {
         "name":  "AdvancedAutocomplete",
         "profileOverrides":  {
+                                 "allowedContexts":  [
+                                                         "constrained_vocabulary_input",
+                                                         "assisted_entity_selection",
+                                                         "high_cardinality_lookup_with_clear_disambiguation"
+                                                     ],
                                  "accessibilityConfidence":  4,
+                                 "avoidWhen":  [
+                                                     "suggestions_are_not_trustworthy",
+                                                     "keyboard_model_is_incomplete"
+                                                 ],
+                                 "bestFor":  [
+                                                 "assisted_known_item_entry"
+                                             ],
+                                 "disallowedContexts":  [
+                                                            "weak_source_quality",
+                                                            "ambiguous_entity_selection",
+                                                            "unreliable_async_lookup"
+                                                        ],
                                  "failureCost":  4,
                                  "opinionation":  2,
                                  "expressiveness":  2,
@@ -314,7 +452,24 @@
     {
         "name":  "DateRangePicker",
         "profileOverrides":  {
+                                 "allowedContexts":  [
+                                                         "bounded_reporting_ranges",
+                                                         "analytics_filters",
+                                                         "scheduling_with_clear_constraints"
+                                                     ],
                                  "accessibilityConfidence":  3,
+                                 "avoidWhen":  [
+                                                     "boundary_rules_are_implicit",
+                                                     "timezone_logic_is_unclear"
+                                                 ],
+                                 "bestFor":  [
+                                                 "bounded_range_selection"
+                                             ],
+                                 "disallowedContexts":  [
+                                                            "timezone_ambiguous_input",
+                                                            "unbounded_historical_guessing",
+                                                            "mobile_first_without_fallback"
+                                                        ],
                                  "failureCost":  4,
                                  "opinionation":  2,
                                  "expressiveness":  2,
@@ -353,7 +508,24 @@
     {
         "name":  "FileUpload",
         "profileOverrides":  {
+                                 "allowedContexts":  [
+                                                         "contracted_file_submission",
+                                                         "validated_media_upload",
+                                                         "document_collection_with_clear_requirements"
+                                                     ],
                                  "accessibilityConfidence":  3,
+                                 "avoidWhen":  [
+                                                     "file_contract_is_ambiguous",
+                                                     "failure_state_is_opaque"
+                                                 ],
+                                 "bestFor":  [
+                                                 "validated_file_collection"
+                                             ],
+                                 "disallowedContexts":  [
+                                                            "unclear_file_requirements",
+                                                            "silent_validation",
+                                                            "hidden_retry_paths"
+                                                        ],
                                  "failureCost":  4,
                                  "opinionation":  3,
                                  "expressiveness":  2,
@@ -392,9 +564,27 @@
     {
         "name":  "Modal",
         "profileOverrides":  {
+                                 "allowedContexts":  [
+                                                         "high_consequence_interruption",
+                                                         "focus_locked_confirmation",
+                                                         "task_blocking_required_attention"
+                                                     ],
                                  "accessibilityConfidence":  4,
+                                 "avoidWhen":  [
+                                                     "content_can_be_inline",
+                                                     "interruption_is_not_justified"
+                                                 ],
+                                 "bestFor":  [
+                                                 "blocking_decisions_that_cannot_be_inline"
+                                             ],
+                                 "disallowedContexts":  [
+                                                            "background_status_updates",
+                                                            "routine_browse_content",
+                                                            "marketing_detours"
+                                                        ],
                                  "failureCost":  5,
                                  "opinionation":  3,
+                                 "primaryJob":  "interrupt_flow_for_high_consequence_attention",
                                  "expressiveness":  1,
                                  "formality":  5,
                                  "interactionIntensity":  3,
@@ -431,7 +621,24 @@
     {
         "name":  "SearchFilter",
         "profileOverrides":  {
+                                 "allowedContexts":  [
+                                                         "results_browse_surfaces",
+                                                         "dataset_exploration",
+                                                         "admin_filtering"
+                                                     ],
                                  "accessibilityConfidence":  4,
+                                 "avoidWhen":  [
+                                                     "active_constraints_are_hidden",
+                                                     "reset_behavior_is_ambiguous"
+                                                 ],
+                                 "bestFor":  [
+                                                 "visible_reversible_filtering"
+                                             ],
+                                 "disallowedContexts":  [
+                                                            "hidden_filter_defaults",
+                                                            "opaque_query_state",
+                                                            "silent_result_mutation"
+                                                        ],
                                  "failureCost":  3,
                                  "opinionation":  2,
                                  "expressiveness":  1,
@@ -470,7 +677,24 @@
     {
         "name":  "Stepper",
         "profileOverrides":  {
+                                 "allowedContexts":  [
+                                                         "strictly_sequential_workflows",
+                                                         "wizard_progress",
+                                                         "ordered_multi_step_completion"
+                                                     ],
                                  "accessibilityConfidence":  4,
+                                 "avoidWhen":  [
+                                                     "process_order_is_not_real",
+                                                     "users_jump_freely_between_steps"
+                                                 ],
+                                 "bestFor":  [
+                                                 "true_sequential_progress"
+                                             ],
+                                 "disallowedContexts":  [
+                                                            "nonlinear_tasks",
+                                                            "optional_step_mix",
+                                                            "freeform_navigation"
+                                                        ],
                                  "failureCost":  3,
                                  "opinionation":  2,
                                  "expressiveness":  2,
@@ -496,7 +720,7 @@
                                               ],
                                "whyNow":  "Sequential framing helps only when process order is actually real.",
                                "evidenceRefs":  [
-                                                    "ui_lab/components/shelves/forms-authoring/Stepper.tsx",
+                                                    "ui_lab/components/shelves/data-admin/Stepper.tsx",
                                                     "ui_lab/docs/UI_LIBRARY_METADATA_V2.md"
                                                 ],
                                "stance":  "ship_guarded",
@@ -509,7 +733,24 @@
     {
         "name":  "Toast",
         "profileOverrides":  {
+                                 "allowedContexts":  [
+                                                         "background_process_completion",
+                                                         "low_risk_confirmation",
+                                                         "non_blocking_status_updates"
+                                                     ],
                                  "accessibilityConfidence":  4,
+                                 "avoidWhen":  [
+                                                     "user_must_remember_or_decide_from_message",
+                                                     "action_requires_persistent_context"
+                                                 ],
+                                 "bestFor":  [
+                                                 "ephemeral_feedback"
+                                             ],
+                                 "disallowedContexts":  [
+                                                            "destructive_confirmation",
+                                                            "legal_consent",
+                                                            "blocking_decisions"
+                                                        ],
                                  "failureCost":  3,
                                  "opinionation":  2,
                                  "expressiveness":  1,

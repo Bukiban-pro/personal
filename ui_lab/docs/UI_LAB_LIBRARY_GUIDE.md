@@ -145,8 +145,8 @@ These pairs are not automatically wrong, but they are the first place to inspect
 - Every catalog component filename has an exact grouped entrypoint in `ui_lab/library/by-name`.
 - Every shelf and starter-lane folder now has a strict `components.ts` barrel for exact file-name imports only.
 - Every registry component now includes `decisionMetadataV2` with layered intent, eligibility, readiness, cost, character, and provenance fields.
-- Every registry component is also individually reviewed with a component-specific heuristic walk-through and written review notes.
-- Every component metadata record is emitted into `ui_lab/configs/ui-library-component-metadata-v2.json` and marked by GitHub Copilot.
+- Every registry component now includes generator-authored heuristic notes, and manual review overrides are explicitly marked instead of being implied.
+- Every component metadata record is emitted into `ui_lab/configs/ui-library-component-metadata-v2.json` with its generation mode and reviewer identity preserved.
 - Every component also has a ranked summary in `ui_lab/configs/ui-library-component-rankings-v2.json` so the library can be compared at a glance.
 - Physical shelf folders, when present, match the generator-owned shelf classification.
 - Folder counts are generated from disk, not manually maintained.
@@ -154,6 +154,6 @@ These pairs are not automatically wrong, but they are the first place to inspect
 
 ## Refresh Command
 ```powershell
-Set-Location 'c:\Users\Bukanto\Downloads\pp\personal'
+Set-Location 'C:\Users\YOGA\Desktop\personal'
 .\ui_lab\docs\generate-ui-lab-library-catalog.ps1
 ```

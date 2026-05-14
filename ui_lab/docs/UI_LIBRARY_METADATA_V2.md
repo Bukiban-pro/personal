@@ -44,7 +44,7 @@ The clearest improvement is a seven-layer schema: Identity, Intent, Eligibility,
 | Readiness | Indicate trust and production confidence | Lifecycle, adoption, evidence type, stability, accessibility confidence  |
 | Operational Cost | Capture implementation and runtime burden | Performance budget fit, complexity, dependency burden  |
 | Behavioral Character | Describe tone and expressive behavior | Opinionation, expressiveness, formality, interaction intensity, visual dominance  |
-| Provenance | Make metadata auditable | Owner, reviewers, last reviewed, examples, changelog, source links  |
+| Provenance | Make metadata auditable | Owner, reviewers, last reviewed, review mode, heuristic inputs, examples, changelog, source links  |
 
 ## Field definitions
 
@@ -119,10 +119,14 @@ Behavioral character captures the component’s experiential profile. These fiel
 
 Provenance is what makes the metadata maintainable over time. AI-ready systems increasingly depend on structured records, source links, and reviewable artifacts, not only descriptive text.
 
+If a record is generated rather than directly evidenced, provenance should retain the structured heuristic inputs that shaped it, such as mined Use hints, source-derived signals, or other generator-visible traces. That evidence should stay machine-readable instead of being buried only in review prose.
+
 - Owner
 - Last reviewed date
 - Reviewer list
-- Linked examples
+- Review mode, such as manual readthrough or heuristic inference
+- Heuristic inputs, such as mined Use hints and source-derived signals when the record is generator-authored
+- Linked examples, ideally component-specific import anchors rather than only shelf folders
 - Source links
 - Changelog
 - Confidence notes
@@ -147,6 +151,12 @@ A component may only work well when certain conditions exist, such as enough vie
 
 A single “research” score is too coarse. A stronger system records whether confidence comes from usability tests, analytics, accessibility audits, expert review, or production history.
 
+If direct evidence is absent, the record should say so explicitly instead of borrowing confidence from a broader shelf or family. A component-level record should not inherit labels such as production observed or accessibility audited unless that evidence truly exists for that component. Honest states such as taxonomy inferred, heuristic inference, or manual readthrough are more useful than false precision because they preserve trust and prevent machines from overcommitting.
+
+When a record depends on heuristic inference, the supporting inputs should remain inspectable in structured metadata. A machine should be able to see which mined hints or source-level signals influenced the classification, rather than relying on a freeform note that cannot be safely reasoned over.
+
+Linked examples should be equally explicit. A reference like a whole shelf folder is useful for browsing, but not precise enough for selection systems. Provenance is stronger when it points to component-specific grouped entrypoints, starter-lane anchors when applicable, and source files that let humans and machines trace the recommendation back to a concrete implementation surface.
+
 ### Failure cost
 
 Not all wrong choices are equally harmful. A decorative hero card, a destructive confirmation modal, and a consent step have very different misuse costs. That makes failure cost an important addition to serious component governance, even if it is not a purely visual attribute.
@@ -154,6 +164,8 @@ Not all wrong choices are equally harmful. A decorative hero card, a destructive
 ### Autonomy allowance
 
 Even if autonomous decision-making is not the main scope of the library today, this field future-proofs the schema. It distinguishes components that can be automatically selected from those that should only be suggested or require human review.
+
+That field only becomes meaningful when review decisions affect the real selection surface. If a component is judged pilot only or do not default, that decision should constrain autonomy allowance, lifecycle, and disallowed contexts rather than living only in notes.
 
 ## What to remove or merge
 

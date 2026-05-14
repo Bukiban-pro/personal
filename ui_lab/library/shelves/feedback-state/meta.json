@@ -28,7 +28,7 @@
                        "PageLoading",
                        "PagePreloader",
                        "ScrollToTop",
-                       "Skeleton",
+                       "skeleton",
                        "Toast",
                        "TopLoadingBar"
                    ],

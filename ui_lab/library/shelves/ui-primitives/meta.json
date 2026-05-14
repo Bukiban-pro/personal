@@ -14,15 +14,15 @@
     "components":  [
                        "Avatar",
                        "AvatarCircles",
-                       "Badge",
+                       "badge",
                        "Divider",
                        "Menu",
-                       "Popover",
-                       "Sheet",
+                       "popover",
+                       "sheet",
                        "StatusBadge",
                        "ThemeToggle",
                        "ToggleGroup",
-                       "Tooltip"
+                       "tooltip"
                    ],
     "exactExportPath":  "ui_lab/library/shelves/ui-primitives/components.ts",
     "fullExportPath":  "ui_lab/library/shelves/ui-primitives/index.ts",

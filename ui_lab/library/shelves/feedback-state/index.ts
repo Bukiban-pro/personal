@@ -13,7 +13,8 @@ export { OverlayLoader } from "../../../components/shelves/feedback-state/Overla
 export { PageLoading } from "../../../components/shelves/feedback-state/PageLoading";
 export { PagePreloader } from "../../../components/shelves/feedback-state/PagePreloader";
 export { ScrollToTop } from "../../../components/shelves/feedback-state/ScrollToTop";
-export { Skeleton } from "../../../components/shelves/feedback-state/Skeleton";
+export { Skeleton } from "../../../components/shelves/feedback-state/skeleton";
+export { Skeleton as skeleton } from "../../../components/shelves/feedback-state/skeleton";
 export { useToast } from "../../../components/shelves/feedback-state/Toast";
 export { ToastProvider } from "../../../components/shelves/feedback-state/Toast";
 export * as Toast from "../../../components/shelves/feedback-state/Toast";

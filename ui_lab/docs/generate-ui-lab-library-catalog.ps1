@@ -319,7 +319,7 @@ function Get-PrimaryBarrelLines {
     if ($info.resolvedPrimaryNamedExport) {
       $lines.Add((New-GuideLine 'export {{ {0} }} from "{1}";' $info.resolvedPrimaryNamedExport $modulePath))
 
-      if ($info.resolvedPrimaryNamedExport -ne $info.file) {
+      if ($info.resolvedPrimaryNamedExport -cne $info.file) {
         $lines.Add((New-GuideLine 'export {{ {0} as {1} }} from "{2}";' $info.resolvedPrimaryNamedExport $info.file $modulePath))
       }
       continue
@@ -357,7 +357,7 @@ function Get-ExactNameExportInfo {
   $modulePath = Get-RelativeImportPath -FromDirectory $BarrelDirectory -ToFilePath $ComponentInfo.sourceFilePath
 
   if ($ComponentInfo.resolvedPrimaryNamedExport) {
-    if ($ComponentInfo.resolvedPrimaryNamedExport -eq $ComponentInfo.file) {
+    if ($ComponentInfo.resolvedPrimaryNamedExport -ceq $ComponentInfo.file) {
       return [pscustomobject]@{
         exportKind = 'named'
         sourceExport = $ComponentInfo.file
@@ -406,6 +406,62 @@ function Get-ExactNameBarrelLines {
   }))
 }
 
+function Convert-ToMetadataTag {
+  param([Parameter(Mandatory = $true)][string]$Text)
+
+  $normalized = $Text.ToLowerInvariant().Replace('&', ' and ')
+  $normalized = [regex]::Replace($normalized, '[^a-z0-9]+', '_').Trim('_')
+  if ([string]::IsNullOrWhiteSpace($normalized)) {
+    return $null
+  }
+
+  return $normalized
+}
+
+function Get-UsageHintTags {
+  param([Parameter(Mandatory = $true)][string]$SourceContent)
+
+  $tags = [System.Collections.Generic.List[string]]::new()
+
+  foreach ($match in [regex]::Matches($SourceContent, '(?im)^\s*\*?\s*Use\s*:\s*(.+)$')) {
+    foreach ($segment in ($match.Groups[1].Value -split '[,;/]')) {
+      $tag = Convert-ToMetadataTag -Text $segment.Trim()
+      if ($tag -and -not $tags.Contains($tag)) {
+        $tags.Add($tag)
+      }
+    }
+  }
+
+  return @($tags)
+}
+
+function Get-SourceSignalTokens {
+  param([Parameter(Mandatory = $true)][string]$SourceContent)
+
+  $signals = [System.Collections.Generic.List[string]]::new()
+
+  function Add-SourceSignal {
+    param([string]$Signal)
+
+    if (-not [string]::IsNullOrWhiteSpace($Signal) -and -not $signals.Contains($Signal)) {
+      $signals.Add($Signal)
+    }
+  }
+
+  if ($SourceContent -match 'framer-motion|\bmotion\.|AnimatePresence|Lottie') { Add-SourceSignal 'motion_runtime' }
+  if ($SourceContent -match 'metaKey|ctrlKey|keydown|CommandPrimitive|cmdk') { Add-SourceSignal 'keyboard_command' }
+  if ($SourceContent -match 'type\s*=\s*["'']file["'']|drag|drop') { Add-SourceSignal 'file_runtime' }
+  if ($SourceContent -match '<table|<thead|<tbody|\bTable\b') { Add-SourceSignal 'table_runtime' }
+  if ($SourceContent -match 'Chart|Graph|Heatmap|Gauge|Radar|LineChart|BarChart|svg') { Add-SourceSignal 'chart_runtime' }
+  if ($SourceContent -match 'Dialog|Modal|role\s*=\s*["'']dialog["'']') { Add-SourceSignal 'overlay_runtime' }
+  if ($SourceContent -match '<input|<textarea|<select|onChange|onSubmit') { Add-SourceSignal 'form_runtime' }
+  if ($SourceContent -match 'currentStep|onStepChange|steps\s*=|StepItem') { Add-SourceSignal 'step_runtime' }
+  if ($SourceContent -match 'onScroll|scroll|IntersectionObserver|Parallax') { Add-SourceSignal 'scroll_runtime' }
+  if ($SourceContent -match 'carousel|lightbox|gallery|video|image') { Add-SourceSignal 'media_runtime' }
+
+  return @($signals)
+}
+
 function Get-ModuleExportInfo {
   param(
     [Parameter(Mandatory = $true)][System.IO.FileInfo]$File,
@@ -438,6 +494,8 @@ function Get-ModuleExportInfo {
     sourceFilePath = $File.FullName
     relativeComponentPath = $relativeComponentPath
     physicalShelfKey = $physicalShelfKey
+    useHints = @(Get-UsageHintTags -SourceContent $content)
+    sourceSignals = @(Get-SourceSignalTokens -SourceContent $content)
     namedExports = $namedExports
     resolvedPrimaryNamedExport = $resolvedPrimaryNamedExport
     hasDefaultExport = [regex]::IsMatch($content, 'export\s+default\s+')
@@ -477,7 +535,10 @@ function Get-ComponentMetadataProfile {
   param(
     [Parameter(Mandatory = $true)][string]$ComponentName,
     [Parameter(Mandatory = $true)][string]$ShelfKey,
-    [Parameter(Mandatory = $true)][hashtable]$Profiles
+    [Parameter(Mandatory = $true)][hashtable]$Profiles,
+    [AllowEmptyCollection()][string[]]$UsageHints = @(),
+    [AllowEmptyCollection()][string[]]$SourceSignals = @(),
+    [string]$RelativeComponentPath = ''
   )
 
   $profile = Copy-Hashtable -InputObject $Profiles[$ShelfKey]
@@ -492,6 +553,101 @@ function Get-ComponentMetadataProfile {
     if (-not [string]::IsNullOrWhiteSpace($Signal) -and -not $signals.Contains($Signal)) {
       $signals.Add($Signal)
     }
+  }
+
+  $profileTokens = [System.Collections.Generic.HashSet[string]]::new([System.StringComparer]::OrdinalIgnoreCase)
+  $profilePhraseFragments = [System.Collections.Generic.List[string]]::new()
+
+  function Add-ProfileToken {
+    param([string]$Token)
+
+    if ([string]::IsNullOrWhiteSpace($Token)) {
+      return
+    }
+
+    $normalizedToken = Convert-ToMetadataTag -Text $Token
+    if ($normalizedToken) {
+      [void]$profileTokens.Add($normalizedToken)
+    }
+  }
+
+  function Add-ProfilePhraseText {
+    param([string]$Text)
+
+    if ([string]::IsNullOrWhiteSpace($Text)) {
+      return
+    }
+
+    $normalizedText = Convert-ToMetadataTag -Text $Text
+    if ($normalizedText) {
+      $profilePhraseFragments.Add($normalizedText)
+    }
+  }
+
+  function Test-AnyProfileToken {
+    param([string[]]$Candidates)
+
+    foreach ($candidate in $Candidates) {
+      $normalizedCandidate = Convert-ToMetadataTag -Text $candidate
+      if ($normalizedCandidate -and $profileTokens.Contains($normalizedCandidate)) {
+        return $true
+      }
+    }
+
+    return $false
+  }
+
+  function Test-AnyProfilePhrase {
+    param([string[]]$Candidates)
+
+    foreach ($candidate in $Candidates) {
+      $normalizedCandidate = Convert-ToMetadataTag -Text $candidate
+      if (-not $normalizedCandidate) {
+        continue
+      }
+
+      foreach ($fragment in $profilePhraseFragments) {
+        if ($fragment.Contains($normalizedCandidate)) {
+          return $true
+        }
+      }
+    }
+
+    return $false
+  }
+
+  foreach ($token in @(Get-IdentifierTokens -Text $ComponentName)) {
+    Add-ProfileToken $token
+  }
+
+  Add-ProfilePhraseText $ComponentName
+
+  if (-not [string]::IsNullOrWhiteSpace($RelativeComponentPath)) {
+    $ignoredPathTokens = [System.Collections.Generic.HashSet[string]]::new([System.StringComparer]::OrdinalIgnoreCase)
+    foreach ($ignoredToken in @('components', 'component', 'shelves', 'shelf', 'starter', 'starters', 'lanes', 'lane', 'ui', 'lab', 'library')) {
+      [void]$ignoredPathTokens.Add($ignoredToken)
+    }
+
+    foreach ($shelfToken in @(Get-IdentifierTokens -Text $ShelfKey)) {
+      [void]$ignoredPathTokens.Add($shelfToken)
+    }
+
+    foreach ($token in @(Get-IdentifierTokens -Text $RelativeComponentPath)) {
+      $normalizedPathToken = Convert-ToMetadataTag -Text $token
+      if ($normalizedPathToken -and -not $ignoredPathTokens.Contains($normalizedPathToken)) {
+        Add-ProfileToken $normalizedPathToken
+      }
+    }
+  }
+
+  foreach ($usageHint in @($UsageHints)) {
+    Add-ProfileToken $usageHint
+    Add-ProfilePhraseText $usageHint
+  }
+
+  foreach ($sourceSignal in @($SourceSignals)) {
+    Add-ProfileToken $sourceSignal
+    Add-ProfilePhraseText $sourceSignal
   }
 
   switch -Regex ($ComponentName) {
@@ -624,19 +780,483 @@ function Get-ComponentMetadataProfile {
     }
   }
 
-  $signalSummary = 'none'
+  if ($UsageHints.Count -gt 0) {
+    Add-Signal 'usage_hints'
+    $profile.bestFor = @(Merge-UniqueStringArray -BaseItems $profile.bestFor -AdditionalItems @($UsageHints | Select-Object -First 3))
+    $profile.allowedContexts = @(Merge-UniqueStringArray -BaseItems $profile.allowedContexts -AdditionalItems @($UsageHints | Select-Object -First 2))
+  }
+
+  if ($SourceSignals.Count -gt 0) {
+    Add-Signal 'source_analysis'
+  }
+
+  switch ($ShelfKey) {
+    'landing-product-system' {
+      if ((Test-AnyProfilePhrase @('sla_commitments', 'technical_validation')) -or (Test-AnyProfileToken @('trust', 'proof', 'evidence', 'audit', 'compliance', 'security', 'identity', 'residency', 'governance', 'sla', 'technical', 'validation', 'commitment', 'commitments'))) {
+        Add-Signal 'landing_trust'
+        $profile.subfamily = 'trust_and_assurance_narratives'
+        $profile.primaryJob = 'establish_trust_and_reduce_purchase_risk'
+        $profile.secondaryJobs = @('compliance_proof', 'assurance_building')
+        $profile.userGoal = 'verify_risk_and_trustworthiness'
+        $profile.primaryInteractionModel = 'disclosure'
+        $profile.uxPatternType = 'proof_pattern'
+        $profile.allowedContexts = @('trust_building_surfaces', 'compliance_proof_sections', 'risk_reduction_storytelling')
+        $profile.disallowedContexts = @('critical_health_alerts', 'casual_consumer_promotions')
+        $profile.bestFor = @('trust_and_assurance_proof')
+        $profile.avoidWhen = @('evidence_is_thin_or_unverifiable')
+        $profile.requiredApprovals = @(Merge-UniqueStringArray -BaseItems $profile.requiredApprovals -AdditionalItems @('security_review'))
+        $profile.formality = [Math]::Min(5, [int]$profile.formality + 1)
+        $profile.failureCost = [Math]::Min(5, [int]$profile.failureCost + 1)
+      } elseif ((Test-AnyProfilePhrase @('trial_conversion', 'retention_levers')) -or (Test-AnyProfileToken @('value', 'pricing', 'revenue', 'commercial', 'cost', 'business_case', 'business', 'procurement', 'benchmark', 'allocation', 'trial', 'conversion', 'retention', 'levers'))) {
+        Add-Signal 'landing_value'
+        $profile.subfamily = 'commercial_value_stories'
+        $profile.primaryJob = 'quantify_business_value_and_commercial_case'
+        $profile.secondaryJobs = @('roi_justification', 'procurement_alignment')
+        $profile.userGoal = 'validate_financial_upside_and_buying_case'
+        $profile.primaryInteractionModel = 'compare'
+        $profile.uxPatternType = 'comparison_pattern'
+        $profile.allowedContexts = @('roi_justification', 'commercial_evaluation', 'procurement_alignment')
+        $profile.disallowedContexts = @('legal_consent', 'pure_brand_mood_sections')
+        $profile.bestFor = @('value_case_and_commercial_alignment')
+        $profile.avoidWhen = @('financial_inputs_are_speculative')
+        $profile.analyticsConfidence = [Math]::Min(5, [int]$profile.analyticsConfidence + 1)
+        $profile.formality = [Math]::Min(5, [int]$profile.formality + 1)
+      } elseif ((Test-AnyProfilePhrase @('qbr_framework')) -or (Test-AnyProfileToken @('decision', 'executive', 'board', 'committee', 'council', 'sponsor', 'review', 'steering', 'briefing', 'summary', 'boardroom', 'qbr'))) {
+        Add-Signal 'landing_decision'
+        $profile.subfamily = 'executive_decision_support'
+        $profile.primaryJob = 'align_executive_decision_making'
+        $profile.secondaryJobs = @('stakeholder_alignment', 'decision_compression')
+        $profile.userGoal = 'reach_high_confidence_buying_alignment'
+        $profile.primaryInteractionModel = 'compare'
+        $profile.uxPatternType = 'structured_data_view'
+        $profile.allowedContexts = @('executive_reviews', 'decision_committee_surfaces', 'board_level_summaries')
+        $profile.disallowedContexts = @('casual_consumer_browse', 'lightweight_social_proof')
+        $profile.bestFor = @('executive_alignment_and_decision_support')
+        $profile.avoidWhen = @('decision_owners_are_undefined')
+        $profile.formality = [Math]::Min(5, [int]$profile.formality + 1)
+        $profile.failureCost = [Math]::Min(5, [int]$profile.failureCost + 1)
+        $profile.densityFeel = [Math]::Min(5, [int]$profile.densityFeel + 1)
+      } elseif (Test-AnyProfileToken @('adoption', 'change', 'enablement', 'journey', 'rollout', 'milestones', 'launch', 'implementation', 'playback', 'office', 'capacity', 'readiness', 'expansion')) {
+        Add-Signal 'landing_rollout'
+        $profile.subfamily = 'adoption_and_change_systems'
+        $profile.primaryJob = 'de_risk_rollout_and_change_management'
+        $profile.secondaryJobs = @('implementation_planning', 'adoption_guidance')
+        $profile.userGoal = 'understand_how_rollout_will_succeed'
+        $profile.primaryInteractionModel = 'disclosure'
+        $profile.uxPatternType = 'workflow_pattern'
+        $profile.allowedContexts = @('implementation_planning', 'adoption_rollout', 'change_management_briefings')
+        $profile.disallowedContexts = @('instant_conversion_prompts', 'casual_visual_storytelling')
+        $profile.bestFor = @('rollout_and_change_readiness')
+        $profile.avoidWhen = @('execution_path_is_unowned')
+        $profile.contentAuthoringBurden = [Math]::Min(5, [int]$profile.contentAuthoringBurden + 1)
+      } elseif (Test-AnyProfileToken @('comparison', 'compare', 'checklist', 'criteria', 'before', 'after', 'benchmark')) {
+        Add-Signal 'landing_comparison'
+        $profile.subfamily = 'evaluation_and_selection'
+        $profile.primaryJob = 'support_solution_evaluation_and_comparison'
+        $profile.secondaryJobs = @('decision_scaffolding', 'tradeoff_clarity')
+        $profile.userGoal = 'compare_options_and_reduce_selection_ambiguity'
+        $profile.primaryInteractionModel = 'compare'
+        $profile.uxPatternType = 'comparison_pattern'
+        $profile.allowedContexts = @('vendor_comparison', 'evaluation_criteria', 'selection_shortlists')
+        $profile.disallowedContexts = @('single_offer_brand_moments', 'low_context_social_proof')
+        $profile.bestFor = @('high_context_solution_comparison')
+        $profile.avoidWhen = @('comparison_basis_is_unfair_or_thin')
+        $profile.formality = [Math]::Min(5, [int]$profile.formality + 1)
+      } elseif ((Test-AnyProfilePhrase @('case_study')) -or (Test-AnyProfileToken @('customer', 'reference', 'champion', 'advocacy', 'partner', 'health', 'case', 'study'))) {
+        Add-Signal 'landing_customer_proof'
+        $profile.subfamily = 'customer_outcome_proof'
+        $profile.primaryJob = 'demonstrate_real_world_outcomes'
+        $profile.secondaryJobs = @('social_proof', 'reference_validation')
+        $profile.userGoal = 'see_evidence_from_similar_buyers'
+        $profile.primaryInteractionModel = 'disclosure'
+        $profile.uxPatternType = 'proof_pattern'
+        $profile.allowedContexts = @('customer_proof', 'reference_programs', 'outcome_storytelling')
+        $profile.disallowedContexts = @('anonymous_claims_without_evidence', 'policy_only_surfaces')
+        $profile.bestFor = @('peer_validation_and_customer_outcomes')
+        $profile.avoidWhen = @('proof_cannot_be_substantiated')
+      } elseif ((Test-AnyProfilePhrase @('dashboard_preview', 'problem_solution', 'integrations_wall', 'experience_blueprint', 'portfolio_coverage', 'use_cases', 'service_moments', 'experience_loop')) -or (Test-AnyProfileToken @('feature', 'capability', 'grid', 'matrix', 'features', 'key', 'points', 'dashboard', 'preview', 'problem', 'solution', 'integration', 'integrations', 'portfolio', 'coverage', 'blueprint', 'use', 'cases', 'service', 'moments', 'experience', 'loop'))) {
+        Add-Signal 'landing_capability'
+        $profile.subfamily = 'capability_explainers'
+        $profile.primaryJob = 'explain_capability_and_solution_shape'
+        $profile.secondaryJobs = @('positioning', 'scope_clarity')
+        $profile.userGoal = 'understand_what_the_system_does'
+        $profile.primaryInteractionModel = 'disclosure'
+        $profile.uxPatternType = 'section_pattern'
+        $profile.allowedContexts = @('solution_overviews', 'capability_explainers', 'narrative_walkthroughs')
+        $profile.disallowedContexts = @('policy_acceptance', 'destructive_confirmation')
+        $profile.bestFor = @('capability_orientation_and_scope_clarity')
+        $profile.avoidWhen = @('real_differentiation_is_not_articulated')
+      } elseif ((Test-AnyProfilePhrase @('problem_solution')) -or (Test-AnyProfileToken @('story', 'narrative', 'faq', 'announcement', 'changelog', 'belief'))) {
+        Add-Signal 'landing_narrative'
+        $profile.subfamily = 'narrative_and_objection_handling'
+        $profile.primaryJob = 'frame_story_and_resolve_objections'
+        $profile.secondaryJobs = @('message_control', 'objection_resolution')
+        $profile.userGoal = 'understand_the_story_without_open_questions_lingering'
+        $profile.primaryInteractionModel = 'disclosure'
+        $profile.uxPatternType = 'section_pattern'
+        $profile.allowedContexts = @('executive_narratives', 'objection_handling', 'story_sections')
+        $profile.disallowedContexts = @('workflow_execution_surfaces', 'legal_consent')
+        $profile.bestFor = @('story_framing_and_question_resolution')
+        $profile.avoidWhen = @('message_is_purely_decorative')
+      } elseif ((Test-AnyProfilePhrase @('account_planning', 'channel_sales_kit', 'internal_comms_kit', 'deal_desk_alignment', 'go_to_market_circuit', 'message_stack', 'message_topology', 'objection_handling', 'objection_network', 'stakeholder_brief', 'stakeholder_map', 'persona_switcher', 'org_design')) -or (Test-AnyProfileToken @('influence', 'stakeholder', 'message', 'objection', 'channel', 'sales', 'deal', 'account', 'persona', 'brief', 'comms', 'relay', 'org'))) {
+        Add-Signal 'landing_alignment_system'
+        $profile.subfamily = 'stakeholder_and_message_orchestration'
+        $profile.primaryJob = 'align_stakeholders_and_message_strategy'
+        $profile.secondaryJobs = @('go_to_market_coordination', 'objection_management')
+        $profile.userGoal = 'understand_how_buyers_and_internal_teams_align'
+        $profile.primaryInteractionModel = 'disclosure'
+        $profile.uxPatternType = 'workflow_pattern'
+        $profile.allowedContexts = @('stakeholder_alignment_surfaces', 'message_orchestration_sections', 'go_to_market_enablement')
+        $profile.disallowedContexts = @('casual_brand_backdrops', 'destructive_confirmation')
+        $profile.bestFor = @('stakeholder_and_message_alignment')
+        $profile.avoidWhen = @('ownership_and_handoffs_are_implicit')
+        $profile.formality = [Math]::Min(5, [int]$profile.formality + 1)
+        $profile.contentAuthoringBurden = [Math]::Min(5, [int]$profile.contentAuthoringBurden + 1)
+      } elseif ((Test-AnyProfilePhrase @('deployment_options', 'migration_plan', 'pilot_program', 'program_map', 'renewal_plan', 'scenario_planner', 'timeline_roadmap', 'success_playbook', 'vendor_transition', 'workflow_templates', 'training_hub')) -or (Test-AnyProfileToken @('execution', 'coordination', 'deployment', 'migration', 'program', 'roadmap', 'timeline', 'pilot', 'scenario', 'planner', 'delivery', 'tabletop', 'environment', 'sandbox', 'plan', 'playbook', 'training', 'workflow', 'template', 'templates', 'transition', 'vendor', 'hub'))) {
+        Add-Signal 'landing_execution_system'
+        $profile.subfamily = 'execution_and_rollout_systems'
+        $profile.primaryJob = 'coordinate_execution_and_operational_rollout'
+        $profile.secondaryJobs = @('delivery_planning', 'operational_readiness')
+        $profile.userGoal = 'see_how_execution_progresses_without_hidden_risk'
+        $profile.primaryInteractionModel = 'disclosure'
+        $profile.uxPatternType = 'workflow_pattern'
+        $profile.allowedContexts = @('delivery_plans', 'rollout_execution_surfaces', 'operational_readiness_briefings')
+        $profile.disallowedContexts = @('lightweight_promo_sections', 'casual_social_proof')
+        $profile.bestFor = @('execution_planning_and_rollout_alignment')
+        $profile.avoidWhen = @('delivery_dependencies_are_unmodeled')
+        $profile.contentAuthoringBurden = [Math]::Min(5, [int]$profile.contentAuthoringBurden + 1)
+        $profile.failureCost = [Math]::Min(5, [int]$profile.failureCost + 1)
+      } elseif ((Test-AnyProfilePhrase @('incident_response', 'execution_risks', 'service_recovery', 'risk_reversal', 'escalation_paths', 'usage_anomaly_alerts', 'friction_map')) -or (Test-AnyProfileToken @('signal', 'confidence', 'recovery', 'incident', 'risk', 'beacon', 'broker', 'radar', 'observatory', 'telescope', 'health', 'outcome', 'metric', 'metrics', 'counter', 'counters', 'momentum', 'renewal', 'escalation', 'anomaly', 'alert', 'alerts', 'friction', 'usage'))) {
+        Add-Signal 'landing_signal_resilience'
+        $profile.subfamily = 'signal_and_resilience_systems'
+        $profile.primaryJob = 'surface_operational_signals_and_resilience'
+        $profile.secondaryJobs = @('risk_visibility', 'outcome_tracking')
+        $profile.userGoal = 'verify_the_system_can_detect_issues_and_recover'
+        $profile.primaryInteractionModel = 'compare'
+        $profile.uxPatternType = 'structured_data_view'
+        $profile.allowedContexts = @('signal_visibility_surfaces', 'resilience_storytelling', 'operational_health_proof')
+        $profile.disallowedContexts = @('pure_brand_mood_sections', 'casual_consumer_browse')
+        $profile.bestFor = @('risk_signal_and_resilience_clarity')
+        $profile.avoidWhen = @('the_claimed_signals_are_not_real_or_actionable')
+        $profile.analyticsConfidence = [Math]::Min(5, [int]$profile.analyticsConfidence + 1)
+        $profile.failureCost = [Math]::Min(5, [int]$profile.failureCost + 1)
+      } elseif ((Test-AnyProfilePhrase @('admin_controls', 'service_control_tower', 'constraint_protocol', 'constraint_runtime')) -or (Test-AnyProfileToken @('constraint', 'control', 'admin', 'responsibility', 'guardrail', 'policy'))) {
+        Add-Signal 'landing_governance_system'
+        $profile.subfamily = 'governance_and_control_surfaces'
+        $profile.primaryJob = 'explain_controls_constraints_and_governance'
+        $profile.secondaryJobs = @('operational_guardrails', 'admin_visibility')
+        $profile.userGoal = 'see_how_the_system_stays_safe_and_controllable'
+        $profile.primaryInteractionModel = 'disclosure'
+        $profile.uxPatternType = 'structured_data_view'
+        $profile.allowedContexts = @('governance_surfaces', 'control_tower_views', 'admin_guardrail_explainers')
+        $profile.disallowedContexts = @('casual_campaign_pages', 'ambient_brand_backdrops')
+        $profile.bestFor = @('governance_and_control_clarity')
+        $profile.avoidWhen = @('guardrails_exist_only_as_marketing_claims')
+        $profile.formality = [Math]::Min(5, [int]$profile.formality + 1)
+        $profile.failureCost = [Math]::Min(5, [int]$profile.failureCost + 1)
+      } elseif ((Test-AnyProfilePhrase @('blur_reveal', 'glow_cta', 'interactive_showcase', 'marquee_band', 'terminal_demo')) -or (Test-AnyProfileToken @('showcase', 'reveal', 'cta', 'glow', 'marquee', 'interactive', 'terminal', 'demo')) -or (Test-AnyProfileToken @('scroll_runtime', 'media_runtime', 'motion_runtime'))) {
+        Add-Signal 'landing_engagement_storytelling'
+        $profile.subfamily = 'interactive_system_storytelling'
+        $profile.primaryJob = 'stage_interactive_system_storytelling'
+        $profile.secondaryJobs = @('attention_guidance', 'product_drama')
+        $profile.userGoal = 'grasp_the_system_through_staged_interaction_and_motion'
+        $profile.primaryInteractionModel = 'disclosure'
+        $profile.uxPatternType = 'interactive_pattern'
+        $profile.allowedContexts = @('interactive_storytelling', 'system_showcase_sections', 'high_attention_hero_sequences')
+        $profile.disallowedContexts = @('high_density_admin_views', 'critical_confirmation')
+        $profile.bestFor = @('interactive_system_narratives')
+        $profile.avoidWhen = @('clarity_depends_on_restrained_plain_explanation')
+        $profile.expressiveness = [Math]::Min(5, [int]$profile.expressiveness + 1)
+        $profile.visualDominance = [Math]::Min(5, [int]$profile.visualDominance + 1)
+      } elseif ((Test-AnyProfilePhrase @('operating_model', 'operating_system', 'operating_kernel', 'operating_runtime', 'operating_workbench')) -or (Test-AnyProfileToken @('operating', 'runtime', 'kernel', 'protocol', 'engine', 'system', 'stack', 'architecture', 'fabric', 'mesh', 'interpreter', 'compiler', 'atlas', 'workbench', 'surface', 'bridge', 'topology', 'console', 'command', 'circuit', 'switchboard', 'constellation', 'horizon', 'genome', 'dock', 'model'))) {
+        Add-Signal 'landing_operating_model'
+        $profile.subfamily = 'operating_model_explainers'
+        $profile.primaryJob = 'explain_operating_model_and_system_design'
+        $profile.secondaryJobs = @('architecture_translation', 'execution_clarity')
+        $profile.userGoal = 'understand_how_the_system_runs_in_reality'
+        $profile.primaryInteractionModel = 'disclosure'
+        $profile.uxPatternType = 'structured_data_view'
+        $profile.allowedContexts = @('solution_architecture_explainers', 'operating_model_sections', 'platform_overview_surfaces')
+        $profile.disallowedContexts = @('lightweight_consumer_marketing', 'casual_brand_mood')
+        $profile.bestFor = @('operating_model_and_architecture_clarity')
+        $profile.avoidWhen = @('system_mechanics_are_handwavy')
+        $profile.implementationComplexity = [Math]::Min(5, [int]$profile.implementationComplexity + 1)
+        $profile.densityFeel = [Math]::Min(5, [int]$profile.densityFeel + 1)
+      }
+    }
+    'landing-marketing' {
+      if (Test-AnyProfileToken @('faq', 'read', 'more', 'question', 'collapsible')) {
+        Add-Signal 'marketing_objection_handling'
+        $profile.subfamily = 'faq_and_objection_handling'
+        $profile.primaryJob = 'resolve_buyer_questions_and_reduce_friction'
+        $profile.secondaryJobs = @('objection_handling', 'self_serve_clarification')
+        $profile.userGoal = 'get_answered_without_leaving_the_page'
+        $profile.primaryInteractionModel = 'disclosure'
+        $profile.uxPatternType = 'section_pattern'
+        $profile.allowedContexts = @('faq_sections', 'objection_handling', 'detail_expansion_surfaces')
+        $profile.disallowedContexts = @('destructive_confirmation', 'urgent_alerting')
+        $profile.bestFor = @('buyer_question_resolution')
+        $profile.avoidWhen = @('answers_are_thin_or_deflective')
+      } elseif (Test-AnyProfileToken @('pricing', 'sale', 'discount', 'plan', 'cta')) {
+        Add-Signal 'marketing_offer_conversion'
+        $profile.subfamily = 'offer_and_conversion_sections'
+        $profile.primaryJob = 'present_offer_and_drive_conversion'
+        $profile.secondaryJobs = @('plan_selection', 'promotion_clarity')
+        $profile.userGoal = 'understand_the_offer_and_take_the_next_step'
+        $profile.primaryInteractionModel = 'select'
+        $profile.uxPatternType = 'section_pattern'
+        $profile.allowedContexts = @('pricing_sections', 'offer_pages', 'conversion_cta_surfaces')
+        $profile.disallowedContexts = @('high_risk_admin_workflows', 'policy_only_surfaces')
+        $profile.bestFor = @('offer_framing_and_conversion')
+        $profile.avoidWhen = @('pricing_logic_is_unstable_or_hidden')
+      } elseif (Test-AnyProfileToken @('testimonial', 'rating', 'review', 'proof', 'social')) {
+        Add-Signal 'marketing_social_proof'
+        $profile.subfamily = 'trust_and_social_proof'
+        $profile.primaryJob = 'build_confidence_with_peer_validation'
+        $profile.secondaryJobs = @('credibility_support', 'trust_building')
+        $profile.userGoal = 'see_that_others_have_succeeded_here'
+        $profile.primaryInteractionModel = 'disclosure'
+        $profile.uxPatternType = 'proof_pattern'
+        $profile.allowedContexts = @('testimonial_sections', 'social_proof_blocks', 'credibility_supporting_surfaces')
+        $profile.disallowedContexts = @('anonymous_claims_without_evidence', 'workflow_execution_views')
+        $profile.bestFor = @('peer_validation_and_trust_building')
+        $profile.avoidWhen = @('proof_is_generic_or_unsubstantiated')
+      } elseif (Test-AnyProfileToken @('feature', 'benefit', 'highlight')) {
+        Add-Signal 'marketing_feature_story'
+        $profile.subfamily = 'feature_and_benefit_sections'
+        $profile.primaryJob = 'explain_key_features_and_benefits'
+        $profile.secondaryJobs = @('positioning', 'offer_clarity')
+        $profile.userGoal = 'understand_why_this_offer_matters'
+        $profile.primaryInteractionModel = 'navigation'
+        $profile.uxPatternType = 'section_pattern'
+        $profile.allowedContexts = @('feature_sections', 'benefit_highlights', 'landing_page_midsections')
+        $profile.disallowedContexts = @('dense_operational_admin_views', 'destructive_confirmation')
+        $profile.bestFor = @('feature_explanation_and_positioning')
+        $profile.avoidWhen = @('differentiation_is_vague')
+      } elseif (Test-AnyProfileToken @('band', 'banner', 'announcement')) {
+        Add-Signal 'marketing_awareness_strip'
+        $profile.subfamily = 'promo_and_awareness_strips'
+        $profile.primaryJob = 'surface_promotions_or_important_announcements'
+        $profile.secondaryJobs = @('campaign_awareness', 'timely_attention')
+        $profile.userGoal = 'notice_the_current_offer_or_announcement'
+        $profile.primaryInteractionModel = 'navigation'
+        $profile.uxPatternType = 'section_pattern'
+        $profile.allowedContexts = @('campaign_banners', 'announcement_strips', 'timely_promotions')
+        $profile.disallowedContexts = @('critical_system_alerting', 'legal_consent')
+        $profile.bestFor = @('campaign_awareness')
+        $profile.avoidWhen = @('priority_or_expiry_is_unclear')
+      }
+    }
+    'data-admin' {
+      if (Test-AnyProfileToken @('chart', 'graph', 'radar', 'bar', 'line', 'gauge', 'heatmap', 'visualization', 'chart_runtime')) {
+        Add-Signal 'data_visualization'
+        $profile.primaryJob = 'visualize_operational_patterns'
+        $profile.allowedContexts = @('analytics_dashboards', 'trend_and_comparison_views', 'executive_metrics_snapshots')
+        $profile.bestFor = @('pattern_detection_and_metric_comparison')
+        $profile.avoidWhen = @('raw_record_lookup_is_primary_need')
+      } elseif (Test-AnyProfileToken @('table', 'tree', 'filter', 'ledger', 'checklist', 'table_runtime')) {
+        Add-Signal 'data_investigation'
+        $profile.primaryJob = 'inspect_filter_and_compare_records'
+        $profile.allowedContexts = @('record_exploration', 'ops_triage_tables', 'administrative_lookup_surfaces')
+        $profile.bestFor = @('structured_record_investigation')
+        $profile.avoidWhen = @('narrative_explanation_is_primary_need')
+      } elseif (Test-AnyProfileToken @('timeline', 'gantt', 'stepper', 'indicator', 'step', 'step_runtime')) {
+        Add-Signal 'data_progress_tracking'
+        $profile.primaryJob = 'track_progress_and_operational_sequence'
+        $profile.allowedContexts = @('program_tracking', 'workflow_progress', 'project_timeline_views')
+        $profile.bestFor = @('sequenced_progress_monitoring')
+        $profile.avoidWhen = @('process_is_nonlinear_or_ad_hoc')
+      } elseif (Test-AnyProfileToken @('dashboard', 'metrics', 'kpi', 'monitor', 'performance', 'health')) {
+        Add-Signal 'data_monitoring'
+        $profile.primaryJob = 'monitor_health_and_operational_status'
+        $profile.allowedContexts = @('monitoring_surfaces', 'ops_dashboards', 'status_command_centers')
+        $profile.bestFor = @('continuous_operational_monitoring')
+        $profile.avoidWhen = @('deep_record_level_comparison_is_primary_need')
+      }
+    }
+    'forms-authoring' {
+      if (Test-AnyProfileToken @('autocomplete', 'search', 'filter')) {
+        Add-Signal 'forms_guided_selection'
+        $profile.primaryJob = 'guide_retrieval_and_selection'
+        $profile.allowedContexts = @('guided_search', 'faceted_filtering', 'assisted_selection')
+        $profile.bestFor = @('guided_lookup_and_filtering')
+        $profile.avoidWhen = @('source_quality_is_low_or_ambiguous')
+      } elseif (Test-AnyProfileToken @('date', 'range', 'picker', 'calendar')) {
+        Add-Signal 'forms_temporal_input'
+        $profile.primaryJob = 'capture_temporal_constraints'
+        $profile.allowedContexts = @('reporting_filters', 'booking_ranges', 'scheduled_workflows')
+        $profile.bestFor = @('bounded_time_selection')
+        $profile.avoidWhen = @('date_logic_is_underspecified')
+      } elseif (Test-AnyProfileToken @('file', 'upload', 'drag', 'drop', 'file_runtime')) {
+        Add-Signal 'forms_file_intake'
+        $profile.primaryJob = 'collect_and_validate_files'
+        $profile.allowedContexts = @('document_collection', 'media_submission', 'contracted_upload_flows')
+        $profile.bestFor = @('validated_file_intake')
+        $profile.avoidWhen = @('file_requirements_are_implicit')
+      } elseif (Test-AnyProfileToken @('markdown', 'rich', 'editor', 'signature', 'qr')) {
+        Add-Signal 'forms_rich_authoring'
+        $profile.primaryJob = 'author_structured_or_rich_content'
+        $profile.allowedContexts = @('editorial_workflows', 'rich_content_authoring', 'specialized_capture')
+        $profile.bestFor = @('rich_or_specialized_input')
+        $profile.avoidWhen = @('simple_fields_are_enough')
+      }
+    }
+    'feedback-state' {
+      if (Test-AnyProfileToken @('loader', 'loading', 'preloader', 'skeleton')) {
+        Add-Signal 'feedback_loading'
+        $profile.primaryJob = 'preserve_orientation_during_load'
+        $profile.allowedContexts = @('background_fetch_feedback', 'progressive_loading', 'page_transition_waits')
+        $profile.bestFor = @('non_decisional_loading_feedback')
+        $profile.avoidWhen = @('user_must_make_a_choice')
+      } elseif (Test-AnyProfileToken @('toast')) {
+        Add-Signal 'feedback_ephemeral'
+        $profile.primaryJob = 'deliver_ephemeral_non_blocking_feedback'
+        $profile.allowedContexts = @('background_process_completion', 'low_risk_confirmation', 'non_blocking_status_updates')
+        $profile.disallowedContexts = @('destructive_confirmation', 'legal_consent', 'blocking_decisions')
+        $profile.bestFor = @('ephemeral_feedback')
+        $profile.avoidWhen = @('user_must_remember_or_decide_from_message')
+      } elseif (Test-AnyProfileToken @('alert', 'error', 'offline', 'empty', 'banner')) {
+        Add-Signal 'feedback_status_alerting'
+        $profile.primaryJob = 'surface_status_risk_or_recovery'
+        $profile.allowedContexts = @('status_alerting', 'error_recovery', 'service_health_communication')
+        $profile.bestFor = @('visible_state_and_recovery_guidance')
+        $profile.avoidWhen = @('message_severity_is_unclear')
+      } elseif (Test-AnyProfileToken @('modal', 'dialog', 'overlay', 'overlay_runtime')) {
+        Add-Signal 'feedback_blocking_overlay'
+        $profile.primaryJob = 'interrupt_flow_for_blocking_attention'
+        $profile.allowedContexts = @('high_consequence_interruption', 'focus_locked_confirmation', 'task_blocking_required_attention')
+        $profile.bestFor = @('blocking_attention_surfaces')
+        $profile.avoidWhen = @('content_can_be_inline')
+      } elseif (Test-AnyProfileToken @('auth', 'consent', 'confirm')) {
+        Add-Signal 'feedback_guarded_gate'
+        $profile.primaryJob = 'guard_access_policy_or_consequence_boundaries'
+        $profile.allowedContexts = @('policy_gates', 'confirmation_boundaries', 'auth_requirements')
+        $profile.bestFor = @('guarded_risk_boundaries')
+        $profile.avoidWhen = @('the_action_is_low_risk')
+      }
+    }
+    'ui-primitives' {
+      if (Test-AnyProfileToken @('avatar', 'badge', 'status', 'divider')) {
+        Add-Signal 'primitive_identity_status'
+        $profile.primaryJob = 'provide_identity_and_status_affordances'
+        $profile.allowedContexts = @('compact_identity_cues', 'status_annotations', 'supporting_visual_structure')
+        $profile.bestFor = @('small_supporting_primitives')
+      } elseif (Test-AnyProfileToken @('theme', 'toggle', 'group')) {
+        Add-Signal 'primitive_selection_control'
+        $profile.primaryJob = 'support_preference_or_state_selection'
+        $profile.allowedContexts = @('settings_controls', 'preference_switches', 'compact_option_sets')
+        $profile.bestFor = @('lightweight_selection_controls')
+      } elseif (Test-AnyProfileToken @('tooltip', 'popover', 'sheet', 'menu')) {
+        Add-Signal 'primitive_reveal_surface'
+        $profile.primaryJob = 'reveal_supporting_context_without_page_change'
+        $profile.allowedContexts = @('contextual_help', 'lightweight_reveal', 'supporting_actions')
+        $profile.bestFor = @('lightweight_overlay_primitives')
+      }
+    }
+    'navigation-command' {
+      if (Test-AnyProfileToken @('command', 'palette', 'context', 'keyboard_command')) {
+        Add-Signal 'navigation_command_access'
+        $profile.primaryJob = 'accelerate_command_access'
+        $profile.allowedContexts = @('power_user_command_access', 'secondary_action_surfaces', 'high_frequency_keyboard_workflows')
+        $profile.bestFor = @('command_acceleration')
+        $profile.avoidWhen = @('visible_ia_is_already_insufficient')
+      } elseif (Test-AnyProfileToken @('breadcrumb', 'sticky', 'floating', 'dock', 'side', 'mega', 'morphing', 'nav')) {
+        Add-Signal 'navigation_scaffolding'
+        $profile.primaryJob = 'provide_orientation_and_wayfinding'
+        $profile.allowedContexts = @('app_shell_navigation', 'section_wayfinding', 'cross_page_orientation')
+        $profile.bestFor = @('navigation_scaffolding')
+      } elseif (Test-AnyProfileToken @('tabs', 'tab')) {
+        Add-Signal 'navigation_context_switch'
+        $profile.primaryJob = 'switch_between_adjacent_contexts'
+        $profile.allowedContexts = @('mode_switching', 'adjacent_content_sections', 'settings_navigation')
+        $profile.bestFor = @('context_switch_controls')
+      }
+    }
+    'motion-typography' {
+      if (Test-AnyProfileToken @('text', 'typing', 'morphing', 'reveal', 'highlighter', 'word', 'hyper', 'comic', 'video')) {
+        Add-Signal 'motion_text_expression'
+        $profile.primaryJob = 'amplify_copy_through_kinetic_treatment'
+        $profile.allowedContexts = @('headline_emphasis', 'narrative_reveals', 'brand_moments')
+        $profile.bestFor = @('expressive_copy_presentation')
+        $profile.avoidWhen = @('copy_needs_plain_scanability')
+      } elseif (Test-AnyProfileToken @('page', 'transition', 'parallax', 'scroll', 'velocity', 'cursor', 'scroll_runtime')) {
+        Add-Signal 'motion_choreography'
+        $profile.primaryJob = 'choreograph_movement_between_states'
+        $profile.allowedContexts = @('page_transition_moments', 'scroll_choreography', 'guided_motion_sequences')
+        $profile.bestFor = @('motion_driven_emphasis')
+        $profile.avoidWhen = @('reduced_motion_is_unhandled')
+      }
+    }
+    'backgrounds-effects' {
+      if (Test-AnyProfileToken @('confetti', 'particles', 'sparkles', 'meteors')) {
+        Add-Signal 'effects_celebration'
+        $profile.primaryJob = 'create_celebratory_or_attention_spiking_effects'
+        $profile.allowedContexts = @('success_celebrations', 'launch_moments', 'high_energy_showcases')
+        $profile.bestFor = @('celebratory_visual_effects')
+        $profile.avoidWhen = @('surface_requires_restraint')
+      } elseif (Test-AnyProfileToken @('background', 'grid', 'pattern', 'mesh', 'blobs', 'wavy', 'retro', 'aurora', 'spotlight')) {
+        Add-Signal 'effects_backdrop'
+        $profile.primaryJob = 'shape_ambient_backdrop_and_depth'
+        $profile.allowedContexts = @('hero_backdrops', 'section_ambience', 'showcase_surfaces')
+        $profile.bestFor = @('ambient_background_layers')
+        $profile.avoidWhen = @('legibility_is_the_primary_requirement')
+      } elseif (Test-AnyProfileToken @('lens', 'cursor', 'pointer', 'glare', 'beam', 'aberration', 'vhs', 'blur')) {
+        Add-Signal 'effects_treatment'
+        $profile.primaryJob = 'apply_interactive_or_stylized_visual_treatment'
+        $profile.allowedContexts = @('interactive_highlights', 'visual_treatments', 'stylized_showcases')
+        $profile.bestFor = @('specialized_visual_treatments')
+        $profile.avoidWhen = @('clarity_outweighs_style')
+      }
+    }
+    'interactive-showcase' {
+      if (Test-AnyProfileToken @('carousel', 'gallery', 'lightbox', 'comparison', 'video', 'image', 'media_runtime')) {
+        Add-Signal 'showcase_media_story'
+        $profile.primaryJob = 'showcase_media_and_comparisons_interactively'
+        $profile.allowedContexts = @('product_media_showcases', 'interactive_demos', 'before_after_storytelling')
+        $profile.bestFor = @('interactive_media_storytelling')
+        $profile.avoidWhen = @('static_proof_is_enough')
+      } elseif (Test-AnyProfileToken @('card', 'accordion', 'expandable', 'glow', 'neon', 'spotlight')) {
+        Add-Signal 'showcase_cards'
+        $profile.primaryJob = 'package_story_or_content_in_high_touch_modules'
+        $profile.allowedContexts = @('feature_showcases', 'interactive_card_systems', 'content_demonstrations')
+        $profile.bestFor = @('interactive_story_modules')
+      } elseif (Test-AnyProfileToken @('mockup', 'iphone', 'android', 'safari', 'terminal')) {
+        Add-Signal 'showcase_framing'
+        $profile.primaryJob = 'frame_product_or_content_in_device_context'
+        $profile.allowedContexts = @('product_mockups', 'device_storytelling', 'ui_showcases')
+        $profile.bestFor = @('framed_product_presentation')
+      } elseif (Test-AnyProfileToken @('scroll', 'swipe', 'pinch', 'zoom', 'drag', 'long', 'press')) {
+        Add-Signal 'showcase_gesture'
+        $profile.primaryJob = 'demonstrate_gesture_or_scroll_driven_interaction'
+        $profile.allowedContexts = @('gesture_demos', 'scroll_driven_storytelling', 'interaction_exploration')
+        $profile.bestFor = @('gesture_and_scroll_showcases')
+      }
+    }
+  }
+
+  $signalSummary = 'shelf_profile_only'
   if ($signals.Count -gt 0) {
     $signalSummary = ($signals | Sort-Object) -join ', '
   }
 
+  $effectiveSignals = if ($signals.Count -gt 0) { @($signals) } else { @('shelf_profile_only') }
+
   $reviewNotes = @(
-    'Component-specific review pass generated from shelf defaults and name-signal heuristics.',
+    'Heuristic component profile generated from shelf defaults and name-signal rules.',
     ('Signals detected: {0}' -f $signalSummary)
   )
 
+  if ($UsageHints.Count -gt 0) {
+    $reviewNotes += ('Usage hints: {0}' -f ((@($UsageHints | Select-Object -First 4)) -join ', '))
+  }
+
+  if ($SourceSignals.Count -gt 0) {
+    $reviewNotes += ('Source signals: {0}' -f ((@($SourceSignals | Select-Object -First 6)) -join ', '))
+  }
+
   return [pscustomobject]@{
     profile = $profile
-    signals = @($signals)
+    signals = @($effectiveSignals)
     reviewNotes = @($reviewNotes)
   }
 }
@@ -791,25 +1411,340 @@ function Get-CriticalReviewProfile {
     $hardVerdict = 'candidate_only'
   }
 
-  $criticalityAnchor = switch ($criticalityScore) {
-    1 { 'Very low critique burden; safe in broad default use' }
-    2 { 'Low critique burden; still has a few guardrails' }
-    3 { 'Moderate critique burden; use deliberately' }
-    4 { 'High critique burden; needs explicit justification' }
-    5 { 'Severe critique burden; do not use casually' }
-    default { 'Moderate critique burden; use deliberately' }
-  }
-
   return [pscustomobject]@{
     criticalityScore = $criticalityScore
-    criticalityAnchor = $criticalityAnchor
+    criticalityAnchor = (Get-CriticalityAnchor -CriticalityScore $criticalityScore)
     hardVerdict = $hardVerdict
     redFlags = @($redFlags)
     failureModes = @($failureModes)
     pushback = @($pushback)
     specificPushback = @($specificPushback)
-    pushbackSummary = if ($pushback.Count -gt 0) { $pushback[0] } else { 'No critical blockers identified beyond the base profile.' }
+    pushbackSummary = if ($pushback.Count -gt 0) { $pushback[0] } else { 'No component-specific pushback beyond the applied shelf profile.' }
   }
+}
+
+function Get-CriticalityAnchor {
+  param([Parameter(Mandatory = $true)][int]$CriticalityScore)
+
+  switch ($CriticalityScore) {
+    1 { return 'Very low critique burden; safe in broad default use' }
+    2 { return 'Low critique burden; still has a few guardrails' }
+    3 { return 'Moderate critique burden; use deliberately' }
+    4 { return 'High critique burden; needs explicit justification' }
+    5 { return 'Severe critique burden; do not use casually' }
+    default { return 'Moderate critique burden; use deliberately' }
+  }
+}
+
+function Merge-UniqueStringArray {
+  param(
+    [AllowEmptyCollection()][object[]]$BaseItems = @(),
+    [AllowEmptyCollection()][object[]]$AdditionalItems = @()
+  )
+
+  $seen = [System.Collections.Generic.HashSet[string]]::new([System.StringComparer]::OrdinalIgnoreCase)
+  $result = [System.Collections.Generic.List[string]]::new()
+
+  foreach ($item in @($BaseItems) + @($AdditionalItems)) {
+    $text = [string]$item
+    if ([string]::IsNullOrWhiteSpace($text)) {
+      continue
+    }
+
+    if ($seen.Add($text)) {
+      $result.Add($text)
+    }
+  }
+
+  return @($result)
+}
+
+function Get-ComponentAliases {
+  param([Parameter(Mandatory = $true)][psobject]$ComponentEntry)
+
+  $aliases = [System.Collections.Generic.List[string]]::new()
+  $seen = [System.Collections.Generic.HashSet[string]]::new([System.StringComparer]::OrdinalIgnoreCase)
+
+  function Add-ComponentAlias {
+    param([string]$Alias)
+
+    if ([string]::IsNullOrWhiteSpace($Alias)) {
+      return
+    }
+
+    $trimmedAlias = $Alias.Trim()
+    if ($trimmedAlias -ceq [string]$ComponentEntry.name) {
+      return
+    }
+
+    if ($trimmedAlias -in @('*', 'default')) {
+      return
+    }
+
+    if ($seen.Add($trimmedAlias)) {
+      $aliases.Add($trimmedAlias)
+    }
+  }
+
+  $nameTokens = @(Get-IdentifierTokens -Text $ComponentEntry.name)
+  if ($nameTokens.Count -gt 0) {
+    Add-ComponentAlias (($nameTokens -join ' ').ToLowerInvariant())
+    Add-ComponentAlias (($nameTokens -join '-').ToLowerInvariant())
+  }
+
+  if (
+    -not [string]::IsNullOrWhiteSpace([string]$ComponentEntry.exactNameSourceExport) -and
+    [string]$ComponentEntry.exactNameSourceExport -notin @('*', 'default') -and
+    ([string]$ComponentEntry.exactNameSourceExport -cne [string]$ComponentEntry.name)
+  ) {
+    Add-ComponentAlias ([string]$ComponentEntry.exactNameSourceExport)
+
+    $exportTokens = @(Get-IdentifierTokens -Text ([string]$ComponentEntry.exactNameSourceExport))
+    if ($exportTokens.Count -gt 0) {
+      Add-ComponentAlias (($exportTokens -join ' ').ToLowerInvariant())
+      Add-ComponentAlias (($exportTokens -join '-').ToLowerInvariant())
+    }
+  }
+
+  foreach ($export in @($ComponentEntry.namedExports | Select-Object -First 4)) {
+    if ([string]$export -ine [string]$ComponentEntry.name) {
+      Add-ComponentAlias ([string]$export)
+    }
+  }
+
+  if ($aliases.Count -eq 0 -and $nameTokens.Count -gt 0) {
+    $shelfTokens = @(Get-IdentifierTokens -Text ([string]$ComponentEntry.shelfLabel))
+    if ($shelfTokens.Count -gt 0) {
+      Add-ComponentAlias ((@($shelfTokens + $nameTokens) -join ' ').ToLowerInvariant())
+    }
+  }
+
+  return @($aliases)
+}
+
+function Get-LinkedExampleRefs {
+  param([Parameter(Mandatory = $true)][psobject]$ComponentEntry)
+
+  $refs = [System.Collections.Generic.List[string]]::new()
+  $seen = [System.Collections.Generic.HashSet[string]]::new([System.StringComparer]::OrdinalIgnoreCase)
+  $exportAnchor = [string]$ComponentEntry.name
+
+  function Add-LinkedExampleRef {
+    param([string]$Ref)
+
+    if ([string]::IsNullOrWhiteSpace($Ref)) {
+      return
+    }
+
+    if ($seen.Add($Ref)) {
+      $refs.Add($Ref)
+    }
+  }
+
+  Add-LinkedExampleRef ("{0}#{1}" -f $ComponentEntry.exactNameImportPath, $exportAnchor)
+  Add-LinkedExampleRef ("{0}#{1}" -f $ComponentEntry.shelfExactImportPath, $exportAnchor)
+
+  foreach ($starterPath in @($ComponentEntry.starterLaneExactImportPaths)) {
+    Add-LinkedExampleRef ("{0}#{1}" -f $starterPath, $exportAnchor)
+  }
+
+  return @($refs)
+}
+
+function Get-SharedStringCount {
+  param(
+    [AllowEmptyCollection()][object[]]$Left = @(),
+    [AllowEmptyCollection()][object[]]$Right = @()
+  )
+
+  $leftValues = [System.Collections.Generic.HashSet[string]]::new([System.StringComparer]::OrdinalIgnoreCase)
+  foreach ($item in @($Left)) {
+    $text = [string]$item
+    if (-not [string]::IsNullOrWhiteSpace($text)) {
+      [void]$leftValues.Add($text)
+    }
+  }
+
+  $sharedCount = 0
+  $seenRightValues = [System.Collections.Generic.HashSet[string]]::new([System.StringComparer]::OrdinalIgnoreCase)
+  foreach ($item in @($Right)) {
+    $text = [string]$item
+    if ([string]::IsNullOrWhiteSpace($text)) {
+      continue
+    }
+
+    if ($seenRightValues.Add($text) -and $leftValues.Contains($text)) {
+      $sharedCount += 1
+    }
+  }
+
+  return $sharedCount
+}
+
+function New-RelatedComponentProfile {
+  param([Parameter(Mandatory = $true)][psobject]$ComponentEntry)
+
+  $ignoredNameTokens = [System.Collections.Generic.HashSet[string]]::new([System.StringComparer]::OrdinalIgnoreCase)
+  foreach ($token in @('landing', 'product', 'component', 'system', 'section', 'ui', 'lab')) {
+    [void]$ignoredNameTokens.Add($token)
+  }
+
+  return [pscustomobject]@{
+    name = $ComponentEntry.name
+    shelfKey = $ComponentEntry.shelfKey
+    subfamily = $ComponentEntry.decisionMetadataV2.layers.identity.subfamily
+    primaryJob = $ComponentEntry.decisionMetadataV2.layers.intent.primaryJob
+    primaryInteractionModel = $ComponentEntry.decisionMetadataV2.layers.intent.primaryInteractionModel
+    uxPatternType = $ComponentEntry.decisionMetadataV2.layers.intent.uxPatternType
+    reviewSignals = @($ComponentEntry.decisionMetadataV2.layers.identity.reviewSignals | Where-Object { $_ -notin @('source_analysis', 'usage_hints') })
+    allowedContexts = @($ComponentEntry.decisionMetadataV2.layers.eligibility.allowedContexts)
+    starterLaneKeys = @($ComponentEntry.starterLaneKeys)
+    sourceSignals = @($ComponentEntry.decisionMetadataV2.layers.provenance.heuristicInputs.sourceSignals)
+    usageHints = @($ComponentEntry.decisionMetadataV2.layers.provenance.heuristicInputs.usageHints)
+    nameTokens = @(
+      Get-IdentifierTokens -Text $ComponentEntry.name |
+        Where-Object { -not $ignoredNameTokens.Contains($_) }
+    )
+    rankScore = if ($ComponentEntry.ranking) { [double]$ComponentEntry.ranking.riskAdjustedSelectionScore } else { 0 }
+  }
+}
+
+function Get-RelatedComponentNames {
+  param(
+    [Parameter(Mandatory = $true)][psobject]$CurrentProfile,
+    [AllowEmptyCollection()][object[]]$CandidateProfiles = @(),
+    [int]$MaxCount = 6
+  )
+
+  $scoredCandidates = foreach ($candidate in @($CandidateProfiles)) {
+    if ([string]$candidate.name -eq [string]$CurrentProfile.name) {
+      continue
+    }
+
+    $score = 0
+
+    if ([string]$candidate.shelfKey -eq [string]$CurrentProfile.shelfKey) {
+      $score += 2
+    }
+
+    if ([string]$candidate.subfamily -eq [string]$CurrentProfile.subfamily) {
+      $score += 6
+    }
+
+    if ([string]$candidate.primaryJob -eq [string]$CurrentProfile.primaryJob) {
+      $score += 5
+    }
+
+    if ([string]$candidate.primaryInteractionModel -eq [string]$CurrentProfile.primaryInteractionModel) {
+      $score += 1
+    }
+
+    if ([string]$candidate.uxPatternType -eq [string]$CurrentProfile.uxPatternType) {
+      $score += 1
+    }
+
+    $score += 3 * (Get-SharedStringCount -Left $CurrentProfile.reviewSignals -Right $candidate.reviewSignals)
+    $score += 2 * (Get-SharedStringCount -Left $CurrentProfile.allowedContexts -Right $candidate.allowedContexts)
+    $score += 2 * (Get-SharedStringCount -Left $CurrentProfile.starterLaneKeys -Right $candidate.starterLaneKeys)
+    $score += 2 * (Get-SharedStringCount -Left $CurrentProfile.sourceSignals -Right $candidate.sourceSignals)
+    $score += 1 * (Get-SharedStringCount -Left $CurrentProfile.usageHints -Right $candidate.usageHints)
+    $score += 1 * (Get-SharedStringCount -Left $CurrentProfile.nameTokens -Right $candidate.nameTokens)
+
+    if ($score -le 0) {
+      continue
+    }
+
+    [pscustomobject]@{
+      name = $candidate.name
+      score = $score
+      rankScore = $candidate.rankScore
+    }
+  }
+
+  return @(
+    $scoredCandidates |
+      Sort-Object @{ Expression = { $_.score }; Descending = $true }, @{ Expression = { $_.rankScore }; Descending = $true }, name |
+      Select-Object -First $MaxCount -ExpandProperty name
+  )
+}
+
+function Apply-ManualDecisionConstraints {
+  param(
+    [Parameter(Mandatory = $true)][hashtable]$Profile,
+    [Parameter(Mandatory = $true)][psobject]$ManualDecision,
+    [Parameter(Mandatory = $true)][string]$ComponentName
+  )
+
+  $Profile.requiredApprovals = @(Merge-UniqueStringArray -BaseItems $Profile.requiredApprovals -AdditionalItems @('manual_review_required'))
+  $Profile.disallowedContexts = @(Merge-UniqueStringArray -BaseItems $Profile.disallowedContexts -AdditionalItems @('autonomous_selection'))
+
+  switch ([string]$ManualDecision.stance) {
+    'do_not_default' {
+      $Profile.autonomyAllowance = 'restricted'
+      $Profile.lifecycle = 'candidate'
+      $Profile.adoption = 'targeted'
+      $Profile.requiredApprovals = @(Merge-UniqueStringArray -BaseItems $Profile.requiredApprovals -AdditionalItems @('risk_review'))
+      $Profile.disallowedContexts = @(Merge-UniqueStringArray -BaseItems $Profile.disallowedContexts -AdditionalItems @('default_library_recommendations'))
+      $Profile.avoidWhen = @(Merge-UniqueStringArray -BaseItems $Profile.avoidWhen -AdditionalItems @('unreviewed_default_flows'))
+    }
+    'pilot_only' {
+      $Profile.autonomyAllowance = 'restricted'
+      $Profile.lifecycle = 'candidate'
+      $Profile.adoption = 'targeted'
+      $Profile.requiredApprovals = @(Merge-UniqueStringArray -BaseItems $Profile.requiredApprovals -AdditionalItems @('pilot_review_required'))
+      $Profile.disallowedContexts = @(Merge-UniqueStringArray -BaseItems $Profile.disallowedContexts -AdditionalItems @('default_library_recommendations'))
+      $Profile.avoidWhen = @(Merge-UniqueStringArray -BaseItems $Profile.avoidWhen -AdditionalItems @('broad_rollout_without_proof'))
+    }
+    'ship_guarded' {
+      $Profile.autonomyAllowance = 'human_review_required'
+      if ([string]$Profile.adoption -eq 'broad') {
+        $Profile.adoption = 'targeted'
+      }
+      $Profile.disallowedContexts = @(Merge-UniqueStringArray -BaseItems $Profile.disallowedContexts -AdditionalItems @('autonomous_selection'))
+      $Profile.avoidWhen = @(Merge-UniqueStringArray -BaseItems $Profile.avoidWhen -AdditionalItems @('unreviewed_high_risk_flows'))
+    }
+    default {
+      $Profile.autonomyAllowance = 'human_review_required'
+      $Profile.disallowedContexts = @(Merge-UniqueStringArray -BaseItems $Profile.disallowedContexts -AdditionalItems @('autonomous_selection'))
+    }
+  }
+
+  switch -Regex ($ComponentName) {
+    '^ConfirmDialog$' {
+      $Profile.primaryJob = 'confirm_irreversible_or_high_consequence_actions'
+      $Profile.allowedContexts = @('destructive_confirmation', 'irreversible_action_confirmation', 'high_consequence_user_actions')
+      $Profile.disallowedContexts = @(Merge-UniqueStringArray -BaseItems $Profile.disallowedContexts -AdditionalItems @('status_updates', 'low_risk_confirmation', 'decorative_feedback'))
+      $Profile.bestFor = @('high_consequence_confirmation')
+      $Profile.avoidWhen = @(Merge-UniqueStringArray -BaseItems $Profile.avoidWhen -AdditionalItems @('generic_confirmation_copy', 'routine_acknowledgement'))
+      $Profile.requiredApprovals = @(Merge-UniqueStringArray -BaseItems $Profile.requiredApprovals -AdditionalItems @('content_design_review'))
+    }
+    '^CookieConsent$' {
+      $Profile.primaryJob = 'capture_policy_sensitive_consent_choices'
+      $Profile.allowedContexts = @('privacy_consent', 'cookie_preference_management', 'compliance_required_disclosure')
+      $Profile.disallowedContexts = @(Merge-UniqueStringArray -BaseItems $Profile.disallowedContexts -AdditionalItems @('status_updates', 'marketing_prompts', 'decorative_feedback'))
+      $Profile.bestFor = @('policy_required_consent_collection')
+      $Profile.avoidWhen = @(Merge-UniqueStringArray -BaseItems $Profile.avoidWhen -AdditionalItems @('dark_patterned_growth_surfaces', 'accept_only_bias'))
+      $Profile.requiredApprovals = @(Merge-UniqueStringArray -BaseItems $Profile.requiredApprovals -AdditionalItems @('legal_review', 'policy_review'))
+    }
+  }
+}
+
+function Resolve-EvidenceType {
+  param(
+    [AllowEmptyCollection()][string[]]$EvidenceType = @(),
+    [Parameter(Mandatory = $true)][bool]$ManualReviewApplied,
+    [Parameter(Mandatory = $true)][bool]$HasExplicitEvidenceTypeOverride
+  )
+
+  if ($ManualReviewApplied) {
+    if ($HasExplicitEvidenceTypeOverride) {
+      return @(Merge-UniqueStringArray -BaseItems $EvidenceType -AdditionalItems @('manual_readthrough'))
+    }
+
+    return @('manual_readthrough', 'taxonomy_inferred')
+  }
+
+  return @('taxonomy_inferred', 'generator_heuristic')
 }
 
 function Get-ScoreAnchor {
@@ -874,22 +1809,16 @@ function New-DecisionMetadataV2 {
     $StarterMemberships = @()
   }
 
-  $componentReview = Get-ComponentMetadataProfile -ComponentName $ComponentName -ShelfKey $Shelf.key -Profiles $Profiles
+  $componentReview = Get-ComponentMetadataProfile -ComponentName $ComponentName -ShelfKey $Shelf.key -Profiles $Profiles -UsageHints $ComponentEntry.useHints -SourceSignals $ComponentEntry.sourceSignals -RelativeComponentPath $ComponentEntry.relativeComponentPath
   $profile = $componentReview.profile
   $manualReviewApplied = $null -ne $ManualReviewOverride
 
-  if ($manualReviewApplied -and $ManualReviewOverride.profileOverrides) {
+  if ($manualReviewApplied -and ($ManualReviewOverride.PSObject.Properties.Name -contains 'profileOverrides') -and $ManualReviewOverride.profileOverrides) {
     Merge-ObjectProperties -Target $profile -Source $ManualReviewOverride.profileOverrides
   }
 
-  $criticalReview = Get-CriticalReviewProfile -ComponentName $ComponentName -ShelfKey $Shelf.key -Profile $profile -Signals $componentReview.signals
-
-  if ($manualReviewApplied -and $ManualReviewOverride.reviewNotes) {
+  if ($manualReviewApplied -and ($ManualReviewOverride.PSObject.Properties.Name -contains 'reviewNotes') -and $ManualReviewOverride.reviewNotes) {
     $componentReview.reviewNotes = @($ManualReviewOverride.reviewNotes) + @($componentReview.reviewNotes)
-  }
-
-  if ($manualReviewApplied -and $ManualReviewOverride.criticalReviewOverrides) {
-    Merge-ObjectProperties -Target $criticalReview -Source $ManualReviewOverride.criticalReviewOverrides
   }
 
   $manualDecision = $null
@@ -902,13 +1831,53 @@ function New-DecisionMetadataV2 {
     Assert-Condition -Condition ($manualDecision.killSwitch.Count -gt 0) -Message "Manual override missing manualDecision.killSwitch for $ComponentName"
     Assert-Condition -Condition ($manualDecision.evidenceRefs.Count -gt 0) -Message "Manual override missing manualDecision.evidenceRefs for $ComponentName"
     $componentReview.reviewNotes = @("Manual decision stance: $($manualDecision.stance)", "Manual decision reason: $($manualDecision.whyNow)") + @($componentReview.reviewNotes)
+    Apply-ManualDecisionConstraints -Profile $profile -ManualDecision $manualDecision -ComponentName $ComponentName
   }
 
-  $reviewMethod = if ($manualReviewApplied) { 'manual_readthrough' } else { 'inferred_readthrough' }
-  $reviewedBy = if ($manualReviewApplied) { 'GitHub Copilot manual readthrough' } else { 'GitHub Copilot' }
+  $criticalReview = Get-CriticalReviewProfile -ComponentName $ComponentName -ShelfKey $Shelf.key -Profile $profile -Signals $componentReview.signals
+
+  if ($manualReviewApplied -and ($ManualReviewOverride.PSObject.Properties.Name -contains 'criticalReviewOverrides') -and $ManualReviewOverride.criticalReviewOverrides) {
+    Merge-ObjectProperties -Target $criticalReview -Source $ManualReviewOverride.criticalReviewOverrides
+  }
+
+  $criticalReview.criticalityScore = [Math]::Min(5, [Math]::Max(1, [int]$criticalReview.criticalityScore))
+  $criticalReview.criticalityAnchor = Get-CriticalityAnchor -CriticalityScore $criticalReview.criticalityScore
+
+  $hasHardVerdictOverride = $manualReviewApplied -and ($ManualReviewOverride.PSObject.Properties.Name -contains 'criticalReviewOverrides') -and $ManualReviewOverride.criticalReviewOverrides -and ($ManualReviewOverride.criticalReviewOverrides.PSObject.Properties.Name -contains 'hardVerdict') -and (-not [string]::IsNullOrWhiteSpace([string]$ManualReviewOverride.criticalReviewOverrides.hardVerdict))
+  if (-not $hasHardVerdictOverride) {
+    if ($criticalReview.criticalityScore -ge 5) {
+      $criticalReview.hardVerdict = 'candidate_only'
+    } elseif ($criticalReview.criticalityScore -ge 4) {
+      $criticalReview.hardVerdict = 'review_required'
+    } else {
+      $criticalReview.hardVerdict = 'acceptable_with_constraints'
+    }
+  }
+
+  $hasExplicitEvidenceTypeOverride = $manualReviewApplied -and ($ManualReviewOverride.PSObject.Properties.Name -contains 'profileOverrides') -and $ManualReviewOverride.profileOverrides -and ($ManualReviewOverride.profileOverrides.PSObject.Properties.Name -contains 'evidenceType')
+
+  $reviewMethod = if ($manualReviewApplied) { 'manual_readthrough' } else { 'heuristic_profile_inference' }
+  $reviewedBy = if ($manualReviewApplied) { 'GitHub Copilot manual readthrough' } else { 'GitHub Copilot heuristic synthesis' }
+  $resolvedEvidenceType = @(Resolve-EvidenceType -EvidenceType $profile.evidenceType -ManualReviewApplied $manualReviewApplied -HasExplicitEvidenceTypeOverride $hasExplicitEvidenceTypeOverride)
+  $provenanceReviewers = if ($manualReviewApplied) { @('github_copilot_manual_readthrough') } else { @('github_copilot_heuristic_generator') }
+  $confidenceNotes = if ($manualReviewApplied) {
+    @('Manual review sharpens the generated shelf profile, but production fit, accessibility, and policy evidence still require direct flow validation.')
+  } else {
+    @(
+      'This record is generated from shelf taxonomy and name-signal heuristics, not direct component evidence.',
+      'Validate accessibility, performance, and product fit against the source component before using it as a default recommendation.'
+    )
+  }
+  $provenanceChangelog = if ($manualReviewApplied) {
+    @('Generated from shelf/starter taxonomy, then constrained by a manual override with explicit stance, proof obligations, and kill-switch criteria.')
+  } else {
+    @('Generated component profile from shelf/starter taxonomy plus name-signal heuristics; direct component evidence has not been verified in this record.')
+  }
   $starterKeys = @($StarterMemberships | ForEach-Object { $_.key })
   $starterLabels = @($StarterMemberships | ForEach-Object { $_.label })
-  $related = @($Shelf.highlights | Where-Object { $_ -ne $ComponentEntry.name } | Select-Object -First 6)
+  $aliases = @(Get-ComponentAliases -ComponentEntry $ComponentEntry)
+  $related = @()
+  $linkedExamples = @(Get-LinkedExampleRefs -ComponentEntry $ComponentEntry)
   $variantSet = @()
   if ($ComponentEntry.namedExports.Count -gt 1) {
     $variantSet = @($ComponentEntry.namedExports)
@@ -921,7 +1890,7 @@ function New-DecisionMetadataV2 {
         name = $ComponentEntry.name
         family = $Shelf.label
         subfamily = $profile.subfamily
-        aliases = @()
+        aliases = @($aliases)
         platformFit = @('web', 'responsive')
         variantSet = $variantSet
         relatedComponents = $related
@@ -946,7 +1915,7 @@ function New-DecisionMetadataV2 {
       readiness = [pscustomobject]@{
         lifecycle = $profile.lifecycle
         adoption = $profile.adoption
-        evidenceType = @($profile.evidenceType)
+        evidenceType = @($resolvedEvidenceType)
         stability = (New-ScoredField -Dimension 'stability' -Score $profile.stability -AnchorMap $AnchorMap)
         accessibilityConfidence = (New-ScoredField -Dimension 'accessibilityConfidence' -Score $profile.accessibilityConfidence -AnchorMap $AnchorMap)
         internationalizationConfidence = (New-ScoredField -Dimension 'internationalizationConfidence' -Score $profile.internationalizationConfidence -AnchorMap $AnchorMap)
@@ -975,11 +1944,16 @@ function New-DecisionMetadataV2 {
         manualReviewed = $manualReviewApplied
         manualDecision = $manualDecision
         lastReviewed = $GeneratedAt.Substring(0, 10)
-        reviewers = @('ui_lab_curation_bot', 'design_system_maintainer', 'github_copilot')
-        linkedExamples = @($ComponentEntry.shelfImportPath, $ComponentEntry.exactNameImportPath)
+        reviewers = @($provenanceReviewers)
+        linkedExamples = @($linkedExamples)
         sourceLinks = @($ComponentEntry.sourcePath, 'ui_lab/docs/UI_LIBRARY_METADATA_V2.md')
-        changelog = @('Generated component-specific profile from shelf/starter-lane taxonomy plus name-signal heuristics; refine with direct evidence as it becomes available.')
-        confidenceNotes = @('Scores are profile-seeded but individually adjusted for component naming signals; manual overrides are explicitly marked when supplied.')
+        heuristicInputs = [pscustomobject]@{
+          relativeComponentPath = $ComponentEntry.relativeComponentPath
+          usageHints = @($ComponentEntry.useHints)
+          sourceSignals = @($ComponentEntry.sourceSignals)
+        }
+        changelog = @($provenanceChangelog)
+        confidenceNotes = @($confidenceNotes)
         reviewNotes = @($componentReview.reviewNotes + $criticalReview.pushbackSummary)
       }
       criticalReview = [pscustomobject]@{
@@ -1002,7 +1976,7 @@ function New-DecisionMetadataV2 {
       allowedContexts = @($profile.allowedContexts)
       disallowedContexts = @($profile.disallowedContexts)
       lifecycle = $profile.lifecycle
-      evidenceType = @($profile.evidenceType)
+      evidenceType = @($resolvedEvidenceType)
       stability = $profile.stability
       accessibilityConfidence = $profile.accessibilityConfidence
       failureCost = $profile.failureCost
@@ -1018,7 +1992,7 @@ function New-DecisionMetadataV2 {
     }
     starterLaneKeys = $starterKeys
     starterLaneLabels = $starterLabels
-    reviewedBy = 'GitHub Copilot'
+    reviewedBy = $reviewedBy
     reviewSignals = @($componentReview.signals)
     reviewNotes = @($componentReview.reviewNotes + $criticalReview.pushbackSummary + ($criticalReview.specificPushback | Select-Object -First 3))
     criticalReview = $criticalReview
@@ -1436,6 +2410,7 @@ $componentIndexEntries = foreach ($info in ($componentModuleInfo | Sort-Object f
   [pscustomobject]@{
     name = $info.file
     sourcePath = ("ui_lab/components/{0}" -f $info.relativeComponentPath)
+    relativeComponentPath = $info.relativeComponentPath
     shelfKey = $shelf.key
     shelfLabel = $shelf.label
     shelfImportPath = ("ui_lab/library/shelves/{0}" -f $shelf.key)
@@ -1449,6 +2424,8 @@ $componentIndexEntries = foreach ($info in ($componentModuleInfo | Sort-Object f
     exactNameImportPath = 'ui_lab/library/by-name'
     exactNameExportKind = $exactNameExport.exportKind
     exactNameSourceExport = $exactNameExport.sourceExport
+    useHints = @($info.useHints)
+    sourceSignals = @($info.sourceSignals)
     namedExports = @($info.namedExports)
     hasDefaultExport = $info.hasDefaultExport
   }
@@ -1559,6 +2536,7 @@ $globalRank = 0
 foreach ($component in $componentRankedEntries) {
   $globalRank += 1
   $component.ranking.globalRank = $globalRank
+  $component | Add-Member -NotePropertyName globalRank -NotePropertyValue $globalRank -Force
 }
 
 foreach ($shelf in $shelves) {
@@ -1567,6 +2545,7 @@ foreach ($shelf in $shelves) {
   foreach ($component in $shelfEntries) {
     $shelfRank += 1
     $component.ranking.shelfRank = $shelfRank
+    $component | Add-Member -NotePropertyName shelfRank -NotePropertyValue $shelfRank -Force
   }
 }
 
@@ -1580,6 +2559,27 @@ foreach ($starter in $starterLanes) {
     }
     $component.ranking.starterLaneRanks[$starter.key] = $starterRank
   }
+}
+
+$relatedProfilesByName = @{}
+$relatedProfilesByShelf = @{}
+foreach ($component in $componentRankedEntries) {
+  $relatedProfile = New-RelatedComponentProfile -ComponentEntry $component
+  $relatedProfilesByName[$component.name] = $relatedProfile
+
+  if (-not $relatedProfilesByShelf.ContainsKey($component.shelfKey)) {
+    $relatedProfilesByShelf[$component.shelfKey] = [System.Collections.Generic.List[object]]::new()
+  }
+
+  $relatedProfilesByShelf[$component.shelfKey].Add($relatedProfile)
+}
+
+foreach ($component in $componentRankedEntries) {
+  $currentProfile = $relatedProfilesByName[$component.name]
+  $candidateProfiles = @($relatedProfilesByShelf[$component.shelfKey] | Where-Object { $_.name -ne $component.name })
+  $component.decisionMetadataV2.layers.identity.relatedComponents = @(
+    Get-RelatedComponentNames -CurrentProfile $currentProfile -CandidateProfiles $candidateProfiles -MaxCount 6
+  )
 }
 
 $componentRankSummary = @($componentRankedEntries | Select-Object name, shelfKey, globalRank, shelfRank, reviewedBy, ranking)
@@ -1853,7 +2853,6 @@ foreach ($dimension in @($metadataScoreAnchors.Keys | Sort-Object)) {
 }
 
 $registry = [pscustomobject]@{
-  generatedAt = $generatedAtIso
   source = [pscustomobject]@{
     root = 'ui_lab'
     groupedAccessRoot = 'ui_lab/library'
@@ -2067,8 +3066,8 @@ $guideLines.Add('- Every starter lane references existing components only.')
 $guideLines.Add('- Every catalog component filename has an exact grouped entrypoint in `ui_lab/library/by-name`.')
 $guideLines.Add('- Every shelf and starter-lane folder now has a strict `components.ts` barrel for exact file-name imports only.')
 $guideLines.Add('- Every registry component now includes `decisionMetadataV2` with layered intent, eligibility, readiness, cost, character, and provenance fields.')
-$guideLines.Add('- Every registry component is also individually reviewed with a component-specific heuristic walk-through and written review notes.')
-$guideLines.Add('- Every component metadata record is emitted into `ui_lab/configs/ui-library-component-metadata-v2.json` and marked by GitHub Copilot.')
+$guideLines.Add('- Every registry component now includes generator-authored heuristic notes, and manual review overrides are explicitly marked instead of being implied.')
+$guideLines.Add('- Every component metadata record is emitted into `ui_lab/configs/ui-library-component-metadata-v2.json` with its generation mode and reviewer identity preserved.')
 $guideLines.Add('- Every component also has a ranked summary in `ui_lab/configs/ui-library-component-rankings-v2.json` so the library can be compared at a glance.')
 $guideLines.Add('- Physical shelf folders, when present, match the generator-owned shelf classification.')
 $guideLines.Add('- Folder counts are generated from disk, not manually maintained.')
@@ -2076,7 +3075,7 @@ $guideLines.Add('- Top-level named component exports are collision-free.')
 $guideLines.Add('')
 $guideLines.Add('## Refresh Command')
 $guideLines.Add('```powershell')
-$guideLines.Add("Set-Location 'c:\Users\Bukanto\Downloads\pp\personal'")
+$guideLines.Add(("Set-Location '{0}'" -f (Resolve-Path -LiteralPath (Join-Path $UiLabRoot '..')).Path))
 $guideLines.Add('.\ui_lab\docs\generate-ui-lab-library-catalog.ps1')
 $guideLines.Add('```')
 
@@ -2136,7 +3135,7 @@ $queueLines.Add('- Prefer sharper semantic names over generic suffixes like `Com
 $queueLines.Add('')
 $queueLines.Add('## Refresh Command')
 $queueLines.Add('```powershell')
-$queueLines.Add("Set-Location 'c:\Users\Bukanto\Downloads\pp\personal'")
+$queueLines.Add(("Set-Location '{0}'" -f (Resolve-Path -LiteralPath (Join-Path $UiLabRoot '..')).Path))
 $queueLines.Add('.\ui_lab\docs\generate-ui-lab-library-catalog.ps1')
 $queueLines.Add('```')
 

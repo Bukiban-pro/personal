@@ -36,6 +36,6 @@ This file is the active admin queue for the remaining naming ambiguity in the li
 
 ## Refresh Command
 ```powershell
-Set-Location 'c:\Users\Bukanto\Downloads\pp\personal'
+Set-Location 'C:\Users\YOGA\Desktop\personal'
 .\ui_lab\docs\generate-ui-lab-library-catalog.ps1
 ```
