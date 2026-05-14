@@ -1,0 +1,704 @@
+﻿[
+    {
+        "shelfKey":  "backgrounds-effects",
+        "profile":  {
+                        "avoidWhen":  [
+                                          "text_legibility_is_primary_constraint"
+                                      ],
+                        "userGoal":  "feel_spatial_and_brand_context",
+                        "dependencyBurden":  3,
+                        "opinionation":  4,
+                        "primaryJob":  "create_atmosphere_and_depth",
+                        "performanceBudgetFit":  2,
+                        "evidenceType":  [
+                                             "expert_reviewed"
+                                         ],
+                        "requiredApprovals":  [
+                                                  "accessibility_review",
+                                                  "performance_review"
+                                              ],
+                        "uxPatternType":  "decorative_layer",
+                        "lifecycle":  "supported",
+                        "formality":  2,
+                        "interactionIntensity":  3,
+                        "analyticsConfidence":  1,
+                        "disallowedContexts":  [
+                                                   "critical_data_readability_surfaces",
+                                                   "legal_consent",
+                                                   "accessibility_sensitive_flows_without_fallbacks"
+                                               ],
+                        "secondaryJobs":  [
+                                              "brand_tone",
+                                              "visual_separation"
+                                          ],
+                        "accessibilityConfidence":  2,
+                        "preconditions":  [
+                                              "contrast_validation",
+                                              "reduced_motion_fallback",
+                                              "performance_budget_validation"
+                                          ],
+                        "visualDominance":  5,
+                        "allowedContexts":  [
+                                                "marketing_backgrounds",
+                                                "hero_backdrops",
+                                                "showcase_surfaces"
+                                            ],
+                        "internationalizationConfidence":  3,
+                        "expressiveness":  5,
+                        "densityFeel":  2,
+                        "subfamily":  "ambient_visual_layers",
+                        "contentAuthoringBurden":  1,
+                        "primaryInteractionModel":  "none",
+                        "implementationComplexity":  3,
+                        "autonomyAllowance":  "human_review_required",
+                        "failureCost":  3,
+                        "stability":  3,
+                        "adoption":  "targeted",
+                        "bestFor":  [
+                                        "visual_ambience_and_brand_mood"
+                                    ],
+                        "designTokenDependencyLevel":  2
+                    }
+    },
+    {
+        "shelfKey":  "data-admin",
+        "profile":  {
+                        "avoidWhen":  [
+                                          "lightweight_marketing_sections"
+                                      ],
+                        "userGoal":  "inspect_status_and_take_action",
+                        "dependencyBurden":  3,
+                        "opinionation":  3,
+                        "primaryJob":  "support_operational_decision_making",
+                        "performanceBudgetFit":  3,
+                        "evidenceType":  [
+                                             "production_observed",
+                                             "analytics_validated",
+                                             "expert_reviewed"
+                                         ],
+                        "requiredApprovals":  [
+                                                  "data_owner_alignment"
+                                              ],
+                        "uxPatternType":  "structured_data_view",
+                        "lifecycle":  "supported",
+                        "formality":  4,
+                        "interactionIntensity":  4,
+                        "analyticsConfidence":  4,
+                        "disallowedContexts":  [
+                                                   "legal_consent",
+                                                   "emotionally_sensitive_alerting"
+                                               ],
+                        "secondaryJobs":  [
+                                              "monitoring",
+                                              "analysis"
+                                          ],
+                        "accessibilityConfidence":  3,
+                        "preconditions":  [
+                                              "structured_data_available",
+                                              "keyboard_navigation_support",
+                                              "sufficient_viewport_space"
+                                          ],
+                        "visualDominance":  3,
+                        "allowedContexts":  [
+                                                "admin_dashboards",
+                                                "ops_surfaces"
+                                            ],
+                        "internationalizationConfidence":  3,
+                        "expressiveness":  2,
+                        "densityFeel":  5,
+                        "subfamily":  "operational_intelligence",
+                        "contentAuthoringBurden":  3,
+                        "primaryInteractionModel":  "compare",
+                        "implementationComplexity":  4,
+                        "autonomyAllowance":  "suggest_only",
+                        "failureCost":  4,
+                        "stability":  4,
+                        "adoption":  "broad",
+                        "bestFor":  [
+                                        "high_density_operational_views"
+                                    ],
+                        "designTokenDependencyLevel":  3
+                    }
+    },
+    {
+        "shelfKey":  "default",
+        "profile":  {
+                        "avoidWhen":  [
+                                          "context_is_safety_critical"
+                                      ],
+                        "userGoal":  "complete_task_with_confidence",
+                        "dependencyBurden":  2,
+                        "opinionation":  3,
+                        "primaryJob":  "ui_capability_delivery",
+                        "performanceBudgetFit":  4,
+                        "evidenceType":  [
+                                             "production_observed",
+                                             "expert_reviewed"
+                                         ],
+                        "requiredApprovals":  [
+
+                                              ],
+                        "uxPatternType":  "composable_component",
+                        "lifecycle":  "supported",
+                        "formality":  3,
+                        "interactionIntensity":  3,
+                        "analyticsConfidence":  3,
+                        "disallowedContexts":  [
+                                                   "legal_consent",
+                                                   "high_risk_confirmation"
+                                               ],
+                        "secondaryJobs":  [
+                                              "content_structuring",
+                                              "interaction_enablement"
+                                          ],
+                        "accessibilityConfidence":  3,
+                        "preconditions":  [
+                                              "responsive_layout_support",
+                                              "keyboard_navigation_support"
+                                          ],
+                        "visualDominance":  3,
+                        "allowedContexts":  [
+                                                "standard_product_surfaces"
+                                            ],
+                        "internationalizationConfidence":  3,
+                        "expressiveness":  3,
+                        "densityFeel":  3,
+                        "subfamily":  "general",
+                        "contentAuthoringBurden":  2,
+                        "primaryInteractionModel":  "mixed",
+                        "implementationComplexity":  3,
+                        "autonomyAllowance":  "suggest_only",
+                        "failureCost":  3,
+                        "stability":  4,
+                        "adoption":  "broad",
+                        "bestFor":  [
+                                        "general_ui_delivery"
+                                    ],
+                        "designTokenDependencyLevel":  3
+                    }
+    },
+    {
+        "shelfKey":  "feedback-state",
+        "profile":  {
+                        "avoidWhen":  [
+                                          "silent_background_changes"
+                                      ],
+                        "userGoal":  "understand_system_state_fast",
+                        "dependencyBurden":  2,
+                        "opinionation":  3,
+                        "primaryJob":  "communicate_state_and_risk",
+                        "performanceBudgetFit":  4,
+                        "evidenceType":  [
+                                             "production_observed",
+                                             "accessibility_audited"
+                                         ],
+                        "requiredApprovals":  [
+                                                  "critical_flow_review"
+                                              ],
+                        "uxPatternType":  "feedback_pattern",
+                        "lifecycle":  "supported",
+                        "formality":  4,
+                        "interactionIntensity":  4,
+                        "analyticsConfidence":  3,
+                        "disallowedContexts":  [
+                                                   "decorative_only_usage"
+                                               ],
+                        "secondaryJobs":  [
+                                              "confirm_actions",
+                                              "recover_from_failures"
+                                          ],
+                        "accessibilityConfidence":  4,
+                        "preconditions":  [
+                                              "message_severity_model_defined",
+                                              "keyboard_navigation_support",
+                                              "focus_management"
+                                          ],
+                        "visualDominance":  3,
+                        "allowedContexts":  [
+                                                "status_updates",
+                                                "error_recovery",
+                                                "confirmation_layers"
+                                            ],
+                        "internationalizationConfidence":  3,
+                        "expressiveness":  2,
+                        "densityFeel":  3,
+                        "subfamily":  "status_and_interruptions",
+                        "contentAuthoringBurden":  2,
+                        "primaryInteractionModel":  "feedback",
+                        "implementationComplexity":  3,
+                        "autonomyAllowance":  "human_review_required",
+                        "failureCost":  5,
+                        "stability":  4,
+                        "adoption":  "broad",
+                        "bestFor":  [
+                                        "clear_state_signaling"
+                                    ],
+                        "designTokenDependencyLevel":  3
+                    }
+    },
+    {
+        "shelfKey":  "forms-authoring",
+        "profile":  {
+                        "avoidWhen":  [
+                                          "read_only_storytelling_surfaces"
+                                      ],
+                        "userGoal":  "submit_accurate_information",
+                        "dependencyBurden":  2,
+                        "opinionation":  2,
+                        "primaryJob":  "capture_and_edit_user_input",
+                        "performanceBudgetFit":  4,
+                        "evidenceType":  [
+                                             "production_observed",
+                                             "usability_tested"
+                                         ],
+                        "requiredApprovals":  [
+
+                                              ],
+                        "uxPatternType":  "inline_control",
+                        "lifecycle":  "supported",
+                        "formality":  3,
+                        "interactionIntensity":  4,
+                        "analyticsConfidence":  3,
+                        "disallowedContexts":  [
+                                                   "critical_health_alerts"
+                                               ],
+                        "secondaryJobs":  [
+                                              "validation",
+                                              "workflow_enablement"
+                                          ],
+                        "accessibilityConfidence":  4,
+                        "preconditions":  [
+                                              "validation_rules_defined",
+                                              "keyboard_navigation_support",
+                                              "focus_management"
+                                          ],
+                        "visualDominance":  2,
+                        "allowedContexts":  [
+                                                "forms",
+                                                "authoring_flows",
+                                                "workflow_tools"
+                                            ],
+                        "internationalizationConfidence":  4,
+                        "expressiveness":  2,
+                        "densityFeel":  3,
+                        "subfamily":  "data_capture_and_authoring",
+                        "contentAuthoringBurden":  2,
+                        "primaryInteractionModel":  "input",
+                        "implementationComplexity":  3,
+                        "autonomyAllowance":  "auto_select",
+                        "failureCost":  4,
+                        "stability":  4,
+                        "adoption":  "broad",
+                        "bestFor":  [
+                                        "structured_input_collection"
+                                    ],
+                        "designTokenDependencyLevel":  3
+                    }
+    },
+    {
+        "shelfKey":  "interactive-showcase",
+        "profile":  {
+                        "avoidWhen":  [
+                                          "workflow_requires_low_cognitive_load"
+                                      ],
+                        "userGoal":  "explore_and_compare_interactively",
+                        "dependencyBurden":  3,
+                        "opinionation":  4,
+                        "primaryJob":  "demonstrate_capability_with_interaction",
+                        "performanceBudgetFit":  2,
+                        "evidenceType":  [
+                                             "production_observed",
+                                             "usability_tested"
+                                         ],
+                        "requiredApprovals":  [
+                                                  "performance_review"
+                                              ],
+                        "uxPatternType":  "interactive_pattern",
+                        "lifecycle":  "supported",
+                        "formality":  3,
+                        "interactionIntensity":  5,
+                        "analyticsConfidence":  3,
+                        "disallowedContexts":  [
+                                                   "critical_confirmation",
+                                                   "low_power_constrained_views"
+                                               ],
+                        "secondaryJobs":  [
+                                              "engagement",
+                                              "feature_demonstration"
+                                          ],
+                        "accessibilityConfidence":  3,
+                        "preconditions":  [
+                                              "pointer_and_keyboard_support",
+                                              "performance_budget_validation"
+                                          ],
+                        "visualDominance":  4,
+                        "allowedContexts":  [
+                                                "product_showcases",
+                                                "interactive_marketing",
+                                                "demo_surfaces"
+                                            ],
+                        "internationalizationConfidence":  2,
+                        "expressiveness":  4,
+                        "densityFeel":  3,
+                        "subfamily":  "high_touch_interactions",
+                        "contentAuthoringBurden":  3,
+                        "primaryInteractionModel":  "select",
+                        "implementationComplexity":  4,
+                        "autonomyAllowance":  "suggest_only",
+                        "failureCost":  3,
+                        "stability":  3,
+                        "adoption":  "targeted",
+                        "bestFor":  [
+                                        "interactive_product_storytelling"
+                                    ],
+                        "designTokenDependencyLevel":  3
+                    }
+    },
+    {
+        "shelfKey":  "landing-marketing",
+        "profile":  {
+                        "avoidWhen":  [
+                                          "dense_operational_workflows"
+                                      ],
+                        "userGoal":  "understand_offer_and_convert",
+                        "dependencyBurden":  2,
+                        "opinionation":  3,
+                        "primaryJob":  "communicate_value_and_drive_action",
+                        "performanceBudgetFit":  4,
+                        "evidenceType":  [
+                                             "production_observed",
+                                             "analytics_validated"
+                                         ],
+                        "requiredApprovals":  [
+
+                                              ],
+                        "uxPatternType":  "section_pattern",
+                        "lifecycle":  "supported",
+                        "formality":  3,
+                        "interactionIntensity":  2,
+                        "analyticsConfidence":  4,
+                        "disallowedContexts":  [
+                                                   "destructive_confirmation",
+                                                   "regulated_consent_steps"
+                                               ],
+                        "secondaryJobs":  [
+                                              "social_proof",
+                                              "offer_clarity"
+                                          ],
+                        "accessibilityConfidence":  3,
+                        "preconditions":  [
+                                              "clear_content_hierarchy",
+                                              "responsive_layout_support"
+                                          ],
+                        "visualDominance":  4,
+                        "allowedContexts":  [
+                                                "marketing_pages",
+                                                "campaign_landing_pages"
+                                            ],
+                        "internationalizationConfidence":  3,
+                        "expressiveness":  4,
+                        "densityFeel":  2,
+                        "subfamily":  "conversion_sections",
+                        "contentAuthoringBurden":  3,
+                        "primaryInteractionModel":  "navigation",
+                        "implementationComplexity":  2,
+                        "autonomyAllowance":  "auto_select",
+                        "failureCost":  2,
+                        "stability":  4,
+                        "adoption":  "broad",
+                        "bestFor":  [
+                                        "product_value_storytelling"
+                                    ],
+                        "designTokenDependencyLevel":  3
+                    }
+    },
+    {
+        "shelfKey":  "landing-product-system",
+        "profile":  {
+                        "avoidWhen":  [
+                                          "minimalist_consumer_microflows"
+                                      ],
+                        "userGoal":  "build_enterprise_buying_confidence",
+                        "dependencyBurden":  3,
+                        "opinionation":  4,
+                        "primaryJob":  "enterprise_narrative_and_decision_support",
+                        "performanceBudgetFit":  3,
+                        "evidenceType":  [
+                                             "production_observed",
+                                             "usability_tested",
+                                             "expert_reviewed"
+                                         ],
+                        "requiredApprovals":  [
+                                                  "content_strategy_review"
+                                              ],
+                        "uxPatternType":  "structured_data_view",
+                        "lifecycle":  "supported",
+                        "formality":  4,
+                        "interactionIntensity":  3,
+                        "analyticsConfidence":  3,
+                        "disallowedContexts":  [
+                                                   "critical_health_alerts",
+                                                   "legal_consent"
+                                               ],
+                        "secondaryJobs":  [
+                                              "proof_orchestration",
+                                              "stakeholder_alignment"
+                                          ],
+                        "accessibilityConfidence":  4,
+                        "preconditions":  [
+                                              "structured_content_available",
+                                              "adequate_viewport_space",
+                                              "keyboard_navigation_support"
+                                          ],
+                        "visualDominance":  4,
+                        "allowedContexts":  [
+                                                "enterprise_landing_pages",
+                                                "executive_readouts",
+                                                "solution_explainers"
+                                            ],
+                        "internationalizationConfidence":  3,
+                        "expressiveness":  4,
+                        "densityFeel":  4,
+                        "subfamily":  "enterprise_story_systems",
+                        "contentAuthoringBurden":  4,
+                        "primaryInteractionModel":  "disclosure",
+                        "implementationComplexity":  4,
+                        "autonomyAllowance":  "suggest_only",
+                        "failureCost":  4,
+                        "stability":  4,
+                        "adoption":  "broad",
+                        "bestFor":  [
+                                        "high-context_enterprise_storytelling"
+                                    ],
+                        "designTokenDependencyLevel":  4
+                    }
+    },
+    {
+        "shelfKey":  "misc-uncurated",
+        "profile":  {
+                        "avoidWhen":  [
+                                          "production_recommendation_flows"
+                                      ],
+                        "userGoal":  "hold_unclassified_assets",
+                        "dependencyBurden":  2,
+                        "opinionation":  3,
+                        "primaryJob":  "pending_classification",
+                        "performanceBudgetFit":  3,
+                        "evidenceType":  [
+                                             "expert_reviewed"
+                                         ],
+                        "requiredApprovals":  [
+                                                  "design_system_review"
+                                              ],
+                        "uxPatternType":  "uncurated_pattern",
+                        "lifecycle":  "candidate",
+                        "formality":  3,
+                        "interactionIntensity":  3,
+                        "analyticsConfidence":  1,
+                        "disallowedContexts":  [
+                                                   "autonomous_selection",
+                                                   "production_defaults"
+                                               ],
+                        "secondaryJobs":  [
+                                              "inventory_holding"
+                                          ],
+                        "accessibilityConfidence":  2,
+                        "preconditions":  [
+                                              "human_review_required"
+                                          ],
+                        "visualDominance":  3,
+                        "allowedContexts":  [
+                                                "internal_exploration_only"
+                                            ],
+                        "internationalizationConfidence":  2,
+                        "expressiveness":  3,
+                        "densityFeel":  3,
+                        "subfamily":  "requires_curation",
+                        "contentAuthoringBurden":  2,
+                        "primaryInteractionModel":  "mixed",
+                        "implementationComplexity":  3,
+                        "autonomyAllowance":  "restricted",
+                        "failureCost":  4,
+                        "stability":  2,
+                        "adoption":  "none",
+                        "bestFor":  [
+                                        "temporary_admin_holding"
+                                    ],
+                        "designTokenDependencyLevel":  2
+                    }
+    },
+    {
+        "shelfKey":  "motion-typography",
+        "profile":  {
+                        "avoidWhen":  [
+                                          "strict_performance_budget_or_reduced_motion_required"
+                                      ],
+                        "userGoal":  "perceive_emphasis_and_hierarchy",
+                        "dependencyBurden":  3,
+                        "opinionation":  4,
+                        "primaryJob":  "amplify_message_through_motion",
+                        "performanceBudgetFit":  2,
+                        "evidenceType":  [
+                                             "expert_reviewed",
+                                             "production_observed"
+                                         ],
+                        "requiredApprovals":  [
+                                                  "motion_review"
+                                              ],
+                        "uxPatternType":  "feedback_pattern",
+                        "lifecycle":  "supported",
+                        "formality":  2,
+                        "interactionIntensity":  4,
+                        "analyticsConfidence":  2,
+                        "disallowedContexts":  [
+                                                   "critical_alerting",
+                                                   "high_density_data_admin"
+                                               ],
+                        "secondaryJobs":  [
+                                              "attention_guidance",
+                                              "brand_expression"
+                                          ],
+                        "accessibilityConfidence":  3,
+                        "preconditions":  [
+                                              "reduced_motion_fallback",
+                                              "performance_budget_validation"
+                                          ],
+                        "visualDominance":  5,
+                        "allowedContexts":  [
+                                                "brand_moments",
+                                                "hero_sections",
+                                                "narrative_surfaces"
+                                            ],
+                        "internationalizationConfidence":  2,
+                        "expressiveness":  5,
+                        "densityFeel":  2,
+                        "subfamily":  "kinetic_content",
+                        "contentAuthoringBurden":  3,
+                        "primaryInteractionModel":  "disclosure",
+                        "implementationComplexity":  3,
+                        "autonomyAllowance":  "suggest_only",
+                        "failureCost":  2,
+                        "stability":  3,
+                        "adoption":  "targeted",
+                        "bestFor":  [
+                                        "expressive_content_sequences"
+                                    ],
+                        "designTokenDependencyLevel":  3
+                    }
+    },
+    {
+        "shelfKey":  "navigation-command",
+        "profile":  {
+                        "avoidWhen":  [
+                                          "single_static_content_views"
+                                      ],
+                        "userGoal":  "move_and_execute_with_confidence",
+                        "dependencyBurden":  2,
+                        "opinionation":  3,
+                        "primaryJob":  "orient_users_and_trigger_commands",
+                        "performanceBudgetFit":  4,
+                        "evidenceType":  [
+                                             "production_observed",
+                                             "usability_tested"
+                                         ],
+                        "requiredApprovals":  [
+
+                                              ],
+                        "uxPatternType":  "overlay",
+                        "lifecycle":  "supported",
+                        "formality":  3,
+                        "interactionIntensity":  4,
+                        "analyticsConfidence":  3,
+                        "disallowedContexts":  [
+                                                   "legal_consent"
+                                               ],
+                        "secondaryJobs":  [
+                                              "wayfinding",
+                                              "workflow_acceleration"
+                                          ],
+                        "accessibilityConfidence":  4,
+                        "preconditions":  [
+                                              "clear_information_architecture",
+                                              "keyboard_navigation_support",
+                                              "focus_management"
+                                          ],
+                        "visualDominance":  3,
+                        "allowedContexts":  [
+                                                "product_shells",
+                                                "cross_page_navigation",
+                                                "command_access"
+                                            ],
+                        "internationalizationConfidence":  3,
+                        "expressiveness":  3,
+                        "densityFeel":  3,
+                        "subfamily":  "navigation_and_control_surfaces",
+                        "contentAuthoringBurden":  2,
+                        "primaryInteractionModel":  "navigation",
+                        "implementationComplexity":  3,
+                        "autonomyAllowance":  "suggest_only",
+                        "failureCost":  4,
+                        "stability":  4,
+                        "adoption":  "broad",
+                        "bestFor":  [
+                                        "high_frequency_navigation_paths"
+                                    ],
+                        "designTokenDependencyLevel":  3
+                    }
+    },
+    {
+        "shelfKey":  "ui-primitives",
+        "profile":  {
+                        "avoidWhen":  [
+                                          "standalone_storytelling_needs"
+                                      ],
+                        "userGoal":  "compose_consistent_interfaces",
+                        "dependencyBurden":  1,
+                        "opinionation":  2,
+                        "primaryJob":  "provide_foundational_ui_primitives",
+                        "performanceBudgetFit":  5,
+                        "evidenceType":  [
+                                             "production_observed",
+                                             "expert_reviewed"
+                                         ],
+                        "requiredApprovals":  [
+
+                                              ],
+                        "uxPatternType":  "inline_control",
+                        "lifecycle":  "supported",
+                        "formality":  3,
+                        "interactionIntensity":  2,
+                        "analyticsConfidence":  2,
+                        "disallowedContexts":  [
+                                                   "none_without_context"
+                                               ],
+                        "secondaryJobs":  [
+                                              "layout_support",
+                                              "interaction_baseline"
+                                          ],
+                        "accessibilityConfidence":  4,
+                        "preconditions":  [
+                                              "token_system_available",
+                                              "keyboard_navigation_support"
+                                          ],
+                        "visualDominance":  1,
+                        "allowedContexts":  [
+                                                "all_product_surfaces"
+                                            ],
+                        "internationalizationConfidence":  4,
+                        "expressiveness":  1,
+                        "densityFeel":  2,
+                        "subfamily":  "atoms_and_composables",
+                        "contentAuthoringBurden":  1,
+                        "primaryInteractionModel":  "mixed",
+                        "implementationComplexity":  2,
+                        "autonomyAllowance":  "auto_select",
+                        "failureCost":  3,
+                        "stability":  5,
+                        "adoption":  "broad",
+                        "bestFor":  [
+                                        "reusable_design_system_foundations"
+                                    ],
+                        "designTokenDependencyLevel":  4
+                    }
+    }
+]

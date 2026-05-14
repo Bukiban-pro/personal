@@ -776,8 +776,8 @@
         "hasDefaultExport":  false
     },
     {
-        "name":  "badge",
-        "sourcePath":  "ui_lab/components/shelves/ui-primitives/badge.tsx",
+        "name":  "Badge",
+        "sourcePath":  "ui_lab/components/shelves/ui-primitives/Badge.tsx",
         "shelfKey":  "ui-primitives",
         "shelfLabel":  "UI Primitives",
         "shelfImportPath":  "ui_lab/library/shelves/ui-primitives",
@@ -800,7 +800,7 @@
                                  ],
         "exactNameImportPath":  "ui_lab/library/by-name",
         "exactNameExportKind":  "named",
-        "exactNameSourceExport":  "badge",
+        "exactNameSourceExport":  "Badge",
         "namedExports":  [
                              "Badge",
                              "BadgeGroup"
@@ -2233,7 +2233,8 @@
         "exactNameSourceExport":  "Tree",
         "namedExports":  [
                              "File",
-                             "Tree"
+                             "Tree",
+                             "FileTree"
                          ],
         "hasDefaultExport":  false
     },
@@ -4443,6 +4444,68 @@
         "hasDefaultExport":  false
     },
     {
+        "name":  "LandingProductBentoFeatures",
+        "sourcePath":  "ui_lab/components/shelves/landing-product-system/LandingProductBentoFeatures.tsx",
+        "shelfKey":  "landing-product-system",
+        "shelfLabel":  "LandingProduct System",
+        "shelfImportPath":  "ui_lab/library/shelves/landing-product-system",
+        "shelfExactImportPath":  "ui_lab/library/shelves/landing-product-system/components",
+        "shelfMetaPath":  "ui_lab/library/shelves/landing-product-system/meta.json",
+        "starterLaneKeys":  [
+
+                            ],
+        "starterLaneLabels":  [
+
+                              ],
+        "starterLaneImportPaths":  [
+
+                                   ],
+        "starterLaneExactImportPaths":  [
+
+                                        ],
+        "starterLaneMetaPaths":  [
+
+                                 ],
+        "exactNameImportPath":  "ui_lab/library/by-name",
+        "exactNameExportKind":  "named",
+        "exactNameSourceExport":  "LandingProductBentoFeatures",
+        "namedExports":  [
+                             "LandingProductBentoFeatures"
+                         ],
+        "hasDefaultExport":  false
+    },
+    {
+        "name":  "LandingProductBlurReveal",
+        "sourcePath":  "ui_lab/components/shelves/landing-product-system/LandingProductBlurReveal.tsx",
+        "shelfKey":  "landing-product-system",
+        "shelfLabel":  "LandingProduct System",
+        "shelfImportPath":  "ui_lab/library/shelves/landing-product-system",
+        "shelfExactImportPath":  "ui_lab/library/shelves/landing-product-system/components",
+        "shelfMetaPath":  "ui_lab/library/shelves/landing-product-system/meta.json",
+        "starterLaneKeys":  [
+
+                            ],
+        "starterLaneLabels":  [
+
+                              ],
+        "starterLaneImportPaths":  [
+
+                                   ],
+        "starterLaneExactImportPaths":  [
+
+                                        ],
+        "starterLaneMetaPaths":  [
+
+                                 ],
+        "exactNameImportPath":  "ui_lab/library/by-name",
+        "exactNameExportKind":  "named",
+        "exactNameSourceExport":  "LandingProductBlurReveal",
+        "namedExports":  [
+                             "LandingProductBlurReveal"
+                         ],
+        "hasDefaultExport":  false
+    },
+    {
         "name":  "LandingProductBoardReporting",
         "sourcePath":  "ui_lab/components/shelves/landing-product-system/LandingProductBoardReporting.tsx",
         "shelfKey":  "landing-product-system",
@@ -4966,6 +5029,37 @@
         "exactNameSourceExport":  "LandingProductCommercialModel",
         "namedExports":  [
                              "LandingProductCommercialModel"
+                         ],
+        "hasDefaultExport":  false
+    },
+    {
+        "name":  "LandingProductCompareColumns",
+        "sourcePath":  "ui_lab/components/shelves/landing-product-system/LandingProductCompareColumns.tsx",
+        "shelfKey":  "landing-product-system",
+        "shelfLabel":  "LandingProduct System",
+        "shelfImportPath":  "ui_lab/library/shelves/landing-product-system",
+        "shelfExactImportPath":  "ui_lab/library/shelves/landing-product-system/components",
+        "shelfMetaPath":  "ui_lab/library/shelves/landing-product-system/meta.json",
+        "starterLaneKeys":  [
+
+                            ],
+        "starterLaneLabels":  [
+
+                              ],
+        "starterLaneImportPaths":  [
+
+                                   ],
+        "starterLaneExactImportPaths":  [
+
+                                        ],
+        "starterLaneMetaPaths":  [
+
+                                 ],
+        "exactNameImportPath":  "ui_lab/library/by-name",
+        "exactNameExportKind":  "named",
+        "exactNameSourceExport":  "LandingProductCompareColumns",
+        "namedExports":  [
+                             "LandingProductCompareColumns"
                          ],
         "hasDefaultExport":  false
     },
@@ -5648,6 +5742,37 @@
         "exactNameSourceExport":  "LandingProductCustomerReferenceProgram",
         "namedExports":  [
                              "LandingProductCustomerReferenceProgram"
+                         ],
+        "hasDefaultExport":  false
+    },
+    {
+        "name":  "LandingProductDashboardPreview",
+        "sourcePath":  "ui_lab/components/shelves/landing-product-system/LandingProductDashboardPreview.tsx",
+        "shelfKey":  "landing-product-system",
+        "shelfLabel":  "LandingProduct System",
+        "shelfImportPath":  "ui_lab/library/shelves/landing-product-system",
+        "shelfExactImportPath":  "ui_lab/library/shelves/landing-product-system/components",
+        "shelfMetaPath":  "ui_lab/library/shelves/landing-product-system/meta.json",
+        "starterLaneKeys":  [
+
+                            ],
+        "starterLaneLabels":  [
+
+                              ],
+        "starterLaneImportPaths":  [
+
+                                   ],
+        "starterLaneExactImportPaths":  [
+
+                                        ],
+        "starterLaneMetaPaths":  [
+
+                                 ],
+        "exactNameImportPath":  "ui_lab/library/by-name",
+        "exactNameExportKind":  "named",
+        "exactNameSourceExport":  "LandingProductDashboardPreview",
+        "namedExports":  [
+                             "LandingProductDashboardPreview"
                          ],
         "hasDefaultExport":  false
     },
@@ -7295,6 +7420,37 @@
         "hasDefaultExport":  false
     },
     {
+        "name":  "LandingProductGlowCTA",
+        "sourcePath":  "ui_lab/components/shelves/landing-product-system/LandingProductGlowCTA.tsx",
+        "shelfKey":  "landing-product-system",
+        "shelfLabel":  "LandingProduct System",
+        "shelfImportPath":  "ui_lab/library/shelves/landing-product-system",
+        "shelfExactImportPath":  "ui_lab/library/shelves/landing-product-system/components",
+        "shelfMetaPath":  "ui_lab/library/shelves/landing-product-system/meta.json",
+        "starterLaneKeys":  [
+
+                            ],
+        "starterLaneLabels":  [
+
+                              ],
+        "starterLaneImportPaths":  [
+
+                                   ],
+        "starterLaneExactImportPaths":  [
+
+                                        ],
+        "starterLaneMetaPaths":  [
+
+                                 ],
+        "exactNameImportPath":  "ui_lab/library/by-name",
+        "exactNameExportKind":  "named",
+        "exactNameSourceExport":  "LandingProductGlowCTA",
+        "namedExports":  [
+                             "LandingProductGlowCTA"
+                         ],
+        "hasDefaultExport":  false
+    },
+    {
         "name":  "LandingProductGoToMarketCircuit",
         "sourcePath":  "ui_lab/components/shelves/landing-product-system/LandingProductGoToMarketCircuit.tsx",
         "shelfKey":  "landing-product-system",
@@ -7946,6 +8102,37 @@
         "hasDefaultExport":  false
     },
     {
+        "name":  "LandingProductInteractiveFAQ",
+        "sourcePath":  "ui_lab/components/shelves/landing-product-system/LandingProductInteractiveFAQ.tsx",
+        "shelfKey":  "landing-product-system",
+        "shelfLabel":  "LandingProduct System",
+        "shelfImportPath":  "ui_lab/library/shelves/landing-product-system",
+        "shelfExactImportPath":  "ui_lab/library/shelves/landing-product-system/components",
+        "shelfMetaPath":  "ui_lab/library/shelves/landing-product-system/meta.json",
+        "starterLaneKeys":  [
+
+                            ],
+        "starterLaneLabels":  [
+
+                              ],
+        "starterLaneImportPaths":  [
+
+                                   ],
+        "starterLaneExactImportPaths":  [
+
+                                        ],
+        "starterLaneMetaPaths":  [
+
+                                 ],
+        "exactNameImportPath":  "ui_lab/library/by-name",
+        "exactNameExportKind":  "named",
+        "exactNameSourceExport":  "LandingProductInteractiveFAQ",
+        "namedExports":  [
+                             "LandingProductInteractiveFAQ"
+                         ],
+        "hasDefaultExport":  false
+    },
+    {
         "name":  "LandingProductInteractiveShowcase",
         "sourcePath":  "ui_lab/components/shelves/landing-product-system/LandingProductInteractiveShowcase.tsx",
         "shelfKey":  "landing-product-system",
@@ -8159,6 +8346,68 @@
         "exactNameSourceExport":  "LandingProductLegalChecklist",
         "namedExports":  [
                              "LandingProductLegalChecklist"
+                         ],
+        "hasDefaultExport":  false
+    },
+    {
+        "name":  "LandingProductLiveCounters",
+        "sourcePath":  "ui_lab/components/shelves/landing-product-system/LandingProductLiveCounters.tsx",
+        "shelfKey":  "landing-product-system",
+        "shelfLabel":  "LandingProduct System",
+        "shelfImportPath":  "ui_lab/library/shelves/landing-product-system",
+        "shelfExactImportPath":  "ui_lab/library/shelves/landing-product-system/components",
+        "shelfMetaPath":  "ui_lab/library/shelves/landing-product-system/meta.json",
+        "starterLaneKeys":  [
+
+                            ],
+        "starterLaneLabels":  [
+
+                              ],
+        "starterLaneImportPaths":  [
+
+                                   ],
+        "starterLaneExactImportPaths":  [
+
+                                        ],
+        "starterLaneMetaPaths":  [
+
+                                 ],
+        "exactNameImportPath":  "ui_lab/library/by-name",
+        "exactNameExportKind":  "named",
+        "exactNameSourceExport":  "LandingProductLiveCounters",
+        "namedExports":  [
+                             "LandingProductLiveCounters"
+                         ],
+        "hasDefaultExport":  false
+    },
+    {
+        "name":  "LandingProductMarqueeBand",
+        "sourcePath":  "ui_lab/components/shelves/landing-product-system/LandingProductMarqueeBand.tsx",
+        "shelfKey":  "landing-product-system",
+        "shelfLabel":  "LandingProduct System",
+        "shelfImportPath":  "ui_lab/library/shelves/landing-product-system",
+        "shelfExactImportPath":  "ui_lab/library/shelves/landing-product-system/components",
+        "shelfMetaPath":  "ui_lab/library/shelves/landing-product-system/meta.json",
+        "starterLaneKeys":  [
+
+                            ],
+        "starterLaneLabels":  [
+
+                              ],
+        "starterLaneImportPaths":  [
+
+                                   ],
+        "starterLaneExactImportPaths":  [
+
+                                        ],
+        "starterLaneMetaPaths":  [
+
+                                 ],
+        "exactNameImportPath":  "ui_lab/library/by-name",
+        "exactNameExportKind":  "named",
+        "exactNameSourceExport":  "LandingProductMarqueeBand",
+        "namedExports":  [
+                             "LandingProductMarqueeBand"
                          ],
         "hasDefaultExport":  false
     },
@@ -9775,6 +10024,37 @@
         "hasDefaultExport":  false
     },
     {
+        "name":  "LandingProductPricingToggle",
+        "sourcePath":  "ui_lab/components/shelves/landing-product-system/LandingProductPricingToggle.tsx",
+        "shelfKey":  "landing-product-system",
+        "shelfLabel":  "LandingProduct System",
+        "shelfImportPath":  "ui_lab/library/shelves/landing-product-system",
+        "shelfExactImportPath":  "ui_lab/library/shelves/landing-product-system/components",
+        "shelfMetaPath":  "ui_lab/library/shelves/landing-product-system/meta.json",
+        "starterLaneKeys":  [
+
+                            ],
+        "starterLaneLabels":  [
+
+                              ],
+        "starterLaneImportPaths":  [
+
+                                   ],
+        "starterLaneExactImportPaths":  [
+
+                                        ],
+        "starterLaneMetaPaths":  [
+
+                                 ],
+        "exactNameImportPath":  "ui_lab/library/by-name",
+        "exactNameExportKind":  "named",
+        "exactNameSourceExport":  "LandingProductPricingToggle",
+        "namedExports":  [
+                             "LandingProductPricingToggle"
+                         ],
+        "hasDefaultExport":  false
+    },
+    {
         "name":  "LandingProductPriorityMatrix",
         "sourcePath":  "ui_lab/components/shelves/landing-product-system/LandingProductPriorityMatrix.tsx",
         "shelfKey":  "landing-product-system",
@@ -11263,6 +11543,37 @@
         "hasDefaultExport":  false
     },
     {
+        "name":  "LandingProductScrollStory",
+        "sourcePath":  "ui_lab/components/shelves/landing-product-system/LandingProductScrollStory.tsx",
+        "shelfKey":  "landing-product-system",
+        "shelfLabel":  "LandingProduct System",
+        "shelfImportPath":  "ui_lab/library/shelves/landing-product-system",
+        "shelfExactImportPath":  "ui_lab/library/shelves/landing-product-system/components",
+        "shelfMetaPath":  "ui_lab/library/shelves/landing-product-system/meta.json",
+        "starterLaneKeys":  [
+
+                            ],
+        "starterLaneLabels":  [
+
+                              ],
+        "starterLaneImportPaths":  [
+
+                                   ],
+        "starterLaneExactImportPaths":  [
+
+                                        ],
+        "starterLaneMetaPaths":  [
+
+                                 ],
+        "exactNameImportPath":  "ui_lab/library/by-name",
+        "exactNameExportKind":  "named",
+        "exactNameSourceExport":  "LandingProductScrollStory",
+        "namedExports":  [
+                             "LandingProductScrollStory"
+                         ],
+        "hasDefaultExport":  false
+    },
+    {
         "name":  "LandingProductSeatExpansionPlanner",
         "sourcePath":  "ui_lab/components/shelves/landing-product-system/LandingProductSeatExpansionPlanner.tsx",
         "shelfKey":  "landing-product-system",
@@ -12038,6 +12349,37 @@
         "hasDefaultExport":  false
     },
     {
+        "name":  "LandingProductSpotlightGrid",
+        "sourcePath":  "ui_lab/components/shelves/landing-product-system/LandingProductSpotlightGrid.tsx",
+        "shelfKey":  "landing-product-system",
+        "shelfLabel":  "LandingProduct System",
+        "shelfImportPath":  "ui_lab/library/shelves/landing-product-system",
+        "shelfExactImportPath":  "ui_lab/library/shelves/landing-product-system/components",
+        "shelfMetaPath":  "ui_lab/library/shelves/landing-product-system/meta.json",
+        "starterLaneKeys":  [
+
+                            ],
+        "starterLaneLabels":  [
+
+                              ],
+        "starterLaneImportPaths":  [
+
+                                   ],
+        "starterLaneExactImportPaths":  [
+
+                                        ],
+        "starterLaneMetaPaths":  [
+
+                                 ],
+        "exactNameImportPath":  "ui_lab/library/by-name",
+        "exactNameExportKind":  "named",
+        "exactNameSourceExport":  "LandingProductSpotlightGrid",
+        "namedExports":  [
+                             "LandingProductSpotlightGrid"
+                         ],
+        "hasDefaultExport":  false
+    },
+    {
         "name":  "LandingProductStakeholderBrief",
         "sourcePath":  "ui_lab/components/shelves/landing-product-system/LandingProductStakeholderBrief.tsx",
         "shelfKey":  "landing-product-system",
@@ -12627,6 +12969,37 @@
         "hasDefaultExport":  false
     },
     {
+        "name":  "LandingProductTerminalDemo",
+        "sourcePath":  "ui_lab/components/shelves/landing-product-system/LandingProductTerminalDemo.tsx",
+        "shelfKey":  "landing-product-system",
+        "shelfLabel":  "LandingProduct System",
+        "shelfImportPath":  "ui_lab/library/shelves/landing-product-system",
+        "shelfExactImportPath":  "ui_lab/library/shelves/landing-product-system/components",
+        "shelfMetaPath":  "ui_lab/library/shelves/landing-product-system/meta.json",
+        "starterLaneKeys":  [
+
+                            ],
+        "starterLaneLabels":  [
+
+                              ],
+        "starterLaneImportPaths":  [
+
+                                   ],
+        "starterLaneExactImportPaths":  [
+
+                                        ],
+        "starterLaneMetaPaths":  [
+
+                                 ],
+        "exactNameImportPath":  "ui_lab/library/by-name",
+        "exactNameExportKind":  "named",
+        "exactNameSourceExport":  "LandingProductTerminalDemo",
+        "namedExports":  [
+                             "LandingProductTerminalDemo"
+                         ],
+        "hasDefaultExport":  false
+    },
+    {
         "name":  "LandingProductTerritoryCapacityModel",
         "sourcePath":  "ui_lab/components/shelves/landing-product-system/LandingProductTerritoryCapacityModel.tsx",
         "shelfKey":  "landing-product-system",
@@ -12654,6 +13027,68 @@
         "exactNameSourceExport":  "LandingProductTerritoryCapacityModel",
         "namedExports":  [
                              "LandingProductTerritoryCapacityModel"
+                         ],
+        "hasDefaultExport":  false
+    },
+    {
+        "name":  "LandingProductTickerStrip",
+        "sourcePath":  "ui_lab/components/shelves/landing-product-system/LandingProductTickerStrip.tsx",
+        "shelfKey":  "landing-product-system",
+        "shelfLabel":  "LandingProduct System",
+        "shelfImportPath":  "ui_lab/library/shelves/landing-product-system",
+        "shelfExactImportPath":  "ui_lab/library/shelves/landing-product-system/components",
+        "shelfMetaPath":  "ui_lab/library/shelves/landing-product-system/meta.json",
+        "starterLaneKeys":  [
+
+                            ],
+        "starterLaneLabels":  [
+
+                              ],
+        "starterLaneImportPaths":  [
+
+                                   ],
+        "starterLaneExactImportPaths":  [
+
+                                        ],
+        "starterLaneMetaPaths":  [
+
+                                 ],
+        "exactNameImportPath":  "ui_lab/library/by-name",
+        "exactNameExportKind":  "named",
+        "exactNameSourceExport":  "LandingProductTickerStrip",
+        "namedExports":  [
+                             "LandingProductTickerStrip"
+                         ],
+        "hasDefaultExport":  false
+    },
+    {
+        "name":  "LandingProductTimelineRoadmap",
+        "sourcePath":  "ui_lab/components/shelves/landing-product-system/LandingProductTimelineRoadmap.tsx",
+        "shelfKey":  "landing-product-system",
+        "shelfLabel":  "LandingProduct System",
+        "shelfImportPath":  "ui_lab/library/shelves/landing-product-system",
+        "shelfExactImportPath":  "ui_lab/library/shelves/landing-product-system/components",
+        "shelfMetaPath":  "ui_lab/library/shelves/landing-product-system/meta.json",
+        "starterLaneKeys":  [
+
+                            ],
+        "starterLaneLabels":  [
+
+                              ],
+        "starterLaneImportPaths":  [
+
+                                   ],
+        "starterLaneExactImportPaths":  [
+
+                                        ],
+        "starterLaneMetaPaths":  [
+
+                                 ],
+        "exactNameImportPath":  "ui_lab/library/by-name",
+        "exactNameExportKind":  "named",
+        "exactNameSourceExport":  "LandingProductTimelineRoadmap",
+        "namedExports":  [
+                             "LandingProductTimelineRoadmap"
                          ],
         "hasDefaultExport":  false
     },
@@ -13898,6 +14333,37 @@
         "exactNameSourceExport":  "LandingProductVideoFeature",
         "namedExports":  [
                              "LandingProductVideoFeature"
+                         ],
+        "hasDefaultExport":  false
+    },
+    {
+        "name":  "LandingProductVideoQuote",
+        "sourcePath":  "ui_lab/components/shelves/landing-product-system/LandingProductVideoQuote.tsx",
+        "shelfKey":  "landing-product-system",
+        "shelfLabel":  "LandingProduct System",
+        "shelfImportPath":  "ui_lab/library/shelves/landing-product-system",
+        "shelfExactImportPath":  "ui_lab/library/shelves/landing-product-system/components",
+        "shelfMetaPath":  "ui_lab/library/shelves/landing-product-system/meta.json",
+        "starterLaneKeys":  [
+
+                            ],
+        "starterLaneLabels":  [
+
+                              ],
+        "starterLaneImportPaths":  [
+
+                                   ],
+        "starterLaneExactImportPaths":  [
+
+                                        ],
+        "starterLaneMetaPaths":  [
+
+                                 ],
+        "exactNameImportPath":  "ui_lab/library/by-name",
+        "exactNameExportKind":  "named",
+        "exactNameSourceExport":  "LandingProductVideoQuote",
+        "namedExports":  [
+                             "LandingProductVideoQuote"
                          ],
         "hasDefaultExport":  false
     },
@@ -15402,8 +15868,8 @@
         "hasDefaultExport":  false
     },
     {
-        "name":  "pagination",
-        "sourcePath":  "ui_lab/components/shelves/forms-authoring/pagination.tsx",
+        "name":  "Pagination",
+        "sourcePath":  "ui_lab/components/shelves/forms-authoring/Pagination.tsx",
         "shelfKey":  "forms-authoring",
         "shelfLabel":  "Forms and Authoring",
         "shelfImportPath":  "ui_lab/library/shelves/forms-authoring",
@@ -15426,7 +15892,7 @@
                                  ],
         "exactNameImportPath":  "ui_lab/library/by-name",
         "exactNameExportKind":  "named",
-        "exactNameSourceExport":  "pagination",
+        "exactNameSourceExport":  "Pagination",
         "namedExports":  [
                              "Pagination"
                          ],
@@ -15620,8 +16086,8 @@
         "hasDefaultExport":  false
     },
     {
-        "name":  "popover",
-        "sourcePath":  "ui_lab/components/shelves/ui-primitives/popover.tsx",
+        "name":  "Popover",
+        "sourcePath":  "ui_lab/components/shelves/ui-primitives/Popover.tsx",
         "shelfKey":  "ui-primitives",
         "shelfLabel":  "UI Primitives",
         "shelfImportPath":  "ui_lab/library/shelves/ui-primitives",
@@ -15644,7 +16110,7 @@
                                  ],
         "exactNameImportPath":  "ui_lab/library/by-name",
         "exactNameExportKind":  "named",
-        "exactNameSourceExport":  "popover",
+        "exactNameSourceExport":  "Popover",
         "namedExports":  [
                              "Popover"
                          ],
@@ -16493,8 +16959,8 @@
         "hasDefaultExport":  false
     },
     {
-        "name":  "sheet",
-        "sourcePath":  "ui_lab/components/shelves/ui-primitives/sheet.tsx",
+        "name":  "Sheet",
+        "sourcePath":  "ui_lab/components/shelves/ui-primitives/Sheet.tsx",
         "shelfKey":  "ui-primitives",
         "shelfLabel":  "UI Primitives",
         "shelfImportPath":  "ui_lab/library/shelves/ui-primitives",
@@ -16517,7 +16983,7 @@
                                  ],
         "exactNameImportPath":  "ui_lab/library/by-name",
         "exactNameExportKind":  "named",
-        "exactNameSourceExport":  "sheet",
+        "exactNameSourceExport":  "Sheet",
         "namedExports":  [
                              "Sheet",
                              "SheetHeader",
@@ -16685,8 +17151,8 @@
         "hasDefaultExport":  false
     },
     {
-        "name":  "skeleton",
-        "sourcePath":  "ui_lab/components/shelves/feedback-state/skeleton.tsx",
+        "name":  "Skeleton",
+        "sourcePath":  "ui_lab/components/shelves/feedback-state/Skeleton.tsx",
         "shelfKey":  "feedback-state",
         "shelfLabel":  "Feedback and State",
         "shelfImportPath":  "ui_lab/library/shelves/feedback-state",
@@ -16709,7 +17175,7 @@
                                  ],
         "exactNameImportPath":  "ui_lab/library/by-name",
         "exactNameExportKind":  "named",
-        "exactNameSourceExport":  "skeleton",
+        "exactNameSourceExport":  "Skeleton",
         "namedExports":  [
                              "Skeleton",
                              "SkeletonGroup"
@@ -17866,8 +18332,8 @@
         "hasDefaultExport":  false
     },
     {
-        "name":  "tooltip",
-        "sourcePath":  "ui_lab/components/shelves/ui-primitives/tooltip.tsx",
+        "name":  "Tooltip",
+        "sourcePath":  "ui_lab/components/shelves/ui-primitives/Tooltip.tsx",
         "shelfKey":  "ui-primitives",
         "shelfLabel":  "UI Primitives",
         "shelfImportPath":  "ui_lab/library/shelves/ui-primitives",
@@ -17890,7 +18356,7 @@
                                  ],
         "exactNameImportPath":  "ui_lab/library/by-name",
         "exactNameExportKind":  "named",
-        "exactNameSourceExport":  "tooltip",
+        "exactNameSourceExport":  "Tooltip",
         "namedExports":  [
                              "Tooltip"
                          ],

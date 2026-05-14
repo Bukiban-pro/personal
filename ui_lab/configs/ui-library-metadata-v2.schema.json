@@ -1,0 +1,132 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "ui_lab/configs/ui-library-metadata-v2.schema.json",
+  "title": "UI Library Metadata v2",
+  "description": "Decision-grade metadata schema for UI component catalog records.",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "layers",
+    "minimumSchema"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "type": "string",
+      "const": "ui-library-metadata-v2"
+    },
+    "layers": {
+      "type": "object",
+      "required": [
+        "identity",
+        "intent",
+        "eligibility",
+        "readiness",
+        "operationalCost",
+        "behavioralCharacter",
+        "provenance"
+      ],
+      "properties": {
+        "identity": {
+          "type": "object",
+          "required": ["name", "family", "platformFit"]
+        },
+        "intent": {
+          "type": "object",
+          "required": ["primaryJob", "userGoal", "primaryInteractionModel", "uxPatternType"]
+        },
+        "eligibility": {
+          "type": "object",
+          "required": [
+            "allowedContexts",
+            "disallowedContexts",
+            "bestFor",
+            "avoidWhen",
+            "autonomyAllowance",
+            "preconditions"
+          ],
+          "properties": {
+            "autonomyAllowance": {
+              "type": "string",
+              "enum": ["auto_select", "suggest_only", "human_review_required", "restricted"]
+            }
+          }
+        },
+        "readiness": {
+          "type": "object",
+          "required": [
+            "lifecycle",
+            "adoption",
+            "evidenceType",
+            "stability",
+            "accessibilityConfidence",
+            "internationalizationConfidence",
+            "analyticsConfidence",
+            "failureCost"
+          ],
+          "properties": {
+            "lifecycle": {
+              "type": "string",
+              "enum": ["candidate", "supported", "deprecated", "retired"]
+            }
+          }
+        },
+        "operationalCost": {
+          "type": "object",
+          "required": [
+            "performanceBudgetFit",
+            "implementationComplexity",
+            "dependencyBurden",
+            "designTokenDependencyLevel",
+            "contentAuthoringBurden"
+          ]
+        },
+        "behavioralCharacter": {
+          "type": "object",
+          "required": [
+            "opinionation",
+            "expressiveness",
+            "formality",
+            "interactionIntensity",
+            "visualDominance",
+            "densityFeel"
+          ]
+        },
+        "provenance": {
+          "type": "object",
+          "required": [
+            "owner",
+            "lastReviewed",
+            "reviewers",
+            "linkedExamples",
+            "sourceLinks",
+            "changelog",
+            "confidenceNotes"
+          ]
+        }
+      }
+    },
+    "minimumSchema": {
+      "type": "object",
+      "required": [
+        "name",
+        "family",
+        "primaryJob",
+        "allowedContexts",
+        "disallowedContexts",
+        "lifecycle",
+        "evidenceType",
+        "stability",
+        "accessibilityConfidence",
+        "failureCost",
+        "performanceBudgetFit",
+        "opinionation",
+        "expressiveness",
+        "formality",
+        "interactionIntensity",
+        "autonomyAllowance",
+        "owner",
+        "lastReviewed"
+      ]
+    }
+  }
+}

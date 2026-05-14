@@ -24,7 +24,7 @@ export { AuthRequiredModal } from "../../components/shelves/feedback-state/AuthR
 export { Avatar } from "../../components/shelves/ui-primitives/Avatar";
 export { AvatarCircles } from "../../components/shelves/ui-primitives/AvatarCircles";
 export { Backlight } from "../../components/shelves/backgrounds-effects/Backlight";
-export { badge } from "../../components/shelves/ui-primitives/badge";
+export { Badge } from "../../components/shelves/ui-primitives/Badge";
 export { BadgeInput } from "../../components/shelves/forms-authoring/BadgeInput";
 export { BarChart } from "../../components/shelves/data-admin/BarChart";
 export { BentoGrid } from "../../components/shelves/data-admin/BentoGrid";
@@ -142,6 +142,8 @@ export { LandingProductBeliefCompiler } from "../../components/shelves/landing-p
 export { LandingProductBeliefGraph } from "../../components/shelves/landing-product-system/LandingProductBeliefGraph";
 export { LandingProductBeliefRuntime } from "../../components/shelves/landing-product-system/LandingProductBeliefRuntime";
 export { LandingProductBenchmarkCards } from "../../components/shelves/landing-product-system/LandingProductBenchmarkCards";
+export { LandingProductBentoFeatures } from "../../components/shelves/landing-product-system/LandingProductBentoFeatures";
+export { LandingProductBlurReveal } from "../../components/shelves/landing-product-system/LandingProductBlurReveal";
 export { LandingProductBoardReporting } from "../../components/shelves/landing-product-system/LandingProductBoardReporting";
 export { LandingProductBoardroomSystem } from "../../components/shelves/landing-product-system/LandingProductBoardroomSystem";
 export { LandingProductBusinessCaseBuilder } from "../../components/shelves/landing-product-system/LandingProductBusinessCaseBuilder";
@@ -159,6 +161,7 @@ export { LandingProductChannelSalesKit } from "../../components/shelves/landing-
 export { LandingProductCommandBriefing } from "../../components/shelves/landing-product-system/LandingProductCommandBriefing";
 export { LandingProductCommandSurface } from "../../components/shelves/landing-product-system/LandingProductCommandSurface";
 export { LandingProductCommercialModel } from "../../components/shelves/landing-product-system/LandingProductCommercialModel";
+export { LandingProductCompareColumns } from "../../components/shelves/landing-product-system/LandingProductCompareColumns";
 export { LandingProductComparison } from "../../components/shelves/landing-product-system/LandingProductComparison";
 export { LandingProductComparisonChecklist } from "../../components/shelves/landing-product-system/LandingProductComparisonChecklist";
 export { LandingProductComplianceMappings } from "../../components/shelves/landing-product-system/LandingProductComplianceMappings";
@@ -181,6 +184,7 @@ export { LandingProductCustomerJourneyMap } from "../../components/shelves/landi
 export { LandingProductCustomerMarketingKit } from "../../components/shelves/landing-product-system/LandingProductCustomerMarketingKit";
 export { LandingProductCustomerOperationsDesk } from "../../components/shelves/landing-product-system/LandingProductCustomerOperationsDesk";
 export { LandingProductCustomerReferenceProgram } from "../../components/shelves/landing-product-system/LandingProductCustomerReferenceProgram";
+export { LandingProductDashboardPreview } from "../../components/shelves/landing-product-system/LandingProductDashboardPreview";
 export { LandingProductDataResidency } from "../../components/shelves/landing-product-system/LandingProductDataResidency";
 export { LandingProductDealDeskAlignment } from "../../components/shelves/landing-product-system/LandingProductDealDeskAlignment";
 export { LandingProductDecisionArray } from "../../components/shelves/landing-product-system/LandingProductDecisionArray";
@@ -234,6 +238,7 @@ export { LandingProductFeatureMatrix } from "../../components/shelves/landing-pr
 export { LandingProductFeatureRail } from "../../components/shelves/landing-product-system/LandingProductFeatureRail";
 export { LandingProductFeaturesGrid } from "../../components/shelves/landing-product-system/LandingProductFeaturesGrid";
 export { LandingProductFrictionMap } from "../../components/shelves/landing-product-system/LandingProductFrictionMap";
+export { LandingProductGlowCTA } from "../../components/shelves/landing-product-system/LandingProductGlowCTA";
 export { LandingProductGoToMarketCircuit } from "../../components/shelves/landing-product-system/LandingProductGoToMarketCircuit";
 export { LandingProductGovernanceCalendar } from "../../components/shelves/landing-product-system/LandingProductGovernanceCalendar";
 export { LandingProductGovernanceModel } from "../../components/shelves/landing-product-system/LandingProductGovernanceModel";
@@ -255,6 +260,7 @@ export { LandingProductInfluenceRuntime } from "../../components/shelves/landing
 export { LandingProductInfluenceTerminal } from "../../components/shelves/landing-product-system/LandingProductInfluenceTerminal";
 export { LandingProductIntegrationReadiness } from "../../components/shelves/landing-product-system/LandingProductIntegrationReadiness";
 export { LandingProductIntegrationsWall } from "../../components/shelves/landing-product-system/LandingProductIntegrationsWall";
+export { LandingProductInteractiveFAQ } from "../../components/shelves/landing-product-system/LandingProductInteractiveFAQ";
 export { LandingProductInteractiveShowcase } from "../../components/shelves/landing-product-system/LandingProductInteractiveShowcase";
 export { LandingProductInternalCommsKit } from "../../components/shelves/landing-product-system/LandingProductInternalCommsKit";
 export { LandingProductJourney } from "../../components/shelves/landing-product-system/LandingProductJourney";
@@ -262,6 +268,8 @@ export { LandingProductJourneyControlRoom } from "../../components/shelves/landi
 export { LandingProductLaunchDependencies } from "../../components/shelves/landing-product-system/LandingProductLaunchDependencies";
 export { LandingProductLaunchStrip } from "../../components/shelves/landing-product-system/LandingProductLaunchStrip";
 export { LandingProductLegalChecklist } from "../../components/shelves/landing-product-system/LandingProductLegalChecklist";
+export { LandingProductLiveCounters } from "../../components/shelves/landing-product-system/LandingProductLiveCounters";
+export { LandingProductMarqueeBand } from "../../components/shelves/landing-product-system/LandingProductMarqueeBand";
 export { LandingProductMessageStack } from "../../components/shelves/landing-product-system/LandingProductMessageStack";
 export { LandingProductMessageTopology } from "../../components/shelves/landing-product-system/LandingProductMessageTopology";
 export { LandingProductMetrics } from "../../components/shelves/landing-product-system/LandingProductMetrics";
@@ -314,6 +322,7 @@ export { LandingProductPricingComparison } from "../../components/shelves/landin
 export { LandingProductPricingControls } from "../../components/shelves/landing-product-system/LandingProductPricingControls";
 export { LandingProductPricingFAQ } from "../../components/shelves/landing-product-system/LandingProductPricingFAQ";
 export { LandingProductPricingOps } from "../../components/shelves/landing-product-system/LandingProductPricingOps";
+export { LandingProductPricingToggle } from "../../components/shelves/landing-product-system/LandingProductPricingToggle";
 export { LandingProductPriorityMatrix } from "../../components/shelves/landing-product-system/LandingProductPriorityMatrix";
 export { LandingProductProblemSolution } from "../../components/shelves/landing-product-system/LandingProductProblemSolution";
 export { LandingProductProcurementObjections } from "../../components/shelves/landing-product-system/LandingProductProcurementObjections";
@@ -362,6 +371,7 @@ export { LandingProductRolloutPhases } from "../../components/shelves/landing-pr
 export { LandingProductRolloutSignals } from "../../components/shelves/landing-product-system/LandingProductRolloutSignals";
 export { LandingProductSandboxEnvironment } from "../../components/shelves/landing-product-system/LandingProductSandboxEnvironment";
 export { LandingProductScenarioPlanner } from "../../components/shelves/landing-product-system/LandingProductScenarioPlanner";
+export { LandingProductScrollStory } from "../../components/shelves/landing-product-system/LandingProductScrollStory";
 export { LandingProductSeatExpansionPlanner } from "../../components/shelves/landing-product-system/LandingProductSeatExpansionPlanner";
 export { LandingProductSecurityCompliance } from "../../components/shelves/landing-product-system/LandingProductSecurityCompliance";
 export { LandingProductSecurityFAQ } from "../../components/shelves/landing-product-system/LandingProductSecurityFAQ";
@@ -387,6 +397,7 @@ export { LandingProductSignalStudio } from "../../components/shelves/landing-pro
 export { LandingProductSignalTelescope } from "../../components/shelves/landing-product-system/LandingProductSignalTelescope";
 export { LandingProductSLACommitments } from "../../components/shelves/landing-product-system/LandingProductSLACommitments";
 export { LandingProductSocialProof } from "../../components/shelves/landing-product-system/LandingProductSocialProof";
+export { LandingProductSpotlightGrid } from "../../components/shelves/landing-product-system/LandingProductSpotlightGrid";
 export { LandingProductStakeholderBrief } from "../../components/shelves/landing-product-system/LandingProductStakeholderBrief";
 export { LandingProductStakeholderMap } from "../../components/shelves/landing-product-system/LandingProductStakeholderMap";
 export { LandingProductStatsCarousel } from "../../components/shelves/landing-product-system/LandingProductStatsCarousel";
@@ -406,7 +417,10 @@ export { LandingProductSuccessPlaybook } from "../../components/shelves/landing-
 export { LandingProductSupportCoverage } from "../../components/shelves/landing-product-system/LandingProductSupportCoverage";
 export { LandingProductTeamTopology } from "../../components/shelves/landing-product-system/LandingProductTeamTopology";
 export { LandingProductTechnicalValidation } from "../../components/shelves/landing-product-system/LandingProductTechnicalValidation";
+export { LandingProductTerminalDemo } from "../../components/shelves/landing-product-system/LandingProductTerminalDemo";
 export { LandingProductTerritoryCapacityModel } from "../../components/shelves/landing-product-system/LandingProductTerritoryCapacityModel";
+export { LandingProductTickerStrip } from "../../components/shelves/landing-product-system/LandingProductTickerStrip";
+export { LandingProductTimelineRoadmap } from "../../components/shelves/landing-product-system/LandingProductTimelineRoadmap";
 export { LandingProductTour } from "../../components/shelves/landing-product-system/LandingProductTour";
 export { LandingProductTrainingHub } from "../../components/shelves/landing-product-system/LandingProductTrainingHub";
 export { LandingProductTrialConversion } from "../../components/shelves/landing-product-system/LandingProductTrialConversion";
@@ -447,6 +461,7 @@ export { LandingProductValueTrackingBoard } from "../../components/shelves/landi
 export { LandingProductValueWeatherMap } from "../../components/shelves/landing-product-system/LandingProductValueWeatherMap";
 export { LandingProductVendorTransition } from "../../components/shelves/landing-product-system/LandingProductVendorTransition";
 export { LandingProductVideoFeature } from "../../components/shelves/landing-product-system/LandingProductVideoFeature";
+export { LandingProductVideoQuote } from "../../components/shelves/landing-product-system/LandingProductVideoQuote";
 export { LandingProductWorkflowTemplates } from "../../components/shelves/landing-product-system/LandingProductWorkflowTemplates";
 export { LandingRating } from "../../components/shelves/landing-marketing/LandingRating";
 export { LandingReadMoreWrapper } from "../../components/shelves/landing-marketing/LandingReadMoreWrapper";
@@ -495,14 +510,14 @@ export { OverlayLoader } from "../../components/shelves/feedback-state/OverlayLo
 export { PageLoading } from "../../components/shelves/feedback-state/PageLoading";
 export { PagePreloader } from "../../components/shelves/feedback-state/PagePreloader";
 export { PageTransition } from "../../components/shelves/motion-typography/PageTransition";
-export { pagination } from "../../components/shelves/forms-authoring/pagination";
+export { Pagination } from "../../components/shelves/forms-authoring/Pagination";
 export { ParallaxSection } from "../../components/shelves/motion-typography/ParallaxSection";
 export { Particles } from "../../components/shelves/backgrounds-effects/Particles";
 export { PerformanceMonitor } from "../../components/shelves/data-admin/PerformanceMonitor";
 export { PinchZoom } from "../../components/shelves/interactive-showcase/PinchZoom";
 export { PixelImage } from "../../components/shelves/interactive-showcase/PixelImage";
 export { Pointer } from "../../components/shelves/backgrounds-effects/Pointer";
-export { popover } from "../../components/shelves/ui-primitives/popover";
+export { Popover } from "../../components/shelves/ui-primitives/Popover";
 export { PricingCards } from "../../components/shelves/landing-marketing/PricingCards";
 export { ProductCarousel } from "../../components/shelves/interactive-showcase/ProductCarousel";
 export { ProductSteps } from "../../components/shelves/landing-marketing/ProductSteps";
@@ -530,13 +545,13 @@ export { ScrollToTop } from "../../components/shelves/feedback-state/ScrollToTop
 export * as ScrollVelocity from "../../components/shelves/motion-typography/ScrollVelocity";
 export { ScrollVideoPlayer } from "../../components/shelves/interactive-showcase/ScrollVideoPlayer";
 export { SearchFilter } from "../../components/shelves/forms-authoring/SearchFilter";
-export { sheet } from "../../components/shelves/ui-primitives/sheet";
+export { Sheet } from "../../components/shelves/ui-primitives/Sheet";
 export { ShimmerButton } from "../../components/shelves/interactive-showcase/ShimmerButton";
 export { ShineBorder } from "../../components/shelves/backgrounds-effects/ShineBorder";
 export { ShinyButton } from "../../components/shelves/interactive-showcase/ShinyButton";
 export { SideMenu } from "../../components/shelves/navigation-command/SideMenu";
 export { SignaturePad } from "../../components/shelves/forms-authoring/SignaturePad";
-export { skeleton } from "../../components/shelves/feedback-state/skeleton";
+export { Skeleton } from "../../components/shelves/feedback-state/Skeleton";
 export { SkillBars } from "../../components/shelves/interactive-showcase/SkillBars";
 export { SlideTabs } from "../../components/shelves/navigation-command/SlideTabs";
 export { SmoothCursor } from "../../components/shelves/motion-typography/SmoothCursor";
@@ -574,7 +589,7 @@ export { Timeline } from "../../components/shelves/data-admin/Timeline";
 export { TimelineComponent } from "../../components/shelves/data-admin/TimelineComponent";
 export * as Toast from "../../components/shelves/feedback-state/Toast";
 export { ToggleGroup } from "../../components/shelves/ui-primitives/ToggleGroup";
-export { tooltip } from "../../components/shelves/ui-primitives/tooltip";
+export { Tooltip } from "../../components/shelves/ui-primitives/Tooltip";
 export { TopLoadingBar } from "../../components/shelves/feedback-state/TopLoadingBar";
 export { TweetCard } from "../../components/shelves/interactive-showcase/TweetCard";
 export { TypingAnimation } from "../../components/shelves/motion-typography/TypingAnimation";

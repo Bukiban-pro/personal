@@ -15,7 +15,7 @@ export { FormTextarea } from "../../../components/shelves/forms-authoring/FormTe
 export { FormToggle } from "../../../components/shelves/forms-authoring/FormToggle";
 export { InputAddon } from "../../../components/shelves/forms-authoring/InputAddon";
 export { MarkdownEditor } from "../../../components/shelves/forms-authoring/MarkdownEditor";
-export { Pagination } from "../../../components/shelves/forms-authoring/pagination";
+export { Pagination } from "../../../components/shelves/forms-authoring/Pagination";
 export { QRCode } from "../../../components/shelves/forms-authoring/QRCodeGenerator";
 export { QRCode as QRCodeGenerator } from "../../../components/shelves/forms-authoring/QRCodeGenerator";
 export { ResizablePanel } from "../../../components/shelves/forms-authoring/ResizablePanel";

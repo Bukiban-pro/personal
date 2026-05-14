@@ -1,12 +1,12 @@
-# UI Lab Library Guide
+﻿# UI Lab Library Guide
 
 This is the repo-level entrypoint. Use it to decide where to start before you dive into any single subsystem.
 
 ## Current Snapshot
-- Catalog component files: 588
-- Component tree files (including nested ui atoms): 634
+- Catalog component files: 603
+- Component tree files (including nested ui atoms): 649
 - Source component shelf root: `ui_lab/components/shelves`
-- LandingProduct components: 321
+- LandingProduct components: 336
 - Non-LandingProduct components: 267
 - Legacy Landing* prefix components outside LandingProduct: 17
 - Shelf count: 11
@@ -18,18 +18,24 @@ This is the repo-level entrypoint. Use it to decide where to start before you di
 - Starter-lane exact-component barrels: `ui_lab/library/starter-lanes/*/components.ts`
 - Shelf metadata files: `ui_lab/library/shelves/*/meta.json`
 - Starter-lane metadata files: `ui_lab/library/starter-lanes/*/meta.json`
+- Metadata v2 profiles: `ui_lab/configs/ui-library-metadata-v2-profiles.json`
+- Component metadata v2: `ui_lab/configs/ui-library-component-metadata-v2.json`
+- Component rankings v2: `ui_lab/configs/ui-library-component-rankings-v2.json`
+- Manual review subset: 14 components
+- Manual review overrides: `ui_lab/configs/ui-library-manual-review-overrides.json`
 - Top-level named export collisions: 0
 - Machine-readable registry: `ui_lab/configs/ui-lab-registry.json`
+- Metadata specification: `ui_lab/docs/UI_LIBRARY_METADATA_V2.md`
 - LandingProduct subsystem guide: `ui_lab/docs/LANDING_PRODUCT_LIBRARY_GUIDE.md`
 - Curation queue: `ui_lab/docs/UI_LAB_CURATION_QUEUE.md`
 - Generator: `ui_lab/docs/generate-ui-lab-library-catalog.ps1`
-- Metadata Specification (v2): `ui_lab/docs/UI_LIBRARY_METADATA_V2.md`
 
 ## First Stops
 1. Start with the starter lanes if you are building a page or product surface from scratch.
 2. Use `ui_lab/library/by-name` when you know the component filename but not the shelf.
 3. Jump into the LandingProduct subsystem only when you actually need enterprise page depth or page-scale systems language.
 4. Treat the misc shelf and the naming watchlist as admin debt, not as default starting points.
+5. Use `ui_lab/configs/ui-library-manual-review-overrides.json` when you need components with explicit stance, proof obligations, kill-switch criteria, and evidence references.
 
 ## Lookup Surfaces
 - By-name barrel: `ui_lab/library/by-name`
@@ -39,14 +45,14 @@ This is the repo-level entrypoint. Use it to decide where to start before you di
 
 ## Folder Map
 - Library: `69` files in `ui_lab/library` (generated grouped access layer count)
-- Components: `634` files in `ui_lab/components` (recursive component tree count)
+- Components: `649` files in `ui_lab/components` (recursive component tree count)
 - Layouts: `8` files in `ui_lab/layouts` (recursive folder count)
 - Hooks: `31` files in `ui_lab/hooks` (recursive folder count)
 - Lib: `15` files in `ui_lab/lib` (recursive folder count)
 - Providers: `4` files in `ui_lab/providers` (recursive folder count)
 - Store: `2` files in `ui_lab/store` (recursive folder count)
-- Configs: `5` files in `ui_lab/configs` (recursive folder count)
-- Docs: `9` files in `ui_lab/docs` (recursive folder count)
+- Configs: `13` files in `ui_lab/configs` (recursive folder count)
+- Docs: `18` files in `ui_lab/docs` (recursive folder count)
 - Styling: `1` files in `ui_lab/styling` (recursive folder count)
 
 ## Starter Lanes
@@ -69,7 +75,7 @@ This is the repo-level entrypoint. Use it to decide where to start before you di
 
 ## Shelf Map
 
-### LandingProduct System (321)
+### LandingProduct System (336)
 - Description: Enterprise landing/product sections with dedicated chapter guidance, starter kits, and deeper operating-model language.
 - Good first picks: `LandingProductProof`, `LandingProductQBRFramework`, `LandingProductOperatingSystem`, `LandingProductTrustRegistry`
 - Follow-up: use `ui_lab/docs/LANDING_PRODUCT_LIBRARY_GUIDE.md` for the curated chapter map and starter kits.
@@ -138,6 +144,10 @@ These pairs are not automatically wrong, but they are the first place to inspect
 - Every starter lane references existing components only.
 - Every catalog component filename has an exact grouped entrypoint in `ui_lab/library/by-name`.
 - Every shelf and starter-lane folder now has a strict `components.ts` barrel for exact file-name imports only.
+- Every registry component now includes `decisionMetadataV2` with layered intent, eligibility, readiness, cost, character, and provenance fields.
+- Every registry component is also individually reviewed with a component-specific heuristic walk-through and written review notes.
+- Every component metadata record is emitted into `ui_lab/configs/ui-library-component-metadata-v2.json` and marked by GitHub Copilot.
+- Every component also has a ranked summary in `ui_lab/configs/ui-library-component-rankings-v2.json` so the library can be compared at a glance.
 - Physical shelf folders, when present, match the generator-owned shelf classification.
 - Folder counts are generated from disk, not manually maintained.
 - Top-level named component exports are collision-free.

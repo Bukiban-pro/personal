@@ -2,7 +2,11 @@ param(
   [string]$UiLabRoot = (Join-Path $PSScriptRoot ".."),
   [string]$GuideOutputPath = (Join-Path $PSScriptRoot "UI_LAB_LIBRARY_GUIDE.md"),
   [string]$QueueOutputPath = (Join-Path $PSScriptRoot "UI_LAB_CURATION_QUEUE.md"),
-  [string]$RegistryOutputPath = (Join-Path $PSScriptRoot "..\configs\ui-lab-registry.json")
+  [string]$RegistryOutputPath = (Join-Path $PSScriptRoot "..\configs\ui-lab-registry.json"),
+  [string]$MetadataProfilesOutputPath = (Join-Path $PSScriptRoot "..\configs\ui-library-metadata-v2-profiles.json"),
+  [string]$ComponentMetadataOutputPath = (Join-Path $PSScriptRoot "..\configs\ui-library-component-metadata-v2.json"),
+  [string]$ComponentRankingsOutputPath = (Join-Path $PSScriptRoot "..\configs\ui-library-component-rankings-v2.json"),
+  [string]$ManualReviewOverridesPath = (Join-Path $PSScriptRoot "..\configs\ui-library-manual-review-overrides.json")
 )
 
 Set-StrictMode -Version Latest
@@ -36,6 +40,23 @@ function New-GuideLine {
   )
 
   return [string]::Format($Template, $Arguments)
+}
+
+function Merge-ObjectProperties {
+  param(
+    [Parameter(Mandatory = $true)][object]$Target,
+    [Parameter(Mandatory = $true)][object]$Source
+  )
+
+  foreach ($property in $Source.PSObject.Properties) {
+    if ($Target -is [hashtable]) {
+      $Target[$property.Name] = $property.Value
+    } elseif ($Target.PSObject.Properties.Name -contains $property.Name) {
+      $Target.$($property.Name) = $property.Value
+    } else {
+      $Target | Add-Member -NotePropertyName $property.Name -NotePropertyValue $property.Value -Force
+    }
+  }
 }
 
 function Convert-ToPascalCase {
@@ -441,8 +462,803 @@ function Get-PrimaryShelfKey {
   }
 }
 
+function Copy-Hashtable {
+  param([Parameter(Mandatory = $true)][hashtable]$InputObject)
+
+  $copy = @{}
+  foreach ($key in $InputObject.Keys) {
+    $copy[$key] = $InputObject[$key]
+  }
+
+  return $copy
+}
+
+function Get-ComponentMetadataProfile {
+  param(
+    [Parameter(Mandatory = $true)][string]$ComponentName,
+    [Parameter(Mandatory = $true)][string]$ShelfKey,
+    [Parameter(Mandatory = $true)][hashtable]$Profiles
+  )
+
+  $profile = Copy-Hashtable -InputObject $Profiles[$ShelfKey]
+  if (-not $profile) {
+    $profile = Copy-Hashtable -InputObject $Profiles['default']
+  }
+
+  $signals = [System.Collections.Generic.List[string]]::new()
+
+  function Add-Signal {
+    param([string]$Signal)
+    if (-not [string]::IsNullOrWhiteSpace($Signal) -and -not $signals.Contains($Signal)) {
+      $signals.Add($Signal)
+    }
+  }
+
+  switch -Regex ($ComponentName) {
+    '^(Alert|ErrorBoundary|ErrorState|ConfirmDialog|CookieConsent|Modal|AuthRequiredModal|Toast|OfflineBanner|Skeleton|Loader|PageLoading|PagePreloader|OverlayLoader|TopLoadingBar)$' {
+      Add-Signal 'feedback'
+      $profile.failureCost = [Math]::Min(5, [int]$profile.failureCost + 1)
+      $profile.accessibilityConfidence = [Math]::Min(5, [int]$profile.accessibilityConfidence + 1)
+      $profile.analyticsConfidence = [Math]::Max(1, [int]$profile.analyticsConfidence - 1)
+      $profile.formality = [Math]::Min(5, [int]$profile.formality + 1)
+      $profile.interactionIntensity = [Math]::Min(5, [int]$profile.interactionIntensity + 1)
+      $profile.bestFor = @('clear_state_signaling', 'high_trust_interruption')
+      $profile.avoidWhen = @('low_severity_background_updates')
+      if ($ComponentName -match 'Toast|Banner|Loading|Skeleton|Loader|TopLoadingBar') {
+        $profile.autonomyAllowance = 'auto_select'
+      } else {
+        $profile.autonomyAllowance = 'human_review_required'
+      }
+    }
+    '^(DataTable|AdvancedDataTable|BentoGrid|KPICard|LineChart|RadarChart|HeatmapVisualization|NetworkGraph|MetricsDashboard|ComparisonChecklist|DecisionGraph|DecisionLedger|DecisionBoard|DecisionTerminal|DecisionWorkbench|Timeline|TimelineComponent|StepIndicator|Stepper|GanttChart|GaugeChart)$' {
+      Add-Signal 'data'
+      $profile.subfamily = 'operational_intelligence'
+      $profile.primaryJob = 'support_operational_decision_making'
+      $profile.secondaryJobs = @('monitoring', 'analysis')
+      $profile.userGoal = 'inspect_status_and_take_action'
+      $profile.primaryInteractionModel = 'compare'
+      $profile.uxPatternType = 'structured_data_view'
+      $profile.allowedContexts = @('admin_dashboards', 'ops_surfaces', 'decision_support_surfaces')
+      $profile.bestFor = @('high_density_operational_views')
+      $profile.avoidWhen = @('lightweight_marketing_sections')
+      $profile.accessibilityConfidence = [Math]::Min(5, [int]$profile.accessibilityConfidence + 1)
+      $profile.analyticsConfidence = [Math]::Min(5, [int]$profile.analyticsConfidence + 1)
+      $profile.densityFeel = [Math]::Min(5, [int]$profile.densityFeel + 1)
+      $profile.interactionIntensity = [Math]::Min(5, [int]$profile.interactionIntensity + 1)
+      $profile.contentAuthoringBurden = [Math]::Min(5, [int]$profile.contentAuthoringBurden + 1)
+    }
+    '^(HeroSection|WelcomeSection|FeatureGrid|FeaturesGrid|CTASection|FAQSection|PricingCards|LogoCloud|SocialProof|AnnouncementBanner|Newsletter|TestimonialGrid|CaseStudy|ProductSteps|StatsGrid|FeatureShowcase|GradientMeshHero|SplitHero|VideoHero|TextRotateHero)$' {
+      Add-Signal 'marketing'
+      $profile.subfamily = 'conversion_sections'
+      $profile.primaryJob = 'communicate_value_and_drive_action'
+      $profile.secondaryJobs = @('social_proof', 'offer_clarity')
+      $profile.userGoal = 'understand_offer_and_convert'
+      $profile.primaryInteractionModel = 'navigation'
+      $profile.uxPatternType = 'section_pattern'
+      $profile.allowedContexts = @('marketing_pages', 'campaign_landing_pages', 'product_intros')
+      $profile.bestFor = @('product_value_storytelling')
+      $profile.avoidWhen = @('dense_operational_workflows')
+      $profile.visualDominance = [Math]::Min(5, [int]$profile.visualDominance + 1)
+      $profile.expressiveness = [Math]::Min(5, [int]$profile.expressiveness + 1)
+      $profile.contentAuthoringBurden = [Math]::Min(5, [int]$profile.contentAuthoringBurden + 1)
+      $profile.autonomyAllowance = 'auto_select'
+    }
+    '^(Form.+|AdvancedAutocomplete|BadgeInput|ColorPicker|DateRangePicker|DragDropZone|FileUpload|InputAddon|MarkdownEditor|Pagination|QRCodeGenerator|ResizablePanel|RichTextEditor|SearchFilter|SignaturePad)$' {
+      Add-Signal 'forms'
+      $profile.subfamily = 'data_capture_and_authoring'
+      $profile.primaryJob = 'capture_and_edit_user_input'
+      $profile.secondaryJobs = @('validation', 'workflow_enablement')
+      $profile.userGoal = 'submit_accurate_information'
+      $profile.primaryInteractionModel = 'input'
+      $profile.uxPatternType = 'inline_control'
+      $profile.allowedContexts = @('forms', 'authoring_flows', 'workflow_tools')
+      $profile.bestFor = @('structured_input_collection')
+      $profile.avoidWhen = @('read_only_storytelling_surfaces')
+      $profile.accessibilityConfidence = [Math]::Min(5, [int]$profile.accessibilityConfidence + 1)
+      $profile.interactionIntensity = [Math]::Min(5, [int]$profile.interactionIntensity + 1)
+      $profile.autonomyAllowance = 'auto_select'
+    }
+    '^(Breadcrumbs|CommandMenu|CommandPalette|ContextMenu|Dock|FloatingNav|MegaMenu|MegaMenuComponent|MorphingNav|SideMenu|SlideTabs|StickyHeader|Menu|Popover|Sheet|Tabs|Tooltip)$' {
+      Add-Signal 'navigation'
+      $profile.subfamily = 'navigation_and_control_surfaces'
+      $profile.primaryJob = 'orient_users_and_trigger_commands'
+      $profile.secondaryJobs = @('wayfinding', 'workflow_acceleration')
+      $profile.userGoal = 'move_and_execute_with_confidence'
+      $profile.primaryInteractionModel = 'navigation'
+      $profile.uxPatternType = 'overlay'
+      $profile.allowedContexts = @('product_shells', 'cross_page_navigation', 'command_access')
+      $profile.bestFor = @('high_frequency_navigation_paths')
+      $profile.accessibilityConfidence = [Math]::Min(5, [int]$profile.accessibilityConfidence + 1)
+      $profile.interactionIntensity = [Math]::Min(5, [int]$profile.interactionIntensity + 1)
+      $profile.autonomyAllowance = 'suggest_only'
+    }
+    '^(Animated.+|AuroraText|BlurFade|ComicText|CountUpStats|DiaTextReveal|FlipText|GlitchText|Highlighter|HighlightOnScroll|HyperText|KineticText|LineShadowText|LottieAnimation|Marquee|MorphingText|NumberTicker|PageTransition|ParallaxSection|RevealOnScroll|ScrollVelocity|SmoothCursor|SparklesText|SpinningText|StaggerAnimation|Text.+|TypingAnimation|TypingEffect|VideoText|WordRotate)$' {
+      Add-Signal 'motion'
+      $profile.subfamily = 'kinetic_content'
+      $profile.primaryJob = 'amplify_message_through_motion'
+      $profile.secondaryJobs = @('attention_guidance', 'brand_expression')
+      $profile.userGoal = 'perceive_emphasis_and_hierarchy'
+      $profile.primaryInteractionModel = 'disclosure'
+      $profile.uxPatternType = 'feedback_pattern'
+      $profile.allowedContexts = @('brand_moments', 'hero_sections', 'narrative_surfaces')
+      $profile.disallowedContexts = @('critical_alerting', 'high_density_data_admin')
+      $profile.bestFor = @('expressive_content_sequences')
+      $profile.avoidWhen = @('strict_performance_budget_or_reduced_motion_required')
+      $profile.expressiveness = [Math]::Min(5, [int]$profile.expressiveness + 1)
+      $profile.performanceBudgetFit = [Math]::Max(1, [int]$profile.performanceBudgetFit - 1)
+      $profile.autonomyAllowance = 'suggest_only'
+    }
+    '^(AuroraBackground|AuroraBackgroundEffect|Backlight|BloomEffect|BorderBeam|BorderBeamEffect|ChromaticAberrationEffect|Confetti|ConfettiEffect|ConfettiExplosion|CoolMode|CursorFollower|DotPattern|DottedMap|FlickeringGrid|GlareHover|Globe|GradientBlobs|GridPattern|InteractiveGridPattern|Lens|LensMagnifier|MotionBlurEffect|MultiLayerParallax|MeshGradient|Meteors|NoiseOverlay|OrbitingCircles|Particles|Pointer|ProgressiveBlur|RetroGrid|Ripple|ShineBorder|SparklesEffect|Spotlight|SpotlightEffect|WarpBackground|WavyBackground|VHSEffect)$' {
+      Add-Signal 'effects'
+      $profile.subfamily = 'ambient_visual_layers'
+      $profile.primaryJob = 'create_atmosphere_and_depth'
+      $profile.secondaryJobs = @('brand_tone', 'visual_separation')
+      $profile.userGoal = 'feel_spatial_and_brand_context'
+      $profile.primaryInteractionModel = 'none'
+      $profile.uxPatternType = 'decorative_layer'
+      $profile.allowedContexts = @('marketing_backgrounds', 'hero_backdrops', 'showcase_surfaces')
+      $profile.disallowedContexts = @('critical_data_readability_surfaces', 'legal_consent', 'accessibility_sensitive_flows_without_fallbacks')
+      $profile.bestFor = @('visual_ambience_and_brand_mood')
+      $profile.avoidWhen = @('text_legibility_is_primary_constraint')
+      $profile.accessibilityConfidence = [Math]::Max(1, [int]$profile.accessibilityConfidence - 1)
+      $profile.performanceBudgetFit = [Math]::Max(1, [int]$profile.performanceBudgetFit - 1)
+      $profile.visualDominance = [Math]::Min(5, [int]$profile.visualDominance + 1)
+      $profile.autonomyAllowance = 'human_review_required'
+    }
+    '^(Accordion3D|AdvancedCarousel|AndroidMockup|CardImage|CodeBlock|CodeComparison|CodeEditor|ComparisonSlider|CurtainReveal|DraggableCards|ExpandableCard|FlipCard|FlipCardEffect|GlassmorphismCard|GlowCard|HeroVideoDialog|HolographicCard|HorizontalScrollSection|IconCloud|ImageGallery|ImageLightbox|ImageReveal|ImageWithFallback|InfiniteCarousel|InteractiveGrid|InteractiveHoverButton|Iphone|LazyLoadComponent|LazySection|LongPressDetector|MagicCard|MagneticButton|MagneticButtonEffect|NeonCard|NeonGradientCard|PinchZoom|PixelImage|ProductCarousel|ProgressRing|PulsatingButton|RainbowButton|RippleButton|Safari|SafariMockup|ScrollPinSection|ScrollSnapContainer|ScrollVideoPlayer|ShimmerButton|ShinyButton|SkillBars|SpotlightCards|StackedCards|StarRating|SwipeDetector|Terminal|TiltCard|TweetCard|ZoomHero)$' {
+      Add-Signal 'showcase'
+      $profile.subfamily = 'high_touch_interactions'
+      $profile.primaryJob = 'demonstrate_capability_with_interaction'
+      $profile.secondaryJobs = @('engagement', 'feature_demonstration')
+      $profile.userGoal = 'explore_and_compare_interactively'
+      $profile.primaryInteractionModel = 'select'
+      $profile.uxPatternType = 'interactive_pattern'
+      $profile.allowedContexts = @('product_showcases', 'interactive_marketing', 'demo_surfaces')
+      $profile.disallowedContexts = @('critical_confirmation', 'low_power_constrained_views')
+      $profile.bestFor = @('interactive_product_storytelling')
+      $profile.avoidWhen = @('workflow_requires_low_cognitive_load')
+      $profile.interactionIntensity = [Math]::Min(5, [int]$profile.interactionIntensity + 1)
+      $profile.visualDominance = [Math]::Min(5, [int]$profile.visualDominance + 1)
+      $profile.performanceBudgetFit = [Math]::Max(1, [int]$profile.performanceBudgetFit - 1)
+      $profile.autonomyAllowance = 'suggest_only'
+    }
+  }
+
+  $signalSummary = 'none'
+  if ($signals.Count -gt 0) {
+    $signalSummary = ($signals | Sort-Object) -join ', '
+  }
+
+  $reviewNotes = @(
+    'Component-specific review pass generated from shelf defaults and name-signal heuristics.',
+    ('Signals detected: {0}' -f $signalSummary)
+  )
+
+  return [pscustomobject]@{
+    profile = $profile
+    signals = @($signals)
+    reviewNotes = @($reviewNotes)
+  }
+}
+
+function Get-CriticalReviewProfile {
+  param(
+    [Parameter(Mandatory = $true)][string]$ComponentName,
+    [Parameter(Mandatory = $true)][string]$ShelfKey,
+    [Parameter(Mandatory = $true)][hashtable]$Profile,
+    [AllowEmptyCollection()][string[]]$Signals = @()
+  )
+
+  if ($null -eq $Signals) {
+    $Signals = @()
+  }
+
+  $redFlags = [System.Collections.Generic.List[string]]::new()
+  $failureModes = [System.Collections.Generic.List[string]]::new()
+  $pushback = [System.Collections.Generic.List[string]]::new()
+  $specificPushback = [System.Collections.Generic.List[string]]::new()
+
+  function Add-UniqueNote {
+    param(
+      [Parameter(Mandatory = $true)][ref]$Target,
+      [Parameter(Mandatory = $true)][string]$Text
+    )
+
+    if ($null -eq $Target -or $null -eq $Target.Value -or [string]::IsNullOrWhiteSpace($Text)) {
+      return
+    }
+
+    if ($Target.Value -is [System.Collections.ICollection] -and $Target.Value -is [System.Collections.IList]) {
+      if (-not $Target.Value.Contains($Text)) {
+        [void]$Target.Value.Add($Text)
+      }
+      return
+    }
+
+    if (-not ($Target.Value -is [System.Array])) {
+      return
+    }
+
+    if ($Target.Value -notcontains $Text) {
+      $Target.Value = @($Target.Value + $Text)
+    }
+  }
+
+  if ([int]$Profile.failureCost -ge 4) {
+    Add-UniqueNote -Target ([ref]$redFlags) -Text 'high_misuse_cost'
+    Add-UniqueNote -Target ([ref]$failureModes) -Text 'Mistakes here are expensive or trust-damaging.'
+    Add-UniqueNote -Target ([ref]$pushback) -Text 'Use only when the consequence of getting it wrong justifies the complexity.'
+    Add-UniqueNote -Target ([ref]$specificPushback) -Text ("{0} has a failure cost of {1}, so a wrong choice is not cosmetic; it can actively damage trust or workflow completion." -f $ComponentName, $Profile.failureCost)
+  }
+
+  if ([int]$Profile.accessibilityConfidence -le 3) {
+    Add-UniqueNote -Target ([ref]$redFlags) -Text 'a11y_uncertain'
+    Add-UniqueNote -Target ([ref]$failureModes) -Text 'Keyboard, focus, or announcement behavior may still be brittle.'
+    Add-UniqueNote -Target ([ref]$pushback) -Text 'Do not call this production-safe without an actual accessibility audit.'
+    Add-UniqueNote -Target ([ref]$specificPushback) -Text ("{0} is not acceptable as a casual default until keyboard, focus, and announcement behavior are verified in the real flow." -f $ComponentName)
+  }
+
+  if ([int]$Profile.performanceBudgetFit -le 2) {
+    Add-UniqueNote -Target ([ref]$redFlags) -Text 'performance_heavy'
+    Add-UniqueNote -Target ([ref]$failureModes) -Text 'This can burn budget on weaker devices or busy pages.'
+    Add-UniqueNote -Target ([ref]$pushback) -Text 'If a lighter pattern works, choose that first.'
+    Add-UniqueNote -Target ([ref]$specificPushback) -Text ("{0} is too expensive for broad use if the same job can be handled by a lighter component with fewer moving parts." -f $ComponentName)
+  }
+
+  if ($Profile.autonomyAllowance -ne 'auto_select') {
+    Add-UniqueNote -Target ([ref]$redFlags) -Text 'not_safe_for_autonomy'
+    Add-UniqueNote -Target ([ref]$pushback) -Text 'This should not be auto-selected without a human check.'
+    Add-UniqueNote -Target ([ref]$specificPushback) -Text ("{0} should stay behind a human decision gate; it is not a safe autonomous default." -f $ComponentName)
+  }
+
+  if ($Profile.lifecycle -ne 'supported' -or $Profile.adoption -eq 'none') {
+    Add-UniqueNote -Target ([ref]$redFlags) -Text 'weak_lifecycle_or_adoption'
+    Add-UniqueNote -Target ([ref]$failureModes) -Text 'The component is not yet a strong default choice.'
+    Add-UniqueNote -Target ([ref]$pushback) -Text 'This should stay a candidate, not a default recommendation.'
+    Add-UniqueNote -Target ([ref]$specificPushback) -Text ("{0} does not have enough lifecycle weight to be treated as a settled standard; keep it in candidate territory." -f $ComponentName)
+  }
+
+  if ($ShelfKey -eq 'misc-uncurated') {
+    Add-UniqueNote -Target ([ref]$redFlags) -Text 'uncurated'
+    Add-UniqueNote -Target ([ref]$pushback) -Text 'It is not fair to treat this as settled library surface yet.'
+    Add-UniqueNote -Target ([ref]$specificPushback) -Text ("{0} is still in the misc shelf, which is a classification warning, not a badge of readiness." -f $ComponentName)
+  }
+
+  if ($Signals -contains 'effects' -or $Signals -contains 'motion') {
+    Add-UniqueNote -Target ([ref]$redFlags) -Text 'motion_or_effect_heavy'
+    Add-UniqueNote -Target ([ref]$failureModes) -Text 'Reduced-motion users and low-budget surfaces may suffer.'
+    Add-UniqueNote -Target ([ref]$pushback) -Text 'Only use if the motion is doing meaningful product work, not just decoration.'
+    Add-UniqueNote -Target ([ref]$specificPushback) -Text ("{0} is motion/effect-heavy, so it will lose quickly if the surface needs restraint, scanability, or reduced-motion friendliness." -f $ComponentName)
+  }
+
+  if ($Signals -contains 'data') {
+    Add-UniqueNote -Target ([ref]$redFlags) -Text 'dense_operational_surface'
+    Add-UniqueNote -Target ([ref]$pushback) -Text 'Dense data surfaces should be chosen for signal clarity, not visual fullness.'
+    Add-UniqueNote -Target ([ref]$specificPushback) -Text ("{0} should only be used when density helps decision-making; if users need quick scans, this is the wrong shape." -f $ComponentName)
+  }
+
+  if ($Signals -contains 'showcase') {
+    Add-UniqueNote -Target ([ref]$redFlags) -Text 'interaction_showpiece'
+    Add-UniqueNote -Target ([ref]$pushback) -Text 'A showcase component is not automatically the right answer for a serious workflow.'
+    Add-UniqueNote -Target ([ref]$specificPushback) -Text ("{0} reads as a showpiece first, which makes it risky as a default choice in serious workflows." -f $ComponentName)
+  }
+
+  if ($Signals -contains 'marketing') {
+    Add-UniqueNote -Target ([ref]$redFlags) -Text 'conversion_surface'
+    Add-UniqueNote -Target ([ref]$pushback) -Text 'Marketing polish should not outrank clarity or proof.'
+    Add-UniqueNote -Target ([ref]$specificPushback) -Text ("{0} should not be chosen just because it looks polished; proof and clarity need to survive first." -f $ComponentName)
+  }
+
+  if ([int]$Profile.interactionIntensity -ge 4) {
+    Add-UniqueNote -Target ([ref]$specificPushback) -Text ("{0} is interaction-dense, so every extra step or state change raises the cost of misunderstanding." -f $ComponentName)
+  }
+
+  if ([int]$Profile.densityFeel -ge 4) {
+    Add-UniqueNote -Target ([ref]$specificPushback) -Text ("{0} is dense enough that it should be treated as specialist surface, not lightweight browse material." -f $ComponentName)
+  }
+
+  if ([int]$Profile.visualDominance -ge 4) {
+    Add-UniqueNote -Target ([ref]$specificPushback) -Text ("{0} has strong visual dominance, so it will pull attention away from surrounding content unless deliberately contained." -f $ComponentName)
+  }
+
+  if ([int]$Profile.expressiveness -ge 4) {
+    Add-UniqueNote -Target ([ref]$specificPushback) -Text ("{0} is highly expressive, which is useful only if the design intent is to change tone rather than simply support content." -f $ComponentName)
+  }
+
+  if ($specificPushback.Count -eq 0) {
+    Add-UniqueNote -Target ([ref]$specificPushback) -Text ("{0} looks low-risk, but that still does not make it a default choice; verify semantics, fit, and the surrounding flow before promoting it." -f $ComponentName)
+  }
+
+  $criticalityScore = 1
+  if ($redFlags.Contains('high_misuse_cost')) { $criticalityScore += 1 }
+  if ($redFlags.Contains('a11y_uncertain')) { $criticalityScore += 1 }
+  if ($redFlags.Contains('performance_heavy')) { $criticalityScore += 1 }
+  if ($redFlags.Contains('not_safe_for_autonomy')) { $criticalityScore += 1 }
+  if ($redFlags.Contains('weak_lifecycle_or_adoption')) { $criticalityScore += 1 }
+  if ($redFlags.Contains('uncurated')) { $criticalityScore += 1 }
+  if ($redFlags.Contains('motion_or_effect_heavy')) { $criticalityScore += 1 }
+  if ($redFlags.Contains('dense_operational_surface')) { $criticalityScore += 1 }
+  if ($redFlags.Contains('interaction_showpiece')) { $criticalityScore += 1 }
+  if ($redFlags.Contains('conversion_surface')) { $criticalityScore += 1 }
+
+  if ($criticalityScore -gt 5) { $criticalityScore = 5 }
+
+  $hardVerdict = 'acceptable_with_constraints'
+  if ($criticalityScore -ge 4) {
+    $hardVerdict = 'review_required'
+  }
+  if ($criticalityScore -ge 5) {
+    $hardVerdict = 'candidate_only'
+  }
+
+  $criticalityAnchor = switch ($criticalityScore) {
+    1 { 'Very low critique burden; safe in broad default use' }
+    2 { 'Low critique burden; still has a few guardrails' }
+    3 { 'Moderate critique burden; use deliberately' }
+    4 { 'High critique burden; needs explicit justification' }
+    5 { 'Severe critique burden; do not use casually' }
+    default { 'Moderate critique burden; use deliberately' }
+  }
+
+  return [pscustomobject]@{
+    criticalityScore = $criticalityScore
+    criticalityAnchor = $criticalityAnchor
+    hardVerdict = $hardVerdict
+    redFlags = @($redFlags)
+    failureModes = @($failureModes)
+    pushback = @($pushback)
+    specificPushback = @($specificPushback)
+    pushbackSummary = if ($pushback.Count -gt 0) { $pushback[0] } else { 'No critical blockers identified beyond the base profile.' }
+  }
+}
+
+function Get-ScoreAnchor {
+  param(
+    [Parameter(Mandatory = $true)][string]$Dimension,
+    [Parameter(Mandatory = $true)][int]$Score,
+    [Parameter(Mandatory = $true)][hashtable]$AnchorMap
+  )
+
+  if (-not $AnchorMap.ContainsKey($Dimension)) {
+    return $null
+  }
+
+  $dimensionAnchors = $AnchorMap[$Dimension]
+  if (-not $dimensionAnchors.ContainsKey($Score)) {
+    return $null
+  }
+
+  return $dimensionAnchors[$Score]
+}
+
+function New-ScoredField {
+  param(
+    [Parameter(Mandatory = $true)][string]$Dimension,
+    [Parameter(Mandatory = $true)][int]$Score,
+    [Parameter(Mandatory = $true)][hashtable]$AnchorMap
+  )
+
+  return [pscustomobject]@{
+    score = $Score
+    anchor = (Get-ScoreAnchor -Dimension $Dimension -Score $Score -AnchorMap $AnchorMap)
+  }
+}
+
+function Get-MetadataProfile {
+  param(
+    [Parameter(Mandatory = $true)][string]$ShelfKey,
+    [Parameter(Mandatory = $true)][hashtable]$Profiles
+  )
+
+  if ($Profiles.ContainsKey($ShelfKey)) {
+    return $Profiles[$ShelfKey]
+  }
+
+  return $Profiles['default']
+}
+
+function New-DecisionMetadataV2 {
+  param(
+    [Parameter(Mandatory = $true)][psobject]$ComponentEntry,
+    [Parameter(Mandatory = $true)][psobject]$Shelf,
+    [Parameter(Mandatory = $true)][string]$ComponentName,
+    [AllowEmptyCollection()][object[]]$StarterMemberships = @(),
+    [Parameter(Mandatory = $true)][hashtable]$Profiles,
+    [Parameter(Mandatory = $true)][hashtable]$AnchorMap,
+    [Parameter(Mandatory = $true)][string]$GeneratedAt,
+    [Parameter(Mandatory = $true)][string]$Owner,
+    [object]$ManualReviewOverride = $null
+  )
+
+  if ($null -eq $StarterMemberships) {
+    $StarterMemberships = @()
+  }
+
+  $componentReview = Get-ComponentMetadataProfile -ComponentName $ComponentName -ShelfKey $Shelf.key -Profiles $Profiles
+  $profile = $componentReview.profile
+  $manualReviewApplied = $null -ne $ManualReviewOverride
+
+  if ($manualReviewApplied -and $ManualReviewOverride.profileOverrides) {
+    Merge-ObjectProperties -Target $profile -Source $ManualReviewOverride.profileOverrides
+  }
+
+  $criticalReview = Get-CriticalReviewProfile -ComponentName $ComponentName -ShelfKey $Shelf.key -Profile $profile -Signals $componentReview.signals
+
+  if ($manualReviewApplied -and $ManualReviewOverride.reviewNotes) {
+    $componentReview.reviewNotes = @($ManualReviewOverride.reviewNotes) + @($componentReview.reviewNotes)
+  }
+
+  if ($manualReviewApplied -and $ManualReviewOverride.criticalReviewOverrides) {
+    Merge-ObjectProperties -Target $criticalReview -Source $ManualReviewOverride.criticalReviewOverrides
+  }
+
+  $manualDecision = $null
+  if ($manualReviewApplied) {
+    Assert-Condition -Condition ($null -ne $ManualReviewOverride.manualDecision) -Message "Manual override missing manualDecision block for $ComponentName"
+    $manualDecision = $ManualReviewOverride.manualDecision
+    Assert-Condition -Condition (-not [string]::IsNullOrWhiteSpace([string]$manualDecision.stance)) -Message "Manual override missing manualDecision.stance for $ComponentName"
+    Assert-Condition -Condition (-not [string]::IsNullOrWhiteSpace([string]$manualDecision.whyNow)) -Message "Manual override missing manualDecision.whyNow for $ComponentName"
+    Assert-Condition -Condition ($manualDecision.mustProve.Count -gt 0) -Message "Manual override missing manualDecision.mustProve for $ComponentName"
+    Assert-Condition -Condition ($manualDecision.killSwitch.Count -gt 0) -Message "Manual override missing manualDecision.killSwitch for $ComponentName"
+    Assert-Condition -Condition ($manualDecision.evidenceRefs.Count -gt 0) -Message "Manual override missing manualDecision.evidenceRefs for $ComponentName"
+    $componentReview.reviewNotes = @("Manual decision stance: $($manualDecision.stance)", "Manual decision reason: $($manualDecision.whyNow)") + @($componentReview.reviewNotes)
+  }
+
+  $reviewMethod = if ($manualReviewApplied) { 'manual_readthrough' } else { 'inferred_readthrough' }
+  $reviewedBy = if ($manualReviewApplied) { 'GitHub Copilot manual readthrough' } else { 'GitHub Copilot' }
+  $starterKeys = @($StarterMemberships | ForEach-Object { $_.key })
+  $starterLabels = @($StarterMemberships | ForEach-Object { $_.label })
+  $related = @($Shelf.highlights | Where-Object { $_ -ne $ComponentEntry.name } | Select-Object -First 6)
+  $variantSet = @()
+  if ($ComponentEntry.namedExports.Count -gt 1) {
+    $variantSet = @($ComponentEntry.namedExports)
+  }
+
+  return [pscustomobject]@{
+    schemaVersion = 'ui-library-metadata-v2'
+    layers = [pscustomobject]@{
+      identity = [pscustomobject]@{
+        name = $ComponentEntry.name
+        family = $Shelf.label
+        subfamily = $profile.subfamily
+        aliases = @()
+        platformFit = @('web', 'responsive')
+        variantSet = $variantSet
+        relatedComponents = $related
+        reviewSignals = @($componentReview.signals)
+      }
+      intent = [pscustomobject]@{
+        primaryJob = $profile.primaryJob
+        secondaryJobs = @($profile.secondaryJobs)
+        userGoal = $profile.userGoal
+        primaryInteractionModel = $profile.primaryInteractionModel
+        uxPatternType = $profile.uxPatternType
+      }
+      eligibility = [pscustomobject]@{
+        allowedContexts = @($profile.allowedContexts)
+        disallowedContexts = @($profile.disallowedContexts)
+        bestFor = @($profile.bestFor)
+        avoidWhen = @($profile.avoidWhen)
+        requiredApprovals = @($profile.requiredApprovals)
+        autonomyAllowance = $profile.autonomyAllowance
+        preconditions = @($profile.preconditions)
+      }
+      readiness = [pscustomobject]@{
+        lifecycle = $profile.lifecycle
+        adoption = $profile.adoption
+        evidenceType = @($profile.evidenceType)
+        stability = (New-ScoredField -Dimension 'stability' -Score $profile.stability -AnchorMap $AnchorMap)
+        accessibilityConfidence = (New-ScoredField -Dimension 'accessibilityConfidence' -Score $profile.accessibilityConfidence -AnchorMap $AnchorMap)
+        internationalizationConfidence = (New-ScoredField -Dimension 'internationalizationConfidence' -Score $profile.internationalizationConfidence -AnchorMap $AnchorMap)
+        analyticsConfidence = (New-ScoredField -Dimension 'analyticsConfidence' -Score $profile.analyticsConfidence -AnchorMap $AnchorMap)
+        failureCost = (New-ScoredField -Dimension 'failureCost' -Score $profile.failureCost -AnchorMap $AnchorMap)
+      }
+      operationalCost = [pscustomobject]@{
+        performanceBudgetFit = (New-ScoredField -Dimension 'performanceBudgetFit' -Score $profile.performanceBudgetFit -AnchorMap $AnchorMap)
+        implementationComplexity = (New-ScoredField -Dimension 'implementationComplexity' -Score $profile.implementationComplexity -AnchorMap $AnchorMap)
+        dependencyBurden = (New-ScoredField -Dimension 'dependencyBurden' -Score $profile.dependencyBurden -AnchorMap $AnchorMap)
+        designTokenDependencyLevel = (New-ScoredField -Dimension 'designTokenDependencyLevel' -Score $profile.designTokenDependencyLevel -AnchorMap $AnchorMap)
+        contentAuthoringBurden = (New-ScoredField -Dimension 'contentAuthoringBurden' -Score $profile.contentAuthoringBurden -AnchorMap $AnchorMap)
+      }
+      behavioralCharacter = [pscustomobject]@{
+        opinionation = (New-ScoredField -Dimension 'opinionation' -Score $profile.opinionation -AnchorMap $AnchorMap)
+        expressiveness = (New-ScoredField -Dimension 'expressiveness' -Score $profile.expressiveness -AnchorMap $AnchorMap)
+        formality = (New-ScoredField -Dimension 'formality' -Score $profile.formality -AnchorMap $AnchorMap)
+        interactionIntensity = (New-ScoredField -Dimension 'interactionIntensity' -Score $profile.interactionIntensity -AnchorMap $AnchorMap)
+        visualDominance = (New-ScoredField -Dimension 'visualDominance' -Score $profile.visualDominance -AnchorMap $AnchorMap)
+        densityFeel = (New-ScoredField -Dimension 'densityFeel' -Score $profile.densityFeel -AnchorMap $AnchorMap)
+      }
+      provenance = [pscustomobject]@{
+        owner = $Owner
+        markedBy = 'GitHub Copilot'
+        reviewMode = $reviewMethod
+        manualReviewed = $manualReviewApplied
+        manualDecision = $manualDecision
+        lastReviewed = $GeneratedAt.Substring(0, 10)
+        reviewers = @('ui_lab_curation_bot', 'design_system_maintainer', 'github_copilot')
+        linkedExamples = @($ComponentEntry.shelfImportPath, $ComponentEntry.exactNameImportPath)
+        sourceLinks = @($ComponentEntry.sourcePath, 'ui_lab/docs/UI_LIBRARY_METADATA_V2.md')
+        changelog = @('Generated component-specific profile from shelf/starter-lane taxonomy plus name-signal heuristics; refine with direct evidence as it becomes available.')
+        confidenceNotes = @('Scores are profile-seeded but individually adjusted for component naming signals; manual overrides are explicitly marked when supplied.')
+        reviewNotes = @($componentReview.reviewNotes + $criticalReview.pushbackSummary)
+      }
+      criticalReview = [pscustomobject]@{
+        reviewedBy = $reviewedBy
+        reviewMethod = $reviewMethod
+        criticalityScore = $criticalReview.criticalityScore
+        criticalityAnchor = $criticalReview.criticalityAnchor
+        hardVerdict = $criticalReview.hardVerdict
+        redFlags = @($criticalReview.redFlags)
+        failureModes = @($criticalReview.failureModes)
+        pushback = @($criticalReview.pushback)
+        specificPushback = @($criticalReview.specificPushback)
+        pushbackSummary = $criticalReview.pushbackSummary
+      }
+    }
+    minimumSchema = [pscustomobject]@{
+      name = $ComponentEntry.name
+      family = $Shelf.key
+      primaryJob = $profile.primaryJob
+      allowedContexts = @($profile.allowedContexts)
+      disallowedContexts = @($profile.disallowedContexts)
+      lifecycle = $profile.lifecycle
+      evidenceType = @($profile.evidenceType)
+      stability = $profile.stability
+      accessibilityConfidence = $profile.accessibilityConfidence
+      failureCost = $profile.failureCost
+      performanceBudgetFit = $profile.performanceBudgetFit
+      opinionation = $profile.opinionation
+      expressiveness = $profile.expressiveness
+      formality = $profile.formality
+      interactionIntensity = $profile.interactionIntensity
+      autonomyAllowance = $profile.autonomyAllowance
+      owner = $Owner
+      markedBy = 'GitHub Copilot'
+      lastReviewed = $GeneratedAt.Substring(0, 10)
+    }
+    starterLaneKeys = $starterKeys
+    starterLaneLabels = $starterLabels
+    reviewedBy = 'GitHub Copilot'
+    reviewSignals = @($componentReview.signals)
+    reviewNotes = @($componentReview.reviewNotes + $criticalReview.pushbackSummary + ($criticalReview.specificPushback | Select-Object -First 3))
+    criticalReview = $criticalReview
+  }
+}
+
+function Get-ScoreAverage {
+  param([Parameter(Mandatory = $true)][int[]]$Scores)
+
+  if (-not $Scores -or $Scores.Count -eq 0) {
+    return 1
+  }
+
+  return [int][Math]::Round((($Scores | Measure-Object -Average).Average), 0, [MidpointRounding]::AwayFromZero)
+}
+
+function Convert-ToRankScore {
+  param([Parameter(Mandatory = $true)][double]$Value)
+
+  $rounded = [int][Math]::Round($Value, 0, [MidpointRounding]::AwayFromZero)
+  if ($rounded -lt 1) { return 1 }
+  if ($rounded -gt 5) { return 5 }
+  return $rounded
+}
+
+function Get-AutonomyScore {
+  param([Parameter(Mandatory = $true)][string]$AutonomyAllowance)
+
+  switch ($AutonomyAllowance) {
+    'auto_select' { return 5 }
+    'suggest_only' { return 4 }
+    'human_review_required' { return 3 }
+    'restricted' { return 2 }
+    default { return 3 }
+  }
+}
+
+function Get-LifecycleScore {
+  param([Parameter(Mandatory = $true)][string]$Lifecycle)
+
+  switch ($Lifecycle) {
+    'supported' { return 5 }
+    'candidate' { return 3 }
+    'deprecated' { return 2 }
+    'retired' { return 1 }
+    default { return 3 }
+  }
+}
+
+function Get-ComponentRanking {
+  param(
+    [Parameter(Mandatory = $true)][psobject]$ComponentEntry,
+    [Parameter(Mandatory = $true)][psobject]$Metadata
+  )
+
+  $layers = $Metadata.layers
+  $readinessScores = @(
+    [int]$layers.readiness.stability.score,
+    [int]$layers.readiness.accessibilityConfidence.score,
+    [int]$layers.readiness.internationalizationConfidence.score,
+    [int]$layers.readiness.analyticsConfidence.score,
+    [int]$layers.readiness.failureCost.score
+  )
+  $costBurdenScores = @(
+    [int]$layers.operationalCost.performanceBudgetFit.score,
+    [int]$layers.operationalCost.implementationComplexity.score,
+    [int]$layers.operationalCost.dependencyBurden.score,
+    [int]$layers.operationalCost.designTokenDependencyLevel.score,
+    [int]$layers.operationalCost.contentAuthoringBurden.score
+  )
+  $characterScores = @(
+    [int]$layers.behavioralCharacter.opinionation.score,
+    [int]$layers.behavioralCharacter.expressiveness.score,
+    [int]$layers.behavioralCharacter.formality.score,
+    [int]$layers.behavioralCharacter.interactionIntensity.score,
+    [int]$layers.behavioralCharacter.visualDominance.score,
+    [int]$layers.behavioralCharacter.densityFeel.score
+  )
+
+  $eligibilityFit = Get-ScoreAverage -Scores @(
+    (6 - [Math]::Min(5, [Math]::Max(1, [int]$layers.eligibility.disallowedContexts.Count + [int]$layers.eligibility.requiredApprovals.Count))),
+    (Get-AutonomyScore -AutonomyAllowance ([string]$layers.eligibility.autonomyAllowance)),
+    (Get-LifecycleScore -Lifecycle ([string]$layers.readiness.lifecycle))
+  )
+
+  $trustScore = Get-ScoreAverage -Scores @(
+    [int]$layers.readiness.stability.score,
+    [int]$layers.readiness.accessibilityConfidence.score,
+    [int]$layers.readiness.internationalizationConfidence.score,
+    [int]$layers.readiness.analyticsConfidence.score,
+    (6 - [int]$layers.readiness.failureCost.score)
+  )
+
+  $efficiencyScore = Get-ScoreAverage -Scores @(
+    [int]$layers.operationalCost.performanceBudgetFit.score,
+    (6 - [int]$layers.operationalCost.implementationComplexity.score),
+    (6 - [int]$layers.operationalCost.dependencyBurden.score),
+    (6 - [int]$layers.operationalCost.designTokenDependencyLevel.score),
+    (6 - [int]$layers.operationalCost.contentAuthoringBurden.score)
+  )
+
+  $styleScore = Get-ScoreAverage -Scores @(
+    [int]$layers.behavioralCharacter.opinionation.score,
+    [int]$layers.behavioralCharacter.expressiveness.score,
+    [int]$layers.behavioralCharacter.formality.score,
+    [int]$layers.behavioralCharacter.interactionIntensity.score,
+    [int]$layers.behavioralCharacter.visualDominance.score,
+    [int]$layers.behavioralCharacter.densityFeel.score
+  )
+
+  $safetyScore = Get-ScoreAverage -Scores @(
+    (6 - [int]$layers.readiness.failureCost.score),
+    [int]$layers.readiness.stability.score,
+    [int]$layers.readiness.accessibilityConfidence.score
+  )
+
+  $selectionScore = Get-ScoreAverage -Scores @(
+    $trustScore,
+    $efficiencyScore,
+    $eligibilityFit
+  )
+
+  $criticalityScore = 1
+  if ($layers.criticalReview -and $layers.criticalReview.criticalityScore) {
+    $criticalityScore = [int]$layers.criticalReview.criticalityScore
+  }
+
+  $riskPenalty = [int][Math]::Floor(($criticalityScore - 1) / 2)
+  $riskAdjustedSelectionScore = Convert-ToRankScore -Value ([Math]::Max(1, $selectionScore - $riskPenalty))
+
+  return [pscustomobject]@{
+    globalRank = $null
+    shelfRank = $null
+    starterLaneRanks = @{}
+    selectionScore = $selectionScore
+    criticalityScore = $criticalityScore
+    riskAdjustedSelectionScore = $riskAdjustedSelectionScore
+    trustScore = $trustScore
+    efficiencyScore = $efficiencyScore
+    eligibilityFitScore = $eligibilityFit
+    styleScore = $styleScore
+    safetyScore = $safetyScore
+    readinessScore = (Get-ScoreAverage -Scores $readinessScores)
+    costBurdenScore = (Get-ScoreAverage -Scores $costBurdenScores)
+    characterScore = (Get-ScoreAverage -Scores $characterScores)
+  }
+}
+
 $script:PrimaryExportOverrides = @{
   FileTree = 'Tree'
+}
+
+$metadataScoreAnchors = @{
+  expressiveness = @{ 1 = 'Plain utility; visually quiet'; 2 = 'Light styling; mostly supports surrounding content'; 3 = 'Noticeable style; adaptable to many product surfaces'; 4 = 'Strong flavor; materially changes screen tone'; 5 = 'Signature visual moment; highly art-directed and attention-seeking' }
+  opinionation = @{ 1 = 'Neutral shell; disappears into most systems'; 2 = 'Slightly opinionated; easy to adapt'; 3 = 'Recognizable point of view; still flexible'; 4 = 'Strong built-in design language'; 5 = 'Dominant stance; should be used deliberately' }
+  autonomyAllowance = @{ 1 = 'Auto-select'; 2 = 'Suggest-only'; 3 = 'Human-review-required'; 4 = 'Restricted'; 5 = 'Restricted' }
+  stability = @{ 1 = 'Experimental and actively shifting'; 2 = 'Emerging with frequent revisions'; 3 = 'Usable with periodic API and behavior changes'; 4 = 'Stable with low change frequency'; 5 = 'Battle-tested and highly stable' }
+  accessibilityConfidence = @{ 1 = 'Unknown a11y behavior'; 2 = 'Basic checks only'; 3 = 'Manual review in representative flows'; 4 = 'Audited with known guidance'; 5 = 'Audited and production-validated' }
+  internationalizationConfidence = @{ 1 = 'Not reviewed for i18n'; 2 = 'Partial layout checks'; 3 = 'Handles common locale changes'; 4 = 'Locale-safe in most product flows'; 5 = 'Broad locale and direction support validated' }
+  analyticsConfidence = @{ 1 = 'No instrumentation expectations'; 2 = 'Ad-hoc instrumentation guidance'; 3 = 'Trackable with moderate effort'; 4 = 'Clear measurement hooks available'; 5 = 'Well-instrumented with production evidence' }
+  failureCost = @{ 1 = 'Low visual-only impact'; 2 = 'Minor UX friction'; 3 = 'Moderate confusion or task interruption'; 4 = 'High trust or workflow impact'; 5 = 'Critical risk if misused' }
+  performanceBudgetFit = @{ 1 = 'Very heavy; likely over budget'; 2 = 'Heavy in constrained surfaces'; 3 = 'Manageable with optimization'; 4 = 'Generally budget-friendly'; 5 = 'Lightweight and budget-safe' }
+  implementationComplexity = @{ 1 = 'Drop-in simple'; 2 = 'Low integration effort'; 3 = 'Moderate integration effort'; 4 = 'Complex integration and maintenance'; 5 = 'High complexity requiring specialist ownership' }
+  dependencyBurden = @{ 1 = 'No extra dependencies'; 2 = 'Minimal dependency footprint'; 3 = 'Moderate dependency surface'; 4 = 'Heavy dependency requirements'; 5 = 'Very heavy and tightly coupled dependencies' }
+  designTokenDependencyLevel = @{ 1 = 'Token-light'; 2 = 'Uses core tokens'; 3 = 'Uses broad token sets'; 4 = 'Strong token coupling'; 5 = 'Deep token-system coupling' }
+  contentAuthoringBurden = @{ 1 = 'Minimal content authoring'; 2 = 'Low authoring effort'; 3 = 'Moderate authoring and curation effort'; 4 = 'High authoring effort'; 5 = 'Very high editorial burden' }
+  formality = @{ 1 = 'Playful and informal'; 2 = 'Casual product tone'; 3 = 'Balanced neutral-professional'; 4 = 'Professional and controlled'; 5 = 'Highly formal enterprise tone' }
+  interactionIntensity = @{ 1 = 'Mostly static'; 2 = 'Low interaction density'; 3 = 'Moderate interaction complexity'; 4 = 'High interaction density'; 5 = 'Very high interaction choreography' }
+  visualDominance = @{ 1 = 'Visually recessive'; 2 = 'Low visual prominence'; 3 = 'Balanced prominence'; 4 = 'High visual pull'; 5 = 'Dominant visual focal point' }
+  densityFeel = @{ 1 = 'Very airy'; 2 = 'Airy'; 3 = 'Balanced'; 4 = 'Dense'; 5 = 'Very dense information texture' }
+}
+
+$metadataProfileDefaults = @{
+  default = @{
+    subfamily = 'general'
+    primaryJob = 'ui_capability_delivery'
+    secondaryJobs = @('content_structuring', 'interaction_enablement')
+    userGoal = 'complete_task_with_confidence'
+    primaryInteractionModel = 'mixed'
+    uxPatternType = 'composable_component'
+    allowedContexts = @('standard_product_surfaces')
+    disallowedContexts = @('legal_consent', 'high_risk_confirmation')
+    bestFor = @('general_ui_delivery')
+    avoidWhen = @('context_is_safety_critical')
+    requiredApprovals = @()
+    autonomyAllowance = 'suggest_only'
+    preconditions = @('responsive_layout_support', 'keyboard_navigation_support')
+    lifecycle = 'supported'
+    adoption = 'broad'
+    evidenceType = @('production_observed', 'expert_reviewed')
+    stability = 4
+    accessibilityConfidence = 3
+    internationalizationConfidence = 3
+    analyticsConfidence = 3
+    failureCost = 3
+    performanceBudgetFit = 4
+    implementationComplexity = 3
+    dependencyBurden = 2
+    designTokenDependencyLevel = 3
+    contentAuthoringBurden = 2
+    opinionation = 3
+    expressiveness = 3
+    formality = 3
+    interactionIntensity = 3
+    visualDominance = 3
+    densityFeel = 3
+  }
+  'landing-product-system' = @{
+    subfamily = 'enterprise_story_systems'; primaryJob = 'enterprise_narrative_and_decision_support'; secondaryJobs = @('proof_orchestration', 'stakeholder_alignment'); userGoal = 'build_enterprise_buying_confidence'; primaryInteractionModel = 'disclosure'; uxPatternType = 'structured_data_view'; allowedContexts = @('enterprise_landing_pages', 'executive_readouts', 'solution_explainers'); disallowedContexts = @('critical_health_alerts', 'legal_consent'); bestFor = @('high-context_enterprise_storytelling'); avoidWhen = @('minimalist_consumer_microflows'); requiredApprovals = @('content_strategy_review'); autonomyAllowance = 'suggest_only'; preconditions = @('structured_content_available', 'adequate_viewport_space', 'keyboard_navigation_support'); lifecycle = 'supported'; adoption = 'broad'; evidenceType = @('production_observed', 'usability_tested', 'expert_reviewed'); stability = 4; accessibilityConfidence = 4; internationalizationConfidence = 3; analyticsConfidence = 3; failureCost = 4; performanceBudgetFit = 3; implementationComplexity = 4; dependencyBurden = 3; designTokenDependencyLevel = 4; contentAuthoringBurden = 4; opinionation = 4; expressiveness = 4; formality = 4; interactionIntensity = 3; visualDominance = 4; densityFeel = 4
+  }
+  'landing-marketing' = @{
+    subfamily = 'conversion_sections'; primaryJob = 'communicate_value_and_drive_action'; secondaryJobs = @('social_proof', 'offer_clarity'); userGoal = 'understand_offer_and_convert'; primaryInteractionModel = 'navigation'; uxPatternType = 'section_pattern'; allowedContexts = @('marketing_pages', 'campaign_landing_pages'); disallowedContexts = @('destructive_confirmation', 'regulated_consent_steps'); bestFor = @('product_value_storytelling'); avoidWhen = @('dense_operational_workflows'); requiredApprovals = @(); autonomyAllowance = 'auto_select'; preconditions = @('clear_content_hierarchy', 'responsive_layout_support'); lifecycle = 'supported'; adoption = 'broad'; evidenceType = @('production_observed', 'analytics_validated'); stability = 4; accessibilityConfidence = 3; internationalizationConfidence = 3; analyticsConfidence = 4; failureCost = 2; performanceBudgetFit = 4; implementationComplexity = 2; dependencyBurden = 2; designTokenDependencyLevel = 3; contentAuthoringBurden = 3; opinionation = 3; expressiveness = 4; formality = 3; interactionIntensity = 2; visualDominance = 4; densityFeel = 2
+  }
+  'data-admin' = @{
+    subfamily = 'operational_intelligence'; primaryJob = 'support_operational_decision_making'; secondaryJobs = @('monitoring', 'analysis'); userGoal = 'inspect_status_and_take_action'; primaryInteractionModel = 'compare'; uxPatternType = 'structured_data_view'; allowedContexts = @('admin_dashboards', 'ops_surfaces'); disallowedContexts = @('legal_consent', 'emotionally_sensitive_alerting'); bestFor = @('high_density_operational_views'); avoidWhen = @('lightweight_marketing_sections'); requiredApprovals = @('data_owner_alignment'); autonomyAllowance = 'suggest_only'; preconditions = @('structured_data_available', 'keyboard_navigation_support', 'sufficient_viewport_space'); lifecycle = 'supported'; adoption = 'broad'; evidenceType = @('production_observed', 'analytics_validated', 'expert_reviewed'); stability = 4; accessibilityConfidence = 3; internationalizationConfidence = 3; analyticsConfidence = 4; failureCost = 4; performanceBudgetFit = 3; implementationComplexity = 4; dependencyBurden = 3; designTokenDependencyLevel = 3; contentAuthoringBurden = 3; opinionation = 3; expressiveness = 2; formality = 4; interactionIntensity = 4; visualDominance = 3; densityFeel = 5
+  }
+  'forms-authoring' = @{
+    subfamily = 'data_capture_and_authoring'; primaryJob = 'capture_and_edit_user_input'; secondaryJobs = @('validation', 'workflow_enablement'); userGoal = 'submit_accurate_information'; primaryInteractionModel = 'input'; uxPatternType = 'inline_control'; allowedContexts = @('forms', 'authoring_flows', 'workflow_tools'); disallowedContexts = @('critical_health_alerts'); bestFor = @('structured_input_collection'); avoidWhen = @('read_only_storytelling_surfaces'); requiredApprovals = @(); autonomyAllowance = 'auto_select'; preconditions = @('validation_rules_defined', 'keyboard_navigation_support', 'focus_management'); lifecycle = 'supported'; adoption = 'broad'; evidenceType = @('production_observed', 'usability_tested'); stability = 4; accessibilityConfidence = 4; internationalizationConfidence = 4; analyticsConfidence = 3; failureCost = 4; performanceBudgetFit = 4; implementationComplexity = 3; dependencyBurden = 2; designTokenDependencyLevel = 3; contentAuthoringBurden = 2; opinionation = 2; expressiveness = 2; formality = 3; interactionIntensity = 4; visualDominance = 2; densityFeel = 3
+  }
+  'feedback-state' = @{
+    subfamily = 'status_and_interruptions'; primaryJob = 'communicate_state_and_risk'; secondaryJobs = @('confirm_actions', 'recover_from_failures'); userGoal = 'understand_system_state_fast'; primaryInteractionModel = 'feedback'; uxPatternType = 'feedback_pattern'; allowedContexts = @('status_updates', 'error_recovery', 'confirmation_layers'); disallowedContexts = @('decorative_only_usage'); bestFor = @('clear_state_signaling'); avoidWhen = @('silent_background_changes'); requiredApprovals = @('critical_flow_review'); autonomyAllowance = 'human_review_required'; preconditions = @('message_severity_model_defined', 'keyboard_navigation_support', 'focus_management'); lifecycle = 'supported'; adoption = 'broad'; evidenceType = @('production_observed', 'accessibility_audited'); stability = 4; accessibilityConfidence = 4; internationalizationConfidence = 3; analyticsConfidence = 3; failureCost = 5; performanceBudgetFit = 4; implementationComplexity = 3; dependencyBurden = 2; designTokenDependencyLevel = 3; contentAuthoringBurden = 2; opinionation = 3; expressiveness = 2; formality = 4; interactionIntensity = 4; visualDominance = 3; densityFeel = 3
+  }
+  'ui-primitives' = @{
+    subfamily = 'atoms_and_composables'; primaryJob = 'provide_foundational_ui_primitives'; secondaryJobs = @('layout_support', 'interaction_baseline'); userGoal = 'compose_consistent_interfaces'; primaryInteractionModel = 'mixed'; uxPatternType = 'inline_control'; allowedContexts = @('all_product_surfaces'); disallowedContexts = @('none_without_context'); bestFor = @('reusable_design_system_foundations'); avoidWhen = @('standalone_storytelling_needs'); requiredApprovals = @(); autonomyAllowance = 'auto_select'; preconditions = @('token_system_available', 'keyboard_navigation_support'); lifecycle = 'supported'; adoption = 'broad'; evidenceType = @('production_observed', 'expert_reviewed'); stability = 5; accessibilityConfidence = 4; internationalizationConfidence = 4; analyticsConfidence = 2; failureCost = 3; performanceBudgetFit = 5; implementationComplexity = 2; dependencyBurden = 1; designTokenDependencyLevel = 4; contentAuthoringBurden = 1; opinionation = 2; expressiveness = 1; formality = 3; interactionIntensity = 2; visualDominance = 1; densityFeel = 2
+  }
+  'navigation-command' = @{
+    subfamily = 'navigation_and_control_surfaces'; primaryJob = 'orient_users_and_trigger_commands'; secondaryJobs = @('wayfinding', 'workflow_acceleration'); userGoal = 'move_and_execute_with_confidence'; primaryInteractionModel = 'navigation'; uxPatternType = 'overlay'; allowedContexts = @('product_shells', 'cross_page_navigation', 'command_access'); disallowedContexts = @('legal_consent'); bestFor = @('high_frequency_navigation_paths'); avoidWhen = @('single_static_content_views'); requiredApprovals = @(); autonomyAllowance = 'suggest_only'; preconditions = @('clear_information_architecture', 'keyboard_navigation_support', 'focus_management'); lifecycle = 'supported'; adoption = 'broad'; evidenceType = @('production_observed', 'usability_tested'); stability = 4; accessibilityConfidence = 4; internationalizationConfidence = 3; analyticsConfidence = 3; failureCost = 4; performanceBudgetFit = 4; implementationComplexity = 3; dependencyBurden = 2; designTokenDependencyLevel = 3; contentAuthoringBurden = 2; opinionation = 3; expressiveness = 3; formality = 3; interactionIntensity = 4; visualDominance = 3; densityFeel = 3
+  }
+  'motion-typography' = @{
+    subfamily = 'kinetic_content'; primaryJob = 'amplify_message_through_motion'; secondaryJobs = @('attention_guidance', 'brand_expression'); userGoal = 'perceive_emphasis_and_hierarchy'; primaryInteractionModel = 'disclosure'; uxPatternType = 'feedback_pattern'; allowedContexts = @('brand_moments', 'hero_sections', 'narrative_surfaces'); disallowedContexts = @('critical_alerting', 'high_density_data_admin'); bestFor = @('expressive_content_sequences'); avoidWhen = @('strict_performance_budget_or_reduced_motion_required'); requiredApprovals = @('motion_review'); autonomyAllowance = 'suggest_only'; preconditions = @('reduced_motion_fallback', 'performance_budget_validation'); lifecycle = 'supported'; adoption = 'targeted'; evidenceType = @('expert_reviewed', 'production_observed'); stability = 3; accessibilityConfidence = 3; internationalizationConfidence = 2; analyticsConfidence = 2; failureCost = 2; performanceBudgetFit = 2; implementationComplexity = 3; dependencyBurden = 3; designTokenDependencyLevel = 3; contentAuthoringBurden = 3; opinionation = 4; expressiveness = 5; formality = 2; interactionIntensity = 4; visualDominance = 5; densityFeel = 2
+  }
+  'backgrounds-effects' = @{
+    subfamily = 'ambient_visual_layers'; primaryJob = 'create_atmosphere_and_depth'; secondaryJobs = @('brand_tone', 'visual_separation'); userGoal = 'feel_spatial_and_brand_context'; primaryInteractionModel = 'none'; uxPatternType = 'decorative_layer'; allowedContexts = @('marketing_backgrounds', 'hero_backdrops', 'showcase_surfaces'); disallowedContexts = @('critical_data_readability_surfaces', 'legal_consent', 'accessibility_sensitive_flows_without_fallbacks'); bestFor = @('visual_ambience_and_brand_mood'); avoidWhen = @('text_legibility_is_primary_constraint'); requiredApprovals = @('accessibility_review', 'performance_review'); autonomyAllowance = 'human_review_required'; preconditions = @('contrast_validation', 'reduced_motion_fallback', 'performance_budget_validation'); lifecycle = 'supported'; adoption = 'targeted'; evidenceType = @('expert_reviewed'); stability = 3; accessibilityConfidence = 2; internationalizationConfidence = 3; analyticsConfidence = 1; failureCost = 3; performanceBudgetFit = 2; implementationComplexity = 3; dependencyBurden = 3; designTokenDependencyLevel = 2; contentAuthoringBurden = 1; opinionation = 4; expressiveness = 5; formality = 2; interactionIntensity = 3; visualDominance = 5; densityFeel = 2
+  }
+  'interactive-showcase' = @{
+    subfamily = 'high_touch_interactions'; primaryJob = 'demonstrate_capability_with_interaction'; secondaryJobs = @('engagement', 'feature_demonstration'); userGoal = 'explore_and_compare_interactively'; primaryInteractionModel = 'select'; uxPatternType = 'interactive_pattern'; allowedContexts = @('product_showcases', 'interactive_marketing', 'demo_surfaces'); disallowedContexts = @('critical_confirmation', 'low_power_constrained_views'); bestFor = @('interactive_product_storytelling'); avoidWhen = @('workflow_requires_low_cognitive_load'); requiredApprovals = @('performance_review'); autonomyAllowance = 'suggest_only'; preconditions = @('pointer_and_keyboard_support', 'performance_budget_validation'); lifecycle = 'supported'; adoption = 'targeted'; evidenceType = @('production_observed', 'usability_tested'); stability = 3; accessibilityConfidence = 3; internationalizationConfidence = 2; analyticsConfidence = 3; failureCost = 3; performanceBudgetFit = 2; implementationComplexity = 4; dependencyBurden = 3; designTokenDependencyLevel = 3; contentAuthoringBurden = 3; opinionation = 4; expressiveness = 4; formality = 3; interactionIntensity = 5; visualDominance = 4; densityFeel = 3
+  }
+  'misc-uncurated' = @{
+    subfamily = 'requires_curation'; primaryJob = 'pending_classification'; secondaryJobs = @('inventory_holding'); userGoal = 'hold_unclassified_assets'; primaryInteractionModel = 'mixed'; uxPatternType = 'uncurated_pattern'; allowedContexts = @('internal_exploration_only'); disallowedContexts = @('autonomous_selection', 'production_defaults'); bestFor = @('temporary_admin_holding'); avoidWhen = @('production_recommendation_flows'); requiredApprovals = @('design_system_review'); autonomyAllowance = 'restricted'; preconditions = @('human_review_required'); lifecycle = 'candidate'; adoption = 'none'; evidenceType = @('expert_reviewed'); stability = 2; accessibilityConfidence = 2; internationalizationConfidence = 2; analyticsConfidence = 1; failureCost = 4; performanceBudgetFit = 3; implementationComplexity = 3; dependencyBurden = 2; designTokenDependencyLevel = 2; contentAuthoringBurden = 2; opinionation = 3; expressiveness = 3; formality = 3; interactionIntensity = 3; visualDominance = 3; densityFeel = 3
+  }
 }
 
 $componentsPath = Join-Path $UiLabRoot "components"
@@ -637,6 +1453,136 @@ $componentIndexEntries = foreach ($info in ($componentModuleInfo | Sort-Object f
     hasDefaultExport = $info.hasDefaultExport
   }
 }
+
+$generatedAtIso = (Get-Date).ToString('yyyy-MM-ddTHH:mm:ssK')
+$metadataOwner = 'ui_lab_design_system_team'
+
+$manualReviewOverrides = @()
+if (Test-Path $ManualReviewOverridesPath) {
+  $manualReviewOverridesRaw = Get-Content -LiteralPath $ManualReviewOverridesPath -Raw | ConvertFrom-Json
+  if ($manualReviewOverridesRaw -is [System.Array]) {
+    $manualReviewOverrides = $manualReviewOverridesRaw
+  } elseif ($null -ne $manualReviewOverridesRaw) {
+    $manualReviewOverrides = @($manualReviewOverridesRaw)
+  }
+}
+
+$manualReviewLookup = @{}
+foreach ($manualReviewOverride in $manualReviewOverrides) {
+  $manualReviewLookup[$manualReviewOverride.name] = $manualReviewOverride
+}
+
+$componentDecisionEntries = foreach ($entry in $componentIndexEntries) {
+  $shelf = $shelfLookup[$entry.name]
+  $starterMemberships = if ($starterLaneLookup.ContainsKey($entry.name)) { @($starterLaneLookup[$entry.name]) } else { @() }
+  $manualReviewOverride = $null
+  if ($manualReviewLookup.ContainsKey($entry.name)) {
+    $manualReviewOverride = $manualReviewLookup[$entry.name]
+  }
+
+  $decisionMetadata = New-DecisionMetadataV2 `
+    -ComponentEntry $entry `
+    -Shelf $shelf `
+    -ComponentName $entry.name `
+    -StarterMemberships $starterMemberships `
+    -Profiles $metadataProfileDefaults `
+    -AnchorMap $metadataScoreAnchors `
+    -GeneratedAt $generatedAtIso `
+    -Owner $metadataOwner `
+    -ManualReviewOverride $manualReviewOverride
+
+  [pscustomobject]@{
+    name = $entry.name
+    sourcePath = $entry.sourcePath
+    shelfKey = $entry.shelfKey
+    shelfLabel = $entry.shelfLabel
+    shelfImportPath = $entry.shelfImportPath
+    shelfExactImportPath = $entry.shelfExactImportPath
+    shelfMetaPath = $entry.shelfMetaPath
+    starterLaneKeys = @($entry.starterLaneKeys)
+    starterLaneLabels = @($entry.starterLaneLabels)
+    starterLaneImportPaths = @($entry.starterLaneImportPaths)
+    starterLaneExactImportPaths = @($entry.starterLaneExactImportPaths)
+    starterLaneMetaPaths = @($entry.starterLaneMetaPaths)
+    exactNameImportPath = $entry.exactNameImportPath
+    exactNameExportKind = $entry.exactNameExportKind
+    exactNameSourceExport = $entry.exactNameSourceExport
+    namedExports = @($entry.namedExports)
+    hasDefaultExport = $entry.hasDefaultExport
+    reviewedBy = $decisionMetadata.layers.criticalReview.reviewedBy
+    reviewMethod = $decisionMetadata.layers.criticalReview.reviewMethod
+    manualReviewed = $decisionMetadata.layers.provenance.manualReviewed
+    reviewNotes = @($decisionMetadata.layers.provenance.reviewNotes)
+    decisionMetadataV2 = $decisionMetadata
+  }
+}
+
+$componentRankedEntries = @(
+  $componentDecisionEntries | ForEach-Object {
+    $ranking = Get-ComponentRanking -ComponentEntry $_ -Metadata $_.decisionMetadataV2
+    $_.decisionMetadataV2 | Add-Member -NotePropertyName ranking -NotePropertyValue $ranking -Force
+
+    [pscustomobject]@{
+      name = $_.name
+      sourcePath = $_.sourcePath
+      shelfKey = $_.shelfKey
+      shelfLabel = $_.shelfLabel
+      shelfImportPath = $_.shelfImportPath
+      shelfExactImportPath = $_.shelfExactImportPath
+      shelfMetaPath = $_.shelfMetaPath
+      starterLaneKeys = @($_.starterLaneKeys)
+      starterLaneLabels = @($_.starterLaneLabels)
+      starterLaneImportPaths = @($_.starterLaneImportPaths)
+      starterLaneExactImportPaths = @($_.starterLaneExactImportPaths)
+      starterLaneMetaPaths = @($_.starterLaneMetaPaths)
+      exactNameImportPath = $_.exactNameImportPath
+      exactNameExportKind = $_.exactNameExportKind
+      exactNameSourceExport = $_.exactNameSourceExport
+      namedExports = @($_.namedExports)
+      hasDefaultExport = $_.hasDefaultExport
+      reviewedBy = $_.reviewedBy
+      reviewMethod = $_.reviewMethod
+      manualReviewed = $_.manualReviewed
+      reviewNotes = @($_.reviewNotes)
+      decisionMetadataV2 = $_.decisionMetadataV2
+      ranking = $ranking
+    }
+  }
+)
+
+$componentRankedEntries = @(
+  $componentRankedEntries |
+    Sort-Object @{ Expression = { $_.ranking.riskAdjustedSelectionScore }; Descending = $true }, @{ Expression = { $_.ranking.trustScore }; Descending = $true }, @{ Expression = { $_.ranking.criticalityScore }; Descending = $false }, name
+)
+
+$globalRank = 0
+foreach ($component in $componentRankedEntries) {
+  $globalRank += 1
+  $component.ranking.globalRank = $globalRank
+}
+
+foreach ($shelf in $shelves) {
+  $shelfEntries = @($componentRankedEntries | Where-Object { $_.shelfKey -eq $shelf.key } | Sort-Object @{ Expression = { $_.ranking.riskAdjustedSelectionScore }; Descending = $true }, @{ Expression = { $_.ranking.trustScore }; Descending = $true }, @{ Expression = { $_.ranking.criticalityScore }; Descending = $false }, name)
+  $shelfRank = 0
+  foreach ($component in $shelfEntries) {
+    $shelfRank += 1
+    $component.ranking.shelfRank = $shelfRank
+  }
+}
+
+foreach ($starter in $starterLanes) {
+  $starterEntries = @($componentRankedEntries | Where-Object { $_.starterLaneKeys -contains $starter.key } | Sort-Object @{ Expression = { $_.ranking.riskAdjustedSelectionScore }; Descending = $true }, @{ Expression = { $_.ranking.trustScore }; Descending = $true }, @{ Expression = { $_.ranking.criticalityScore }; Descending = $false }, name)
+  $starterRank = 0
+  foreach ($component in $starterEntries) {
+    $starterRank += 1
+    if (-not $component.ranking.starterLaneRanks) {
+      $component.ranking.starterLaneRanks = [ordered]@{}
+    }
+    $component.ranking.starterLaneRanks[$starter.key] = $starterRank
+  }
+}
+
+$componentRankSummary = @($componentRankedEntries | Select-Object name, shelfKey, globalRank, shelfRank, reviewedBy, ranking)
 
 $unresolvedComponentIndexEntries = @($componentIndexEntries | Where-Object { $_.exactNameExportKind -eq 'unresolved' })
 $unresolvedComponentIndexNames = @($unresolvedComponentIndexEntries | ForEach-Object { $_.name })
@@ -896,8 +1842,18 @@ $namingRecommendations = foreach ($entry in $namingWatchlist) {
   }
 }
 
+$metadataScoreAnchorsSerializable = [ordered]@{}
+foreach ($dimension in @($metadataScoreAnchors.Keys | Sort-Object)) {
+  $scoreMap = [ordered]@{}
+  foreach ($scoreKey in @($metadataScoreAnchors[$dimension].Keys | Sort-Object)) {
+    $scoreMap[[string]$scoreKey] = $metadataScoreAnchors[$dimension][$scoreKey]
+  }
+
+  $metadataScoreAnchorsSerializable[$dimension] = $scoreMap
+}
+
 $registry = [pscustomobject]@{
-  generatedAt = (Get-Date).ToString('yyyy-MM-ddTHH:mm:ssK')
+  generatedAt = $generatedAtIso
   source = [pscustomobject]@{
     root = 'ui_lab'
     groupedAccessRoot = 'ui_lab/library'
@@ -906,9 +1862,28 @@ $registry = [pscustomobject]@{
     components = 'ui_lab/components'
     componentShelfRoot = 'ui_lab/components/shelves'
     generator = 'ui_lab/docs/generate-ui-lab-library-catalog.ps1'
+    metadataGuide = 'ui_lab/docs/UI_LIBRARY_METADATA_V2.md'
+    metadataProfiles = 'ui_lab/configs/ui-library-metadata-v2-profiles.json'
+    componentMetadata = 'ui_lab/configs/ui-library-component-metadata-v2.json'
+    componentRankings = 'ui_lab/configs/ui-library-component-rankings-v2.json'
     landingProductGuide = 'ui_lab/docs/LANDING_PRODUCT_LIBRARY_GUIDE.md'
     landingProductRegistry = 'ui_lab/configs/landing-product-registry.json'
   }
+  metadataModel = [pscustomobject]@{
+    version = 'v2'
+    layers = @('identity', 'intent', 'eligibility', 'readiness', 'operationalCost', 'behavioralCharacter', 'provenance')
+    scoreScale = '1-5'
+    autonomyAllowanceEnum = @('auto_select', 'suggest_only', 'human_review_required', 'restricted')
+    lifecycleEnum = @('candidate', 'supported', 'deprecated', 'retired')
+    maintainedBy = $metadataOwner
+    scoreAnchors = $metadataScoreAnchorsSerializable
+  }
+  metadataProfiles = @($metadataProfileDefaults.GetEnumerator() | ForEach-Object {
+    [pscustomobject]@{
+      shelfKey = $_.Key
+      profile = $_.Value
+    }
+  } | Sort-Object shelfKey)
   stats = [pscustomobject]@{
     topLevelComponentFiles = $componentNames.Count
     componentTreeFiles = $componentTreeFileCount
@@ -927,7 +1902,7 @@ $registry = [pscustomobject]@{
   folders = @($folderStats)
   shelves = @($shelves)
   starterLanes = @($starterLanes)
-  componentLookup = @($componentIndexEntries)
+  componentLookup = @($componentRankedEntries)
   namingWatchlist = @($namingWatchlist)
   namingRecommendations = @($namingRecommendations)
   topLevelNamedExportCollisions = @($topLevelNamedExportCollisions)
@@ -937,6 +1912,8 @@ $registry = [pscustomobject]@{
     everyComponentHasExactNameEntrypoint = ($unresolvedComponentIndexEntries.Count -eq 0)
     folderStatsGeneratedFromDisk = $true
     noTopLevelNamedExportCollisions = ($topLevelNamedExportCollisions.Count -eq 0)
+    metadataV2PresentForEveryComponent = ($componentRankedEntries.Count -eq $componentIndexEntries.Count)
+    metadataV2SchemaVersionConsistent = (@($componentRankedEntries | Where-Object { $_.decisionMetadataV2.schemaVersion -ne 'ui-library-metadata-v2' }).Count -eq 0)
     physicalShelfFoldersMatchPrimaryShelf = ($physicalShelfMismatches.Count -eq 0)
   }
 }
@@ -946,7 +1923,33 @@ if (-not (Test-Path -LiteralPath $registryDirectory)) {
   New-Item -ItemType Directory -Path $registryDirectory -Force | Out-Null
 }
 
-$registry | ConvertTo-Json -Depth 8 | Set-Content -LiteralPath $RegistryOutputPath -Encoding utf8
+$registry | ConvertTo-Json -Depth 14 | Set-Content -LiteralPath $RegistryOutputPath -Encoding utf8
+
+$metadataProfilesDirectory = Split-Path -Parent $MetadataProfilesOutputPath
+if (-not (Test-Path -LiteralPath $metadataProfilesDirectory)) {
+  New-Item -ItemType Directory -Path $metadataProfilesDirectory -Force | Out-Null
+}
+
+(@($metadataProfileDefaults.GetEnumerator() | ForEach-Object {
+  [pscustomobject]@{
+    shelfKey = $_.Key
+    profile = $_.Value
+  }
+} | Sort-Object shelfKey)) | ConvertTo-Json -Depth 8 | Set-Content -LiteralPath $MetadataProfilesOutputPath -Encoding utf8
+
+$componentMetadataDirectory = Split-Path -Parent $ComponentMetadataOutputPath
+if (-not (Test-Path -LiteralPath $componentMetadataDirectory)) {
+  New-Item -ItemType Directory -Path $componentMetadataDirectory -Force | Out-Null
+}
+
+@($componentRankedEntries) | ConvertTo-Json -Depth 14 | Set-Content -LiteralPath $ComponentMetadataOutputPath -Encoding utf8
+
+$componentRankingsDirectory = Split-Path -Parent $ComponentRankingsOutputPath
+if (-not (Test-Path -LiteralPath $componentRankingsDirectory)) {
+  New-Item -ItemType Directory -Path $componentRankingsDirectory -Force | Out-Null
+}
+
+@($componentRankSummary) | ConvertTo-Json -Depth 6 | Set-Content -LiteralPath $ComponentRankingsOutputPath -Encoding utf8
 
 $guideLines = [System.Collections.Generic.List[string]]::new()
 $guideLines.Add('# UI Lab Library Guide')
@@ -969,8 +1972,14 @@ $guideLines.Add((New-GuideLine '- Shelf exact-component barrels: `{0}`' 'ui_lab/
 $guideLines.Add((New-GuideLine '- Starter-lane exact-component barrels: `{0}`' 'ui_lab/library/starter-lanes/*/components.ts'))
 $guideLines.Add((New-GuideLine '- Shelf metadata files: `{0}`' 'ui_lab/library/shelves/*/meta.json'))
 $guideLines.Add((New-GuideLine '- Starter-lane metadata files: `{0}`' 'ui_lab/library/starter-lanes/*/meta.json'))
+$guideLines.Add((New-GuideLine '- Metadata v2 profiles: `{0}`' 'ui_lab/configs/ui-library-metadata-v2-profiles.json'))
+$guideLines.Add((New-GuideLine '- Component metadata v2: `{0}`' 'ui_lab/configs/ui-library-component-metadata-v2.json'))
+$guideLines.Add((New-GuideLine '- Component rankings v2: `{0}`' 'ui_lab/configs/ui-library-component-rankings-v2.json'))
+$guideLines.Add("- Manual review subset: $($manualReviewOverrides.Count) components")
+$guideLines.Add((New-GuideLine '- Manual review overrides: `{0}`' 'ui_lab/configs/ui-library-manual-review-overrides.json'))
 $guideLines.Add("- Top-level named export collisions: $($topLevelNamedExportCollisions.Count)")
 $guideLines.Add((New-GuideLine '- Machine-readable registry: `{0}`' 'ui_lab/configs/ui-lab-registry.json'))
+$guideLines.Add((New-GuideLine '- Metadata specification: `{0}`' 'ui_lab/docs/UI_LIBRARY_METADATA_V2.md'))
 $guideLines.Add((New-GuideLine '- LandingProduct subsystem guide: `{0}`' 'ui_lab/docs/LANDING_PRODUCT_LIBRARY_GUIDE.md'))
 $guideLines.Add((New-GuideLine '- Curation queue: `{0}`' 'ui_lab/docs/UI_LAB_CURATION_QUEUE.md'))
 $guideLines.Add((New-GuideLine '- Generator: `{0}`' 'ui_lab/docs/generate-ui-lab-library-catalog.ps1'))
@@ -980,6 +1989,7 @@ $guideLines.Add('1. Start with the starter lanes if you are building a page or p
 $guideLines.Add('2. Use `ui_lab/library/by-name` when you know the component filename but not the shelf.')
 $guideLines.Add('3. Jump into the LandingProduct subsystem only when you actually need enterprise page depth or page-scale systems language.')
 $guideLines.Add('4. Treat the misc shelf and the naming watchlist as admin debt, not as default starting points.')
+$guideLines.Add('5. Use `ui_lab/configs/ui-library-manual-review-overrides.json` when you need components with explicit stance, proof obligations, kill-switch criteria, and evidence references.')
 $guideLines.Add('')
 $guideLines.Add('## Lookup Surfaces')
 $guideLines.Add((New-GuideLine '- By-name barrel: `{0}`' 'ui_lab/library/by-name'))
@@ -1056,6 +2066,10 @@ $guideLines.Add('- Every component file is assigned to exactly one repo-level sh
 $guideLines.Add('- Every starter lane references existing components only.')
 $guideLines.Add('- Every catalog component filename has an exact grouped entrypoint in `ui_lab/library/by-name`.')
 $guideLines.Add('- Every shelf and starter-lane folder now has a strict `components.ts` barrel for exact file-name imports only.')
+$guideLines.Add('- Every registry component now includes `decisionMetadataV2` with layered intent, eligibility, readiness, cost, character, and provenance fields.')
+$guideLines.Add('- Every registry component is also individually reviewed with a component-specific heuristic walk-through and written review notes.')
+$guideLines.Add('- Every component metadata record is emitted into `ui_lab/configs/ui-library-component-metadata-v2.json` and marked by GitHub Copilot.')
+$guideLines.Add('- Every component also has a ranked summary in `ui_lab/configs/ui-library-component-rankings-v2.json` so the library can be compared at a glance.')
 $guideLines.Add('- Physical shelf folders, when present, match the generator-owned shelf classification.')
 $guideLines.Add('- Folder counts are generated from disk, not manually maintained.')
 $guideLines.Add('- Top-level named component exports are collision-free.')
@@ -1134,6 +2148,9 @@ if (-not (Test-Path -LiteralPath $queueDirectory)) {
 $queueLines | Set-Content -LiteralPath $QueueOutputPath -Encoding utf8
 
 Write-Host "Generated registry: $RegistryOutputPath"
+Write-Host "Generated metadata profiles: $MetadataProfilesOutputPath"
+Write-Host "Generated component metadata: $ComponentMetadataOutputPath"
+Write-Host "Generated component rankings: $ComponentRankingsOutputPath"
 Write-Host "Generated guide: $GuideOutputPath"
 Write-Host "Generated queue: $QueueOutputPath"
 Write-Host "Generated grouped access layer: $libraryOutputRoot"

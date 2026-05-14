@@ -1,0 +1,548 @@
+﻿[
+    {
+        "name":  "Avatar",
+        "profileOverrides":  {
+                                 "accessibilityConfidence":  4,
+                                 "failureCost":  2,
+                                 "opinionation":  2,
+                                 "expressiveness":  2,
+                                 "formality":  3,
+                                 "interactionIntensity":  1,
+                                 "visualDominance":  1,
+                                 "densityFeel":  1
+                             },
+        "reviewNotes":  [
+                            "Manual readthrough: safe as a small identity surface only if fallback initials, alt text, and crop behavior are explicit.",
+                            "Do not use it as decoration when the real task is user identification or trust signaling."
+                        ],
+        "criticalReviewOverrides":  {
+                                        "hardVerdict":  "acceptable_with_constraints",
+                                        "criticalityScore":  2,
+                                        "specificPushback":  [
+                                                                 "Avatar looks low-risk, but that still does not make it a default choice; verify semantics, fallback content, and the surrounding flow before promoting it."
+                                                             ]
+                                    },
+        "manualDecision":  {
+                               "killSwitch":  [
+                                                  "Any flow where missing image removes user identification clarity."
+                                              ],
+                               "whyNow":  "Identity cues are useful but frequently misused as decorative noise.",
+                               "evidenceRefs":  [
+                                                    "ui_lab/components/shelves/ui-primitives/Avatar.tsx",
+                                                    "ui_lab/docs/UI_LIBRARY_METADATA_V2.md"
+                                                ],
+                               "stance":  "ship_guarded",
+                               "mustProve":  [
+                                                 "Fallback initials and alt semantics are always present.",
+                                                 "Avatar does not replace explicit identity labels in critical contexts."
+                                             ]
+                           }
+    },
+    {
+        "name":  "Badge",
+        "profileOverrides":  {
+                                 "accessibilityConfidence":  4,
+                                 "failureCost":  2,
+                                 "opinionation":  2,
+                                 "expressiveness":  1,
+                                 "formality":  3,
+                                 "interactionIntensity":  1,
+                                 "visualDominance":  1,
+                                 "densityFeel":  1
+                             },
+        "reviewNotes":  [
+                            "Manual readthrough: this is a label-adjacent utility, not a substitute for explanatory text.",
+                            "Use it for status, category, or tiny counts; do not let it carry meaning that the copy should actually say."
+                        ],
+        "criticalReviewOverrides":  {
+                                        "hardVerdict":  "acceptable_with_constraints",
+                                        "criticalityScore":  2,
+                                        "specificPushback":  [
+                                                                 "Badge is too small to carry real meaning on its own; if the label matters, say it in text instead of relying on the visual chip."
+                                                             ]
+                                    },
+        "manualDecision":  {
+                               "killSwitch":  [
+                                                  "Any use where chip color is the sole carrier of critical meaning."
+                                              ],
+                               "whyNow":  "Badge density is high value only when status vocabulary is controlled.",
+                               "evidenceRefs":  [
+                                                    "ui_lab/components/shelves/ui-primitives/badge.tsx",
+                                                    "ui_lab/docs/UI_LIBRARY_METADATA_V2.md"
+                                                ],
+                               "stance":  "ship_guarded",
+                               "mustProve":  [
+                                                 "Badge vocabulary is finite and documented.",
+                                                 "Critical meaning is duplicated in visible text, not chip color only."
+                                             ]
+                           }
+    },
+    {
+        "name":  "CommandPalette",
+        "profileOverrides":  {
+                                 "accessibilityConfidence":  4,
+                                 "failureCost":  3,
+                                 "opinionation":  3,
+                                 "expressiveness":  2,
+                                 "formality":  3,
+                                 "interactionIntensity":  4,
+                                 "visualDominance":  3,
+                                 "densityFeel":  3
+                             },
+        "reviewNotes":  [
+                            "Manual readthrough: only worth it if the product actually has command discovery, not just because it feels advanced.",
+                            "The feature is high leverage but easy to overbuild; keep the command set small and obvious."
+                        ],
+        "criticalReviewOverrides":  {
+                                        "hardVerdict":  "review_required",
+                                        "criticalityScore":  4,
+                                        "specificPushback":  [
+                                                                 "CommandPalette is easy to overstate: if users cannot predict commands or recall them from memory, the surface becomes a novelty layer instead of a productivity tool."
+                                                             ]
+                                    },
+        "manualDecision":  {
+                               "killSwitch":  [
+                                                  "Search index drift creates stale or misleading command results."
+                                              ],
+                               "whyNow":  "High leverage surface that can become performative complexity if command grammar is weak.",
+                               "evidenceRefs":  [
+                                                    "ui_lab/components/shelves/navigation-and-command/CommandPalette.tsx",
+                                                    "ui_lab/docs/UI_LIBRARY_METADATA_V2.md"
+                                                ],
+                               "stance":  "pilot_only",
+                               "mustProve":  [
+                                                 "Top tasks can be completed faster than via visible nav.",
+                                                 "Keyboard and screen-reader flows are validated in production-like data."
+                                             ]
+                           }
+    },
+    {
+        "name":  "CommandMenu",
+        "profileOverrides":  {
+                                 "accessibilityConfidence":  4,
+                                 "failureCost":  3,
+                                 "opinionation":  3,
+                                 "expressiveness":  2,
+                                 "formality":  3,
+                                 "interactionIntensity":  4,
+                                 "visualDominance":  3,
+                                 "densityFeel":  3
+                             },
+        "reviewNotes":  [
+                            "Manual readthrough: good for compact action surfaces, but only when the menu model is genuinely discoverable.",
+                            "If it becomes the only way to reach a command, that is a product navigation smell, not a feature."
+                        ],
+        "criticalReviewOverrides":  {
+                                        "hardVerdict":  "review_required",
+                                        "criticalityScore":  4,
+                                        "specificPushback":  [
+                                                                 "CommandMenu should not be the primary way to hide essential actions; if users need it to find core features, the information architecture is already too thin."
+                                                             ]
+                                    },
+        "manualDecision":  {
+                               "killSwitch":  [
+                                                  "Users require command menu to find core product actions."
+                                              ],
+                               "whyNow":  "Useful for dense action sets but dangerous when it hides primary actions.",
+                               "evidenceRefs":  [
+                                                    "ui_lab/components/shelves/navigation-and-command/CommandMenu.tsx",
+                                                    "ui_lab/docs/UI_LIBRARY_METADATA_V2.md"
+                                                ],
+                               "stance":  "pilot_only",
+                               "mustProve":  [
+                                                 "Essential actions still exist in visible IA.",
+                                                 "Action labels remain unambiguous under localization."
+                                             ]
+                           }
+    },
+    {
+        "name":  "ConfirmDialog",
+        "profileOverrides":  {
+                                 "accessibilityConfidence":  4,
+                                 "failureCost":  5,
+                                 "opinionation":  3,
+                                 "expressiveness":  1,
+                                 "formality":  5,
+                                 "interactionIntensity":  3,
+                                 "visualDominance":  3,
+                                 "densityFeel":  2
+                             },
+        "reviewNotes":  [
+                            "Manual readthrough: this is a high-risk surface because it can turn a destructive action into a mistaken click.",
+                            "The copy, focus order, and default button bias matter more than the chrome."
+                        ],
+        "criticalReviewOverrides":  {
+                                        "hardVerdict":  "candidate_only",
+                                        "criticalityScore":  5,
+                                        "specificPushback":  [
+                                                                 "ConfirmDialog is a legal-and-product-risk surface, not a reusable convenience component; if the message is vague, the component is wrong by default."
+                                                             ]
+                                    },
+        "manualDecision":  {
+                               "killSwitch":  [
+                                                  "Default focus lands on destructive action or copy is generic."
+                                              ],
+                               "whyNow":  "Destructive confirmation flows carry legal, trust, and support risk.",
+                               "evidenceRefs":  [
+                                                    "ui_lab/components/shelves/feedback-state/ConfirmDialog.tsx",
+                                                    "ui_lab/docs/UI_LIBRARY_METADATA_V2.md"
+                                                ],
+                               "stance":  "do_not_default",
+                               "mustProve":  [
+                                                 "Button hierarchy prevents accidental destructive confirmation.",
+                                                 "Dialog copy names the irreversible consequence explicitly."
+                                             ]
+                           }
+    },
+    {
+        "name":  "CookieConsent",
+        "profileOverrides":  {
+                                 "accessibilityConfidence":  4,
+                                 "failureCost":  5,
+                                 "opinionation":  3,
+                                 "expressiveness":  1,
+                                 "formality":  5,
+                                 "interactionIntensity":  2,
+                                 "visualDominance":  2,
+                                 "densityFeel":  2
+                             },
+        "reviewNotes":  [
+                            "Manual readthrough: this is compliance-sensitive; treat it as policy UI, not marketing UI.",
+                            "Never hide the reject path or make acceptance the only obvious action."
+                        ],
+        "criticalReviewOverrides":  {
+                                        "hardVerdict":  "candidate_only",
+                                        "criticalityScore":  5,
+                                        "specificPushback":  [
+                                                                 "CookieConsent is only acceptable when refusal is as visible and usable as acceptance; otherwise the component is doing policy theater."
+                                                             ]
+                                    },
+        "manualDecision":  {
+                               "killSwitch":  [
+                                                  "Reject or customize controls become less visible than accept."
+                                              ],
+                               "whyNow":  "Consent mechanics are compliance-critical and cannot be dark-patterned.",
+                               "evidenceRefs":  [
+                                                    "ui_lab/components/shelves/feedback-state/CookieConsent.tsx",
+                                                    "ui_lab/docs/UI_LIBRARY_METADATA_V2.md"
+                                                ],
+                               "stance":  "do_not_default",
+                               "mustProve":  [
+                                                 "Reject path parity with accept path is maintained.",
+                                                 "Consent state changes are auditable by policy logs."
+                                             ]
+                           }
+    },
+    {
+        "name":  "DataTable",
+        "profileOverrides":  {
+                                 "accessibilityConfidence":  3,
+                                 "failureCost":  4,
+                                 "opinionation":  3,
+                                 "expressiveness":  2,
+                                 "formality":  4,
+                                 "interactionIntensity":  4,
+                                 "visualDominance":  3,
+                                 "densityFeel":  5
+                             },
+        "reviewNotes":  [
+                            "Manual readthrough: strong for operational browsing, weak for storytelling.",
+                            "Tables fail when sorting, filtering, and empty states are not treated as first-class behavior."
+                        ],
+        "criticalReviewOverrides":  {
+                                        "hardVerdict":  "review_required",
+                                        "criticalityScore":  4,
+                                        "specificPushback":  [
+                                                                 "DataTable is a trap if you use it for anything that requires narrative explanation; the component will happily hide the actual decision behind density."
+                                                             ]
+                                    },
+        "manualDecision":  {
+                               "killSwitch":  [
+                                                  "Table is used where narrative explanation is required but absent."
+                                              ],
+                               "whyNow":  "Operationally strong but frequently abused for narrative decisions.",
+                               "evidenceRefs":  [
+                                                    "ui_lab/components/shelves/data-admin/DataTable.tsx",
+                                                    "ui_lab/docs/UI_LIBRARY_METADATA_V2.md"
+                                                ],
+                               "stance":  "pilot_only",
+                               "mustProve":  [
+                                                 "Sorting/filtering/empty/error states are fully specified.",
+                                                 "Key decision outcomes are not hidden in dense tabular noise."
+                                             ]
+                           }
+    },
+    {
+        "name":  "AdvancedAutocomplete",
+        "profileOverrides":  {
+                                 "accessibilityConfidence":  4,
+                                 "failureCost":  4,
+                                 "opinionation":  2,
+                                 "expressiveness":  2,
+                                 "formality":  3,
+                                 "interactionIntensity":  4,
+                                 "visualDominance":  2,
+                                 "densityFeel":  3
+                             },
+        "reviewNotes":  [
+                            "Manual readthrough: useful, but only when keyboard handling, async loading, and empty-state behavior are already solid.",
+                            "If you need to explain it in the component name, the control may be too clever."
+                        ],
+        "criticalReviewOverrides":  {
+                                        "hardVerdict":  "review_required",
+                                        "criticalityScore":  4,
+                                        "specificPushback":  [
+                                                                 "AdvancedAutocomplete can hide complexity behind a pleasant surface, which is exactly why it should not be the first option unless the interaction cost is justified."
+                                                             ]
+                                    },
+        "manualDecision":  {
+                               "killSwitch":  [
+                                                  "Autocomplete suggestions create silent wrong selections."
+                                              ],
+                               "whyNow":  "Excellent in constrained vocabularies; harmful when source quality is weak.",
+                               "evidenceRefs":  [
+                                                    "ui_lab/components/shelves/forms-authoring/AdvancedAutocomplete.tsx",
+                                                    "ui_lab/docs/UI_LIBRARY_METADATA_V2.md"
+                                                ],
+                               "stance":  "pilot_only",
+                               "mustProve":  [
+                                                 "Keyboard and async loading states are deterministic.",
+                                                 "No-results and ambiguity states are explicit and recoverable."
+                                             ]
+                           }
+    },
+    {
+        "name":  "DateRangePicker",
+        "profileOverrides":  {
+                                 "accessibilityConfidence":  3,
+                                 "failureCost":  4,
+                                 "opinionation":  2,
+                                 "expressiveness":  2,
+                                 "formality":  3,
+                                 "interactionIntensity":  4,
+                                 "visualDominance":  3,
+                                 "densityFeel":  3
+                             },
+        "reviewNotes":  [
+                            "Manual readthrough: calendaring controls are notorious for edge cases, especially on mobile and with keyboard users.",
+                            "Do not ship it without clear min/max constraints and an unambiguous reset path."
+                        ],
+        "criticalReviewOverrides":  {
+                                        "hardVerdict":  "review_required",
+                                        "criticalityScore":  4,
+                                        "specificPushback":  [
+                                                                 "DateRangePicker should not be treated as a convenience component; it is a stateful control that can create a lot of user error if the range model is unclear."
+                                                             ]
+                                    },
+        "manualDecision":  {
+                               "killSwitch":  [
+                                                  "Users can submit invalid or ambiguous date ranges."
+                                              ],
+                               "whyNow":  "Date logic errors produce silent analytics and workflow corruption.",
+                               "evidenceRefs":  [
+                                                    "ui_lab/components/shelves/forms-authoring/DateRangePicker.tsx",
+                                                    "ui_lab/docs/UI_LIBRARY_METADATA_V2.md"
+                                                ],
+                               "stance":  "pilot_only",
+                               "mustProve":  [
+                                                 "Timezone, locale, and boundary behavior is documented and tested.",
+                                                 "Range reset and invalid range behavior is explicit."
+                                             ]
+                           }
+    },
+    {
+        "name":  "FileUpload",
+        "profileOverrides":  {
+                                 "accessibilityConfidence":  3,
+                                 "failureCost":  4,
+                                 "opinionation":  3,
+                                 "expressiveness":  2,
+                                 "formality":  3,
+                                 "interactionIntensity":  4,
+                                 "visualDominance":  2,
+                                 "densityFeel":  3
+                             },
+        "reviewNotes":  [
+                            "Manual readthrough: this is only safe when accepted file types, errors, and retry behavior are explicit.",
+                            "If the upload flow is ambiguous, the component will expose it immediately."
+                        ],
+        "criticalReviewOverrides":  {
+                                        "hardVerdict":  "review_required",
+                                        "criticalityScore":  4,
+                                        "specificPushback":  [
+                                                                 "FileUpload is not a generic drop zone; without exact validation and visible failure states, it becomes a support burden quickly."
+                                                             ]
+                                    },
+        "manualDecision":  {
+                               "killSwitch":  [
+                                                  "Upload accepts disallowed files or hides validation failures."
+                                              ],
+                               "whyNow":  "Upload failures are expensive and user-hostile without clear contracts.",
+                               "evidenceRefs":  [
+                                                    "ui_lab/components/shelves/forms-authoring/FileUpload.tsx",
+                                                    "ui_lab/docs/UI_LIBRARY_METADATA_V2.md"
+                                                ],
+                               "stance":  "pilot_only",
+                               "mustProve":  [
+                                                 "Accepted types and size constraints are enforced and visible.",
+                                                 "Failure and retry paths are observable and actionable."
+                                             ]
+                           }
+    },
+    {
+        "name":  "Modal",
+        "profileOverrides":  {
+                                 "accessibilityConfidence":  4,
+                                 "failureCost":  5,
+                                 "opinionation":  3,
+                                 "expressiveness":  1,
+                                 "formality":  5,
+                                 "interactionIntensity":  3,
+                                 "visualDominance":  3,
+                                 "densityFeel":  2
+                             },
+        "reviewNotes":  [
+                            "Manual readthrough: modals are overused; they should interrupt only when the task really needs blocking attention.",
+                            "The focus trap and close semantics are not optional details."
+                        ],
+        "criticalReviewOverrides":  {
+                                        "hardVerdict":  "candidate_only",
+                                        "criticalityScore":  5,
+                                        "specificPushback":  [
+                                                                 "Modal should be the exception, not the default; if the user can complete the task inline, the modal is adding friction instead of value."
+                                                             ]
+                                    },
+        "manualDecision":  {
+                               "killSwitch":  [
+                                                  "Modal is used for non-critical content that can be inline."
+                                              ],
+                               "whyNow":  "Blocking interaction is often used lazily and damages flow quality.",
+                               "evidenceRefs":  [
+                                                    "ui_lab/components/shelves/feedback-state/Modal.tsx",
+                                                    "ui_lab/docs/UI_LIBRARY_METADATA_V2.md"
+                                                ],
+                               "stance":  "do_not_default",
+                               "mustProve":  [
+                                                 "Focus trap, escape, and close semantics are robust.",
+                                                 "Inline alternative was considered and rejected with reason."
+                                             ]
+                           }
+    },
+    {
+        "name":  "SearchFilter",
+        "profileOverrides":  {
+                                 "accessibilityConfidence":  4,
+                                 "failureCost":  3,
+                                 "opinionation":  2,
+                                 "expressiveness":  1,
+                                 "formality":  3,
+                                 "interactionIntensity":  3,
+                                 "visualDominance":  2,
+                                 "densityFeel":  2
+                             },
+        "reviewNotes":  [
+                            "Manual readthrough: search filters should feel mechanical and predictable, not clever.",
+                            "The weakest implementation is the one that looks elegant but hides filter state or resets too easily."
+                        ],
+        "criticalReviewOverrides":  {
+                                        "hardVerdict":  "acceptable_with_constraints",
+                                        "criticalityScore":  3,
+                                        "specificPushback":  [
+                                                                 "SearchFilter is acceptable only if the active constraints are visible and reversible; otherwise users cannot trust what they are searching."
+                                                             ]
+                                    },
+        "manualDecision":  {
+                               "killSwitch":  [
+                                                  "Hidden filters alter results without visible state."
+                                              ],
+                               "whyNow":  "Filtering quality directly affects trust in results.",
+                               "evidenceRefs":  [
+                                                    "ui_lab/components/shelves/forms-authoring/SearchFilter.tsx",
+                                                    "ui_lab/docs/UI_LIBRARY_METADATA_V2.md"
+                                                ],
+                               "stance":  "ship_guarded",
+                               "mustProve":  [
+                                                 "Active filter state is always visible and reversible.",
+                                                 "Reset behavior is explicit and non-destructive."
+                                             ]
+                           }
+    },
+    {
+        "name":  "Stepper",
+        "profileOverrides":  {
+                                 "accessibilityConfidence":  4,
+                                 "failureCost":  3,
+                                 "opinionation":  2,
+                                 "expressiveness":  2,
+                                 "formality":  4,
+                                 "interactionIntensity":  3,
+                                 "visualDominance":  2,
+                                 "densityFeel":  2
+                             },
+        "reviewNotes":  [
+                            "Manual readthrough: stepper works when the path is truly sequential; if steps are optional or revisitable, the design starts lying.",
+                            "It should clarify progress, not create a fake sense of certainty."
+                        ],
+        "criticalReviewOverrides":  {
+                                        "hardVerdict":  "acceptable_with_constraints",
+                                        "criticalityScore":  3,
+                                        "specificPushback":  [
+                                                                 "Stepper only works when the process is genuinely stepwise; if users can jump around freely, the control becomes misleading decoration."
+                                                             ]
+                                    },
+        "manualDecision":  {
+                               "killSwitch":  [
+                                                  "Stepper implies linearity where process is not linear."
+                                              ],
+                               "whyNow":  "Sequential framing helps only when process order is actually real.",
+                               "evidenceRefs":  [
+                                                    "ui_lab/components/shelves/forms-authoring/Stepper.tsx",
+                                                    "ui_lab/docs/UI_LIBRARY_METADATA_V2.md"
+                                                ],
+                               "stance":  "ship_guarded",
+                               "mustProve":  [
+                                                 "Step order matches actual workflow constraints.",
+                                                 "Users can recover cleanly from prior-step edits."
+                                             ]
+                           }
+    },
+    {
+        "name":  "Toast",
+        "profileOverrides":  {
+                                 "accessibilityConfidence":  4,
+                                 "failureCost":  3,
+                                 "opinionation":  2,
+                                 "expressiveness":  1,
+                                 "formality":  3,
+                                 "interactionIntensity":  2,
+                                 "visualDominance":  2,
+                                 "densityFeel":  1
+                             },
+        "reviewNotes":  [
+                            "Manual readthrough: toasts are for ephemeral, non-blocking status only.",
+                            "Do not use them for destructive confirmations, compliance, or anything that requires the user to stop and decide."
+                        ],
+        "criticalReviewOverrides":  {
+                                        "hardVerdict":  "acceptable_with_constraints",
+                                        "criticalityScore":  3,
+                                        "specificPushback":  [
+                                                                 "Toast is a poor container for serious information; if the user must remember it, react to it, or decide from it, use something stronger."
+                                                             ]
+                                    },
+        "manualDecision":  {
+                               "killSwitch":  [
+                                                  "Irreversible decisions are communicated only via toast."
+                                              ],
+                               "whyNow":  "Great for ephemeral feedback, unsafe for required decisions.",
+                               "evidenceRefs":  [
+                                                    "ui_lab/components/shelves/feedback-state/Toast.tsx",
+                                                    "ui_lab/docs/UI_LIBRARY_METADATA_V2.md"
+                                                ],
+                               "stance":  "ship_guarded",
+                               "mustProve":  [
+                                                 "Critical actions never rely solely on toast visibility.",
+                                                 "Auto-dismiss timing does not hide actionable information."
+                                             ]
+                           }
+    }
+]
