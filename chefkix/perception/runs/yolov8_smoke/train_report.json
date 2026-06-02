@@ -1,0 +1,14 @@
+{
+  "config": {
+    "augmentation": "smoke",
+    "batch_size": 2,
+    "epochs": 1,
+    "image_size": 640,
+    "model": "yolov8n",
+    "notes": "stubbed smoke config for Phase 1",
+    "random_seed": 7
+  },
+  "model_name": "yolov8",
+  "reason": "ultralytics trainer and real dataset are not wired yet",
+  "status": "STUBBED"
+}

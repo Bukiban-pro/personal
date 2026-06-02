@@ -1,0 +1,60 @@
+{
+  "status": "DONE",
+  "shared_ontology": true,
+  "shared_split": true,
+  "shared_preprocessing": true,
+  "shared_evaluator": true,
+  "shared_reporting_format": true,
+  "shared_latency_method": true,
+  "baseline": {
+    "model_name": "yolov8",
+    "status": "STUBBED",
+    "metrics": {},
+    "artifact_path": {
+      "config": {
+        "annotation_schema": "labels/annotation_schema.yaml",
+        "augmentation": "smoke",
+        "batch_size": 2,
+        "dataset_version": "smoke",
+        "epochs": 1,
+        "image_size": 640,
+        "model": "yolov8n",
+        "notes": "stubbed Phase 1 training config until a real dataset trainer is wired.",
+        "ontology_file": "labels/taxonomy.yaml",
+        "random_seed": 7
+      },
+      "model_name": "yolov8",
+      "reason": "ultralytics trainer and real dataset are not wired yet",
+      "status": "STUBBED"
+    }
+  },
+  "challenger": {
+    "model_name": "rtdetr",
+    "status": "STUBBED",
+    "metrics": {},
+    "artifact_path": {
+      "benchmark": {
+        "shared_evaluator": true,
+        "shared_ontology": true,
+        "shared_split": true
+      },
+      "config": {
+        "annotation_schema": "labels/annotation_schema.yaml",
+        "augmentation": "smoke",
+        "batch_size": 2,
+        "dataset_version": "smoke",
+        "epochs": 1,
+        "image_size": 640,
+        "model": "rtdetr",
+        "notes": "stubbed Phase 1 challenger config until a real RT-DETR trainer is wired.",
+        "ontology_file": "labels/taxonomy.yaml",
+        "random_seed": 7
+      },
+      "model_name": "rtdetr",
+      "reason": "RT-DETR trainer is not wired yet",
+      "status": "STUBBED"
+    }
+  },
+  "winner": "baseline",
+  "basis": "shared-evaluator-f1"
+}

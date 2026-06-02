@@ -1,0 +1,22 @@
+{
+  "parity": "not_run",
+  "reason": "real ONNX export backend is not wired yet",
+  "source_checkpoint": {
+    "config": {
+      "annotation_schema": "labels/annotation_schema.yaml",
+      "augmentation": "smoke",
+      "batch_size": 2,
+      "dataset_version": "smoke",
+      "epochs": 1,
+      "image_size": 640,
+      "model": "yolov8n",
+      "notes": "stubbed Phase 1 training config until a real dataset trainer is wired.",
+      "ontology_file": "labels/taxonomy.yaml",
+      "random_seed": 7
+    },
+    "model_name": "yolov8",
+    "reason": "ultralytics trainer and real dataset are not wired yet",
+    "status": "STUBBED"
+  },
+  "status": "STUBBED"
+}

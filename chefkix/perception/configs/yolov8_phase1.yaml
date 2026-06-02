@@ -1,0 +1,10 @@
+model: yolov8n
+image_size: 640
+batch_size: 2
+epochs: 1
+random_seed: 7
+augmentation: smoke
+dataset_version: smoke
+ontology_file: labels/taxonomy.yaml
+annotation_schema: labels/annotation_schema.yaml
+notes: stubbed Phase 1 training config until a real dataset trainer is wired.

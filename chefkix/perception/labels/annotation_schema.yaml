@@ -1,0 +1,41 @@
+version: 1
+schema_name: chefkix_phase1_annotation_schema
+description: Normalized bounding-box schema for Phase 1 ingredient labeling.
+fields:
+  record_id:
+    type: string
+    required: true
+  image_path:
+    type: string
+    required: true
+  split:
+    type: string
+    required: true
+    allowed_values: [train, validation, test]
+  source_name:
+    type: string
+    required: true
+  annotations:
+    type: array
+    required: true
+    item_schema:
+      class:
+        type: string
+        required: true
+      class_id:
+        type: integer
+        required: true
+      bbox:
+        type: array
+        required: true
+        items: float
+        length: 4
+      source_label:
+        type: string
+        required: true
+validation_rules:
+  - bbox must contain exactly four coordinates
+  - x2 must be greater than x1
+  - y2 must be greater than y1
+  - every class must map to the canonical ontology
+  - split must be one of train, validation, or test

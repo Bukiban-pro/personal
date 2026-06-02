@@ -1,0 +1,22 @@
+{
+  "exported_model": "runs\\phase1_smoke_recheck2\\export\\model.onnx",
+  "parity_report": "runs\\phase1_smoke_recheck2\\export\\parity_report.json",
+  "source_checkpoint": {
+    "config": {
+      "annotation_schema": "labels/annotation_schema.yaml",
+      "augmentation": "smoke",
+      "batch_size": 2,
+      "dataset_version": "smoke",
+      "epochs": 1,
+      "image_size": 640,
+      "model": "yolov8n",
+      "notes": "stubbed Phase 1 training config until a real dataset trainer is wired.",
+      "ontology_file": "labels/taxonomy.yaml",
+      "random_seed": 7
+    },
+    "model_name": "yolov8",
+    "reason": "ultralytics trainer and real dataset are not wired yet",
+    "status": "STUBBED"
+  },
+  "status": "STUBBED"
+}

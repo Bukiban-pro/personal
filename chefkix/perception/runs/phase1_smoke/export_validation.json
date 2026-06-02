@@ -1,0 +1,8 @@
+{
+  "status": "DONE",
+  "export_dir": "runs\\phase1_smoke\\export",
+  "model_path": "runs\\phase1_smoke\\export\\model.onnx",
+  "parity_path": "runs\\phase1_smoke\\export\\parity_report.json",
+  "manifest_path": "runs\\phase1_smoke\\export\\export_manifest.json",
+  "parity_status": "STUBBED"
+}

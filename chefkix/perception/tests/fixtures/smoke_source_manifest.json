@@ -1,0 +1,26 @@
+{
+  "dataset_name": "smoke_dataset",
+  "sources": [
+    {
+      "name": "smoke_source",
+      "url": "https://example.com/smoke",
+      "license": "CC0",
+      "records": [
+        {
+          "image_id": "record-1",
+          "image_path": "images/record-1.jpg",
+          "annotations": [
+            {"class": "eggs", "bbox": [10, 20, 50, 70]}
+          ]
+        },
+        {
+          "image_id": "record-2",
+          "image_path": "images/record-2.jpg",
+          "annotations": [
+            {"class": "tomato", "bbox": [5, 5, 25, 25]}
+          ]
+        }
+      ]
+    }
+  ]
+}

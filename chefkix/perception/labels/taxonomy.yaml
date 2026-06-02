@@ -1,0 +1,52 @@
+version: 1
+ontology_name: chefkix_phase1_ingredients
+description: Canonical ingredient ontology for Phase 1 standalone perception.
+classes:
+  - id: 0
+    name: egg
+    aliases: [egg, eggs]
+    notes: Whole egg, shell-on or shell-off, if visually distinct.
+  - id: 1
+    name: tomato
+    aliases: [tomato, tomatoes]
+    notes: Raw tomato or clearly identifiable tomato pieces.
+  - id: 2
+    name: onion
+    aliases: [onion, onions]
+    notes: Yellow, red, or white onion when visually identifiable.
+  - id: 3
+    name: garlic
+    aliases: [garlic, garlic_clove, garlic_cloves]
+    notes: Whole cloves or clearly identifiable garlic pieces.
+  - id: 4
+    name: chicken
+    aliases: [chicken, chicken_meat]
+    notes: Raw chicken pieces or whole cuts clearly visible in frame.
+  - id: 5
+    name: beef
+    aliases: [beef, beef_meat]
+    notes: Raw beef pieces or cuts clearly visible in frame.
+  - id: 6
+    name: potato
+    aliases: [potato, potatoes]
+    notes: Whole or cut potato when visually identifiable.
+  - id: 7
+    name: carrot
+    aliases: [carrot, carrots]
+    notes: Whole, cut, or shredded carrot when visually identifiable.
+  - id: 8
+    name: lettuce
+    aliases: [lettuce]
+    notes: Leaf lettuce or lettuce piles.
+  - id: 9
+    name: milk_carton
+    aliases: [milk carton, milk_carton, carton_of_milk]
+    notes: Carton-based milk container when the container itself is visible.
+  - id: 10
+    name: butter
+    aliases: [butter, butter_block]
+    notes: Butter block or pat when visually identifiable.
+  - id: 11
+    name: lemon
+    aliases: [lemon, lemons]
+    notes: Whole lemons or clearly identifiable lemon pieces.

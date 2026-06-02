@@ -1,0 +1,7 @@
+model: rtdetr
+image_size: 640
+batch_size: 2
+epochs: 1
+random_seed: 7
+augmentation: smoke
+notes: stubbed challenger smoke config for Phase 1

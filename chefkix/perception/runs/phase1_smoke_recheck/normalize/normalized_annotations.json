@@ -1,0 +1,40 @@
+[
+  {
+    "annotations": [
+      {
+        "bbox": [
+          10.0,
+          20.0,
+          50.0,
+          70.0
+        ],
+        "class": "egg",
+        "class_id": 0,
+        "source_label": "eggs"
+      }
+    ],
+    "image_path": "images/record-1.jpg",
+    "record_id": "record-1",
+    "source_name": "smoke_source",
+    "split": "train"
+  },
+  {
+    "annotations": [
+      {
+        "bbox": [
+          5.0,
+          5.0,
+          25.0,
+          25.0
+        ],
+        "class": "tomato",
+        "class_id": 1,
+        "source_label": "tomato"
+      }
+    ],
+    "image_path": "images/record-2.jpg",
+    "record_id": "record-2",
+    "source_name": "smoke_source",
+    "split": "test"
+  }
+]
