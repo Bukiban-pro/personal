@@ -1,9 +1,0 @@
-{
-  "test": [
-    "record-2"
-  ],
-  "train": [
-    "record-1"
-  ],
-  "validation": []
-}
