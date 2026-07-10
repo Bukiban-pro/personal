@@ -1,4 +1,4 @@
-﻿{
+{
     "key":  "data-admin",
     "label":  "Data and Admin",
     "description":  "Dashboards, tables, charts, monitoring, timelines, and administrative information surfaces.",
@@ -40,7 +40,7 @@
                        "Timeline",
                        "TimelineComponent"
                    ],
-    "exactExportPath":  "ui_lab/library/shelves/data-admin/components.ts",
-    "fullExportPath":  "ui_lab/library/shelves/data-admin/index.ts",
-    "readmePath":  "ui_lab/library/shelves/data-admin/README.md"
+    "exactExportPath":  "projects/ui-patterns/library/shelves/data-admin/components.ts",
+    "fullExportPath":  "projects/ui-patterns/library/shelves/data-admin/index.ts",
+    "readmePath":  "projects/ui-patterns/library/shelves/data-admin/README.md"
 }

@@ -1,4 +1,4 @@
-﻿{
+{
     "key":  "interactive-showcase",
     "label":  "Interactive Showcase",
     "description":  "Carousels, mockups, cards, media comparison surfaces, and high-touch presentation components.",
@@ -73,7 +73,7 @@
                        "TweetCard",
                        "ZoomHero"
                    ],
-    "exactExportPath":  "ui_lab/library/shelves/interactive-showcase/components.ts",
-    "fullExportPath":  "ui_lab/library/shelves/interactive-showcase/index.ts",
-    "readmePath":  "ui_lab/library/shelves/interactive-showcase/README.md"
+    "exactExportPath":  "projects/ui-patterns/library/shelves/interactive-showcase/components.ts",
+    "fullExportPath":  "projects/ui-patterns/library/shelves/interactive-showcase/index.ts",
+    "readmePath":  "projects/ui-patterns/library/shelves/interactive-showcase/README.md"
 }

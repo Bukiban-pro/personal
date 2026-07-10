@@ -1,4 +1,4 @@
-﻿{
+{
     "key":  "polish-layer",
     "label":  "Polish Layer",
     "useWhen":  "The structure already works and you want motion, contrast, and visual depth without random ornament.",
@@ -13,7 +13,7 @@
                        "TextScramble",
                        "GradientBlobs"
                    ],
-    "exactExportPath":  "ui_lab/library/starter-lanes/polish-layer/components.ts",
-    "fullExportPath":  "ui_lab/library/starter-lanes/polish-layer/index.ts",
-    "readmePath":  "ui_lab/library/starter-lanes/polish-layer/README.md"
+    "exactExportPath":  "projects/ui-patterns/library/starter-lanes/polish-layer/components.ts",
+    "fullExportPath":  "projects/ui-patterns/library/starter-lanes/polish-layer/index.ts",
+    "readmePath":  "projects/ui-patterns/library/starter-lanes/polish-layer/README.md"
 }

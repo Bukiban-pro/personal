@@ -1,4 +1,4 @@
-﻿{
+{
     "key":  "navigation-command",
     "label":  "Navigation and Command",
     "description":  "Menus, command surfaces, navigational scaffolding, and page-structure affordances.",
@@ -27,7 +27,7 @@
                        "SlideTabs",
                        "StickyHeader"
                    ],
-    "exactExportPath":  "ui_lab/library/shelves/navigation-command/components.ts",
-    "fullExportPath":  "ui_lab/library/shelves/navigation-command/index.ts",
-    "readmePath":  "ui_lab/library/shelves/navigation-command/README.md"
+    "exactExportPath":  "projects/ui-patterns/library/shelves/navigation-command/components.ts",
+    "fullExportPath":  "projects/ui-patterns/library/shelves/navigation-command/index.ts",
+    "readmePath":  "projects/ui-patterns/library/shelves/navigation-command/README.md"
 }

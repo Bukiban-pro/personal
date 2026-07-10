@@ -1,4 +1,4 @@
-﻿[
+[
     {
         "name":  "Avatar",
         "profileOverrides":  {
@@ -45,8 +45,8 @@
                                               ],
                                "whyNow":  "Identity cues are useful but frequently misused as decorative noise.",
                                "evidenceRefs":  [
-                                                    "ui_lab/components/shelves/ui-primitives/Avatar.tsx",
-                                                    "ui_lab/docs/UI_LIBRARY_METADATA_V2.md"
+                                                    "projects/ui-patterns/components/shelves/ui-primitives/Avatar.tsx",
+                                                    "projects/ui-patterns/docs/UI_LIBRARY_METADATA_V2.md"
                                                 ],
                                "stance":  "ship_guarded",
                                "mustProve":  [
@@ -101,8 +101,8 @@
                                               ],
                                "whyNow":  "Badge density is high value only when status vocabulary is controlled.",
                                "evidenceRefs":  [
-                                                    "ui_lab/components/shelves/ui-primitives/badge.tsx",
-                                                    "ui_lab/docs/UI_LIBRARY_METADATA_V2.md"
+                                                    "projects/ui-patterns/components/shelves/ui-primitives/badge.tsx",
+                                                    "projects/ui-patterns/docs/UI_LIBRARY_METADATA_V2.md"
                                                 ],
                                "stance":  "ship_guarded",
                                "mustProve":  [
@@ -157,8 +157,8 @@
                                               ],
                                "whyNow":  "High leverage surface that can become performative complexity if command grammar is weak.",
                                "evidenceRefs":  [
-                                                    "ui_lab/components/shelves/navigation-command/CommandPalette.tsx",
-                                                    "ui_lab/docs/UI_LIBRARY_METADATA_V2.md"
+                                                    "projects/ui-patterns/components/shelves/navigation-command/CommandPalette.tsx",
+                                                    "projects/ui-patterns/docs/UI_LIBRARY_METADATA_V2.md"
                                                 ],
                                "stance":  "pilot_only",
                                "mustProve":  [
@@ -213,8 +213,8 @@
                                               ],
                                "whyNow":  "Useful for dense action sets but dangerous when it hides primary actions.",
                                "evidenceRefs":  [
-                                                    "ui_lab/components/shelves/navigation-command/CommandMenu.tsx",
-                                                    "ui_lab/docs/UI_LIBRARY_METADATA_V2.md"
+                                                    "projects/ui-patterns/components/shelves/navigation-command/CommandMenu.tsx",
+                                                    "projects/ui-patterns/docs/UI_LIBRARY_METADATA_V2.md"
                                                 ],
                                "stance":  "pilot_only",
                                "mustProve":  [
@@ -270,8 +270,8 @@
                                               ],
                                "whyNow":  "Destructive confirmation flows carry legal, trust, and support risk.",
                                "evidenceRefs":  [
-                                                    "ui_lab/components/shelves/feedback-state/ConfirmDialog.tsx",
-                                                    "ui_lab/docs/UI_LIBRARY_METADATA_V2.md"
+                                                    "projects/ui-patterns/components/shelves/feedback-state/ConfirmDialog.tsx",
+                                                    "projects/ui-patterns/docs/UI_LIBRARY_METADATA_V2.md"
                                                 ],
                                "stance":  "do_not_default",
                                "mustProve":  [
@@ -327,8 +327,8 @@
                                               ],
                                "whyNow":  "Consent mechanics are compliance-critical and cannot be dark-patterned.",
                                "evidenceRefs":  [
-                                                    "ui_lab/components/shelves/feedback-state/CookieConsent.tsx",
-                                                    "ui_lab/docs/UI_LIBRARY_METADATA_V2.md"
+                                                    "projects/ui-patterns/components/shelves/feedback-state/CookieConsent.tsx",
+                                                    "projects/ui-patterns/docs/UI_LIBRARY_METADATA_V2.md"
                                                 ],
                                "stance":  "do_not_default",
                                "mustProve":  [
@@ -383,8 +383,8 @@
                                               ],
                                "whyNow":  "Operationally strong but frequently abused for narrative decisions.",
                                "evidenceRefs":  [
-                                                    "ui_lab/components/shelves/data-admin/DataTable.tsx",
-                                                    "ui_lab/docs/UI_LIBRARY_METADATA_V2.md"
+                                                    "projects/ui-patterns/components/shelves/data-admin/DataTable.tsx",
+                                                    "projects/ui-patterns/docs/UI_LIBRARY_METADATA_V2.md"
                                                 ],
                                "stance":  "pilot_only",
                                "mustProve":  [
@@ -439,8 +439,8 @@
                                               ],
                                "whyNow":  "Excellent in constrained vocabularies; harmful when source quality is weak.",
                                "evidenceRefs":  [
-                                                    "ui_lab/components/shelves/forms-authoring/AdvancedAutocomplete.tsx",
-                                                    "ui_lab/docs/UI_LIBRARY_METADATA_V2.md"
+                                                    "projects/ui-patterns/components/shelves/forms-authoring/AdvancedAutocomplete.tsx",
+                                                    "projects/ui-patterns/docs/UI_LIBRARY_METADATA_V2.md"
                                                 ],
                                "stance":  "pilot_only",
                                "mustProve":  [
@@ -495,8 +495,8 @@
                                               ],
                                "whyNow":  "Date logic errors produce silent analytics and workflow corruption.",
                                "evidenceRefs":  [
-                                                    "ui_lab/components/shelves/forms-authoring/DateRangePicker.tsx",
-                                                    "ui_lab/docs/UI_LIBRARY_METADATA_V2.md"
+                                                    "projects/ui-patterns/components/shelves/forms-authoring/DateRangePicker.tsx",
+                                                    "projects/ui-patterns/docs/UI_LIBRARY_METADATA_V2.md"
                                                 ],
                                "stance":  "pilot_only",
                                "mustProve":  [
@@ -551,8 +551,8 @@
                                               ],
                                "whyNow":  "Upload failures are expensive and user-hostile without clear contracts.",
                                "evidenceRefs":  [
-                                                    "ui_lab/components/shelves/forms-authoring/FileUpload.tsx",
-                                                    "ui_lab/docs/UI_LIBRARY_METADATA_V2.md"
+                                                    "projects/ui-patterns/components/shelves/forms-authoring/FileUpload.tsx",
+                                                    "projects/ui-patterns/docs/UI_LIBRARY_METADATA_V2.md"
                                                 ],
                                "stance":  "pilot_only",
                                "mustProve":  [
@@ -608,8 +608,8 @@
                                               ],
                                "whyNow":  "Blocking interaction is often used lazily and damages flow quality.",
                                "evidenceRefs":  [
-                                                    "ui_lab/components/shelves/feedback-state/Modal.tsx",
-                                                    "ui_lab/docs/UI_LIBRARY_METADATA_V2.md"
+                                                    "projects/ui-patterns/components/shelves/feedback-state/Modal.tsx",
+                                                    "projects/ui-patterns/docs/UI_LIBRARY_METADATA_V2.md"
                                                 ],
                                "stance":  "do_not_default",
                                "mustProve":  [
@@ -664,8 +664,8 @@
                                               ],
                                "whyNow":  "Filtering quality directly affects trust in results.",
                                "evidenceRefs":  [
-                                                    "ui_lab/components/shelves/forms-authoring/SearchFilter.tsx",
-                                                    "ui_lab/docs/UI_LIBRARY_METADATA_V2.md"
+                                                    "projects/ui-patterns/components/shelves/forms-authoring/SearchFilter.tsx",
+                                                    "projects/ui-patterns/docs/UI_LIBRARY_METADATA_V2.md"
                                                 ],
                                "stance":  "ship_guarded",
                                "mustProve":  [
@@ -720,8 +720,8 @@
                                               ],
                                "whyNow":  "Sequential framing helps only when process order is actually real.",
                                "evidenceRefs":  [
-                                                    "ui_lab/components/shelves/data-admin/Stepper.tsx",
-                                                    "ui_lab/docs/UI_LIBRARY_METADATA_V2.md"
+                                                    "projects/ui-patterns/components/shelves/data-admin/Stepper.tsx",
+                                                    "projects/ui-patterns/docs/UI_LIBRARY_METADATA_V2.md"
                                                 ],
                                "stance":  "ship_guarded",
                                "mustProve":  [
@@ -776,8 +776,8 @@
                                               ],
                                "whyNow":  "Great for ephemeral feedback, unsafe for required decisions.",
                                "evidenceRefs":  [
-                                                    "ui_lab/components/shelves/feedback-state/Toast.tsx",
-                                                    "ui_lab/docs/UI_LIBRARY_METADATA_V2.md"
+                                                    "projects/ui-patterns/components/shelves/feedback-state/Toast.tsx",
+                                                    "projects/ui-patterns/docs/UI_LIBRARY_METADATA_V2.md"
                                                 ],
                                "stance":  "ship_guarded",
                                "mustProve":  [

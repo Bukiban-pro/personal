@@ -68,7 +68,7 @@ coverage/
 # ─── Generated / auto-created ────────────────────────────────────────────────
 # Keep auto-samples.json (generated props) — it's useful to commit
 # Uncomment below if you want to regenerate it from scratch on every clone:
-# ui_lab/configs/auto-samples.json
+# projects/ui-patterns/configs/auto-samples.json
 
 # ─── Temp files ──────────────────────────────────────────────────────────────
 *.tmp

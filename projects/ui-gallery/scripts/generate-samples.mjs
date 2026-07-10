@@ -1,14 +1,14 @@
 /**
  * Scans all component TSX files, parses their Props interface,
- * and generates sample data. Writes to ui_lab/configs/auto-samples.json
+ * and generates sample data. Writes to projects/ui-patterns/configs/auto-samples.json
  */
 import fs from 'fs'
 import path from 'path'
 import { fileURLToPath } from 'url'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
-const SHELVES_DIR = path.resolve(__dirname, '../../ui_lab/components/shelves')
-const OUTPUT_FILE = path.resolve(__dirname, '../../ui_lab/configs/auto-samples.json')
+const SHELVES_DIR = path.resolve(__dirname, '../../ui-patterns/components/shelves')
+const OUTPUT_FILE = path.resolve(__dirname, '../../ui-patterns/configs/auto-samples.json')
 
 // ── Collect all TSX files ──────────────────────────────────────────────────
 function getAllTsx(dir) {

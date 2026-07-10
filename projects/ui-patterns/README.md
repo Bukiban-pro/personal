@@ -11,42 +11,42 @@ This repo started as a ~221-file React pattern stash. It now contains a much lar
 - Repo-level shelves: 11
 - Repo-level starter lanes: 4
 - Grouped access layer files: 69
-- Component source root: `ui_lab/components/shelves`
-- Grouped access root: `ui_lab/library`
-- By-name barrel: `ui_lab/library/by-name`
-- Component index: `ui_lab/library/component-index.json`
-- Shelf exact-component barrels: `ui_lab/library/shelves/*/components.ts`
-- Starter-lane exact-component barrels: `ui_lab/library/starter-lanes/*/components.ts`
-- Shelf metadata files: `ui_lab/library/shelves/*/meta.json`
-- Starter-lane metadata files: `ui_lab/library/starter-lanes/*/meta.json`
+- Component source root: `projects/ui-patterns/components/shelves`
+- Grouped access root: `projects/ui-patterns/library`
+- By-name barrel: `projects/ui-patterns/library/by-name`
+- Component index: `projects/ui-patterns/library/component-index.json`
+- Shelf exact-component barrels: `projects/ui-patterns/library/shelves/*/components.ts`
+- Starter-lane exact-component barrels: `projects/ui-patterns/library/starter-lanes/*/components.ts`
+- Shelf metadata files: `projects/ui-patterns/library/shelves/*/meta.json`
+- Starter-lane metadata files: `projects/ui-patterns/library/starter-lanes/*/meta.json`
 - Repo-level misc shelf: 0
 - Top-level named export collisions: 0
 - LandingProduct chapters: 6
 - LandingProduct starter kits: 5
-- Inventory status: QA-checked against the file system and regenerated entrypoints via `ui_lab/docs/generate-ui-lab-library-catalog.ps1` and `ui_lab/docs/generate-landing-product-catalog.ps1`
+- Inventory status: QA-checked against the file system and regenerated entrypoints via `projects/ui-patterns/docs/generate-ui-lab-library-catalog.ps1` and `projects/ui-patterns/docs/generate-landing-product-catalog.ps1`
 
 ## Start Here
 
-1. Read `ui_lab/docs/UI_LAB_LIBRARY_GUIDE.md` for the repo-level shelf map, starter lanes, naming watchlist, and export-surface QA.
-2. Browse `ui_lab/library/` when you want the generated shelf folders and starter-lane folders instead of walking the raw source tree.
-3. Use `ui_lab/library/by-name/` when you know the component filename but not the shelf.
-4. Use `ui_lab/library/component-index.json` when you need machine-readable lookup by component name, shelf, and starter-lane membership.
-5. Use `ui_lab/components/shelves/` when you need the physical source files grouped by shelf.
+1. Read `projects/ui-patterns/docs/UI_LAB_LIBRARY_GUIDE.md` for the repo-level shelf map, starter lanes, naming watchlist, and export-surface QA.
+2. Browse `projects/ui-patterns/library/` when you want the generated shelf folders and starter-lane folders instead of walking the raw source tree.
+3. Use `projects/ui-patterns/library/by-name/` when you know the component filename but not the shelf.
+4. Use `projects/ui-patterns/library/component-index.json` when you need machine-readable lookup by component name, shelf, and starter-lane membership.
+5. Use `projects/ui-patterns/components/shelves/` when you need the physical source files grouped by shelf.
 6. Inside a shelf or starter-lane folder, use `components.ts` when you want exact file-name exports only and `index.ts` when you want the full module export surface.
 7. Inside a shelf or starter-lane folder, use `meta.json` when you want folder-local machine-readable metadata without opening the repo-level registry.
-8. Use `ui_lab/configs/ui-lab-registry.json` when you need the machine-readable root inventory.
-9. Read `ui_lab/docs/UI_LAB_CURATION_QUEUE.md` for the active admin backlog around the remaining naming ambiguity.
-10. Read `ui_lab/docs/UI_LIBRARY_METADATA_V2.md` for the proposed decision-grade metadata schema for components.
-11. Read `ui_lab/configs/ui-library-manual-review-overrides.json` for the explicitly hand-reviewed subset and its written pushback.
-12. Read `ui_lab/docs/LANDING_PRODUCT_LIBRARY_GUIDE.md` when you are specifically entering the 321-file LandingProduct subsystem.
-13. Use `ui_lab/configs/landing-product-registry.json` for the machine-readable LandingProduct inventory.
-14. Read `ui_lab/docs/LANDING_PRODUCT_VISUAL_GALLERY_MAP.md` for a human visual-first wall map across the landing-product shelf.
-15. Read `ui_lab/docs/LANDING_PRODUCT_VISUAL_PLAYBOOK.md` for chapter-level visual defaults, anti-repeat primary picks, and full wall browse links.
-16. Open `ui_lab/library/landing-product-live-gallery.html` when you want actual rendered LandingProduct sections instead of file browse surfaces.
-17. Use `ui_lab/library/landing-product-gallery.json` when you need machine-readable chapter color defaults and curated picks.
-18. Use `ui_lab/configs/landing-product-live-samples.json` when you need the curated sample props that power the live render gallery.
-19. Use `ui_lab/HANDOFF_UI_MINING_2026-05-06.md` as the full LandingProduct archive and source inventory.
-20. Rerun `ui_lab/docs/generate-ui-lab-library-catalog.ps1`, `ui_lab/docs/generate-landing-product-catalog.ps1`, `ui_lab/docs/generate-landing-product-visual-gallery.ps1`, and `ui_lab/docs/generate-landing-product-live-gallery.ps1` after future inventory changes so guides and registries stay honest.
+8. Use `projects/ui-patterns/configs/ui-lab-registry.json` when you need the machine-readable root inventory.
+9. Read `projects/ui-patterns/docs/UI_LAB_CURATION_QUEUE.md` for the active admin backlog around the remaining naming ambiguity.
+10. Read `projects/ui-patterns/docs/UI_LIBRARY_METADATA_V2.md` for the proposed decision-grade metadata schema for components.
+11. Read `projects/ui-patterns/configs/ui-library-manual-review-overrides.json` for the explicitly hand-reviewed subset and its written pushback.
+12. Read `projects/ui-patterns/docs/LANDING_PRODUCT_LIBRARY_GUIDE.md` when you are specifically entering the 321-file LandingProduct subsystem.
+13. Use `projects/ui-patterns/configs/landing-product-registry.json` for the machine-readable LandingProduct inventory.
+14. Read `projects/ui-patterns/docs/LANDING_PRODUCT_VISUAL_GALLERY_MAP.md` for a human visual-first wall map across the landing-product shelf.
+15. Read `projects/ui-patterns/docs/LANDING_PRODUCT_VISUAL_PLAYBOOK.md` for chapter-level visual defaults, anti-repeat primary picks, and full wall browse links.
+16. Open `projects/ui-patterns/library/landing-product-live-gallery.html` when you want actual rendered LandingProduct sections instead of file browse surfaces.
+17. Use `projects/ui-patterns/library/landing-product-gallery.json` when you need machine-readable chapter color defaults and curated picks.
+18. Use `projects/ui-patterns/configs/landing-product-live-samples.json` when you need the curated sample props that power the live render gallery.
+19. Use `projects/ui-patterns/HANDOFF_UI_MINING_2026-05-06.md` as the full LandingProduct archive and source inventory.
+20. Rerun `projects/ui-patterns/docs/generate-ui-lab-library-catalog.ps1`, `projects/ui-patterns/docs/generate-landing-product-catalog.ps1`, `projects/ui-patterns/docs/generate-landing-product-visual-gallery.ps1`, and `projects/ui-patterns/docs/generate-landing-product-live-gallery.ps1` after future inventory changes so guides and registries stay honest.
 
 ## What This README Still Covers
 

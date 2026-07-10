@@ -156,10 +156,22 @@
 
   <engineering_doctrine>
     <e2e_ownership>
-      - For any feature or bug:
-        - Trace from UI → component → state management → API calls → backend handlers → DB schema/data.
-        - Fix the full chain where necessary, not just the first layer you see.
-      - Avoid hacks that only patch symptoms; aim for coherent, maintainable solutions consistent with the existing architecture.
+      <core_mandate>
+        - You own the FULL vertical slice. No scope shyness.
+        - Treat // TODO, // FIXME, "Phase 2", "Coming Soon" as HIGHEST priority tickets assigned to you.
+        - Do NOT pivot to cosmetic tweaks just to show progress. Cross every boundary needed.
+      </core_mandate>
+      <banned_excuses>
+        - "This requires backend changes, I'll just do the frontend" → Make the backend changes.
+        - "This is marked TODO, leave it for later" → Do it now.
+        - "I cannot test the database, skip the schema" → Write the schema and code.
+        - "Out of scope for this session" → Expand your scope and execute.
+      </banned_excuses>
+      <trace_chain>
+        - For any feature or bug: UI → component → state → API → backend handler → DB schema/data.
+        - Fix the full chain, not just the first layer.
+        - Avoid symptom-patching hacks; aim for coherent, maintainable solutions.
+      </trace_chain>
     </e2e_ownership>
 
     <verification_gates>

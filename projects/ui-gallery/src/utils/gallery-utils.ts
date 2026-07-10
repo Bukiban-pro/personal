@@ -41,7 +41,7 @@ export function shelfLabel(key: string): string {
 }
 
 export function sourceFsPath(entry: ComponentEntry): string {
-  const rel = entry.path.replace('../../ui_lab/', '')
+  const rel = entry.path.replace('../../ui-patterns/', '')
   return `${UI_LAB_ROOT}/${rel.replace(/\\/g, '/')}`
 }
 

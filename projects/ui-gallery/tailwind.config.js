@@ -4,7 +4,7 @@ export default {
   content: [
     './index.html',
     './src/**/*.{ts,tsx}',
-    '../ui_lab/components/**/*.{ts,tsx}',
+    '../ui-patterns/components/**/*.{ts,tsx}',
   ],
   theme: {
     extend: {

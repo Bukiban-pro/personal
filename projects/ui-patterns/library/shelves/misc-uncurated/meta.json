@@ -1,4 +1,4 @@
-﻿{
+{
     "key":  "misc-uncurated",
     "label":  "Misc and Uncurated",
     "description":  "Components that still need sharper shelf placement or clearer naming before they feel fully curated.",
@@ -9,7 +9,7 @@
     "components":  [
 
                    ],
-    "exactExportPath":  "ui_lab/library/shelves/misc-uncurated/components.ts",
-    "fullExportPath":  "ui_lab/library/shelves/misc-uncurated/index.ts",
-    "readmePath":  "ui_lab/library/shelves/misc-uncurated/README.md"
+    "exactExportPath":  "projects/ui-patterns/library/shelves/misc-uncurated/components.ts",
+    "fullExportPath":  "projects/ui-patterns/library/shelves/misc-uncurated/index.ts",
+    "readmePath":  "projects/ui-patterns/library/shelves/misc-uncurated/README.md"
 }

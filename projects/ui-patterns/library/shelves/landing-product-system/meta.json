@@ -1,4 +1,4 @@
-﻿{
+{
     "key":  "landing-product-system",
     "label":  "LandingProduct System",
     "description":  "Enterprise landing/product sections with dedicated chapter guidance, starter kits, and deeper operating-model language.",
@@ -347,7 +347,7 @@
                        "LandingProductVideoQuote",
                        "LandingProductWorkflowTemplates"
                    ],
-    "exactExportPath":  "ui_lab/library/shelves/landing-product-system/components.ts",
-    "fullExportPath":  "ui_lab/library/shelves/landing-product-system/index.ts",
-    "readmePath":  "ui_lab/library/shelves/landing-product-system/README.md"
+    "exactExportPath":  "projects/ui-patterns/library/shelves/landing-product-system/components.ts",
+    "fullExportPath":  "projects/ui-patterns/library/shelves/landing-product-system/index.ts",
+    "readmePath":  "projects/ui-patterns/library/shelves/landing-product-system/README.md"
 }

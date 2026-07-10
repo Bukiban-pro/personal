@@ -28,8 +28,8 @@
     /* Path aliases */
     "baseUrl": ".",
     "paths": {
-      "@/*": ["../ui_lab/*"]
+      "@/*": ["../ui-patterns/*"]
     }
   },
-  "include": ["src", "../ui_lab/**/*"]
+  "include": ["src", "../ui-patterns/**/*"]
 }

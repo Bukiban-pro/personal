@@ -1,4 +1,4 @@
-﻿{
+{
     "key":  "forms-authoring",
     "label":  "Forms and Authoring",
     "description":  "Input systems, editors, uploads, search filters, and workflow authoring tools.",
@@ -37,7 +37,7 @@
                        "SearchFilter",
                        "SignaturePad"
                    ],
-    "exactExportPath":  "ui_lab/library/shelves/forms-authoring/components.ts",
-    "fullExportPath":  "ui_lab/library/shelves/forms-authoring/index.ts",
-    "readmePath":  "ui_lab/library/shelves/forms-authoring/README.md"
+    "exactExportPath":  "projects/ui-patterns/library/shelves/forms-authoring/components.ts",
+    "fullExportPath":  "projects/ui-patterns/library/shelves/forms-authoring/index.ts",
+    "readmePath":  "projects/ui-patterns/library/shelves/forms-authoring/README.md"
 }

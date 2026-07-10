@@ -1,4 +1,4 @@
-﻿{
+{
     "key":  "landing-marketing",
     "label":  "Landing and Marketing",
     "description":  "General marketing sections, landing-page building blocks, and non-LandingProduct conversion surfaces.",
@@ -53,7 +53,7 @@
                        "VideoHero",
                        "WelcomeSection"
                    ],
-    "exactExportPath":  "ui_lab/library/shelves/landing-marketing/components.ts",
-    "fullExportPath":  "ui_lab/library/shelves/landing-marketing/index.ts",
-    "readmePath":  "ui_lab/library/shelves/landing-marketing/README.md"
+    "exactExportPath":  "projects/ui-patterns/library/shelves/landing-marketing/components.ts",
+    "fullExportPath":  "projects/ui-patterns/library/shelves/landing-marketing/index.ts",
+    "readmePath":  "projects/ui-patterns/library/shelves/landing-marketing/README.md"
 }

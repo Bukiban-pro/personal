@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "ui_lab/configs/ui-library-metadata-v2.schema.json",
+  "$id": "projects/ui-patterns/configs/ui-library-metadata-v2.schema.json",
   "title": "UI Library Metadata v2",
   "description": "Decision-grade metadata schema for UI component catalog records.",
   "type": "object",

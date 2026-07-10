@@ -1,4 +1,4 @@
-﻿{
+{
     "key":  "dashboard-core",
     "label":  "Dashboard Core",
     "useWhen":  "You are building a product or admin surface with metrics, tables, and workflow context.",
@@ -13,7 +13,7 @@
                        "Breadcrumbs",
                        "NotificationCenter"
                    ],
-    "exactExportPath":  "ui_lab/library/starter-lanes/dashboard-core/components.ts",
-    "fullExportPath":  "ui_lab/library/starter-lanes/dashboard-core/index.ts",
-    "readmePath":  "ui_lab/library/starter-lanes/dashboard-core/README.md"
+    "exactExportPath":  "projects/ui-patterns/library/starter-lanes/dashboard-core/components.ts",
+    "fullExportPath":  "projects/ui-patterns/library/starter-lanes/dashboard-core/index.ts",
+    "readmePath":  "projects/ui-patterns/library/starter-lanes/dashboard-core/README.md"
 }

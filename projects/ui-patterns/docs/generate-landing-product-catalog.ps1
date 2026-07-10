@@ -406,9 +406,9 @@ $starterKits = foreach ($starterKit in $starterKitBlueprints) {
 $registry = [pscustomobject]@{
   generatedAt = (Get-Date).ToString("yyyy-MM-ddTHH:mm:ssK")
   source = [pscustomobject]@{
-    handoff = "ui_lab/HANDOFF_UI_MINING_2026-05-06.md"
-    components = "ui_lab/components"
-    generator = "ui_lab/docs/generate-landing-product-catalog.ps1"
+    handoff = "projects/ui-patterns/HANDOFF_UI_MINING_2026-05-06.md"
+    components = "projects/ui-patterns/components"
+    generator = "projects/ui-patterns/docs/generate-landing-product-catalog.ps1"
   }
   stats = [pscustomobject]@{
     totalComponents = $snapshotTotalComponents
@@ -450,11 +450,11 @@ $guideLines.Add("")
 $guideLines.Add("## Current Snapshot")
 $guideLines.Add("- Total component files: $snapshotTotalComponents")
 $guideLines.Add("- LandingProduct components: $snapshotLandingComponents")
-$guideLines.Add('- Parent guide: `ui_lab/docs/UI_LAB_LIBRARY_GUIDE.md`')
-$guideLines.Add('- Repo-level registry: `ui_lab/configs/ui-lab-registry.json`')
-$guideLines.Add('- Source of truth: `ui_lab/HANDOFF_UI_MINING_2026-05-06.md`')
-$guideLines.Add('- Machine-readable registry: `ui_lab/configs/landing-product-registry.json`')
-$guideLines.Add('- Generator: `ui_lab/docs/generate-landing-product-catalog.ps1`')
+$guideLines.Add('- Parent guide: `projects/ui-patterns/docs/UI_LAB_LIBRARY_GUIDE.md`')
+$guideLines.Add('- Repo-level registry: `projects/ui-patterns/configs/ui-lab-registry.json`')
+$guideLines.Add('- Source of truth: `projects/ui-patterns/HANDOFF_UI_MINING_2026-05-06.md`')
+$guideLines.Add('- Machine-readable registry: `projects/ui-patterns/configs/landing-product-registry.json`')
+$guideLines.Add('- Generator: `projects/ui-patterns/docs/generate-landing-product-catalog.ps1`')
 $guideLines.Add("")
 $guideLines.Add("## Operating Rules")
 $guideLines.Add("1. Do not start in the runtime frontier unless the page already has a clean business story.")
@@ -486,7 +486,7 @@ foreach ($chapter in $chapters) {
 
 $guideLines.Add("")
 $guideLines.Add("## QA Status")
-$guideLines.Add('- Snapshot counts match the actual `ui_lab/components` folder.')
+$guideLines.Add('- Snapshot counts match the actual `projects/ui-patterns/components` folder.')
 $guideLines.Add('- Every `LandingProduct*.tsx` file is represented in the wave inventory.')
 $guideLines.Add("- Every wave is assigned to exactly one top-level chapter.")
 $guideLines.Add("- Every starter kit references existing components only.")

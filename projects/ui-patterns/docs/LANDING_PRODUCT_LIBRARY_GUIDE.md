@@ -1,15 +1,15 @@
-﻿# LandingProduct Library Guide
+# LandingProduct Library Guide
 
 This file turns the LandingProduct archive into a usable library. Start here, not in the raw components folder.
 
 ## Current Snapshot
 - Total component files: 588
 - LandingProduct components: 321
-- Parent guide: `ui_lab/docs/UI_LAB_LIBRARY_GUIDE.md`
-- Repo-level registry: `ui_lab/configs/ui-lab-registry.json`
-- Source of truth: `ui_lab/HANDOFF_UI_MINING_2026-05-06.md`
-- Machine-readable registry: `ui_lab/configs/landing-product-registry.json`
-- Generator: `ui_lab/docs/generate-landing-product-catalog.ps1`
+- Parent guide: `projects/ui-patterns/docs/UI_LAB_LIBRARY_GUIDE.md`
+- Repo-level registry: `projects/ui-patterns/configs/ui-lab-registry.json`
+- Source of truth: `projects/ui-patterns/HANDOFF_UI_MINING_2026-05-06.md`
+- Machine-readable registry: `projects/ui-patterns/configs/landing-product-registry.json`
+- Generator: `projects/ui-patterns/docs/generate-landing-product-catalog.ps1`
 
 ## Operating Rules
 1. Do not start in the runtime frontier unless the page already has a clean business story.
@@ -82,7 +82,7 @@ This file turns the LandingProduct archive into a usable library. Start here, no
 - Good first picks: `LandingProductCommandSurface`, `LandingProductTrustRegistry`, `LandingProductExecutiveBridge`, `LandingProductProofCartography`, `LandingProductDecisionTerminal`, `LandingProductBoardroomSystem`, `LandingProductTrustDossier`, `LandingProductStoryCeremony`
 
 ## QA Status
-- Snapshot counts match the actual `ui_lab/components` folder.
+- Snapshot counts match the actual `projects/ui-patterns/components` folder.
 - Every `LandingProduct*.tsx` file is represented in the wave inventory.
 - Every wave is assigned to exactly one top-level chapter.
 - Every starter kit references existing components only.

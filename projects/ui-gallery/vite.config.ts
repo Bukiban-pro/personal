@@ -8,20 +8,20 @@ const ROOT_MODULES = path.resolve(__dirname, 'node_modules')
 export default defineConfig({
   plugins: [react()],
   define: {
-    __UI_LAB_ROOT__: JSON.stringify(path.resolve(__dirname, '../ui_lab')),
+    __UI_LAB_ROOT__: JSON.stringify(path.resolve(__dirname, '../ui-patterns')),
   },
   resolve: {
     // Force ALL bare-module imports (even from outside the project) to resolve here
     modules: [ROOT_MODULES, 'node_modules'],
     alias: {
-      '@': path.resolve(__dirname, '../ui_lab'),
+      '@': path.resolve(__dirname, '../ui-patterns'),
       'next/image': path.resolve(__dirname, 'src/mocks/next-image.tsx'),
       'next/link': path.resolve(__dirname, 'src/mocks/next-link.tsx'),
     },
   },
   server: {
     fs: {
-      // Allow serving files from the whole repo (including ../ui_lab)
+      // Allow serving files from the whole repo (including ../ui-patterns)
       allow: [path.resolve(__dirname, '..'), ROOT_MODULES],
     },
   },

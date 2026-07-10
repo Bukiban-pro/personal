@@ -1,4 +1,4 @@
-﻿{
+{
     "key":  "ui-primitives",
     "label":  "UI Primitives",
     "description":  "Small reusable surface elements used as atoms or composable presentation building blocks.",
@@ -24,7 +24,7 @@
                        "ToggleGroup",
                        "tooltip"
                    ],
-    "exactExportPath":  "ui_lab/library/shelves/ui-primitives/components.ts",
-    "fullExportPath":  "ui_lab/library/shelves/ui-primitives/index.ts",
-    "readmePath":  "ui_lab/library/shelves/ui-primitives/README.md"
+    "exactExportPath":  "projects/ui-patterns/library/shelves/ui-primitives/components.ts",
+    "fullExportPath":  "projects/ui-patterns/library/shelves/ui-primitives/index.ts",
+    "readmePath":  "projects/ui-patterns/library/shelves/ui-primitives/README.md"
 }

@@ -164,14 +164,14 @@ foreach ($component in $components) {
   Assert-Condition -Condition (-not [string]::IsNullOrWhiteSpace([string]$layers.provenance.owner)) -Message "Missing owner in provenance for $($component.name)"
   Assert-Condition -Condition (-not [string]::IsNullOrWhiteSpace([string]$layers.provenance.lastReviewed)) -Message "Missing lastReviewed in provenance for $($component.name)"
   Assert-Condition -Condition ($layers.provenance.linkedExamples.Count -gt 0) -Message "Missing provenance.linkedExamples for $($component.name)"
-  Assert-Condition -Condition (@($layers.provenance.linkedExamples | Where-Object { ([string]$_) -like 'ui_lab/library/by-name#*' }).Count -gt 0) -Message "provenance.linkedExamples missing by-name anchor for $($component.name)"
-  Assert-Condition -Condition (@($layers.provenance.linkedExamples | Where-Object { ([string]$_) -like ("ui_lab/library/shelves/{0}/components#*" -f $component.shelfKey) }).Count -gt 0) -Message "provenance.linkedExamples missing shelf component anchor for $($component.name)"
+  Assert-Condition -Condition (@($layers.provenance.linkedExamples | Where-Object { ([string]$_) -like 'projects/ui-patterns/library/by-name#*' }).Count -gt 0) -Message "provenance.linkedExamples missing by-name anchor for $($component.name)"
+  Assert-Condition -Condition (@($layers.provenance.linkedExamples | Where-Object { ([string]$_) -like ("projects/ui-patterns/library/shelves/{0}/components#*" -f $component.shelfKey) }).Count -gt 0) -Message "provenance.linkedExamples missing shelf component anchor for $($component.name)"
   Assert-Condition -Condition (@($layers.provenance.linkedExamples | Where-Object { ([string]$_) -like '*#*' -and ([string]$_) -notlike '*#' -and ([string]$_) -notlike '*#*#*' }).Count -eq $layers.provenance.linkedExamples.Count) -Message "provenance.linkedExamples contains malformed anchors for $($component.name)"
   Assert-Condition -Condition (@($layers.provenance.linkedExamples | Where-Object { ([string]$_) -like '*#*' -and ([string]$_).EndsWith('#*') }).Count -eq 0) -Message "provenance.linkedExamples contains wildcard anchor for $($component.name)"
   Assert-Condition -Condition (@($layers.provenance.linkedExamples | Where-Object { ([string]$_).EndsWith('#default') }).Count -eq 0) -Message "provenance.linkedExamples contains default anchor for $($component.name)"
   Assert-Condition -Condition ($layers.provenance.sourceLinks.Count -gt 0) -Message "Missing provenance.sourceLinks for $($component.name)"
   Assert-Condition -Condition ($layers.provenance.sourceLinks -contains [string]$component.sourcePath) -Message "provenance.sourceLinks missing component sourcePath for $($component.name)"
-  Assert-Condition -Condition ($layers.provenance.sourceLinks -contains 'ui_lab/docs/UI_LIBRARY_METADATA_V2.md') -Message "provenance.sourceLinks missing metadata spec link for $($component.name)"
+  Assert-Condition -Condition ($layers.provenance.sourceLinks -contains 'projects/ui-patterns/docs/UI_LIBRARY_METADATA_V2.md') -Message "provenance.sourceLinks missing metadata spec link for $($component.name)"
   Assert-Condition -Condition ($layers.provenance.PSObject.Properties.Name -contains 'heuristicInputs') -Message "Missing provenance.heuristicInputs for $($component.name)"
   Assert-Condition -Condition ($null -ne $layers.provenance.heuristicInputs) -Message "Null provenance.heuristicInputs for $($component.name)"
   Assert-Condition -Condition (-not [string]::IsNullOrWhiteSpace([string]$layers.provenance.heuristicInputs.relativeComponentPath)) -Message "Missing heuristicInputs.relativeComponentPath for $($component.name)"
@@ -194,7 +194,7 @@ foreach ($component in $components) {
     Assert-Condition -Condition ($layers.provenance.manualDecision.evidenceRefs.Count -gt 0) -Message "Missing manualDecision.evidenceRefs for $($component.name)"
     Assert-Condition -Condition ($layers.readiness.evidenceType -contains 'manual_readthrough') -Message "Manual-reviewed component missing manual_readthrough evidence type for $($component.name)"
     foreach ($evidenceRef in $layers.provenance.manualDecision.evidenceRefs) {
-      if ([string]$evidenceRef -like 'ui_lab/*') {
+      if ([string]$evidenceRef -like 'projects/ui-patterns/*') {
         $evidenceRefPath = Join-Path $workspaceRoot ([string]$evidenceRef).Replace('/', '\\')
         Assert-Condition -Condition (Test-Path -LiteralPath $evidenceRefPath) -Message "Manual evidenceRef does not exist for $($component.name): $evidenceRef"
       }

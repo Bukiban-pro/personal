@@ -1,4 +1,4 @@
-﻿{
+{
     "key":  "motion-typography",
     "label":  "Motion and Typography",
     "description":  "Animated text, reveal systems, motion primitives, and presentation choreography.",
@@ -59,7 +59,7 @@
                        "VideoText",
                        "WordRotate"
                    ],
-    "exactExportPath":  "ui_lab/library/shelves/motion-typography/components.ts",
-    "fullExportPath":  "ui_lab/library/shelves/motion-typography/index.ts",
-    "readmePath":  "ui_lab/library/shelves/motion-typography/README.md"
+    "exactExportPath":  "projects/ui-patterns/library/shelves/motion-typography/components.ts",
+    "fullExportPath":  "projects/ui-patterns/library/shelves/motion-typography/index.ts",
+    "readmePath":  "projects/ui-patterns/library/shelves/motion-typography/README.md"
 }

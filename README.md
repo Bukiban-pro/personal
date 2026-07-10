@@ -5,18 +5,17 @@ Workspace monorepo — projects, research, references, and career prep.
 ```
 personal/
 ├── projects/
-│   ├── chefkix/              # AI cooking platform (perception module)
-│   ├── ui-patterns/          # 634+ curated UI component patterns (React/TS)
-│   └── ui-gallery/           # Vite demo app for UI showcase
-├── career/                   # Job hunting & interview prep
-├── research/                 # UI/UX & design research (5 files)
+│   ├── chefkix/              # AI cooking platform — perception module (Python, YOLOv8/RT-DETR)
+│   ├── ui-patterns/          # 634+ curated React/TS UI components (magicui, shadcn, premium clones)
+│   └── ui-gallery/           # Vite + React + Tailwind demo app
+├── career/                   # Job hunt: Java backend fresher/intern (Vietnam)
+├── research/                 # UI/UX research: patterns, premium clones, open-source kits
 ├── references/
-│   ├── prompts/              # AI agent system prompts (10)
-│   ├── frameworks/           # Architecture blueprints (5)
-│   ├── workflows/            # Engineering process (1)
-│   └── skills/               # Skill definitions (1)
-├── archives/                 # Backups
-├── .github/
+│   ├── prompts/              # 9 AI agent system prompts
+│   ├── frameworks/           # 5 architecture/learning blueprints
+│   ├── workflows/            # Engineering process (core workflow)
+│   └── skills/               # AI skill definitions (testing spreadsheets)
+├── archives/                 # Zipped workspace backups
 └── README.md
 ```
 
@@ -28,10 +27,10 @@ personal/
 
 ## References
 
-- **prompts/** — 10 agent prompts: Jarvis Prime (Full-Stack & ChefKix), Inquisitor (AoE code review), Dev-Leroy (brutal review), Universal E2E, Investor demo, Copilot template, role definitions, LLM model selection, Phase 1 perception plan.
-- **frameworks/** — 5 blueprints: Agentic Hands 2026, Web Brain, Universal Learning OS, Dual-Agent Concurrency Protocol, Dev Mode Blueprint.
-- **workflows/** — Engineering process: trunk-based development, Conventional Commits, CI/CD quality gates.
-- **skills/** — Reusable AI skill: software testing spreadsheets.
+- **prompts/** — 9 agent prompts: Jarvis Prime (full-stack execution + UX audit), Jarvis Prime ChefKix (ChefKix-specific variant), Inquisitor (AoE code review), Dev-Leroy (brutal review), investor demo, Copilot template, role definitions (product designer), LLM model selection (free tier), Phase 1 perception plan.
+- **frameworks/** — 5 blueprints: Agentic Hands 2026 (zero-budget AI stack), Web Brain (brain-hand separation), Universal Learning OS (INTJ learning loop), Dual-Agent Concurrency Protocol, Dev Mode Blueprint (2736-line universal dev UX).
+- **workflows/** — Engineering process: trunk-based development, Conventional Commits, quality gates.
+- **skills/** — Reusable AI skill: software testing spreadsheets (540-line spec).
 
 ## Career
 

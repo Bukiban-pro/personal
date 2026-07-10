@@ -3,7 +3,7 @@ import { ComponentEntry, SlotStatus, SlotIssue, HarnessMode, FitMode, PreviewSiz
 import { pathToName, pathToShelf, shelfLabel } from './utils/gallery-utils'
 import { ComponentCard } from './components/GalleryLayout'
 
-const allModules = import.meta.glob<{ [key: string]: React.ComponentType<any> }>('../../ui_lab/components/shelves/**/*.tsx')
+const allModules = import.meta.glob<{ [key: string]: React.ComponentType<any> }>('../../ui-patterns/components/shelves/**/*.tsx')
 
 const SHELF_ORDER = [
   'landing-product-system',

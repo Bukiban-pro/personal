@@ -1,4 +1,4 @@
-﻿{
+{
     "key":  "forms-operations",
     "label":  "Forms and Operations",
     "useWhen":  "You need inputs, authoring, uploads, and filtering for real application workflows.",
@@ -13,7 +13,7 @@
                        "BadgeInput",
                        "SearchFilter"
                    ],
-    "exactExportPath":  "ui_lab/library/starter-lanes/forms-operations/components.ts",
-    "fullExportPath":  "ui_lab/library/starter-lanes/forms-operations/index.ts",
-    "readmePath":  "ui_lab/library/starter-lanes/forms-operations/README.md"
+    "exactExportPath":  "projects/ui-patterns/library/starter-lanes/forms-operations/components.ts",
+    "fullExportPath":  "projects/ui-patterns/library/starter-lanes/forms-operations/index.ts",
+    "readmePath":  "projects/ui-patterns/library/starter-lanes/forms-operations/README.md"
 }

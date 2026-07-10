@@ -1,4 +1,4 @@
-﻿{
+{
     "key":  "feedback-state",
     "label":  "Feedback and State",
     "description":  "Error states, dialogs, consent surfaces, loaders, and operational feedback layers.",
@@ -32,7 +32,7 @@
                        "Toast",
                        "TopLoadingBar"
                    ],
-    "exactExportPath":  "ui_lab/library/shelves/feedback-state/components.ts",
-    "fullExportPath":  "ui_lab/library/shelves/feedback-state/index.ts",
-    "readmePath":  "ui_lab/library/shelves/feedback-state/README.md"
+    "exactExportPath":  "projects/ui-patterns/library/shelves/feedback-state/components.ts",
+    "fullExportPath":  "projects/ui-patterns/library/shelves/feedback-state/index.ts",
+    "readmePath":  "projects/ui-patterns/library/shelves/feedback-state/README.md"
 }

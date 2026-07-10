@@ -31,9 +31,9 @@ Write-Host "Added $($currentSamples.samples.Count) existing curated samples" -Fo
 $autoGenCount = 0
 foreach ($component in $registry.componentLookup) {
   if (-not $currentSampleNames[$component.name]) {
-    # Strip "ui_lab/" prefix from sourcePath if present
+    # Strip "projects/ui-patterns/" prefix from sourcePath if present
     $cleanPath = $component.sourcePath
-    if ($cleanPath.StartsWith("ui_lab/")) {
+    if ($cleanPath.StartsWith("projects/ui-patterns/")) {
       $cleanPath = $cleanPath.Substring(7)
     }
     
