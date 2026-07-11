@@ -1,6 +1,7 @@
 # SESSION.md
 
-AI maintains this file automatically throughout the session. No human prompting needed.
+AI maintains this file automatically. Loaded by AGENTS.md → core-philosophy.md → SESSION.md chain.
+Read this file on boot to resume state. Write to it throughout the session.
 Survives context resets, tool switches, and PREEMPTION.
 
 ```markdown

@@ -1,6 +1,18 @@
-# COOKBOOK — Survival Manual
+# COOKBOOK — Survival Manual (Backup)
 
-Your primary tool is `references/prompts/core-philosophy.md`. Paste it. Open this file when things break.
+**The system is one file: `references/prompts/core-philosophy.md`. Paste it. Open this file for apocalypse recovery only.**
+
+## Apocalypse Prep — When Everything Fails
+
+| Failure Mode | Play |
+|-------------|------|
+| **AI provider down (all of them)** | You still have 649 UI components, dev-mode blueprint, and your brain. Open `research/`. Manual mode. You're still 10x, just slower. |
+| **Credits exhausted mid-sprint** | Switch to zero-budget profile. Free web tools (ChatGPT, Gemini, Claude web). Use the raw GitHub URL boot instead of file access. |
+| **Corporate IT locked everything** | `stealth` profile. Offline-first. Local LLM if available (Ollama + Mistral/Phi-3). Same boot sequence, local execution. Corp mirror: stash `personal/` in internal git. |
+| **No internet (plane, dead zone)** | `stealth` profile. Local files only. Self-contained scripts. The formula still works. |
+| **You're sick / 20% capacity** | Declare ENERGY: 20%. AI does one-file changes. You approve or reject. System works without the pilot at full capacity. |
+| **Senior engineer hostile to your methods** | Inquisitor + Dev-Leroy. Systemic analysis + brutal clarity. They can't argue with root cause evidence and concrete alternatives. |
+| **Multi-tab context loss** | SESSION.md is your cross-tab memory. End Tab 1 → commit SCRATCHPAD. Start Tab 2 → boot core + paste SESSION.md. Zero information loss. |
 
 ## Anti-Fragile Recovery Protocols
 
@@ -71,11 +83,12 @@ PREVENTION: Keep a local git clone + read-only backup on USB. Mirror to internal
 | Failure Mode | First Action |
 |-------------|-------------|
 | AI provider down | `research/` + manual mode |
-| Credits exhausted | `profiles/zero-budget.md` + free models |
-| Corp IT locked everything | `profiles/locked-down.md` + `profiles/stealth.md` |
+| Credits exhausted | Zero-budget profile + free web tools |
+| Corp IT locked everything | Stealth profile + local LLM |
 | Git history corrupted | SESSION.md + staged files = evidence trail |
-| You're sick / 20% | Declare energy state. AI adapts to one-shot mode. |
+| You're sick / 20% | Declare ENERGY: 20%. AI adapts. |
 | Senior engineer hostile | Inquisitor + Dev-Leroy. They can't argue with evidence. |
+| Multi-tab context loss | SESSION.md handoff between tabs |
 
 ## If the Formula Is Not Enough
 

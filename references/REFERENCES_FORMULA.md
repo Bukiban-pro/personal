@@ -1,7 +1,8 @@
-# REFERENCES FORMULA — Master Deployment System
+# REFERENCES FORMULA — Master Deployment System (Backup)
 
-**If you only have one paste: use `references/prompts/core-philosophy.md`. It contains everything.**
-Come here when you need the matrix, deep profiles, or cell metadata.
+**The system is one file: `references/prompts/core-philosophy.md`. Paste it. That's it.**
+This file is a supplementary backup for the situation × environment matrix.
+You don't need it. core-philosophy.md contains everything inline.
 
 ## Situation × Environment Matrix
 
@@ -113,4 +114,27 @@ After any formula, check:
 
 **Driver**: who produces the primary output. AI = agent does the work, Human = human pipes in compressed prompts.
 **Difficulty**: Easy (15-30min), Medium (30-60min), Hard (60-120min). Adjust for familiarity.
+
+## Free Web Tool Allocation
+
+| Task Type | Best Tool | Why |
+|-----------|-----------|-----|
+| Reasoning, architecture, planning | Claude web | Best long-context reasoning |
+| Code generation, diffs, implementation | ChatGPT (4o) | Strong code output, fast |
+| Research, web-grounded facts | Perplexity / Gemini | Live web access |
+| Multimodal UX review | Claude or GPT-4o | Best vision + reasoning |
+| Large file ingestion | Gemini (1M context) | Largest free context window |
+
+**Rule:** Pick the tool for the task type, not your favorite tool. This is in your formula matrix.
+
+## Boot Sequence (Apocalypse: Free Web, No API, No MCP)
+
+```
+1. Open any web tool
+2. Paste: https://raw.githubusercontent.com/Bukiban-pro/personal/main/references/prompts/core-philosophy.md
+   With: "Read this file and adopt the OS before we begin"
+3. Task follows. Session boots in under 60 seconds.
+```
+
+For the triad: open three tabs. Git is shared memory. SESSION.md is handoff protocol.
 
