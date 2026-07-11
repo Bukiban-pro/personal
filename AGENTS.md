@@ -7,4 +7,7 @@ deployment models for web/VM/Ollama, and a self-evolution loop. All inline. No o
 
 Boot sequence: AGENTS.md → core-philosophy.md (load OS) → SESSION.md (resume state) → task.
 
+Execution layer (scripts in hands/): boot-session.ps1 → task-to-diff.ps1 → apply-diff.ps1.
+Three scripts, one terminal, zero friction.
+
 Delete the rest of this repo and the system still works.

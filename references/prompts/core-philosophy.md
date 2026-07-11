@@ -74,6 +74,8 @@ DEPLOYMENT (three modes, same OS):
   Private VM: No URL tricks work. Context-pack into paste block. GHCP reads AGENTS.md.
               Sensitive data → Ollama (qwen2.5-coder / deepseek-coder-v2) + Corp-Sec.
               Artifacts flow clipboard→git, never via URL.
+  Scripted: hands/boot-session.ps1 → hands/task-to-diff.ps1 → hands/apply-diff.ps1.
+            Three scripts, one terminal, zero friction. All modes, same pipeline.
 
 MODEL PICK (per task type):
   Reasoning/planning → Claude web. Code → ChatGPT 4o. Research → Gemini/Perplexity.
@@ -89,6 +91,52 @@ EVOLUTION:
   This file grows sharper with every interaction. Never repeat old mistakes.
   The repo (profiles/, skills/, workflows/, etc.) is archive — read for depth, never required.
   This file alone is the system. Delete the rest and still win.
+
+[EXECUTION LAYER — scripts that close the theory gap]
+
+TAB ARCHITECTURE (free web, no API):
+  Tab 1 (Claude): Planner. Holds PLAN.md. Decomposes features.
+  Tab 2 (ChatGPT): Doer. Receives tasks from Tab 1, outputs diffs.
+  Tab 3 (Gemini): Finder. Research + large file ingestion.
+  Tab 4 (Perplexity): Web facts. On-demand.
+  You are the pipe between them. Commit SCRATCHPAD.md after each handoff.
+
+SCRIPTS (in hands/):
+  boot-session.ps1 — Opens 4 tabs, copies OS boot prompt to clipboard.
+    Run: powershell -File hands\boot-session.ps1 -Mission "what"
+    Then: paste into Claude Tab 1.
+  task-to-diff.ps1 — Reads TASKS.md, collects referenced files, builds prompt.
+    Run: powershell -File hands\task-to-diff.ps1 -Task "fix auth bug"
+    Then: paste into ChatGPT Tab 2.
+  apply-diff.ps1 — Pastes ChatGPT output as diff, applies, tests, logs.
+    Run: Copy ChatGPT output, then: powershell -File hands\apply-diff.ps1
+    Logs to HANDS_LOG.md automatically.
+
+CONTEXT INJECTION (every paste, 3 layers):
+  Layer 1 — OS: core-philosophy.md URL
+  Layer 2 — Session: SESSION.md current state
+  Layer 3 — Task: only files the task touches (use task-to-diff.ps1)
+  Never paste the whole repo. Paste the surgical slice.
+
+SESSION HANDOFF (between tabs, sessions, days):
+  "My SESSION.md: [paste].
+   My PLAN.md: [paste].
+   Current task: [task].
+   Adopt core OS, continue from exactly this state."
+
+SESSION HARVEST (end every session, command to Claude Tab 1):
+  "Session is ending. Write a Session Harvest:
+   1. What was built (files changed, exact paths)
+   2. What was learned (patterns, gotchas, discoveries)
+   3. What broke (and why)
+   4. Next 3 tasks for cold-start tomorrow
+   5. Formula that worked: [situation × environment → formula used]
+   Append to SESSION.md. Sign HARVEST + timestamp."
+
+SHARED MEMORY FILES:
+  SCRATCHPAD.md — All tabs read/write. Git commits it. Shared brain.
+  HANDS_LOG.md — Every apply-diff.ps1 run logged. Weekly pattern mining.
+  SESSION.md — Always current. Cold start reads this.
 
 [HUMAN COCKPIT — your half of the Jaeger]
 
