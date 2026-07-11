@@ -4,28 +4,31 @@ Nothing here is for reading. Find your cell. Follow the formula.
 
 ## Situation × Environment Matrix
 
-| Situation | Unlimited | Locked-Down | Zero-Budget | Token-Limited |
-|-----------|-----------|-------------|-------------|---------------|
-| **Ship feature** | `core + unlimited + AGENTS + task` | `core + locked + AGENTS + task` | `core + zero + task` | `core + token + task` |
-| **Review code** | `inquisitor` | `inquisitor` (offline) | `dev-leroy` (compressed) | `inquisitor` (grep only) |
-| **Debug** | `core + unlimited + inquisitor` | `core + locked + problem` | `core + zero + problem` | `core + token + problem` |
-| **Interview prep** | `learn + career` | `learn + career` (offline) | `learn + career` (compressed) | `learn + career` (cheatsheet) |
-| **New project** | `core + unlimited + dev-mode + AGENTS` | `core + locked + dev-mode + AGENTS` | `core + zero + dev-mode` | `core + token + AGENTS` |
-| **Investor demo** | `demo` | — | — | — |
-| **Design UI** | `ui-design` | — | — | — |
-| **Learn topic** | `learn` | `learn` (offline) | `learn` (3-pass) | `learn` (cheatsheet) |
-| **Build infra** | `dev-mode` | `dev-mode` (local) | — | — |
-| **Run multi-agent** | `protocol + web-brain` | — | — | — |
+| Situation | Unlimited | Locked-Down | Zero-Budget | Token-Limited | **Tool-Agnostic** | **Stealth** |
+|-----------|-----------|-------------|-------------|---------------|-------------------|-------------|
+| **Ship feature** | `core + unlimited + AGENTS + task` | `core + locked + AGENTS + task` | `core + zero + task` | `core + token + task` | `core + adaptive + AGENTS + task` | `core + stealth + local-pack + task` |
+| **Review code** | `inquisitor` | `inquisitor` (offline) | `dev-leroy` (compressed) | `inquisitor` (grep only) | `adaptive + dev-leroy + task` | `dev-leroy` (compressed) + `local-pack` |
+| **Debug** | `core + unlimited + inquisitor` | `core + locked + problem` | `core + zero + problem` | `core + token + problem` | `core + adaptive + problem` | `core + stealth + problem` |
+| **Interview prep** | `learn + career` | `learn + career` (offline) | `learn + career` (compressed) | `learn + career` (cheatsheet) | `adaptive + learn + career` | `learn` (offline) + `career` (cheatsheet) |
+| **New project** | `core + unlimited + dev-mode + AGENTS` | `core + locked + dev-mode + AGENTS` | `core + zero + dev-mode` | `core + token + AGENTS` | `core + adaptive + dev-mode + AGENTS` | `core + stealth + dev-mode` |
+| **Investor demo** | `demo` | — | — | — | `demo` (adaptive) | — |
+| **Design UI** | `ui-design` | — | — | — | `ui-design` (adaptive) | — |
+| **Learn topic** | `learn` | `learn` (offline) | `learn` (3-pass) | `learn` (cheatsheet) | `adaptive + learn` | `learn` (offline) |
+| **Build infra** | `dev-mode` | `dev-mode` (local) | — | — | `adaptive + dev-mode` | `dev-mode` (offline) |
+| **Run multi-agent** | `protocol + web-brain` | — | — | — | `adaptive + protocol` | — |
 
 ## Key
 
 ```
-core        = references/prompts/core-philosophy.md  [the prepender only]
-unlimited   = references/profiles/unlimited.md       [prepender]
-locked      = references/profiles/locked-down.md     [prepender]
-zero        = references/profiles/zero-budget.md     [prepender]
-token       = references/profiles/token-limited.md   [prepender]
-AGENTS      = references/prompts/agents-template.md [deploy as ./AGENTS.md]
+core        = references/prompts/core-philosophy.md    [the prepender]
+unlimited   = references/profiles/unlimited.md
+locked      = references/profiles/locked-down.md
+zero        = references/profiles/zero-budget.md
+token       = references/profiles/token-limited.md
+adaptive    = references/profiles/adaptive.md          [self-detects tool capabilities]
+stealth     = references/profiles/stealth.md           [no internet, corp-blocked]
+corp-sec    = references/profiles/corp-sec.md          [zero-trust company compliance]
+AGENTS      = references/prompts/agents-template.md    [deploy as ./AGENTS.md]
 task        = your own prompt specifying what to build
 problem     = paste bug report + error logs
 inquisitor  = references/prompts/inquisitor-system.md
@@ -37,36 +40,77 @@ career      = career/developer-playbook.md
 dev-mode    = references/frameworks/dev-mode-blueprint.md
 protocol    = references/frameworks/dual-agent-concurrency-protocol.md
 web-brain   = references/frameworks/web-brain-agentic-hands.md
+local-pack  = references/skills/zero-trust-env.md     [offline survival]
+session     = references/session/SESSION.md           [context persistence]
+single      = references/prompts/single-file-deploy.md [450-token bootable deploy]
+cold-start  = references/workflows/cold-start.md      [2-min re-entry]
+token-pack  = references/workflows/token-packing.md   [max value per budget]
+java-tasks  = references/templates/java-backend-tasks.md [Spring Boot recipes]
+persona     = references/frameworks/persona-switching.md [5 operating personas]
 ```
 
 ## Deployment Order
 
 ```
-1. core + [profile]      → prepend before task prompt (this is the OS)
-2. AGENTS                → deploy as ./AGENTS.md in project root (this is the brain)
-3. task                  → the actual prompt describing what to build
+0. cold-start      → run if you haven't touched the system in 7+ days
+0. adaptive        → self-classify the tool (only if using adaptive profile)
+0. session         → copy SESSION.md into project root, write mission line
+0. energy+persona  → declare energy level (20/50/80/100%) + pick persona
+--- if you can't access any files (only chat window) -----------------
+0. single          → paste single-file-deploy.md as boot prompt
+--- ----------------------------------------------------------------
+1. core + profile  → prepend before task prompt (this is the OS)
+2. AGENTS          → deploy as ./AGENTS.md in project root (this is the brain)
+3. skillpack       → load relevant skill card (optional, for domain-specific work)
+3. token-pack      → check budget, pack components if budget-limited
+4. persona         → load persona rules for this task (optional, default: Builder)
+5. task            → the actual prompt describing what to build
+6. session         → AI updates SESSION.md in real-time during work
+7. harvest         → AI writes Session Harvest on completion
 ```
 
-## Example
+## Tool-Agnostic Rule
 
-**Situation:** I need to ship a feature. I'm on a corporate laptop with no API keys.
-
-**Formula:** `core + locked + AGENTS + task`
-
-**Execution:**
-```
-1. Read references/prompts/core-philosophy.md      → take the [GYPSY DANGER PROTOCOL] block
-2. Read references/profiles/locked-down.md          → take the prepender
-3. Read references/prompts/agents-template.md → deploy as ./AGENTS.md
-4. Write your task prompt: "Build a user profile page with..."
-5. Paste: [GYPSY DANGER PROTOCOL] + [locked-down prepender] + task
-```
-
-**Output:** Feature ships with testable artifacts. AGENTS.md grows wiser.
+If you don't know the tool's capabilities: load `adaptive` profile first. It probes the tool and switches to the right sub-mode. Never guess again.
 
 ## Verification
 
-After following any formula, check:
-- [ ] Artifact exists (diff, test output, plan file, etc.)
+After any formula, check:
+- [ ] Artifact exists (diff, plan, test output, etc.)
+- [ ] SESSION.md state matches reality (file log, blockers, next action)
 - [ ] AGENTS.md updated with lessons learned
-- [ ] Prepender installed the operating system (model behaves like Iron Man, not a generic assistant)
+- [ ] Prepender installed the OS (model behaves like Iron Man, not a generic assistant)
+
+## Cell Metadata
+
+| Situation | Environment | Est. Time | Difficulty | Driver | Artifacts |
+|-----------|-------------|-----------|------------|--------|-----------|
+| Ship feature | Unlimited | 30-60min | Medium | AI | PLAN, DIFF, TEST_REPORT |
+| Ship feature | Locked-Down | 45-90min | Medium | AI | PLAN, DIFF, TEST_REPORT |
+| Ship feature | Zero-Budget | 20-40min | Easy | Human | DIFF only |
+| Ship feature | Token-Limited | 20-40min | Easy | AI (compressed) | DIFF, TEST_REPORT |
+| Ship feature | Tool-Agnostic | 30-60min | Medium | AI | PLAN, DIFF, TEST_REPORT |
+| Ship feature | Stealth | 45-90min | Hard | Human | DIFF only (no PLAN) |
+| Review code | Unlimited | 15-30min | Easy | AI | PR-REVIEW |
+| Review code | Locked-Down | 20-40min | Easy | AI | PR-REVIEW |
+| Review code | Zero-Budget | 10-20min | Easy | AI | PR-REVIEW (compressed) |
+| Review code | Token-Limited | 15-30min | Easy | AI | PR-REVIEW (grep-based) |
+| Review code | Tool-Agnostic | 20-40min | Easy | AI | PR-REVIEW |
+| Review code | Stealth | 20-40min | Medium | AI | PR-REVIEW (compressed) |
+| Debug | Unlimited | 20-60min | Medium | AI | DIAGNOSIS, DIFF |
+| Debug | Locked-Down | 30-60min | Medium | AI | DIAGNOSIS, DIFF |
+| Debug | Zero-Budget | 15-30min | Easy | Human | DIAGNOSIS only |
+| Debug | Token-Limited | 20-40min | Medium | AI (compressed) | DIAGNOSIS, DIFF |
+| Debug | Tool-Agnostic | 20-60min | Medium | AI | DIAGNOSIS, DIFF |
+| Debug | Stealth | 30-60min | Hard | Human | DIAGNOSIS, DIFF |
+| Interview prep | Any | 30-60min | Medium | AI | Study note, quiz, schedule |
+| New project | Any | 30-60min | Medium | AI | AGENTS.md, PLAN, scaffold |
+| Investor demo | Unlimited | 20-40min | Medium | AI | DEMO.md, prototype |
+| Design UI | Unlimited | 30-60min | Medium | AI | DESIGN-SPEC |
+| Learn topic | Any | 20-40min | Easy | AI | Study note, quiz |
+| Build infra | Unlimited/Locked | 45-120min | Hard | AI | PLAN, config, tests |
+| Run multi-agent | Unlimited | 60-120min | Hard | AI | SCRATCHPAD, PLAN, EXECUTION_LOG |
+
+**Driver**: who produces the primary output. AI = agent does the work, Human = human pipes in compressed prompts.
+**Difficulty**: Easy (15-30min), Medium (30-60min), Hard (60-120min). Adjust for familiarity.
+

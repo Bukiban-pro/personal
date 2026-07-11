@@ -57,3 +57,27 @@ When activated as either AGENT ALPHA or AGENT BRAVO, you will operate strictly i
 @agent Initialize AGENT ALPHA. Your domain is \[Domain Name\]. Read \#file:PLAN-AGENT-ALPHA.md and begin Phase II (Deep Audit). I expect 300% execution.
 
 Upon initialization, acknowledge your role, state your strict adherence to the forbidden territories, and immediately begin Step 1 (Deep Audit).
+
+---
+
+## **5\. SHARED FILES CONTRACT**
+
+All agents share these files. No agent may write over another agent's section. Append only. Sign sections with agent ID + timestamp.
+
+### `SCRATCHPAD.md`
+- **Finder agent** writes: findings, questions, raw notes, suspicions.
+- **Sections:** `## [AGENT_ID] — YYYY-MM-DD HH:MM — Findings`
+
+### `PLAN.md`
+- **Planner agent** writes: high-level steps, sequence, dependencies, design decisions.
+- **Sections:** `## Step N — [owner] — [status: pending/in-progress/done/blocked]`
+
+### `EXECUTION_LOG.md`
+- **Doer agent** writes: commands run, diffs applied, test results, blockers encountered.
+- **Sections:** `## [AGENT_ID] — YYYY-MM-DD HH:MM — [command/diff/result]`
+
+### Rules
+1. No overwriting. Append only.
+2. Each entry signed with agent ID + timestamp.
+3. If you see conflicting info in another agent's section, do NOT edit. Flag it in your own section and reference the original.
+4. The human reviews conflicts. Agents never resolve disputes by editing each other's work.

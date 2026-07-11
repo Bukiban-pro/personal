@@ -756,3 +756,43 @@ When you pick up this markdown offline, without re‑thinking everything, follow
 11. Periodically update `lessons.md` with anything worth remembering.
 
 Do this consistently and your agents will rarely, if ever, do manual work the bridge can automate.
+
+---
+
+## Three-Agent Assembly Line
+
+Extend the web-brain-agentic-hands model into three specialized agents:
+
+### Agent 1: Search Agent
+- **Role:** Uses web/search tools only. Discovers facts, collects evidence.
+- **Tools:** Web search, documentation lookup, code search.
+- **Writes to:** `SCRATCHPAD.md` — findings, questions, raw notes, source URLs.
+- **Never:** Plans or executes code. Pure reconnaissance.
+
+### Agent 2: Synthesis Agent
+- **Role:** Reads scratchpad. Uses universal-learning-os to create knowledge artifacts.
+- **Tools:** None (or text-only LLM). Synthesizes, structures, prioritizes.
+- **Writes to:** `PLAN.md` — structured plan, design decisions, risk assessment, file list.
+- **Never:** Searches or executes. Pure analysis.
+
+### Agent 3: Execution Agent
+- **Role:** Reads plan + artifacts. Produces diffs, runs tests, applies changes.
+- **Tools:** File I/O, code execution, test runner, git.
+- **Writes to:** `EXECUTION_LOG.md` — commands run, diffs applied, test results.
+- **Never:** Searches or plans. Pure execution.
+
+### Flow
+```
+Search → SCRATCHPAD.md → Synthesis → PLAN.md → Execution → EXECUTION_LOG.md
+                                                                      ↓
+                                                          Human reviews artifacts
+                                                                      ↓
+                                                      If blockers: loop back to Search
+```
+
+### Tool Assignment
+- Class A (Agentic IDE) → Execution Agent
+- Class B (Inline Assistant) → Synthesis Agent
+- Class C (Chat Strategist) → Search Agent
+
+Any tool, any environment, any combination. The files are the interface, not the tool.

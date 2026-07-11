@@ -2734,3 +2734,55 @@ Copy the files, customize the configuration section, add your `services.json` an
 ---
 
 *Battle-tested in a real production monorepo. Every gotcha in this document cost real debugging hours. Every agentic runtime concept is designed so that your next AI coding assistant won't have to pay those hours again.*
+
+---
+
+## Hard Interface Contract
+
+Any tool implementing dev-mode must produce these three artifacts:
+
+### PLAN.md
+```
+# PLAN — <task-tag>
+
+## 1. Diagnosis
+- What needs to change, why, and in what order.
+
+## 2. Files to Modify
+- path/to/file — what to change and why.
+
+## 3. Step-by-step
+1. Do X in file A (line range)
+2. Do Y in file B
+3. Run command: `...`
+4. Verify with: `...`
+
+## 4. Risks
+- Things that could break, rollback plan.
+```
+
+### DIFF.md
+```
+## file: path/to/file.ts
+- Lines 45-60: replaced X with Y (reason)
+- Lines 120: added null check (reason)
+
+```diff
+@@ -45,7 +45,9 @@
+...
+```
+
+### TEST_REPORT.md
+```
+## Commands Run
+- `npm test` — ✅ (12 passed, 0 failed)
+- `npm run lint` — ✅
+
+## Coverage Gaps
+- No tests for edge case Z. Added TODO.
+
+## Manual Verification
+- [ ] Feature works on happy path
+- [ ] Error states render correctly
+- [ ] No regressions in adjacent features
+```
