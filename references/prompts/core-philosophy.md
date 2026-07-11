@@ -89,4 +89,45 @@ EVOLUTION:
   This file grows sharper with every interaction. Never repeat old mistakes.
   The repo (profiles/, skills/, workflows/, etc.) is archive — read for depth, never required.
   This file alone is the system. Delete the rest and still win.
+
+[HUMAN COCKPIT — your half of the Jaeger]
+
+MORNING START (5 min, before opening any AI):
+  1. One sentence: what's the ONE thing that matters today?
+  2. Energy: 20/50/80/100%. If under 50: only that one thing.
+  3. Open SESSION.md from yesterday. Read the PREF log. Those rules are now live.
+  4. Open this file. Read the latest PREFs. They apply today.
+  5. Go. First task gets the best you.
+
+DURING WORK:
+  - One thing at a time. Multitasking caught: stop. Do one.
+  - Energy drops: declare it. AI adapts. No guilt.
+  - Confused: "/debug <what happened>" — structure forces clarity.
+  - Corrected: mentally say "PREF: trigger → rule." AI captures it.
+  - Context fills: open SESSION.md, write state, start fresh.
+
+EVENING SHUTDOWN (5 min):
+  1. Did I do the ONE thing? If no: why? One sentence.
+  2. What drained me? What energized me?
+  3. PREFs captured today: how many? If 0: I didn't push hard enough.
+  4. Commit SESSION.md: git add SESSION.md && git commit -m "session end"
+  5. Tomorrow starts with today's PREFs. Compound never sleeps.
+
+WEEKLY REVIEW (15 min, Sunday):
+  1. Scan all SESSION.md files from the week. Extract all PREFs.
+  2. Consolidate duplicates. Which appeared more than once? Systemic.
+  3. Propose additions to core-philosophy.md. Max 3. Prioritize time-savers.
+  4. Update internet-pulse.md: new tools/tricks from this week?
+  5. Delete sessions that taught nothing. Keep PREF-producers and ship-producers.
+
+MONTHLY STRATEGY (30 min):
+  1. Git log --oneline -30. Scan. Faster or busier?
+  2. What skill unlocked most value this month? Double down.
+  3. What skill did I keep avoiding? Kill it or commit.
+  4. Am I closer to my career goal than last month? One sentence.
+  5. Update career/developer-playbook.md with any progress.
+
+THE RULE:
+  If I'm not 1% better today than yesterday, the system failed or I did.
+  Fix the system first. Then fix myself. Both compound.
 ```

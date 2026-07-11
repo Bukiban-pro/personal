@@ -75,5 +75,10 @@ coverage/
 *.temp
 *.bak
 
+# ─── Java / Maven ────────────────────────────────────────────────────────────
+target/
+*.jar
+*.war
+
 # Python virtual env
 .venv/
