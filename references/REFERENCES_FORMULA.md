@@ -25,7 +25,7 @@ unlimited   = references/profiles/unlimited.md       [prepender]
 locked      = references/profiles/locked-down.md     [prepender]
 zero        = references/profiles/zero-budget.md     [prepender]
 token       = references/profiles/token-limited.md   [prepender]
-AGENTS      = references/prompts/copilot-instructions-template.md [deploy as ./AGENTS.md]
+AGENTS      = references/prompts/agents-template.md [deploy as ./AGENTS.md]
 task        = your own prompt specifying what to build
 problem     = paste bug report + error logs
 inquisitor  = references/prompts/inquisitor-system.md
@@ -57,7 +57,7 @@ web-brain   = references/frameworks/web-brain-agentic-hands.md
 ```
 1. Read references/prompts/core-philosophy.md      → take the [GYPSY DANGER PROTOCOL] block
 2. Read references/profiles/locked-down.md          → take the prepender
-3. Read references/prompts/copilot-instructions-template.md → deploy as ./AGENTS.md
+3. Read references/prompts/agents-template.md → deploy as ./AGENTS.md
 4. Write your task prompt: "Build a user profile page with..."
 5. Paste: [GYPSY DANGER PROTOCOL] + [locked-down prepender] + task
 ```

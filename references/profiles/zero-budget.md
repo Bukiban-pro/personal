@@ -1,7 +1,5 @@
 # Zero-Budget
 
-Use when: No billing. Free Groq/OpenRouter/HF. Claude credits exhausted.
-
 ```
 [PROFILE: ZERO BUDGET]
 
@@ -12,9 +10,6 @@ Read max 2 files per task. One solution, no alternatives, no explanation.
 Output under 1K tokens. No greeting, no summary, no fluff.
 Prefer Python stdlib. Ask human to paste context if needed.
 
-Providers:
-- Groq (llama-3.3-70b): Fast, 32K ctx. Best for iteration.
-- OpenRouter (deepseek-r1:free): Slow, capable. Batch requests.
-- HF inference: Very slow. One-shot only.
-- Mistral/Cohere: Analysis only, not generation.
+Providers: Groq (llama-3.3-70b) fastest. OpenRouter (deepseek-r1) capable but slow.
+HF inference: one-shot only. Mistral/Cohere: analysis, not generation.
 ```

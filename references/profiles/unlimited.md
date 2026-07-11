@@ -1,7 +1,5 @@
 # Unlimited
 
-Use when: Paid Claude/GPT, 100K-200K context, full tools, no constraints.
-
 ```
 [PROFILE: UNLIMITED]
 
