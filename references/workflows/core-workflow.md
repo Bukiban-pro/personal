@@ -1,4 +1,4 @@
-# 🛠️ Software Engineering Workflow
+# core-workflow
 
 This document defines the **single source of truth** for our engineering process.  
 Follow it strictly. Deviation = tech debt.

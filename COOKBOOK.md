@@ -1,6 +1,6 @@
 # COOKBOOK — Survival Manual
 
-Your primary tool is `references/REFERENCES_FORMULA.md`. Open it first. This file is for when things break.
+Your primary tool is `references/prompts/core-philosophy.md`. Paste it. Open this file when things break.
 
 ## Anti-Fragile Recovery Protocols
 
@@ -59,7 +59,7 @@ PREVENTION: Session starts with energy level + persona declaration.
 ```
 SYMPTOM: The file REFERENCES_FORMULA.md or core-philosophy.md says "not found".
 RECOVERY:
-1. Use single-file-deploy.md from memory: paste the 450-token bootable prompt.
+1. Paste core-philosophy.md from memory — it contains all boot rules in ~300 tokens.
 2. It contains all essential operating rules. Works standalone.
 3. Rebuild lost files from git: git checkout -- references/prompts/core-philosophy.md
 4. If git is also gone: the references are in raw.githubusercontent.com. Fetch them.
@@ -83,13 +83,10 @@ PREVENTION: Keep a local git clone + read-only backup on USB. Mirror to internal
 - **Need a framework?** `references/frameworks/` — blueprints, not philosophy.
 - **Need components?** `projects/ui-patterns/` — 649 deployable UI assets.
 - **Need free models?** `references/prompts/llm-model-selection.md`.
-- **Need to start from zero?** Paste `references/prompts/single-file-deploy.md` — it's a bootable OS.
+- **Need to start from zero?** Paste `references/prompts/core-philosophy.md` — it's a bootable OS with profile selection built in.
 
 ## The Core Loop
 
 When in doubt:
-1. Open `REFERENCES_FORMULA.md`
-2. Find your situation + environment
-3. Deploy the formula
-4. Check verification
-5. Update AGENTS.md with what you learned
+1. Paste `references/prompts/core-philosophy.md`. It contains the boot OS.
+2. Do the thing.

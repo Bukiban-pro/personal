@@ -7,8 +7,8 @@ Target: re-enter in under 2 minutes.
 
 ```
 1. READ (30s)
-   - Open REFERENCES_FORMULA.md. Find the grid. Orient yourself.
-   - Scan AGENTS.md architecture. Nothing has changed structurally.
+   - Open references/prompts/core-philosophy.md. It contains all 7 profiles.
+   - Pick one. Deploy. Nothing else to read.
 
 2. CHECK SESSION (20s)
    - Does SESSION.md exist in project root?
@@ -40,4 +40,4 @@ Target: re-enter in under 2 minutes.
 ## No Panic
 - The system is designed to work at 20% capacity.
 - If you skip a step, the system still works — just less efficiently.
-- Worst case: paste single-file-deploy.md prompt and deploy from scratch.
+- Worst case: paste core-philosophy.md and deploy from scratch.

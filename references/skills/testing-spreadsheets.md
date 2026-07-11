@@ -1,12 +1,8 @@
----
-name: software-testing-spreadsheets
-description: 'Build, audit, repair, normalize, regenerate, package, and finalize software testing spreadsheets in Excel, Google Sheets, or CSV-backed workbooks. Use for test case sheets, QA matrices, execution logs, RTMs, defect trackers, workbook gap analysis, explicitness upgrades, formula drift, header normalization, cross-sheet synchronization, and submission-ready proof paths.'
-argument-hint: 'Describe the workbook, any exemplar or grading target, the source of truth, and whether you want audit, repair, regeneration, cleanup, or finalization.'
-user-invocable: true
-disable-model-invocation: false
----
+# testing-spreadsheets
 
-# Software Testing Spreadsheets
+Build, audit, repair, normalize, regenerate, package, and finalize software testing spreadsheets in Excel, Google Sheets, or CSV-backed workbooks. Use for test case sheets, QA matrices, execution logs, RTMs, defect trackers, workbook gap analysis, explicitness upgrades, formula drift, header normalization, cross-sheet synchronization, and submission-ready proof paths.
+
+Argument hint: Describe the workbook, any exemplar or grading target, the source of truth, and whether you want audit, repair, regeneration, cleanup, or finalization.
 
 Use this skill when the task is centered on sheets, software testing, Excel, test workbooks, QA matrices, traceability tables, or any spreadsheet that acts as a testing system rather than a casual document, especially under grading, audit, or submission pressure.
 

@@ -1,18 +1,18 @@
 # SESSION.md
 
-Copy this template into project root on session start. AI maintains it in real-time.
+AI maintains this file automatically throughout the session. No human prompting needed.
 Survives context resets, tool switches, and PREEMPTION.
 
 ```markdown
 # Session: YYYY-MM-DD
 
 ## Mission
-<one-line mission statement>
+<one line>
 
 ## Formula
 core + <profile> + <task>
 
-## Energy Level
+## Energy
 <20%/50%/80%/100%>
 
 ## Persona
@@ -20,7 +20,7 @@ core + <profile> + <task>
 
 ## Environment
 Tool: <Class A/B/C>
-Budget: <unlimited/locked-down/zero-budget/token-limited/adaptive/stealth/corp-sec>
+Budget: <profile>
 State: <in-progress/blocked/done>
 
 ## Task State
@@ -33,33 +33,28 @@ State: <in-progress/blocked/done>
 ## File Log
 | File | Status | Notes |
 |------|--------|-------|
-| src/main/java/... | drafted | needs review |
+| src/... | drafted | needs review |
 
 ## Decisions
-- <#>: <decision> — <rationale>
+- 1: <decision> — <rationale>
+
+## PREF Log (auto-captured)
+Every human correction encoded as a permanent rule:
+- 1: <trigger> → <rule>
 
 ## Blockers
-- <#>: <description>
-
-## Preference Log
-Corrections that became rules for future behavior.
-- <#>: <correction> — <how AI should behave next time>
+- 1: <description>
 
 ## Next Action
-/task opencode "Resume: <precise next step>"
+/task opencode "Resume: <next step>"
 ```
 
-## Session Harvest
+## Session Harvest (AI writes on completion)
 
-After session completes or before closing:
-
+```markdown
+## Harvest
+- Outcome: shipped/reviewed/learned
+- PREFs added: <count>
+- Proposed updates to core-philosophy.md: <list>
+- What to do better next time: <one thing>
 ```
-## Session Harvest
-- What worked: <one thing>
-- What didn't: <one thing>
-- New pattern discovered: <if any>
-- Files to update: AGENTS.md | REFERENCES_FORMULA.md | <skill/framework file>
-- Confidence accuracy: "I said X%, actual was Y%. Gap: <reason>"
-```
-
-Copy harvest into AGENTS.md as a session log entry. Update referenced files.

@@ -7,8 +7,7 @@ Maximize value per token budget. For zero-budget and token-limited environments.
 ### Core (always start here)
 | Component | Est. Tokens |
 |-----------|-------------|
-| core-philosophy.md | ~300 |
-| single-file-deploy.md | ~450 |
+| core-philosophy.md | ~400 |
 
 ### Profiles
 | Profile | Est. Tokens | When to use |
@@ -54,38 +53,40 @@ Maximize value per token budget. For zero-budget and token-limited environments.
 
 ### Budget: 500 tokens (absolute minimum)
 ```
-core(300) + stealth(200) = 500
+core(400) + stealth(350) = 750
 ```
-Single paste: core-philosophy (300) + stealth profile (200).
-No task prompt — just describe the task in your own words.
+Can't fit in 500. Use a compressed profile directly, or:
+```
+zero-budget(300) + task(200) = 500
+```
 
 ### Budget: 1000 tokens
 ```
-core(300) + zero-budget(300) + ship-feature(300) + task = ~1000
+core(400) + zero-budget(300) + task(300) = ~1000
 ```
 OR
 ```
-single-file-deploy(450) + task description = ~600-800
+core(400) + task(600) = ~1000
 ```
 
 ### Budget: 1500 tokens
 ```
-core(300) + token-limited(250) + kickoff(500) + task(400) = ~1450
+core(400) + token-limited(250) + kickoff(500) + task(350) = ~1500
 ```
 
 ### Budget: 2000 tokens
 ```
-core(300) + unlimited(150) + kickoff(500) + role(800) + task(200) = ~1950
+core(400) + unlimited(150) + kickoff(500) + role(800) + task(150) = ~2000
 ```
 
 ### Budget: 3000 tokens (comfortable)
 ```
-core(300) + adaptive(400) + kickoff(500) + role(800) + tool-abs(500) + work(500) = ~3000
+core(400) + adaptive(400) + kickoff(500) + role(800) + tool-abs(500) + task(400) = ~3000
 ```
 
 ## Algorithm
 
-1. Start with core (300 tokens minimum)
+1. Start with core (400 tokens minimum)
 2. Add profile (150-400 tokens based on environment)
 3. Add task prompt (300-800 tokens based on complexity)
 4. If budget remains: add skill card or framework interface
@@ -93,6 +94,6 @@ core(300) + adaptive(400) + kickoff(500) + role(800) + tool-abs(500) + work(500)
 
 ### Compression tricks
 - Skip headers, skip explanations, paste only the directives
-- Use `single-file-deploy.md` instead of core + profile + kickoff (saves ~200 tokens)
-- For tasks under 1000 tokens: paste single-file-deploy + task description only
+- Use `core-philosophy.md` as self-contained boot (saves ~100 tokens over core + profile)
+- For tasks under 800 tokens: paste core-philosophy + task description only
 - For review tasks: load dev-leroy directly (no core, no profile)

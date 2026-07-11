@@ -1,30 +1,31 @@
 # REFERENCES FORMULA — Master Deployment System
 
-Nothing here is for reading. Find your cell. Follow the formula.
+**If you only have one paste: use `references/prompts/core-philosophy.md`. It contains everything.**
+Come here when you need the matrix, deep profiles, or cell metadata.
 
 ## Situation × Environment Matrix
 
-| Situation | Unlimited | Locked-Down | Zero-Budget | Token-Limited | **Tool-Agnostic** | **Stealth** |
-|-----------|-----------|-------------|-------------|---------------|-------------------|-------------|
-| **Ship feature** | `core + unlimited + AGENTS + task` | `core + locked + AGENTS + task` | `core + zero + task` | `core + token + task` | `core + adaptive + AGENTS + task` | `core + stealth + local-pack + task` |
-| **Review code** | `inquisitor` | `inquisitor` (offline) | `dev-leroy` (compressed) | `inquisitor` (grep only) | `adaptive + dev-leroy + task` | `dev-leroy` (compressed) + `local-pack` |
-| **Debug** | `core + unlimited + inquisitor` | `core + locked + problem` | `core + zero + problem` | `core + token + problem` | `core + adaptive + problem` | `core + stealth + problem` |
-| **Interview prep** | `learn + career` | `learn + career` (offline) | `learn + career` (compressed) | `learn + career` (cheatsheet) | `adaptive + learn + career` | `learn` (offline) + `career` (cheatsheet) |
-| **New project** | `core + unlimited + dev-mode + AGENTS` | `core + locked + dev-mode + AGENTS` | `core + zero + dev-mode` | `core + token + AGENTS` | `core + adaptive + dev-mode + AGENTS` | `core + stealth + dev-mode` |
-| **Investor demo** | `demo` | — | — | — | `demo` (adaptive) | — |
-| **Design UI** | `ui-design` | — | — | — | `ui-design` (adaptive) | — |
-| **Learn topic** | `learn` | `learn` (offline) | `learn` (3-pass) | `learn` (cheatsheet) | `adaptive + learn` | `learn` (offline) |
-| **Build infra** | `dev-mode` | `dev-mode` (local) | — | — | `adaptive + dev-mode` | `dev-mode` (offline) |
-| **Run multi-agent** | `protocol + web-brain` | — | — | — | `adaptive + protocol` | — |
+| Situation | Unlimited | Locked-Down | Zero-Budget | Token-Limited | **Adaptive** | **Stealth** | **Corp-Sec** |
+|-----------|-----------|-------------|-------------|---------------|--------------|-------------|--------------|
+| **Ship feature** | `core + unlimited + AGENTS + task` | `core + locked-down + AGENTS + task` | `core + zero-budget + task` | `core + token-limited + task` | `core + adaptive + AGENTS + task` | `core + stealth + local-pack + task` | `core + corp-sec + AGENTS + task` |
+| **Review code** | `inquisitor` | `inquisitor` (offline) | `dev-leroy` (compressed) | `inquisitor` (grep only) | `adaptive + dev-leroy + task` | `dev-leroy` (compressed) + `local-pack` | `corp-sec + dev-leroy` |
+| **Debug** | `core + unlimited + inquisitor` | `core + locked-down + problem` | `core + zero-budget + problem` | `core + token-limited + problem` | `core + adaptive + problem` | `core + stealth + problem` | `core + corp-sec + problem` |
+| **Interview prep** | `learn + career` | `learn + career` (offline) | `learn + career` (compressed) | `learn + career` (cheatsheet) | `adaptive + learn + career` | `learn` (offline) + `career` (cheatsheet) | — |
+| **New project** | `core + unlimited + dev-mode + AGENTS` | `core + locked-down + dev-mode + AGENTS` | `core + zero-budget + dev-mode` | `core + token-limited + AGENTS` | `core + adaptive + dev-mode + AGENTS` | `core + stealth + dev-mode` | `core + corp-sec + dev-mode + AGENTS` |
+| **Investor demo** | `demo` | — | — | — | `demo` (adaptive) | — | — |
+| **Design UI** | `ui-design` | — | — | — | `ui-design` (adaptive) | — | — |
+| **Learn topic** | `learn` | `learn` (offline) | `learn` (3-pass) | `learn` (cheatsheet) | `adaptive + learn` | `learn` (offline) | — |
+| **Build infra** | `dev-mode` | `dev-mode` (local) | — | — | `adaptive + dev-mode` | `dev-mode` (offline) | — |
+| **Run multi-agent** | `protocol + web-brain` | — | — | — | `adaptive + protocol` | — | — |
 
 ## Key
 
 ```
 core        = references/prompts/core-philosophy.md    [the prepender]
 unlimited   = references/profiles/unlimited.md
-locked      = references/profiles/locked-down.md
-zero        = references/profiles/zero-budget.md
-token       = references/profiles/token-limited.md
+locked-down = references/profiles/locked-down.md
+zero-budget = references/profiles/zero-budget.md
+token-limited = references/profiles/token-limited.md
 adaptive    = references/profiles/adaptive.md          [self-detects tool capabilities]
 stealth     = references/profiles/stealth.md           [no internet, corp-blocked]
 corp-sec    = references/profiles/corp-sec.md          [zero-trust company compliance]
@@ -42,11 +43,13 @@ protocol    = references/frameworks/dual-agent-concurrency-protocol.md
 web-brain   = references/frameworks/web-brain-agentic-hands.md
 local-pack  = references/skills/zero-trust-env.md     [offline survival]
 session     = references/session/SESSION.md           [context persistence]
-single      = references/prompts/single-file-deploy.md [450-token bootable deploy]
 cold-start  = references/workflows/cold-start.md      [2-min re-entry]
 token-pack  = references/workflows/token-packing.md   [max value per budget]
 java-tasks  = references/templates/java-backend-tasks.md [Spring Boot recipes]
 persona     = references/frameworks/persona-switching.md [5 operating personas]
+models      = references/prompts/llm-model-selection.md  [model selection policy]
+snippets    = .vscode/opencode.code-snippets             [macro: 2-keystroke formula deploy]
+triad       = Finder/Planner/Doer                        [see protocol + web-brain]
 ```
 
 ## Deployment Order
@@ -56,9 +59,6 @@ persona     = references/frameworks/persona-switching.md [5 operating personas]
 0. adaptive        → self-classify the tool (only if using adaptive profile)
 0. session         → copy SESSION.md into project root, write mission line
 0. energy+persona  → declare energy level (20/50/80/100%) + pick persona
---- if you can't access any files (only chat window) -----------------
-0. single          → paste single-file-deploy.md as boot prompt
---- ----------------------------------------------------------------
 1. core + profile  → prepend before task prompt (this is the OS)
 2. AGENTS          → deploy as ./AGENTS.md in project root (this is the brain)
 3. skillpack       → load relevant skill card (optional, for domain-specific work)

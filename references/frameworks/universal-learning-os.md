@@ -1,4 +1,4 @@
-# Universal Learning OS – INTJ 1w2 126
+# Framework: Universal Learning OS
 Use this for **any subject**: competitive programming, law, medicine, physics, engineering, languages, etc.
 The idea is **one loop, many domains**, not one method per topic.
 

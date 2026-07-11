@@ -2,7 +2,11 @@
 
 ## Entry Point
 
-`references/REFERENCES_FORMULA.md` — find your cell, deploy the formula. Nothing else to read.
+**The entire system is one file: `references/prompts/core-philosophy.md` (~400 tokens).**
+Paste it before any task. It contains the OS, all 7 profiles inline, tool classification,
+artifact contracts, and a self-evolution protocol. Nothing else is required to paste.
+
+This repo is a reference library for when you need deep knowledge — not a deployment checklist.
 
 ## Quick Reference
 
@@ -22,6 +26,26 @@
 | Token budget | `token-pack` playbook |
 | Persona | `persona` framework (Teacher/Builder/Surgeon/Warrior/Explorer) |
 | Energy level | `core-philosophy.md` (declare at session start: 20/50/80/100%) |
+| Slash commands | `/ship`, `/debug`, `/review`, `/learn` (defined in core-philosophy.md) |
+
+## MEM-Level Macros
+
+2-keystroke formula deployment via VS Code snippets (`.vscode/opencode.code-snippets`):
+
+| Keystroke | Expands to |
+|-----------|-----------|
+| `boot` + Tab | core + profile + task (universal OS boot) |
+| `ship` + Tab | core + profile + AGENTS + task |
+| `debug` + Tab | core + profile + inquisitor + problem |
+| `review` + Tab | dev-leroy + diff |
+| `learn` + Tab | learn + topic |
+| `newproj` + Tab | core + profile + dev-mode + AGENTS |
+| `design` + Tab | ui-design + task |
+| `cold` + Tab | cold start ritual (2-min re-entry) |
+| `session` + Tab | SESSION.md template |
+| `triad` + Tab | Finder/Planner/Doer multi-agent setup |
+
+Usage: open VS Code, type prefix, press Tab. Snippet pastes into any chat/editor.
 
 See `references/REFERENCES_FORMULA.md` for the full Situation × Environment matrix.
 
@@ -32,7 +56,7 @@ personal/
 ├── references/
 │   ├── REFERENCES_FORMULA.md     ← START HERE (the formula system)
 │   ├── profiles/                 ← 7 environment loadouts (prependers)
-│   ├── prompts/                  ← 12 system prompts + core-philosophy.md
+│   ├── prompts/                  ← 9 system prompts + core-philosophy.md
 │   ├── frameworks/               ← 7 architecture blueprints
 │   ├── skills/                   ← 6 skill cards
 │   ├── workflows/                ← 8 playbooks

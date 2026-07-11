@@ -761,6 +761,14 @@ Do this consistently and your agents will rarely, if ever, do manual work the br
 
 ## Three-Agent Assembly Line
 
+Map to any naming convention:
+
+| This Document | Finder/Planner/Doer | Dual-Agent Protocol |
+|---------------|---------------------|---------------------|
+| Search Agent | Finder | (context agent) |
+| Synthesis Agent | Planner | AGENT ALPHA |
+| Execution Agent | Doer | AGENT BRAVO |
+
 Extend the web-brain-agentic-hands model into three specialized agents:
 
 ### Agent 1: Search Agent
