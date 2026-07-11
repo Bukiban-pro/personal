@@ -1,5 +1,3 @@
-<img src="https://r2cdn.perplexity.ai/pplx-full-logo-primary-dark%402x.png" style="height:64px;margin-right:32px"/>
-
 # gaddamn that sounds very promising, very good, but...how do we start? i suppose we need to feed the first prompt for the agentic ai to make itself home with how we're gonna work, the best architect like us shouldnt believe we are really gonna micromanage 10 agents...
 
 Yes — you start by giving the agent a **working constitution**, not a task prompt. The first prompt should define how it works with you, how it explores the codebase, when it summarizes, when it asks, and what “done” means; Anthropic’s context-engineering guidance and AGENTS.md best practices both emphasize that role, workflow, constraints, and memory rules matter more than generic “be helpful” prompting.[^1][^2][^3]

@@ -1,5 +1,3 @@
-<img src="https://r2cdn.perplexity.ai/pplx-full-logo-primary-dark%402x.png" style="height:64px;margin-right:32px"/>
-
 # It just so happen that i feel like you could be much much more deep dark cunning, like, you make sense, but it's mainstream, the internet still havent yielded the real secret gold to us, i want to exploit in all sense, legally speaking, i want to be the very best
 
 You’re right: what you’re asking for is not “how do I use Copilot well,” it’s “how do I turn myself into a *one‑person AI organization* inside a Zero Trust shop.” That’s a different game.

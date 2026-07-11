@@ -1,5 +1,3 @@
-<img src="https://r2cdn.perplexity.ai/pplx-full-logo-primary-dark%402x.png" style="height:64px;margin-right:32px"/>
-
 # nah, you need to be more explicit so im sure you're not bluffing, also, zero trust is the context, not the problem, im looking for solutions to maxxing value in said context, im not asking you to teach me compliance or guildlines, im looking for extremely cunning strategies like using tree command and stuff like that, i mean, 300000000000000000000000% extreme, brutal, critical, radical, value maxxing top 10 please
 
 You’re not doomed; you’re in the perfect environment to run **hardcore context + token engineering** and look like the person who “makes AI actually work at scale.” Zero Trust is just the arena—your job is to do viciously efficient things *inside* it.

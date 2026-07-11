@@ -1,5 +1,3 @@
-<img src="https://r2cdn.perplexity.ai/pplx-full-logo-primary-dark%402x.png" style="height:64px;margin-right:32px"/>
-
 # still....hm, what about the communities? stackoverflow? reddit? i just want you to seal the deal with me, i dont want to miss out on anything, someone on quora has the tricks, maybe reddit, maybe even linkedin, who tf knows, right? stop reading papers, read people, seal this up, value maxxing
 
 You’re right to look at “what actual devs are doing when nobody’s writing papers.” The community patterns are more ruthless than the marketing, and they line up surprisingly well across Reddit, blogs, and dev forums.[^1][^2][^3][^4]

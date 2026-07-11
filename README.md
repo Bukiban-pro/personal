@@ -1,37 +1,50 @@
 # Personal Stash
 
-Workspace monorepo — projects, research, references, and career prep.
+Workspace monorepo — perception engineering, UI pattern library, career prep. Designed for AI-agent collaboration.
+
+## Quick Start
 
 ```
-personal/
-├── projects/
-│   ├── chefkix/              # AI cooking platform — perception module (Python, YOLOv8/RT-DETR)
-│   ├── ui-patterns/          # 634+ curated React/TS UI components (magicui, shadcn, premium clones)
-│   └── ui-gallery/           # Vite + React + Tailwind demo app
-├── career/                   # Job hunt: Java backend fresher/intern (Vietnam)
-├── research/                 # UI/UX research: patterns, premium clones, open-source kits
-├── references/
-│   ├── prompts/              # 9 AI agent system prompts
-│   ├── frameworks/           # 5 architecture/learning blueprints
-│   ├── workflows/            # Engineering process (core workflow)
-│   └── skills/               # AI skill definitions (testing spreadsheets)
-├── archives/                 # Zipped workspace backups
-└── README.md
+# UI Gallery (preview 649 components)
+npm run dev --prefix projects/ui-gallery
+
+# ChefKix smoke test
+python projects/chefkix/perception/scripts/phase1_smoke.py --output-dir runs/phase1_smoke
+
+# ChefKix API server
+uvicorn projects/chefkix/perception/service/app:app --reload
+
+# Run perception tests
+python -m pytest projects/chefkix/perception/tests/
 ```
 
-## Projects
+## What's Here
 
-- **chefkix** — Computer vision perception module for ingredient detection (YOLOv8/RT-DETR). Python, FastAPI, ONNX.
-- **ui-patterns** — 600+ copy-paste React/TS components mined from shadcn/ui, Magic UI, Aceternity, Stripe/Apple clones.
-- **ui-gallery** — Minimal Vite + React + Tailwind demo app for UI component showcase.
+| Area | What | Tech | Key File |
+|---|---|---|---|
+| **chefkix** | CV ingredient detection (scaffolded) | Python, FastAPI, YOLOv8/RT-DETR | `docs/phased-implementation-plan.md` |
+| **ui-patterns** | 649 copy-paste React/TS components | React 18, Tailwind, Framer Motion | `README.md` |
+| **ui-gallery** | Live component demo browser | Vite 5, React 18, Tailwind | `src/App.tsx` |
+| **prompts** | 10 AI agent system prompts | Markdown | Pick from table below |
+| **frameworks** | 5 architecture/learning blueprints | Markdown | `agentic-hands-2026.md` |
+| **career** | Java backend intern prep (Vietnam) | — | `developer-playbook.md` |
 
-## References
+## Prompt Quick-Pick
 
-- **prompts/** — 9 agent prompts: Jarvis Prime (full-stack execution + UX audit), Jarvis Prime ChefKix (ChefKix-specific variant), Inquisitor (AoE code review), Dev-Leroy (brutal review), investor demo, Copilot template, role definitions (product designer), LLM model selection (free tier), Phase 1 perception plan.
-- **frameworks/** — 5 blueprints: Agentic Hands 2026 (zero-budget AI stack), Web Brain (brain-hand separation), Universal Learning OS (INTJ learning loop), Dual-Agent Concurrency Protocol, Dev Mode Blueprint (2736-line universal dev UX).
-- **workflows/** — Engineering process: trunk-based development, Conventional Commits, quality gates.
-- **skills/** — Reusable AI skill: software testing spreadsheets (540-line spec).
+| Want to... | Load This |
+|---|---|
+| Work on chefkix | `references/prompts/jarvis-prime-chefkix.md` |
+| Review code | `references/prompts/inquisitor-system.md` |
+| Get brutally reviewed | `references/prompts/dev-leroy-reviewer.md` |
+| Prep an investor demo | `references/prompts/investor-demo-copilot.md` |
+| Start a new agent session | `references/prompts/agent-session-kickoff.md` |
+| Design UI components | `references/prompts/agent-role-definitions.md` |
+| Pick a free LLM | `references/prompts/llm-model-selection.md` |
 
-## Career
+## Where to Start
 
-Java backend fresher/intern prep targeting Vietnamese companies (KMS, Endava, VNG, Axon Active, ELCA Vietnam).
+- **Human, need to get something done?** Read `COOKBOOK.md` — mission-based playbook for every scenario.
+- **AI agent, just landed?** Read `AGENTS.md` — navigation rules, commands, prompt selection.
+- **Working on chefkix?** See `projects/chefkix/perception/README.md` and `docs/phased-implementation-plan.md`
+- **Browsing components?** Start at `projects/ui-patterns/README.md`
+- **Preparing for interviews?** Open `career/developer-playbook.md`
