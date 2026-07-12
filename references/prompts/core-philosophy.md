@@ -51,9 +51,10 @@ SESSION.md (maintain in project root automatically):
 
 CONTEXT-PACK (for blind web tools, no file access):
   If tool can't see files: human runs this in terminal, pastes the output.
-  Single file: cat <path> | pbcopy
-  Multi-file: find <dir> -type f | xargs awk 'BEGIN{print "=== FILE: " FILENAME " ==="} {print}'
+  Linux/Mac: find <dir> -type f | xargs awk 'BEGIN{print "=== FILE: " FILENAME " ==="} {print}'
    > /tmp/pack.txt && pbcopy < /tmp/pack.txt
+  Windows: context-pack -SourceDir <dir> -Extensions java,ts
+  Single file: cat <path> | pbcopy (Mac) | Set-Clipboard (Windows)
 
 INQUISITOR PROTOCOL (debug):
   Pass 1: Human pastes broken component. Epicenter fix only.
@@ -102,15 +103,22 @@ TAB ARCHITECTURE (free web, no API):
   You are the pipe between them. Commit SCRATCHPAD.md after each handoff.
 
 SCRIPTS (in hands/):
-  boot-session.ps1 — Opens 4 tabs, copies OS boot prompt to clipboard.
-    Run: powershell -File hands\boot-session.ps1 -Mission "what"
-    Then: paste into Claude Tab 1.
+  boot-session.ps1 — Opens 4 tabs, copies tab-specific OS boot prompts.
+    Run: boot -Mission "what"
+    Params: -Profile [unlimited/default] -Browser [auto/chrome/edge/firefox] -NoTabs
   task-to-diff.ps1 — Reads TASKS.md, collects referenced files, builds prompt.
-    Run: powershell -File hands\task-to-diff.ps1 -Task "fix auth bug"
-    Then: paste into ChatGPT Tab 2.
+    Run: task -Task "fix auth bug"
+    Params: -Profile [profile name] -Tool [chatgpt/claude/gemini]
   apply-diff.ps1 — Pastes ChatGPT output as diff, applies, tests, logs.
-    Run: Copy ChatGPT output, then: powershell -File hands\apply-diff.ps1
-    Logs to HANDS_LOG.md automatically.
+    Run: apply
+    Creates git safety branch before apply. Revert on test failure.
+  context-pack.ps1 — Windows port of context-pack.sh for blind web tools.
+    Run: context-pack -SourceDir src/auth -Extensions java,ts
+
+ALTERNATE OS BOOT (for complex sessions):
+  jarvis-prime = references/prompts/jarvis-prime-system.md (14KB — 277 lines)
+  Use instead of core for sessions requiring 3+ back-and-forths.
+  Use core for single-artifact tasks. Saves 20 min per complex session.
 
 CONTEXT INJECTION (every paste, 3 layers):
   Layer 1 — OS: core-philosophy.md URL
