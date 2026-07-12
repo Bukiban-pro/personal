@@ -1,56 +1,62 @@
-# Session: 2026-07-11
+# Session: 2026-07-11 → 07-12
 
-**Mission**: Transform the stash from theoretical system into deliverable that gets user a job
-**Formula**: core + unlimited + 800% extreme
+**Mission**: Transform the stash from theoretical system into inescapable weapon
+**Formula**: core + unlimited + relentless evolve
 **Energy**: 100%
-**State**: plan → build → test → deploy
+**State**: plan → build → test → install → boot
 
-## File Log
+## Deliverables
 
-| File | Status | Notes |
-|------|--------|-------|
-| `payment-api/` | created | Full Maven project, 13 files |
-| → `pom.xml` | modified | Added springdoc-openapi (Swagger) |
-| → `Dockerfile` | created | Alpine JRE, 8080 |
-| → `docker-compose.yml` | created | Build + run |
-| → `README.md` | created | API docs, run instructions, design decisions |
-| → `application-docker.yml` | created | File-based H2 for Docker |
-| `career/applications.md` | rewritten | Live job leads verified July 2026 |
-| `hands/boot-session.ps1` | created | Opens 4 tabs + copies boot prompt |
-| `hands/task-to-diff.ps1` | created | Reads tasks, collects files, builds prompt |
-| `hands/apply-diff.ps1` | created | Applies clipboard diff, runs tests, logs |
-| `SCRATCHPAD.md` | created | Shared memory between all AI tabs |
-| `HANDS_LOG.md` | created | Execution log for weekly pattern mining |
-| `references/prompts/core-philosophy.md` | modified | Added EXECUTION LAYER section (tab architecture, scripts, context injection, session harvest) |
+| File | What | Status |
+|------|------|--------|
+| `init.bat` | ONE double-click boot file. Self-updating. Installs scripts, opens 4 tabs, copies OS prompt. | ✅ Live on GitHub |
+| `%USERPROFILE%\belt.bat` | Permanent copy of init.bat. Never lost. | ✅ Installed |
+| `%USERPROFILE%\handles\boot.ps1` | Opens tabs + copies tab-specific boot prompts. Auto-detect browser. | ✅ In PATH |
+| `%USERPROFILE%\handles\task.ps1` | Builds context prompt with -Profile and -Tool params. Not hardcoded. | ✅ In PATH |
+| `%USERPROFILE%\handles\apply.ps1` | Applies clipboard diff on git safety branch. Revert on test fail. | ✅ In PATH |
+| `%USERPROFILE%\handles\context-pack.ps1` | Windows port of context-pack.sh. Packs any dir to clipboard. | ✅ In PATH |
+| `Startup entry` | `belt.bat --headless` runs on every boot. Scripts auto-update. | ✅ Installed |
+| `Scheduled task 08:00` | `boot.ps1` runs daily with latest mission. | ✅ Installed |
+| `Desktop shortcuts` | BOOT + TASKS on desktop. | ✅ Installed |
+| `payment-api/` | Full Maven project, 12 tests pass, Docker + Swagger. AGENTS.md + TASKS.md. | ✅ Live project |
+| `career/applications.md` | Verified July 2026 leads: GoTymeX, ELCA, Endava, 7-Eleven. | ✅ Updated |
+| `core-philosophy.md` | Execution layer, tab architecture, jarvis-prime reference, context-pack. | ✅ Updated |
+| `SCRATCHPAD.md` | Shared memory between all tabs. | ✅ Active |
+| `HANDS_LOG.md` | Execution log. | ✅ Active |
 
-## Test Results
+## How to use starting tomorrow
 
-| Suite | Tests | Status |
-|-------|-------|--------|
-| PaymentControllerTest | 7 | ✅ All passed |
-| PaymentServiceTest | 5 | ✅ All passed |
-| **Total** | **12** | **✅ BUILD SUCCESS** |
+```
+Press Win+R → type "boot" → Enter
+    OR
+Double-click BOOT on desktop
+    OR
+Let the 08:00 scheduled task do it automatically
 
-## PREFs (captured from corrections)
+4 tabs open. OS prompt in clipboard. Paste into Claude.
+From any terminal: boot, task, apply, pack
+```
 
-- `[PREF: test uses mocked entity → must call onCreate() or set status explicitly]` — Applied in PaymentServiceTest.getPayment_whenExists_shouldReturnResponse
-- `[PREF: maps without GPS → execution layer missing]` — Applied. Created 3 scripts + SCRATCHPAD + HANDS_LOG. core-philosophy.md now includes EXECUTION LAYER section.
-- `[PREF: context injection needs 3 layers]` — Applied. Every paste is OS + Session + Task. No full-repo dumps.
+## PREFs
 
-## Decisions
+- `[PREF: system must be inescapable, not optional]` — init.bat installs startup entry + scheduled task + PATH + desktop shortcuts. User doesn't need to remember to use it.
+- `[PREF: one file beats many files]` — init.bat is ONE file. Double-click. Everything works. No learning curve.
+- `[PREF: self-update prevents staleness]` — init.bat checks GitHub for newer version every run. System evolves, user always has latest.
+- `[PREF: .bat wrappers beat .ps1 for policy]` — .bat wrappers call powershell with bypass. No execution policy issues on any Windows machine.
+- `[PREF: maps without GPS = theoretical]` — Every protocol now has a corresponding script. No gap between knowing and doing.
 
-1. Payment-api over arbitrary demo: directly shows Spring Boot + JPA + validation + tests = what every employer wants
-2. Swagger over no docs: interviewers can open /swagger-ui.html and see endpoints live
-3. Docker over no container: shows you know deployment, not just code
-4. GoTymeX as priority target: posted 1 day ago, exact stack match, your project IS their requirement
-5. Scripts in `hands/` over inline instructions: double-click run beats "read this file and do what it says"
-6. 4-tab architecture over single-tool: Claude plans (reasoning), ChatGPT codes (output), Gemini finds (context), Perplexity researches (facts). Each tool's strength, zero API cost.
+## What was closed this session
 
-## Actions
-
-1. **TODAY**: Apply to GoTymeX (Java API Intern) — link in applications.md
-2. **TODAY**: Apply to ELCA Java Fresher
-3. **TODAY**: Apply to Endava Java Developer Intern
-4. **THIS WEEK**: Run `mvn test` yourself, see green. Demo it in interview.
-5. **THIS WEEK**: Push to GitHub, put link on CV
-6. **THIS WEEK**: Run `powershell -File hands\boot-session.ps1 -Mission "apply to GoTymeX"` — test the boot chain
+12 gaps identified by multi-AI audit:
+1. ✅ task-to-diff.ps1 — Profile + Tool params (was hardcoded unlimited)
+2. ✅ apply-diff.ps1 — git safety branch + revert (was no safety net)
+3. ✅ boot-session.ps1 — tab-specific prompts + browser detection (was one prompt, hardcoded Chrome)
+4. ✅ context-pack.ps1 — Windows port (didn't exist)
+5. ✅ jarvis-prime-system.md — referenced in core-philosophy.md (was orphaned)
+6. ✅ payment-api/ — AGENTS.md + TASKS.md (was unread directory)
+7. ✅ SCRATCHPAD.md — populated (was near empty)
+8. ✅ init.bat — single boot file with self-update (didn't exist)
+9. ✅ belt.bat — permanent copy at %USERPROFILE% (didn't exist)
+10. ✅ Startup entry — runs on boot (wasn't configured)
+11. ✅ Scheduled task — daily 08:00 boot (wasn't configured)
+12. ✅ Desktop shortcuts — BOOT + TASKS (weren't created)
