@@ -9,6 +9,8 @@ You don't need it. core-philosophy.md contains everything inline.
 | Situation | Unlimited | Locked-Down | Zero-Budget | Token-Limited | **Adaptive** | **Stealth** | **Corp-Sec** |
 |-----------|-----------|-------------|-------------|---------------|--------------|-------------|--------------|
 | **Ship feature** | `core + unlimited + AGENTS + task` | `core + locked-down + AGENTS + task` | `core + zero-budget + task` | `core + token-limited + task` | `core + adaptive + AGENTS + task` | `core + stealth + local-pack + task` | `core + corp-sec + AGENTS + task` |
+| **Complex feature (3+ turns)** | `jarvis + unlimited + task` | `jarvis + locked-down + task` | — | — | `jarvis + adaptive + task` | — | `jarvis + corp-sec + task` |
+| **UI audit / ICK hunt** | `jarvis + unlimited` | — | — | — | — | — | — |
 | **Review code** | `inquisitor` | `inquisitor` (offline) | `dev-leroy` (compressed) | `inquisitor` (grep only) | `adaptive + dev-leroy + task` | `dev-leroy` (compressed) + `local-pack` | `corp-sec + dev-leroy` |
 | **Debug** | `core + unlimited + inquisitor` | `core + locked-down + problem` | `core + zero-budget + problem` | `core + token-limited + problem` | `core + adaptive + problem` | `core + stealth + problem` | `core + corp-sec + problem` |
 | **Interview prep** | `learn + career` | `learn + career` (offline) | `learn + career` (compressed) | `learn + career` (cheatsheet) | `adaptive + learn + career` | `learn` (offline) + `career` (cheatsheet) | — |
@@ -18,11 +20,14 @@ You don't need it. core-philosophy.md contains everything inline.
 | **Learn topic** | `learn` | `learn` (offline) | `learn` (3-pass) | `learn` (cheatsheet) | `adaptive + learn` | `learn` (offline) | — |
 | **Build infra** | `dev-mode` | `dev-mode` (local) | — | — | `adaptive + dev-mode` | `dev-mode` (offline) | — |
 | **Run multi-agent** | `protocol + web-brain` | — | — | — | `adaptive + protocol` | — | — |
+| **Unknown repo** | `INIT.md + repo-recon` | — | — | — | `INIT.md + repo-recon` | — | — |
+| **UI audit / ICK hunt** | `jarvis` | — | — | — | — | — | — |
 
 ## Key
 
 ```
-core        = references/prompts/core-philosophy.md    [the prepender]
+core        = references/prompts/core-philosophy.md    [the prepender — use for quick tasks]
+jarvis      = references/prompts/jarvis-prime-system.md [apex OS — 14KB, use for complex 3+ turn sessions]
 unlimited   = references/profiles/unlimited.md
 locked-down = references/profiles/locked-down.md
 zero-budget = references/profiles/zero-budget.md

@@ -24,7 +24,7 @@ if %errorlevel% equ 42 (start "" "%SELF%" --headless & exit /b)
 if not exist "%HANDLES%" mkdir "%HANDLES%" >nul 2>&1
 
 :: Download scripts
-for %%s in (boot.ps1 task.ps1 apply.ps1 context-pack.ps1) do (
+for %%s in (boot.ps1 task.ps1 apply.ps1 context-pack.ps1 repo-recon.ps1 archive-session.ps1) do (
   powershell -ExecutionPolicy Bypass -Command "try{$r=Invoke-WebRequest '%RAW%/hands/%%s' -UseBasicParsing -TimeoutSec 5;[System.IO.File]::WriteAllText('%HANDLES%\%%s',$r.Content)}catch{}"
 )
 
@@ -33,6 +33,8 @@ echo @echo off ^& powershell -ExecutionPolicy Bypass -File "%HANDLES%\boot.ps1" 
 echo @echo off ^& powershell -ExecutionPolicy Bypass -File "%HANDLES%\task.ps1" %%* > "%HANDLES%\task.bat"
 echo @echo off ^& powershell -ExecutionPolicy Bypass -File "%HANDLES%\apply.ps1" %%* > "%HANDLES%\apply.bat"
 echo @echo off ^& powershell -ExecutionPolicy Bypass -File "%HANDLES%\context-pack.ps1" %%* > "%HANDLES%\pack.bat"
+echo @echo off ^& powershell -ExecutionPolicy Bypass -File "%HANDLES%\repo-recon.ps1" %%* > "%HANDLES%\recon.bat"
+echo @echo off ^& powershell -ExecutionPolicy Bypass -File "%HANDLES%\archive-session.ps1" %%* > "%HANDLES%\archive.bat"
 
 :: Add to PATH
 for /f "tokens=2*" %%p in ('reg query "HKCU\Environment" /v PATH 2^>nul') do set "USER_PATH=%%q"

@@ -113,7 +113,13 @@ SCRIPTS (in hands/):
     Run: apply
     Creates git safety branch before apply. Revert on test failure.
   context-pack.ps1 — Windows port of context-pack.sh for blind web tools.
-    Run: context-pack -SourceDir src/auth -Extensions java,ts
+    Run: pack -SourceDir src/auth -Extensions java,ts
+  repo-recon.ps1 — Instant unknown repo intelligence. File tree + packages + git log.
+    Run: repo-recon -RepoPath .
+    Paste output + INIT.md into any AI for instant codebase understanding.
+  archive-session.ps1 — Weekly SESSION.md archiver.
+    Run: archive-session
+    Appends to SESSION_HISTORY.md, resets SESSION.md fresh.
 
 ALTERNATE OS BOOT (for complex sessions):
   jarvis-prime = references/prompts/jarvis-prime-system.md (14KB — 277 lines)
@@ -141,10 +147,29 @@ SESSION HARVEST (end every session, command to Claude Tab 1):
    5. Formula that worked: [situation × environment → formula used]
    Append to SESSION.md. Sign HARVEST + timestamp."
 
+TRIAD HANDSHAKE PROTOCOL (cross-agent handoff envelope):
+  HANDOFF → [RECIPIENT_ROLE]
+  FROM: [YOUR_ROLE]
+  SESSION: [SESSION_ID]
+  ---
+  [CONTENT]
+  ---
+  EXPECTS: [what recipient should do with this]
+  Example: Finder outputs → you paste to Planner → continues. Clean relay.
+
+CLAIM.md (root file): prevents multi-agent file conflicts.
+  Before any agent touches a file, check CLAIM.md.
+  If claimed, wait or work elsewhere. No merge conflicts.
+
+INIT.md (root file): single-page master key for any unknown environment.
+  Paste into any unknown tool (ChatGPT web, Claude, Copilot in unknown IDE).
+  One paste installs the full OS. Agent reads URLs, adopts system, executes.
+
 SHARED MEMORY FILES:
   SCRATCHPAD.md — All tabs read/write. Git commits it. Shared brain.
-  HANDS_LOG.md — Every apply-diff.ps1 run logged. Weekly pattern mining.
+  HANDS_LOG.md — Every script run auto-logs. Weekly pattern mining.
   SESSION.md — Always current. Cold start reads this.
+  SESSION_HISTORY.md — Weekly archive of SESSION.md. Run hands/archive-session.ps1.
 
 [HUMAN COCKPIT — your half of the Jaeger]
 

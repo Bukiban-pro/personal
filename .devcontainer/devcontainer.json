@@ -1,0 +1,15 @@
+{
+  "name": "Jarvis Prime Dev Container",
+  "image": "mcr.microsoft.com/devcontainers/universal:2",
+  "postCreateCommand": "echo 'Jarvis OS loaded.' && find /workspaces -name '*.ps1' > /tmp/jarvis-scripts.txt",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-vscode.powershell",
+        "GitHub.copilot",
+        "ms-python.python",
+        "vscjava.vscode-java-pack"
+      ]
+    }
+  }
+}

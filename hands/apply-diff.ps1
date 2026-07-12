@@ -34,6 +34,12 @@ Write-Host "=== DIFF REVIEW ===" -ForegroundColor Cyan
 git -C $RepoPath diff --stat HEAD
 Write-Host "---" -ForegroundColor DarkGray
 
+# Stash guard
+$stashResult = git -C $RepoPath stash push -m "hands-pre-apply-$(Get-Date -Format 'HHmmss')" 2>&1
+$stashCreated = $stashResult -notmatch "No local changes"
+if ($stashCreated) { Write-Host "Working changes stashed." -ForegroundColor DarkGray }
+
+# Safety branch
 $safeBranch = "hands-$(Get-Date -Format 'yyyyMMdd-HHmmss')"
 git -C $RepoPath checkout -b $safeBranch 2>&1 | Out-Null
 Write-Host "Safety branch: $safeBranch" -ForegroundColor DarkGray
@@ -42,7 +48,8 @@ $confirm = Read-Host "Apply this diff? (y/n)"
 if ($confirm -ne 'y') {
     git -C $RepoPath checkout - 2>&1 | Out-Null
     git -C $RepoPath branch -D $safeBranch 2>&1 | Out-Null
-    Write-Host "Reverted to original branch. Safety branch deleted." -ForegroundColor Yellow
+    if ($stashCreated) { git -C $RepoPath stash pop 2>&1 | Out-Null }
+    Write-Host "Reverted. Clean state." -ForegroundColor Yellow
     Write-Host "Diff saved to $PatchFile." -ForegroundColor Yellow
     exit 0
 }
@@ -52,9 +59,10 @@ if ($LASTEXITCODE -ne 0) {
     Write-Host "FAILED to apply diff. Check $PatchFile for errors." -ForegroundColor Red
     git -C $RepoPath checkout - 2>&1 | Out-Null
     git -C $RepoPath branch -D $safeBranch 2>&1 | Out-Null
+    if ($stashCreated) { git -C $RepoPath stash pop 2>&1 | Out-Null }
     $log = "| $(Get-Date -Format 'yyyy-MM-dd HH:mm') | APPLY FAILED | see $PatchFile |"
     if (-not (Test-Path $logPath)) {
-        Set-Content $logPath "# HANDS_LOG.md`n`n| Timestamp | Action | Tests | Patch |`n|-----------|--------|-------|-------|"
+        Set-Content $logPath "# HANDS_LOG.md`n`n| Timestamp | Action | Details | Branch |`n|-----------|--------|--------|--------|"
     }
     Add-Content $logPath $log
     exit 1
@@ -62,6 +70,7 @@ if ($LASTEXITCODE -ne 0) {
 
 Write-Host "Diff applied successfully on branch: $safeBranch" -ForegroundColor Green
 
+$exitCode = -1
 if ($TestCommand -ne "") {
     Write-Host "Running tests: $TestCommand" -ForegroundColor Cyan
     $testResult = Invoke-Expression "cd '$RepoPath' && $TestCommand" 2>&1
@@ -71,23 +80,24 @@ if ($TestCommand -ne "") {
     }
     else {
         Write-Host "TESTS FAILED (exit code: $exitCode)" -ForegroundColor Red
-        $revert = Read-Host "Tests FAILED. Revert to original branch? (y/n)"
-        if ($revert -eq 'y') {
+        $r = Read-Host "Nuke and revert? (y/n)"
+        if ($r -eq 'y') {
             git -C $RepoPath checkout - 2>&1 | Out-Null
             git -C $RepoPath branch -D $safeBranch 2>&1 | Out-Null
-            Write-Host "Reverted. Safety branch deleted." -ForegroundColor Yellow
+            if ($stashCreated) { git -C $RepoPath stash pop 2>&1 | Out-Null }
+            Write-Host "Clean. You are back where you started." -ForegroundColor Yellow
         }
     }
     Write-Host $testResult
-    $log = "| $(Get-Date -Format 'yyyy-MM-dd HH:mm') | APPLIED | tests=$exitCode | $safeBranch |"
+    $log = "| $(Get-Date -Format 'yyyy-MM-dd HH:mm') | APPLIED | tests=$exitCode branch=$safeBranch | $PatchFile |"
 }
 else {
-    $log = "| $(Get-Date -Format 'yyyy-MM-dd HH:mm') | APPLIED | no-tests | $safeBranch |"
+    $log = "| $(Get-Date -Format 'yyyy-MM-dd HH:mm') | APPLIED | no-tests branch=$safeBranch | $PatchFile |"
 }
 
 if (-not (Test-Path $logPath)) {
-    Set-Content $logPath "# HANDS_LOG.md`n`n| Timestamp | Action | Tests | Patch |`n|-----------|--------|-------|-------|"
+    Set-Content $logPath "# HANDS_LOG.md`n`n| Timestamp | Action | Details | Branch |`n|-----------|--------|--------|--------|"
 }
 Add-Content $logPath $log
 Write-Host "Logged to HANDS_LOG.md" -ForegroundColor Green
-Write-Host "Branch: $safeBranch — merge or delete after verification." -ForegroundColor Cyan
+Write-Host "Branch: $safeBranch — merge to main after verification." -ForegroundColor Cyan

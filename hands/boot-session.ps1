@@ -12,6 +12,9 @@ $coreUrl = "https://raw.githubusercontent.com/Bukiban-pro/personal/main/referenc
 $sessionState = ""
 if (Test-Path $sessionPath) {
     $sessionState = Get-Content $sessionPath -Raw
+    if ($sessionState.Length -gt 1000) {
+        $sessionState = $sessionState.Substring(0, 1000) + "`n... [TRUNCATED]"
+    }
 }
 
 $tabs = @(
@@ -21,36 +24,29 @@ $tabs = @(
     @{ Label="Perplexity (Web)";   Url="https://perplexity.ai";       PromptPrefix="You are the WEB FACT-CHECKER. Verify claims, find docs, check dates." }
 )
 
-$bootPrompts = @()
-$bootPrompts += "=============================="
-$bootPrompts += "BOOT SEQUENCE — copy per tab:"
-$bootPrompts += "=============================="
-$bootPrompts += ""
+$tmpDir = "$env:TEMP\jarvis-boot-$(Get-Date -Format 'HHmmss')"
+New-Item -ItemType Directory -Path $tmpDir -Force | Out-Null
 
-foreach ($tab in $tabs) {
+for ($i = 0; $i -lt $tabs.Count; $i++) {
     $p = @"
---- $($tab.Label) ---
 Read and adopt: $coreUrl
-$($tab.PromptPrefix)
+$($tabs[$i].PromptPrefix)
 
 MISSION: $Mission
 PROFILE: $Profile
 SESSION:
 $sessionState
 "@
-    $bootPrompts += $p
-    $bootPrompts += ""
+    Set-Content -Path "$tmpDir\tab$($i+1).txt" -Value $p -Encoding UTF8
 }
 
-$allPrompts = $bootPrompts -join "`n"
-Set-Clipboard $allPrompts
+Set-Clipboard (Get-Content "$tmpDir\tab1.txt" -Raw)
 
 if (-not $NoTabs) {
     if ($Browser -eq "auto") {
         $browsers = @("chrome", "msedge", "firefox")
         foreach ($b in $browsers) {
-            $check = Get-Process -Name $b -ErrorAction SilentlyContinue
-            if ($check) {
+            if (Get-Process -Name $b -ErrorAction SilentlyContinue) {
                 $Browser = $b
                 break
             }
@@ -59,7 +55,6 @@ if (-not $NoTabs) {
     }
 
     $urls = $tabs | ForEach-Object { $_.Url }
-
     switch ($Browser.ToLower()) {
         "chrome"  { Start-Process "chrome"  "-new-window $($urls -join ' ')" }
         "msedge"  { Start-Process "msedge"  "-new-window $($urls -join ' ')" }
@@ -69,14 +64,18 @@ if (-not $NoTabs) {
     }
 }
 
-Write-Host "=== BOOT SESSION ===" -ForegroundColor Cyan
-Write-Host "Profile: $Profile" -ForegroundColor Yellow
-Write-Host "Mission: $Mission" -ForegroundColor Yellow
-Write-Host "Browser: $Browser" -ForegroundColor Yellow
-Write-Host "Tabs: Claude (Planner), ChatGPT (Doer), Gemini (Finder), Perplexity (Web)" -ForegroundColor Green
-Write-Host "4 tab-specific boot prompts copied to clipboard." -ForegroundColor Green
-Write-Host "PASTE INTO EACH TAB:" -ForegroundColor Magenta
-Write-Host "  Tab 1 Claude → paste block 1 (Planner)" -ForegroundColor Cyan
-Write-Host "  Tab 2 ChatGPT → paste block 2 (Doer)" -ForegroundColor Cyan
-Write-Host "  Tab 3 Gemini → paste block 3 (Finder)" -ForegroundColor Cyan
-Write-Host "  Tab 4 Perplexity → paste block 4 (Web)" -ForegroundColor Cyan
+Write-Host "=== BOOT SEQUENCE ===" -ForegroundColor Cyan
+Write-Host "Profile: $Profile | Mission: $Mission | Browser: $Browser" -ForegroundColor Yellow
+Write-Host "" -ForegroundColor Cyan
+Write-Host "Tab 1 (Claude — Planner) COPIED. Paste now." -ForegroundColor Green
+
+for ($i = 2; $i -le $tabs.Count; $i++) {
+    Write-Host "When Tab $($i-1) is booted, press ENTER → will copy Tab $i ($($tabs[$i-1].Label))" -ForegroundColor DarkGray
+    $null = Read-Host
+    Set-Clipboard (Get-Content "$tmpDir\tab$i.txt" -Raw)
+    Write-Host "Tab $i ($($tabs[$i-1].Label)) COPIED. Paste now." -ForegroundColor Green
+}
+
+Write-Host ""
+Write-Host "All 4 tabs booted. SCRATCHPAD.md is shared memory." -ForegroundColor Cyan
+Write-Host "Commit SCRATCHPAD.md after each tab output." -ForegroundColor DarkGray
