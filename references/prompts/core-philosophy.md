@@ -1,3 +1,10 @@
+# ARCHIVE — This file is preserved for history.
+
+**The system is now one file: `BELT.md` at project root.**
+Read that instead. Everything below is archive.
+
+---
+
 # core — paste before any task. The entire system in one file.
 
 ```

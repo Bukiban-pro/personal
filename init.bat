@@ -48,7 +48,7 @@ if defined HEADLESS goto :done
 
 start "" "chrome" "https://claude.ai/new" "https://chatgpt.com" "https://gemini.google.com" "https://perplexity.ai"
 
-powershell -ExecutionPolicy Bypass -Command "$s='';$sp='%USERPROFILE%\references\session\SESSION.md';if(Test-Path $sp){$s=(gc $sp -Raw).Substring(0,[Math]::Min(500,(gc $sp -Raw).Length))};$p='Read and adopt: %RAW%/references/prompts/core-philosophy.md';$p+='`n`nSESSION:`n'+$s+'`n`nBoot the OS. Show PLAN.md.';Set-Clipboard $p"
+powershell -ExecutionPolicy Bypass -Command "$s='';$sp='%USERPROFILE%\references\session\SESSION.md';if(Test-Path $sp){$s=(gc $sp -Raw).Substring(0,[Math]::Min(500,(gc $sp -Raw).Length))};$p='Read and adopt: %RAW%/BELT.md';$p+='`n`nSESSION:`n'+$s+'`n`nBoot the OS. Show PLAN.md.';Set-Clipboard $p"
 echo   4 tabs opened. OS prompt copied to clipboard.
 goto :done
 
@@ -79,7 +79,7 @@ powershell -ExecutionPolicy Bypass -Command "$app=New-Object -ComObject Shell.Ap
 :: Run initial boot
 echo   Running initial boot...
 start "" "chrome" "https://claude.ai/new" "https://chatgpt.com" "https://gemini.google.com" "https://perplexity.ai"
-powershell -ExecutionPolicy Bypass -Command "$s='';$sp='%USERPROFILE%\references\session\SESSION.md';if(Test-Path $sp){$s=(gc $sp -Raw).Substring(0,[Math]::Min(500,(gc $sp -Raw).Length))};$p='Read and adopt: %RAW%/references/prompts/core-philosophy.md';$p+='`n`nSESSION:`n'+$s+'`n`nBoot the OS. Show PLAN.md.';Set-Clipboard $p"
+powershell -ExecutionPolicy Bypass -Command "$s='';$sp='%USERPROFILE%\references\session\SESSION.md';if(Test-Path $sp){$s=(gc $sp -Raw).Substring(0,[Math]::Min(500,(gc $sp -Raw).Length))};$p='Read and adopt: %RAW%/BELT.md';$p+='`n`nSESSION:`n'+$s+'`n`nBoot the OS. Show PLAN.md.';Set-Clipboard $p"
 echo   Booted. OS prompt in clipboard.
 echo.
 echo === INSTALL COMPLETE ===

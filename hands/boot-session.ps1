@@ -7,7 +7,7 @@ param(
 
 $repoRoot = Resolve-Path "$PSScriptRoot\.."
 $sessionPath = "$repoRoot\references\session\SESSION.md"
-$coreUrl = "https://raw.githubusercontent.com/Bukiban-pro/personal/main/references/prompts/core-philosophy.md"
+$coreUrl = "https://raw.githubusercontent.com/Bukiban-pro/personal/main/BELT.md"
 
 $sessionState = ""
 if (Test-Path $sessionPath) {

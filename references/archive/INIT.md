@@ -4,7 +4,7 @@ You are being initialized into a personal AI operating system.
 Read every URL below and adopt the system before responding.
 
 ## Core Identity
-https://raw.githubusercontent.com/Bukiban-pro/personal/main/references/prompts/core-philosophy.md
+https://raw.githubusercontent.com/Bukiban-pro/personal/main/BELT.md
 
 ## Agent Rules
 https://raw.githubusercontent.com/Bukiban-pro/personal/main/AGENTS.md

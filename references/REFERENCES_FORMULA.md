@@ -1,8 +1,8 @@
 # REFERENCES FORMULA — Master Deployment System (Backup)
 
-**The system is one file: `references/prompts/core-philosophy.md`. Paste it. That's it.**
+**The system is one file: `BELT.md` at project root. Paste it. That's it.**
 This file is a supplementary backup for the situation × environment matrix.
-You don't need it. core-philosophy.md contains everything inline.
+You don't need it. BELT.md contains everything inline.
 
 ## Situation × Environment Matrix
 

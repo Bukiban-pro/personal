@@ -21,7 +21,7 @@ $outputSpec = switch ($toolUpper) {
 
 $prompt = @"
 You are operating under my engineering OS.
-Read and adopt: https://raw.githubusercontent.com/Bukiban-pro/personal/main/references/prompts/core-philosophy.md
+Read and adopt: https://raw.githubusercontent.com/Bukiban-pro/personal/main/BELT.md
 
 PROFILE: $Profile
 TARGET TOOL: $toolUpper
