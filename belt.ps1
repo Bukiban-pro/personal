@@ -1,7 +1,20 @@
-﻿$scriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
-$cwd = Get-Location
-$prompt = Get-Content (Join-Path $scriptDir "BELT.md") -Raw
+﻿param([switch]$Save)
 
+$cwd = Get-Location
+$scriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
+$sessionFile = Join-Path $cwd "SESSION.md"
+$promptFile = Join-Path $scriptDir "BELT.md"
+
+Add-Type -AssemblyName System.Windows.Forms
+
+if ($Save) {
+  $clip = [System.Windows.Forms.Clipboard]::GetText()
+  Set-Content $sessionFile $clip -Encoding UTF8
+  Write-Host "Session saved to SESSION.md"
+  return
+}
+
+$prompt = Get-Content $promptFile -Raw
 $context = @()
 $context += "`n## CONTEXT`n"
 $context += "Directory: $cwd"
@@ -33,16 +46,21 @@ if (Test-Path $readmePath) {
   if ($readme) { $context += "`nREADME:`n" + ($readme -join "`n") }
 }
 
+if (Test-Path $sessionFile) {
+  $carry = Get-Content $sessionFile -Raw
+  $context += "`n## CARRY`n" + $carry
+}
+
 $final = $prompt + ($context -join "`n")
 
-Add-Type -AssemblyName System.Windows.Forms
 [System.Windows.Forms.Clipboard]::SetText($final)
 
 Write-Host ""
 Write-Host "BELT loaded -"
 if ($pkg) { Write-Host "  Stack: $pkg" }
 if ($gitLog) { Write-Host "  Commits: $((@($gitLog)).Count)" }
-Write-Host "  Context auto-detected. Paste into any AI."
-Write-Host "  Protocol activates. Work begins."
+if (Test-Path $sessionFile) { Write-Host "  Session carryover loaded" }
+Write-Host "  Paste into AI. Protocol + context ready."
+Write-Host "  After AI responds: copy NEXT line, run 'belt -save'"
 
 Start-Process "https://claude.ai/new"
