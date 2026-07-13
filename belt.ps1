@@ -4,6 +4,7 @@ $cwd = Get-Location
 $scriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
 $sessionFile = Join-Path $cwd "SESSION.md"
 $promptFile = Join-Path $scriptDir "BELT.md"
+$claudeMdFile = Join-Path $cwd "CLAUDE.md"
 
 Add-Type -AssemblyName System.Windows.Forms
 
@@ -51,16 +52,77 @@ if (Test-Path $sessionFile) {
   $context += "`n## CARRY`n" + $carry
 }
 
-$final = $prompt + ($context -join "`n")
-
-[System.Windows.Forms.Clipboard]::SetText($final)
+$fullPrompt = $prompt + ($context -join "`n")
 
 Write-Host ""
 Write-Host "BELT loaded -"
 if ($pkg) { Write-Host "  Stack: $pkg" }
 if ($gitLog) { Write-Host "  Commits: $((@($gitLog)).Count)" }
 if (Test-Path $sessionFile) { Write-Host "  Session carryover loaded" }
-Write-Host "  Paste into AI. Protocol + context ready."
-Write-Host "  After AI responds: copy NEXT line, run 'belt -save'"
 
-Start-Process "https://claude.ai/new"
+Write-Host ""
+Write-Host "  Scanning for AI tools..."
+Write-Host ""
+
+$claudeCmd = Get-Command "claude" -ErrorAction SilentlyContinue
+$opencodeCmd = Get-Command "opencode" -ErrorAction SilentlyContinue
+
+if ($claudeCmd) {
+  Write-Host "  [1] Claude Code detected. Writing CLAUDE.md..."
+  Set-Content $claudeMdFile $fullPrompt -Encoding UTF8
+  Write-Host "  CLAUDE.md written. Starting Claude..."
+  Start-Process $claudeCmd.Source -WorkingDirectory $cwd
+}
+elseif ($opencodeCmd) {
+  Write-Host "  [1] OpenCode detected. Starting..."
+  Set-Content $claudeMdFile $fullPrompt -Encoding UTF8
+  Start-Process $opencodeCmd.Source -WorkingDirectory $cwd
+}
+else {
+  Write-Host "  [1] No agent CLI found."
+
+  try {
+    $ollamaTest = Invoke-RestMethod -Uri "http://localhost:11434/api/tags" -Method Get -TimeoutSec 2 -ErrorAction Stop
+    Write-Host "  [2] Ollama detected. Running local..."
+    Write-Host ""
+
+    $models = $ollamaTest.models.name
+    if (-not $models -or $models.Count -eq 0) { throw "No models" }
+    $preferred = @($models | Where-Object { $_ -match 'llama3.2|llama3|mistral|qwen2|deepseek' })
+    $model = if ($preferred) { $preferred[0] } else { $models[0] }
+    Write-Host "  Using: $model"
+    Write-Host ""
+
+    $body = @{
+      model = $model
+      prompt = $fullPrompt
+      stream = $false
+      options = @{ num_predict = 4096 }
+    } | ConvertTo-Json
+
+    $response = Invoke-RestMethod -Uri "http://localhost:11434/api/generate" -Method Post -Body $body -ContentType "application/json" -TimeoutSec 120
+    $output = $response.response
+
+    Write-Host ""
+    Write-Host ">> AI RESPONSE <<"
+    Write-Host "----------------"
+    Write-Host $output
+    Write-Host "----------------"
+
+    if ($output -match 'NEXT:\s*(.+)') {
+      Set-Content $sessionFile ("NEXT: " + $matches[1]) -Encoding UTF8
+      Write-Host "NEXT saved. Run 'belt' to continue."
+    }
+  }
+  catch {
+    Write-Host "  [2] No Ollama."
+    Write-Host ""
+    Write-Host "  [3] Using clipboard + browser."
+
+    [System.Windows.Forms.Clipboard]::SetText($fullPrompt)
+    Start-Process "https://claude.ai/new"
+
+    Write-Host "  Clipboard loaded. Claude opened."
+    Write-Host "  Paste. Work. Copy NEXT. Run 'belt -save'."
+  }
+}

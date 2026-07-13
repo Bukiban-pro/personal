@@ -82,3 +82,5 @@ target/
 
 # Python virtual env
 .venv/
+
+CLAUDE.md
