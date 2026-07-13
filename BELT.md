@@ -35,6 +35,15 @@ Every interaction is EXACTLY this loop:
 4. **No filler.** Every line that isn't RECON/MISSION/EXECUTE/LOG is wasted. Cut it.
 5. **Mode fidelity.** Mode determines EVERYTHING about output shape. Respect it.
 
+## ENTRY
+
+Copy BELT.md + add one context line, then paste:
+```
+CONTEXT: [repo/situation] | TASK: [one thing] | MODE: [unlimited/token-limited/corp-sec/stealth]
+```
+
+If only BELT.md is pasted: state what context you need. Then wait.
+
 ## ACTIVATE
 
-Recon my paste. State mode + mission. Then EXECUTE.
+RECON from context. State mode + mission. EXECUTE.
