@@ -11,8 +11,6 @@ if ($Install) {
   if ($path -notlike "*$scriptDir*") {
     [Environment]::SetEnvironmentVariable("Path", "$scriptDir;$path", "User")
     Write-Host "belt installed. Run 'belt' from any directory."
-  } else {
-    Write-Host "belt already in PATH."
   }
   return
 }
@@ -22,6 +20,7 @@ Add-Type -AssemblyName System.Windows.Forms
 if ($Save) {
   $clip = [System.Windows.Forms.Clipboard]::GetText()
   Set-Content $sessionFile $clip -Encoding UTF8
+  Write-Host "SESSION.md saved: $($clip.Substring(0, [Math]::Min(80, $clip.Length)))..."
   return
 }
 
@@ -34,7 +33,11 @@ $gitLog = & git log --oneline -5 2>$null
 if ($gitLog) { $context += "`nCommits:" + ($gitLog -join "`n") }
 
 $gitStatus = & git status --short 2>$null
-if ($gitStatus) { $context += "`nChanges:" + ($gitStatus -join "`n") }
+if ($gitStatus) {
+  $context += "`nChanges:" + ($gitStatus -join "`n")
+  $gitDiff = & git diff 2>$null
+  if ($gitDiff) { $context += "`nDiff:`n" + $gitDiff }
+}
 
 $pkg = ""
 if (Test-Path (Join-Path $cwd "pom.xml")) { $pkg = "Java/Maven" }
@@ -64,27 +67,34 @@ if (Test-Path $sessionFile) {
 
 $fullPrompt = $prompt + ($context -join "`n")
 
-$claudeCmd = Get-Command "claude" -ErrorAction SilentlyContinue
-$opencodeCmd = Get-Command "opencode" -ErrorAction SilentlyContinue
+function Run-ClI($src, $msg) {
+  $isPs1 = $src -like "*.ps1"
+  $outFile = Join-Path ([System.IO.Path]::GetTempPath()) "belt_out_$([System.Guid]::NewGuid().ToString('N')).txt"
+  $inFile = Join-Path ([System.IO.Path]::GetTempPath()) "belt_in_$([System.Guid]::NewGuid().ToString('N')).txt"
+  Set-Content $inFile $msg -Encoding UTF8
+  if ($isPs1) {
+    Start-Process powershell.exe -ArgumentList "-NoProfile -ExecutionPolicy Bypass -Command `"Get-Content '$inFile' | & '$src' run --auto --no-replay | Out-File '$outFile' -Encoding UTF8`"" -WorkingDirectory $cwd -NoNewWindow -Wait
+  } else {
+    Start-Process $src -ArgumentList "run --auto --no-replay < '$inFile' > '$outFile'" -WorkingDirectory $cwd -NoNewWindow -Wait
+  }
+  if (Test-Path $outFile) {
+    $out = Get-Content $outFile -Raw
+    Remove-Item $inFile, $outFile -ErrorAction SilentlyContinue
+    $clean = $out -replace '\x1b\[[0-9;]*[a-zA-Z]','' -replace '[^\x20-\x7E\n]',''
+    Write-Host $clean
+    if ($clean -match 'NEXT:\s*(.+)') { Set-Content $sessionFile ("NEXT: " + $matches[1]) -Encoding UTF8 }
+  }
+  Read-Host "`nPress Enter to exit"
+  return $true
+}
 
-if ($claudeCmd -or $opencodeCmd) {
-  $cmd = if ($claudeCmd) { $claudeCmd } else { $opencodeCmd }
+$opencodeSrc = (Get-Command "opencode" -ErrorAction SilentlyContinue).Source
+if ($opencodeSrc) { Run-ClI $opencodeSrc $fullPrompt; return }
+
+$claudeSrc = (Get-Command "claude" -ErrorAction SilentlyContinue).Source
+if ($claudeSrc) {
   Set-Content $claudeMdFile $fullPrompt -Encoding UTF8
-  $isPs1 = $cmd.Source -like "*.ps1"
-  $exe = if ($isPs1) { "powershell.exe" } else { $cmd.Source }
-  $args = if ($isPs1) { "-NoProfile -ExecutionPolicy Bypass -File `"" + $cmd.Source + "`"" } else { "" }
-  $psi = New-Object System.Diagnostics.ProcessStartInfo
-  $psi.FileName = $exe
-  $psi.Arguments = $args
-  $psi.WorkingDirectory = $cwd
-  $psi.RedirectStandardInput = $true
-  $psi.UseShellExecute = $false
-  $p = [System.Diagnostics.Process]::Start($psi)
-  Start-Sleep -Milliseconds 2000
-  $p.StandardInput.WriteLine("SCAN the repo. Identify the highest-leverage improvement. IMPLEMENT it. Do not ask. Report what you did.")
-  $p.StandardInput.WriteLine("")
-  $p.StandardInput.Flush()
-  $p.WaitForExit()
+  Run-ClI $claudeSrc $fullPrompt
   return
 }
 
@@ -96,18 +106,14 @@ try {
   $model = if ($preferred) { $preferred[0] } else { $models[0] }
   $body = @{ model = $model; prompt = $fullPrompt; stream = $false; options = @{ num_predict = 4096 } } | ConvertTo-Json
   $response = Invoke-RestMethod -Uri "http://localhost:11434/api/generate" -Method Post -Body $body -ContentType "application/json" -TimeoutSec 120
-  $output = $response.response
-  Write-Host $output
-  if ($output -match 'NEXT:\s*(.+)') {
-    Set-Content $sessionFile ("NEXT: " + $matches[1]) -Encoding UTF8
-  }
+  $out = $response.response
+  Write-Host $out
+  if ($out -match 'NEXT:\s*(.+)') { Set-Content $sessionFile ("NEXT: " + $matches[1]) -Encoding UTF8 }
   Read-Host "`nPress Enter to exit"
-  return
 }
 catch {
   [System.Windows.Forms.Clipboard]::SetText($fullPrompt)
   Start-Process "https://claude.ai/new"
-  Write-Host "Copied to clipboard. Claude opened in browser."
+  Write-Host "Copied to clipboard. Claude opened."
   Read-Host "Press Enter to exit"
-  return
 }
