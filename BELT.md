@@ -1,83 +1,25 @@
-# BELT
+# I AM THE SYSTEM
 
-```
-┌─────────────────────────────────────────────────────────────┐
-│                      THE UTILITY BELT                       │
-│     One file. Every realm. Zero friction. Double-click.     │
-│     boot → task → apply → archive. Daily. Compound. Win.   │
-└─────────────────────────────────────────────────────────────┘
-```
+## OPERATOR PROFILE
+Java backend intern in Vietnam. Job-seeking. Spring Boot 3.4. Payment API with JPA, validation, 12 tests, Docker, Swagger. English proficiency: technical read/write. Available for full-time intern, 3-6 months, immediate start.
 
-## MORNING (30s)
+## LIVE TARGETS (verified July 2026)
+1. GoTymeX Backend Java API Intern — vietnamdevs.com (posted 1d ago)
+2. ELCA Vietnam Java Fresher — elca-vn.elca-services.com
+3. Endava Java Developer Intern — smrtr.io (10-week program)
+4. 7-Eleven Vietnam Java Engineer Intern — 7elevenvn.talent.vn
+5. ant international Java Software Engineer Intern — 6 months
 
-| Step | What |
-|------|------|
-| 1 | Open terminal → `boot "today's mission"` |
-| 2 | Tab 1 (Claude) opens. Paste. It produces PLAN.md. |
-| 3 | `task -Task "top item from PLAN" -Tool chatgpt -Profile <energy>` |
-| 4 | Tab 2 (ChatGPT) pasted. It produces diff. |
-| 5 | `apply` → diff applied, tests run, logged. |
-| 6 | Repeat 3-5 until mission done. |
-| 7 | End of day → `archive` → SESSION.md resets. |
+## ASSETS
+- payment-api/ — Spring Boot 3.4, Java 21, Maven, H2, REST endpoints (POST/GET/process), state machine (PENDING→PROCESSING), DTOs as records, global exception handlers, 12 tests (7 integration + 5 unit), Docker multi-stage, Swagger UI
+- career/applications.md — tracker with checklist, interview prep per company, pitch
+- career/GoTymeX-resume.md — tailored 1-page resume
+- career/GoTymeX-cover-letter.md — 3-sentence pitch
+- career/GoTymeX-interview-prep.md — 8 specific Q&A for their technical interview
+- career/developer-playbook.md — 4-week study plan
 
-**Energy-based profile selection:**
-```
-100% → unlimited (ship fast, 5 alternatives)
- 80% → your-profile (pick from profiles below)
- 50% → token-limited (diff only, no commentary)
- 20% → boot only, read, don't ship
-```
+## PROTOCOL
+You are reading this. You now know everything about me. Your only job: produce maximum value. Every output is an asset I can use immediately. No questions. No "let me understand." Here's what I need:
 
-## PROFILES (pick one per task)
-
-| Profile | When | What it does |
-|---------|------|-------------|
-| `unlimited` | Full energy | Senior engineer. Production-grade. 5 alternatives. Ship. |
-| `token-limited` | Low energy | Code review. Just the diff. No greetings, no explanations. |
-| `corp-sec` | Audited env | [REDACTED] everything. Synthetic data. No real URLs. |
-| `stealth` | No internet | Self-contained. Zero deps. Document every command. |
-
-## COMMANDS (work from any terminal, any directory)
-
-| Command | What it does |
-|---------|-------------|
-| `boot "mission"` | Opens 4 AI tabs. Copies OS prompt. ENTER advances to next tab. |
-| `task -Task "x" -Tool y -Profile z` | Reads files, packs context, copies prompt. |
-| `apply` | Pastes clipboard diff → safety branch → apply → test → log. |
-| `pack -SourceDir src` | Packs any directory to clipboard. For blind web tools. |
-| `recon -RepoPath .` | Analyzes unknown repo. File tree + packages + git log. |
-| `archive` | Archives SESSION.md to SESSION_HISTORY.md. Fresh start. |
-
-## DEBUG (when stuck)
-
-```
-1. "what did I just do?" → git log --oneline -5 + HANDS_LOG.md
-2. "what broke?" → describe symptom. Run recon. Paste to Claude.
-3. "how to fix?" → Claude produces PLAN. task → apply. Test. Done.
-```
-
-## EVENING (30s)
-
-```
-1. Did I ship? Yes/No. If No: one sentence why.
-2. What did I learn? One sentence → append to SCRATCHPAD.md.
-3. archive → SESSION.md resets to fresh start.
-```
-
-## THE RULE
-
-```
-Every interaction makes the next one faster.
-You are not competing with others. You are competing with yesterday.
-If today didn't beat yesterday: the system failed or you did.
-Fix the system first. Fix yourself second. Both compound.
-```
-
-## QUICKSTART (first time)
-
-```powershell
-# One double-click. That's it.
-init.bat --install
-# Now reboot. Then:
-boot "first mission"
-```
+## NOW
+Tell me the single highest-leverage action. Then produce it. Format: copy-paste ready. If it's a plan: sections with exact commands. If it's content: final version I can use. If it's code: working diff. Start.
