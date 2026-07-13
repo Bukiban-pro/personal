@@ -67,16 +67,37 @@ Write-Host ""
 $claudeCmd = Get-Command "claude" -ErrorAction SilentlyContinue
 $opencodeCmd = Get-Command "opencode" -ErrorAction SilentlyContinue
 
+function Start-AiCli($cmd) {
+  $isPs1 = $cmd.Source -like "*.ps1"
+  $exe = if ($isPs1) { "powershell.exe" } else { $cmd.Source }
+  $args = if ($isPs1) { "-NoProfile -ExecutionPolicy Bypass -File `"" + $cmd.Source + "`"" } else { "" }
+  $psi = New-Object System.Diagnostics.ProcessStartInfo
+  $psi.FileName = $exe
+  $psi.Arguments = $args
+  $psi.WorkingDirectory = $cwd
+  $psi.RedirectStandardInput = $true
+  $psi.UseShellExecute = $false
+  try {
+    $p = [System.Diagnostics.Process]::Start($psi)
+    Start-Sleep -Milliseconds 2000
+    $p.StandardInput.WriteLine("SCAN the repo. Identify the highest-leverage improvement. IMPLEMENT it. Do not ask. Do not wait. Report what you did.")
+    $p.StandardInput.Flush()
+    Write-Host "  AI CLI started. Working autonomously."
+  } catch {
+    Write-Host "  Could not start AI CLI. Falling through."
+    throw
+  }
+}
+
 if ($claudeCmd) {
-  Write-Host "  [1] Claude Code detected. Writing CLAUDE.md..."
+  Write-Host "  [1] Claude Code detected."
   Set-Content $claudeMdFile $fullPrompt -Encoding UTF8
-  Write-Host "  CLAUDE.md written. Starting Claude..."
-  Start-Process $claudeCmd.Source -WorkingDirectory $cwd
+  Start-AiCli $claudeCmd
 }
 elseif ($opencodeCmd) {
-  Write-Host "  [1] OpenCode detected. Starting..."
+  Write-Host "  [1] OpenCode detected."
   Set-Content $claudeMdFile $fullPrompt -Encoding UTF8
-  Start-Process $opencodeCmd.Source -WorkingDirectory $cwd
+  Start-AiCli $opencodeCmd
 }
 else {
   Write-Host "  [1] No agent CLI found."
