@@ -12,6 +12,7 @@ dist/
 dist-ssr/
 build/
 out/
+!career/out/
 .next/
 .nuxt/
 .output/
