@@ -1,7 +1,7 @@
 ﻿param([switch]$Save, [switch]$Install)
 
 $cwd = Get-Location
-$scriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
+$scriptDir = if ($MyInvocation.MyCommand.Path) { Split-Path -Parent $MyInvocation.MyCommand.Path } else { $cwd }
 $sessionFile = Join-Path $cwd "SESSION.md"
 if (Test-Path $sessionFile) { Remove-Item $sessionFile -Force -ErrorAction SilentlyContinue }
 $promptFile = Join-Path $scriptDir "BELT.md"
@@ -10,6 +10,8 @@ $claudeMdFile = Join-Path $cwd "CLAUDE.md"
 if ($Install) {
   $p = [Environment]::GetEnvironmentVariable("Path", "User")
   if ($p -notlike "*$scriptDir*") { [Environment]::SetEnvironmentVariable("Path", "$scriptDir;$p", "User") }
+  Write-Host "belt ready."
+  Write-Host "One-liner: iex (iwr -Uri 'https://raw.githubusercontent.com/Bukiban-pro/personal/main/belt.ps1' -UseBasicParsing).Content"
   return
 }
 
@@ -21,7 +23,19 @@ if ($Save) {
   return
 }
 
-$prompt = Get-Content $promptFile -Raw
+$embeddedProtocol = @"
+Agent protocol. Works with any AI, anywhere.
+
+On reading this, IMMEDIATELY:
+1. SCAN - Analyze the context below. One sentence.
+2. MOVE - Identify the highest-leverage improvement. IMPLEMENT it. Do not ask.
+3. OUTPUT - What you did, what changed. Code, diff, results.
+4. NEXT - One line: what happened, what now.
+
+If I'm wrong, tell me. Show me better. Always end with NEXT.
+"@
+
+$prompt = if (Test-Path $promptFile) { Get-Content $promptFile -Raw } else { $embeddedProtocol }
 $ctx = @()
 $ctx += "`n## CONTEXT"
 $ctx += "Directory: $cwd"
