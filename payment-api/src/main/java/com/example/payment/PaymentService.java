@@ -41,4 +41,19 @@ public class PaymentService {
         payment = repository.save(payment);
         return PaymentResponse.from(payment);
     }
+
+    @Transactional
+    public PaymentResponse refundPayment(Long id) {
+        Payment payment = repository.findById(id)
+            .orElseThrow(() -> new PaymentNotFoundException(id));
+        if (payment.getStatus() == PaymentStatus.REFUNDED) {
+            return PaymentResponse.from(payment);
+        }
+        if (payment.getStatus() != PaymentStatus.COMPLETED) {
+            throw new IllegalStateException("Payment " + id + " cannot be refunded in " + payment.getStatus() + " state");
+        }
+        payment.setStatus(PaymentStatus.REFUNDED);
+        payment = repository.save(payment);
+        return PaymentResponse.from(payment);
+    }
 }

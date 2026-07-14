@@ -111,4 +111,54 @@ class PaymentServiceTest {
         verify(repository).findById(1L);
         verify(repository, never()).save(any());
     }
+
+    @Test
+    void refundPayment_whenCompleted_shouldRefund() {
+        Payment payment = new Payment();
+        payment.setId(1L);
+        payment.setUserId("user1");
+        payment.setAmount(new BigDecimal("100.00"));
+        payment.setCurrency("USD");
+        payment.setStatus(PaymentStatus.COMPLETED);
+
+        when(repository.findById(1L)).thenReturn(Optional.of(payment));
+        when(repository.save(any(Payment.class))).thenAnswer(inv -> inv.getArgument(0));
+
+        PaymentResponse response = service.refundPayment(1L);
+
+        assertEquals("REFUNDED", response.status());
+
+        verify(repository).findById(1L);
+        verify(repository).save(payment);
+    }
+
+    @Test
+    void refundPayment_whenAlreadyRefunded_shouldBeIdempotent() {
+        Payment payment = new Payment();
+        payment.setId(1L);
+        payment.setStatus(PaymentStatus.REFUNDED);
+
+        when(repository.findById(1L)).thenReturn(Optional.of(payment));
+
+        PaymentResponse response = service.refundPayment(1L);
+
+        assertEquals("REFUNDED", response.status());
+
+        verify(repository).findById(1L);
+        verify(repository, never()).save(any());
+    }
+
+    @Test
+    void refundPayment_whenNotCompleted_shouldThrow() {
+        Payment payment = new Payment();
+        payment.setId(1L);
+        payment.setStatus(PaymentStatus.PENDING);
+
+        when(repository.findById(1L)).thenReturn(Optional.of(payment));
+
+        assertThrows(IllegalStateException.class, () -> service.refundPayment(1L));
+
+        verify(repository).findById(1L);
+        verify(repository, never()).save(any());
+    }
 }

@@ -33,6 +33,12 @@ public class PaymentController {
         return ResponseEntity.ok(response);
     }
 
+    @PostMapping("/{id}/refund")
+    public ResponseEntity<PaymentResponse> refundPayment(@PathVariable Long id) {
+        PaymentResponse response = service.refundPayment(id);
+        return ResponseEntity.ok(response);
+    }
+
     @ExceptionHandler(PaymentNotFoundException.class)
     public ResponseEntity<String> handleNotFound(PaymentNotFoundException e) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());

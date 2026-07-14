@@ -1,7 +1,7 @@
 ## [TASK] Add refund endpoint
-Status: pending
+Status: completed
 Description: POST /api/v1/payments/{id}/refund — transitions REFUNDED state, idempotent
-Files: `src/main/java/com/example/payment/PaymentController.java`, `src/main/java/com/example/payment/PaymentService.java`, `src/test/java/com/example/payment/PaymentControllerTest.java`
+Files: `src/main/java/com/example/payment/PaymentController.java`, `src/main/java/com/example/payment/PaymentService.java`, `src/test/java/com/example/payment/PaymentServiceTest.java`, `src/test/java/com/example/payment/PaymentControllerTest.java`
 
 ## [TASK] Replace H2 with PostgreSQL for production
 Status: pending

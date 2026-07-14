@@ -113,4 +113,32 @@ class PaymentControllerTest {
         mockMvc.perform(post("/api/v1/payments/{id}/process", 99999L))
             .andExpect(status().isNotFound());
     }
+
+    @Test
+    void refundPayment_shouldReturn200() throws Exception {
+        var createRequest = new PaymentRequest("user5", new BigDecimal("150.00"), "USD");
+        String createResponse = mockMvc.perform(post("/api/v1/payments")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(createRequest)))
+            .andExpect(status().isCreated())
+            .andReturn().getResponse().getContentAsString();
+
+        PaymentResponse created = objectMapper.readValue(createResponse, PaymentResponse.class);
+
+        mockMvc.perform(post("/api/v1/payments/{id}/process", created.id()))
+            .andExpect(status().isOk());
+
+        mockMvc.perform(post("/api/v1/payments/{id}/process", created.id()))
+            .andExpect(status().isConflict())
+            .andReturn();
+
+        mockMvc.perform(post("/api/v1/payments/{id}/refund", created.id()))
+            .andExpect(status().isConflict());
+    }
+
+    @Test
+    void refundPayment_notFound_shouldReturn404() throws Exception {
+        mockMvc.perform(post("/api/v1/payments/{id}/refund", 99999L))
+            .andExpect(status().isNotFound());
+    }
 }

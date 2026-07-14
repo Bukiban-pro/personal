@@ -3,117 +3,138 @@
 $cwd = Get-Location
 $scriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
 $sessionFile = Join-Path $cwd "SESSION.md"
+if (Test-Path $sessionFile) { Remove-Item $sessionFile -Force -ErrorAction SilentlyContinue }
 $promptFile = Join-Path $scriptDir "BELT.md"
 $claudeMdFile = Join-Path $cwd "CLAUDE.md"
 
 if ($Install) {
-  $path = [Environment]::GetEnvironmentVariable("Path", "User")
-  if ($path -notlike "*$scriptDir*") {
-    [Environment]::SetEnvironmentVariable("Path", "$scriptDir;$path", "User")
-    Write-Host "belt installed. Run 'belt' from any directory."
-  }
+  $p = [Environment]::GetEnvironmentVariable("Path", "User")
+  if ($p -notlike "*$scriptDir*") { [Environment]::SetEnvironmentVariable("Path", "$scriptDir;$p", "User") }
   return
 }
 
 Add-Type -AssemblyName System.Windows.Forms
 
 if ($Save) {
-  $clip = [System.Windows.Forms.Clipboard]::GetText()
-  Set-Content $sessionFile $clip -Encoding UTF8
-  Write-Host "SESSION.md saved: $($clip.Substring(0, [Math]::Min(80, $clip.Length)))..."
+  $c = [System.Windows.Forms.Clipboard]::GetText()
+  Set-Content $sessionFile $c -Encoding UTF8
   return
 }
 
 $prompt = Get-Content $promptFile -Raw
-$context = @()
-$context += "`n## CONTEXT"
-$context += "Directory: $cwd"
+$ctx = @()
+$ctx += "`n## CONTEXT"
+$ctx += "Directory: $cwd"
 
-$gitLog = & git log --oneline -5 2>$null
-if ($gitLog) { $context += "`nCommits:" + ($gitLog -join "`n") }
+$g = & git log --oneline -5 2>$null
+if ($g) { $ctx += "`nCommits:" + ($g -join "`n") }
 
-$gitStatus = & git status --short 2>$null
-if ($gitStatus) {
-  $context += "`nChanges:" + ($gitStatus -join "`n")
-  $gitDiff = & git diff 2>$null
-  if ($gitDiff) { $context += "`nDiff:`n" + $gitDiff }
-}
+$s = & git status --short 2>$null
+if ($s) { $ctx += "`nChanges:" + ($s -join "`n"); $d = & git diff 2>$null; if ($d) { $ctx += "`nDiff:`n" + $d } }
 
 $pkg = ""
-if (Test-Path (Join-Path $cwd "pom.xml")) { $pkg = "Java/Maven" }
-elseif (Test-Path (Join-Path $cwd "package.json")) { $pkg = "Node" }
-elseif (Test-Path (Join-Path $cwd "Cargo.toml")) { $pkg = "Rust" }
-elseif (Test-Path (Join-Path $cwd "go.mod")) { $pkg = "Go" }
-elseif (Test-Path (Join-Path $cwd "requirements.txt")) { $pkg = "Python" }
-elseif (Test-Path (Join-Path $cwd "Dockerfile")) { $pkg = "Docker" }
-if ($pkg) { $context += "`nStack: $pkg" }
+if (Test-Path "$cwd\pom.xml") { $pkg = "Java/Maven" } elseif (Test-Path "$cwd\package.json") { $pkg = "Node" } elseif (Test-Path "$cwd\Cargo.toml") { $pkg = "Rust" } elseif (Test-Path "$cwd\go.mod") { $pkg = "Go" } elseif (Test-Path "$cwd\requirements.txt") { $pkg = "Python" } elseif (Test-Path "$cwd\Dockerfile") { $pkg = "Docker" }
+if ($pkg) { $ctx += "`nStack: $pkg" }
 
-$tree = Get-ChildItem -Path $cwd -Depth 2 -ErrorAction SilentlyContinue |
-  Where-Object { $_.FullName -notmatch '\\(node_modules|target|build|dist|__pycache__|\\.git|\\.venv)' } |
-  ForEach-Object { $_.FullName.Substring($cwd.Path.Length + 1) } |
-  Select-Object -First 30
-if ($tree) { $context += "`nFiles:" + ($tree -join "`n") }
+$t = Get-ChildItem $cwd -Depth 2 -ErrorAction SilentlyContinue | Where-Object { $_.FullName -notmatch '\\(node_modules|target|build|dist|__pycache__|\\.git|\\.venv)' } | ForEach-Object { $_.FullName.Substring($cwd.Path.Length + 1) } | Select-Object -First 30
+if ($t) { $ctx += "`nFiles:`n" + ($t -join "`n") }
 
-$readmePath = Join-Path $cwd "README.md"
-if (Test-Path $readmePath) {
-  $readme = Get-Content $readmePath -TotalCount 10 -ErrorAction SilentlyContinue
-  if ($readme) { $context += "`nREADME:" + ($readme -join "`n") }
-}
+$r = "$cwd\README.md"
+if (Test-Path $r) { $m = Get-Content $r -TotalCount 10 -ErrorAction SilentlyContinue; if ($m) { $ctx += "`nREADME:`n" + ($m -join "`n") } }
 
-if (Test-Path $sessionFile) {
-  $carry = Get-Content $sessionFile -Raw
-  $context += "`n## CARRY" + $carry
-}
+if (Test-Path $sessionFile) { $c = Get-Content $sessionFile -Raw; $ctx += "`n## CARRY" + $c }
 
-$fullPrompt = $prompt + ($context -join "`n")
+$fullPrompt = $prompt + ($ctx -join "`n")
 
-function Run-ClI($src, $msg) {
-  $isPs1 = $src -like "*.ps1"
+function Clean($t) { $t -replace '\x1b\[[0-9;]*[a-zA-Z]','' -replace '[^\x20-\x7E\n]','' -replace '^\s+|\s+$','' }
+
+function SaveNext($t) { if ($t -match 'NEXT:\s*(.+)') { Set-Content $sessionFile ("NEXT: " + $matches[1]) -Encoding UTF8 } }
+
+function Run-Cli($src, $runArgs) {
   $outFile = Join-Path ([System.IO.Path]::GetTempPath()) "belt_out_$([System.Guid]::NewGuid().ToString('N')).txt"
   $inFile = Join-Path ([System.IO.Path]::GetTempPath()) "belt_in_$([System.Guid]::NewGuid().ToString('N')).txt"
-  Set-Content $inFile $msg -Encoding UTF8
+  Set-Content $inFile $fullPrompt -Encoding UTF8
+  $isPs1 = $src -like "*.ps1"
   if ($isPs1) {
-    Start-Process powershell.exe -ArgumentList "-NoProfile -ExecutionPolicy Bypass -Command `"Get-Content '$inFile' | & '$src' run --auto --no-replay | Out-File '$outFile' -Encoding UTF8`"" -WorkingDirectory $cwd -NoNewWindow -Wait
+    Start-Process powershell.exe -ArgumentList "-NoProfile -ExecutionPolicy Bypass -Command `"Get-Content '$inFile' | & '$src' $runArgs 2>&1 | Out-File '$outFile' -Encoding UTF8`"" -WorkingDirectory $cwd -NoNewWindow -Wait
   } else {
-    Start-Process $src -ArgumentList "run --auto --no-replay < '$inFile' > '$outFile'" -WorkingDirectory $cwd -NoNewWindow -Wait
+    Start-Process "$env:windir\System32\cmd.exe" -ArgumentList "/c type `"$inFile`" | `"$src`" $runArgs > `"$outFile`" 2>&1" -WorkingDirectory $cwd -NoNewWindow -Wait
   }
-  if (Test-Path $outFile) {
-    $out = Get-Content $outFile -Raw
-    Remove-Item $inFile, $outFile -ErrorAction SilentlyContinue
-    $clean = $out -replace '\x1b\[[0-9;]*[a-zA-Z]','' -replace '[^\x20-\x7E\n]',''
-    Write-Host $clean
-    if ($clean -match 'NEXT:\s*(.+)') { Set-Content $sessionFile ("NEXT: " + $matches[1]) -Encoding UTF8 }
+  Remove-Item $inFile -ErrorAction SilentlyContinue
+  if (Test-Path $outFile) { $o = Get-Content $outFile -Raw; Remove-Item $outFile -ErrorAction SilentlyContinue; return $o }
+  return $null
+}
+
+# Priority 1: AI CLI tools (detect, pipe, capture)
+$tools = @(
+  @{ cmd = "opencode"; run = "run --auto --no-replay" },
+  @{ cmd = "claude"; run = "run --auto --no-replay" },
+  @{ cmd = "aider"; run = "--message 'BELT online' --yes" },
+  @{ cmd = "codex"; run = "--input" },
+  @{ cmd = "cursor"; run = "--message 'BELT online'" }
+)
+
+$ran = $false
+foreach ($tool in $tools) {
+  $c = Get-Command $tool.cmd -ErrorAction SilentlyContinue
+  if ($c) {
+    Set-Content $claudeMdFile $fullPrompt -Encoding UTF8
+    $out = Run-Cli $c.Source $tool.run
+    if ($out) { $clean = Clean $out; Write-Host $clean; SaveNext $clean; $ran = $true; break }
+    Write-Warning "$($tool.cmd) found but produced no output, trying next tool"
   }
-  Read-Host "`nPress Enter to exit"
-  return $true
 }
 
-$opencodeSrc = (Get-Command "opencode" -ErrorAction SilentlyContinue).Source
-if ($opencodeSrc) { Run-ClI $opencodeSrc $fullPrompt; return }
-
-$claudeSrc = (Get-Command "claude" -ErrorAction SilentlyContinue).Source
-if ($claudeSrc) {
-  Set-Content $claudeMdFile $fullPrompt -Encoding UTF8
-  Run-ClI $claudeSrc $fullPrompt
-  return
+# Priority 2: Ollama
+if (-not $ran) {
+  try {
+    $t = Invoke-RestMethod -Uri "http://localhost:11434/api/tags" -Method Get -TimeoutSec 2 -ErrorAction Stop
+    $m = $t.models.name
+    if ($m -and $m.Count -gt 0) {
+      $p = @($m | Where-Object { $_ -match 'llama3.2|llama3|mistral|qwen2|deepseek' })
+      $model = if ($p) { $p[0] } else { $m[0] }
+      $body = @{ model = $model; prompt = $fullPrompt; stream = $false; options = @{ num_predict = 4096 } } | ConvertTo-Json
+      $r = Invoke-RestMethod -Uri "http://localhost:11434/api/generate" -Method Post -Body $body -ContentType "application/json" -TimeoutSec 120
+      if ($r.response) { Write-Host $r.response; SaveNext $r.response }
+      $ran = $true
+    }
+  } catch {}
 }
 
-try {
-  $ollamaTest = Invoke-RestMethod -Uri "http://localhost:11434/api/tags" -Method Get -TimeoutSec 2 -ErrorAction Stop
-  $models = $ollamaTest.models.name
-  if (-not $models -or $models.Count -eq 0) { throw "No models" }
-  $preferred = @($models | Where-Object { $_ -match 'llama3.2|llama3|mistral|qwen2|deepseek' })
-  $model = if ($preferred) { $preferred[0] } else { $models[0] }
-  $body = @{ model = $model; prompt = $fullPrompt; stream = $false; options = @{ num_predict = 4096 } } | ConvertTo-Json
-  $response = Invoke-RestMethod -Uri "http://localhost:11434/api/generate" -Method Post -Body $body -ContentType "application/json" -TimeoutSec 120
-  $out = $response.response
-  Write-Host $out
-  if ($out -match 'NEXT:\s*(.+)') { Set-Content $sessionFile ("NEXT: " + $matches[1]) -Encoding UTF8 }
-  Read-Host "`nPress Enter to exit"
+# Priority 3: OpenAI-compatible API (detect env vars)
+if (-not $ran) {
+  $key = if ($env:OPENAI_API_KEY) { $env:OPENAI_API_KEY } else { $null }
+  $url = if ($env:OPENAI_BASE_URL) { "$($env:OPENAI_BASE_URL)/chat/completions" } else { "https://api.openai.com/v1/chat/completions" }
+  $model = $env:OPENAI_MODEL
+
+  if ($key) {
+    try {
+      if (-not $model) { $model = "gpt-4o" }
+      $body = @{ model = $model; messages = @(@{ role = "user"; content = $fullPrompt }); max_tokens = 4096 } | ConvertTo-Json
+      $h = @{ Authorization = "Bearer $key"; "Content-Type" = "application/json" }
+      $r = Invoke-RestMethod -Uri $url -Method Post -Headers $h -Body $body -TimeoutSec 120
+      $t = $r.choices[0].message.content
+      if ($t) { Write-Host $t; SaveNext $t }
+      $ran = $true
+    } catch {}
+  }
 }
-catch {
+
+# Priority 4: Anthropic API
+if (-not $ran -and $env:ANTHROPIC_API_KEY) {
+  try {
+    $model = if ($env:ANTHROPIC_MODEL) { $env:ANTHROPIC_MODEL } else { "claude-3-5-sonnet-20241022" }
+    $body = @{ model = $model; max_tokens = 4096; messages = @(@{ role = "user"; content = $fullPrompt }) } | ConvertTo-Json
+    $h = @{ "x-api-key" = $env:ANTHROPIC_API_KEY; "anthropic-version" = "2023-06-01"; "Content-Type" = "application/json" }
+    $r = Invoke-RestMethod -Uri "https://api.anthropic.com/v1/messages" -Method Post -Headers $h -Body $body -TimeoutSec 120
+    $t = $r.content[0].text
+    if ($t) { Write-Host $t; SaveNext $t }
+    $ran = $true
+  } catch {}
+}
+
+# Fallback: clipboard + browser
+if (-not $ran) {
   [System.Windows.Forms.Clipboard]::SetText($fullPrompt)
   Start-Process "https://claude.ai/new"
-  Write-Host "Copied to clipboard. Claude opened."
-  Read-Host "Press Enter to exit"
 }
