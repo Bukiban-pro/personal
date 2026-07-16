@@ -3,7 +3,7 @@ param(
     [string]$TestCommand = "",
     [string]$PatchFile = "clipboard.diff",
     [switch]$Watch,
-    [string]$Dropzone = "dropzone"
+    [string]$Dropzone = "DROPZONE.md"
 )
 
 if ($RepoPath -eq "") {
@@ -13,6 +13,29 @@ if ($RepoPath -eq "") {
 $patchPath = Join-Path $RepoPath $PatchFile
 $logPath = Join-Path $RepoPath "HANDS_LOG.md"
 $dropzonePath = Join-Path $RepoPath $Dropzone
+
+function Extract-DiffsFromMarkdown {
+    param([string]$Content)
+    $diffs = @()
+    $inDiff = $false
+    $currentDiff = @()
+    foreach ($line in ($Content -split "`n")) {
+        if ($line -match '^```diff\s*$') {
+            $inDiff = $true
+            $currentDiff = @()
+        }
+        elseif ($inDiff -and $line -match '^```\s*$') {
+            $inDiff = $false
+            if ($currentDiff.Count -gt 0) {
+                $diffs += ($currentDiff -join "`n")
+            }
+        }
+        elseif ($inDiff) {
+            $currentDiff += $line
+        }
+    }
+    return $diffs
+}
 
 function Apply-Diff {
     param([string]$DiffContent, [string]$Source)
@@ -105,25 +128,32 @@ function Apply-Diff {
 # === DROPZONE WATCH MODE ===
 if ($Watch) {
     if (-not (Test-Path $dropzonePath)) {
-        New-Item -ItemType Directory -Path $dropzonePath -Force | Out-Null
-        Write-Host "Created DROPZONE: $dropzonePath" -ForegroundColor DarkGray
+        Set-Content -Path $dropzonePath -Value "# DROPZONE.md`n`nDrop unified diffs in \`\`\`diff blocks below. Watcher auto-applies on save.`n`n---" -Encoding UTF8
+        Write-Host "Created DROPZONE.md: $dropzonePath" -ForegroundColor DarkGray
     }
 
     Write-Host "=== DROPZONE WATCHER ===" -ForegroundColor Cyan
-    Write-Host "Drop .diff files into: $dropzonePath" -ForegroundColor Yellow
-    Write-Host "Press Ctrl+C to stop." -ForegroundColor DarkGray
+    Write-Host "Write \`\`\`diff blocks to: $dropzonePath" -ForegroundColor Yellow
+    Write-Host "Watcher auto-applies on every save. Ctrl+C to stop." -ForegroundColor DarkGray
     Write-Host ""
 
-    $applied = @{}
+    $lastContent = ""
+    $appliedHashes = @{}
+
     while ($true) {
-        $diffs = Get-ChildItem -Path $dropzonePath -Filter "*.diff" -ErrorAction SilentlyContinue
-        foreach ($f in $diffs) {
-            if (-not $applied.ContainsKey($f.FullName)) {
-                $content = Get-Content $f.FullName -Raw -ErrorAction SilentlyContinue
-                if ($content) {
-                    Write-Host ">>> Detected: $($f.Name)" -ForegroundColor Green
-                    Apply-Diff -DiffContent $content -Source $f.Name
-                    $applied[$f.FullName] = $true
+        if (Test-Path $dropzonePath) {
+            $content = Get-Content $dropzonePath -Raw -ErrorAction SilentlyContinue
+            if ($content -ne $lastContent) {
+                $lastContent = $content
+                $diffs = Extract-DiffsFromMarkdown -Content $content
+                foreach ($diff in $diffs) {
+                    $hash = [System.Security.Cryptography.SHA256]::Create().ComputeHash([System.Text.Encoding]::UTF8.GetBytes($diff))
+                    $hashStr = [System.BitConverter]::ToString($hash).Replace("-", "")
+                    if (-not $appliedHashes.ContainsKey($hashStr)) {
+                        Write-Host ">>> Detected new diff block" -ForegroundColor Green
+                        Apply-Diff -DiffContent $diff -Source "DROPZONE.md"
+                        $appliedHashes[$hashStr] = $true
+                    }
                 }
             }
         }
@@ -139,7 +169,7 @@ if (-not $clipText) {
 
 if ([string]::IsNullOrWhiteSpace($clipText)) {
     Write-Host "ERROR: Clipboard is empty. Copy a diff from ChatGPT first." -ForegroundColor Red
-    Write-Host "Or use -Watch to watch a DROPZONE directory for .diff files." -ForegroundColor DarkGray
+    Write-Host "Or use -Watch to watch DROPZONE.md for \`\`\`diff blocks." -ForegroundColor DarkGray
     exit 1
 }
 
