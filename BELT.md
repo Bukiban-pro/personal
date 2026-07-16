@@ -17,6 +17,8 @@ Anything else is dead weight.
 
 One file. Works with any AI, anywhere. No dependencies.
 
+Every situation you care about is encoded below with: a name, a profile selection, a prep sequence (≤10 steps), and a canonical output set. These are the only acceptable flows. Any deviation is a bug.
+
 On reading this, IMMEDIATELY:
 1. SCAN — Analyze the context. Classify the situation. One sentence.
 2. MOVE — Identify the highest-leverage action. EXECUTE it. Do not ask.
@@ -46,9 +48,7 @@ Params for all scripts: see hands/ directory. Under pressure, use defaults.
 
 ## IDENTITY
 
-You are an execution partner, not a conversational assistant. You output artifacts: diffs, plans, reviews, diagnoses, specs. You do not output fluff, summaries, or questions when context is sufficient.
-
-Two minds, one machine. You execute. I decide.
+Execution partner, not conversational assistant. Output artifacts: diffs, plans, reviews, diagnoses, specs. No fluff, no summaries, no questions when context is sufficient.
 
 ---
 
@@ -128,7 +128,7 @@ Before touching any new repo or feature:
 - [ ] Identify environment (from profiles).
 - [ ] Select formula (from matrix).
 - [ ] Run `recon` on repo (if accessible).
-- [ ] Write WARROOM.md with: product thesis, core job, top 3 P0 defects, top 3 P0 tasks, anti-goals.
+- [ ] Update WARROOM.md with mission, constraints, anti-goals.
 - [ ] Run `boot` with mission + profile.
 - [ ] Paste SCOPE_SHOT_IGNITION into Planner/Doer tabs.
 - [ ] Enforce output contracts (PLAN.md, EXECUTION_QUEUE.md, DIFF, TEST_REPORT, ICK_AUDIT).
@@ -208,7 +208,8 @@ Acceptance: Tests pass. Types clean. Lint clean. Artifact exists and is evaluabl
 Reads: screenshots, codebase, specs.
 Outputs: ICK_AUDIT.md, DIFFs, verification results.
 Job: ICK audit → critique → decompose → plan → execute → verify → self-critique → log → repeat.
-Acceptance: 3+ real ics found and fixed per cycle. No false alarms.
+Constraints: No git operations. Just edit, run, verify. No shotgun changes across unrelated areas.
+Acceptance: 3+ real, non-trivial icks found and fixed per cycle. No false alarms.
 
 ### IGNITION PROMPT (paste into any agent)
 ```
@@ -263,26 +264,11 @@ Every task produces an artifact. Not chat. Artifacts.
 
 ## PREFERENCE PROTOCOL
 
-Every correction: [PREF: trigger → rule]. Apply immediately and for all future sessions.
-At session end: propose PREFs as permanent additions.
-After 5 new PREFs: audit, deduplicate, propose permanent additions to this file.
-This file grows sharper with every interaction. Never repeat old mistakes.
+Every correction: [PREF: trigger → rule]. Apply immediately. At session end: propose PREFs as permanent additions. After 5 new PREFs: audit, deduplicate, propose permanent additions to this file.
 
 ---
 
 ## EXECUTION LAYER
-
-### Tab Architecture (free web, no API)
-Tab 1 (Claude): Planner. Holds PLAN.md. Decomposes features.
-Tab 2 (ChatGPT): Doer. Receives tasks from Tab 1, outputs diffs.
-Tab 3 (Gemini): Finder. Research + large file ingestion.
-Tab 4 (Perplexity): Web facts. On-demand.
-You are the pipe between them. Commit SCRATCHPAD.md after each handoff.
-
-### Boot Sequence
-1. AGENTS.md → BELT.md (load OS) → SESSION.md (resume state) → task
-2. Paste BELT.md URL or content into any agent. Agent reads, adopts, executes.
-3. Three scripts, one terminal, zero friction.
 
 ### Context Injection (every paste, 3 layers)
 Layer 1 — OS: BELT.md content
@@ -346,56 +332,22 @@ Anti-slop: No purple/blue gradients, glassmorphism, SaaS hero layouts, random bl
 
 ## MODEL SELECTION
 
-Pick the tool for the task type:
-- Reasoning/planning → Claude web
-- Code generation/diffs → ChatGPT 4o
-- Research/web facts → Perplexity / Gemini
-- Visual UX review → Claude or GPT-4o (vision + reasoning)
-- Large file ingestion → Gemini (1M context)
-- Sensitive/corp code → Local LLM (Ollama) or approved Copilot only
-
-Rule: Tool for the task, not your favorite tool.
+Reasoning → Claude. Code → ChatGPT. Research → Perplexity/Gemini. Vision → Claude/GPT-4o. Large files → Gemini. Corp code → Local LLM or Copilot only. Tool for the task, not your favorite.
 
 ---
 
 ## SHARED MEMORY FILES
 
-- WARROOM.md — Target repo. Product thesis, core job, P0s, anti-goals. Lives in the target repo, not personal.
-- SCRATCHPAD.md — All agents read/write. Git commits it. Shared brain.
-- HANDS_LOG.md — Every script run auto-logs. Weekly pattern mining.
-- SESSION.md — Always current. Cold start reads this.
-- SESSION_HISTORY.md — Weekly archive. Run `archive`.
-- CLAIM.md — File ownership. Before touching a file, check if claimed.
+WARROOM.md (target repo, product truth) | SCRATCHPAD.md (shared brain, git-committed) | HANDS_LOG.md (auto-logged) | SESSION.md (cold start) | SESSION_HISTORY.md (weekly archive via `archive`) | CLAIM.md (file ownership)
 
 ---
 
 ## RITUALS
 
-### Morning Start (5 min)
-1. One sentence: what is the ONE thing that matters today?
-2. Energy: 20/50/80/100%. If under 50: only that one thing.
-3. Open SESSION.md. Read the PREF log. Those rules are live.
-4. Open BELT.md. Read the latest PREFs. They apply today.
-5. Go. First task gets the best you.
-
-### Evening Shutdown (5 min)
-1. Did I do the ONE thing? If no: why? One sentence.
-2. What drained me? What energized me?
-3. PREFs captured today: how many? If 0: I didn't push hard enough.
-4. Commit SESSION.md.
-5. Tomorrow starts with today's PREFs. Compound never sleeps.
-
-### Weekly Review (15 min, Sunday)
-1. Scan all SESSION.md files. Extract all PREFs.
-2. Consolidate duplicates. Which appeared more than once? Systemic.
-3. Propose additions to BELT.md. Max 3. Prioritize time-savers.
-4. Delete sessions that taught nothing. Keep PREF-producers and ship-producers.
-
-### Monthly Strategy (30 min)
-1. git log --oneline -30. Faster or busier?
-2. What skill unlocked most value? Double down.
-3. What skill did I keep avoiding? Kill it or commit.
-4. Am I closer to my career goal than last month? One sentence.
+**Morning (5 min):** One sentence: what matters today? Energy: 20/50/80/100%. Read SESSION.md PREFs. Go.
+**Evening (5 min):** Did I do the ONE thing? What drained/energized? PREFs captured? Commit SESSION.md.
+**Weekly (15 min, Sun):** Scan SESSIONs. Extract PREFs. Deduplicate. Propose max 3 additions to BELT. Delete dead sessions.
+**Monthly (30 min):** git log --oneline -30. What skill unlocked value? What did I avoid? Closer to career goal?
 
 ---
 
@@ -413,6 +365,120 @@ Rule: Tool for the task, not your favorite tool.
 | Unknown repo | recon+scope | — | — | — | recon+scope | — | — |
 
 See `references/prompts/scenarios/` for drop-in scenario cards.
+
+---
+
+## SITUATION FLOWS
+
+Every situation has: a name, a profile selection, a prep sequence (≤10 steps), and a canonical output set. These are the only acceptable flows. Any deviation is a bug.
+
+### Unknown Repo
+**Profiles:** unlimited, adaptive
+**Prep (5 min):**
+1. Run `recon` on the repo.
+2. Paste recon output + BELT.md into agent.
+3. Agent classifies: what is this, what works, what is broken.
+**Outputs:** PRODUCT_AUDIT.md, top 3 files list.
+**Acceptance:** Audit is evidence-based. Top 3 files justified. No vibes.
+
+### Ship Feature (Unlimited)
+**Profiles:** unlimited, locked-down, adaptive
+**Prep (10 min):**
+1. Write TASKS.md with the feature spec.
+2. Run `recon` if repo is unfamiliar.
+3. Run `boot` with mission + profile.
+4. Paste SCOPE_SHOT_IGNITION into Planner tab.
+**Outputs:** PLAN.md, EXECUTION_QUEUE.md, DIFF, TEST_REPORT.md.
+**Acceptance:** PLAN.md exists. DIFFs apply cleanly. Tests pass. Types clean.
+
+### Ship Feature (Corp-Sec)
+**Profiles:** corp-sec
+**Prep (10 min):**
+1. Run `recon` on the repo (read-only).
+2. Write WARROOM.md: product thesis, core job, P0s, anti-goals.
+3. Run `boot` with mission + corp-sec profile.
+4. Paste SCOPE_SHOT_IGNITION into Copilot.
+**Outputs:** PRODUCT_AUDIT.md, PRODUCT_SPEC.md, EXECUTION_QUEUE.md, DIFF, TEST_REPORT.md.
+**Acceptance:** No proprietary code leaked to external tools. Artifacts exist. Tests pass.
+
+### Vibecoded UX Mess
+**Profiles:** unlimited, corp-sec
+**Prep (10 min):**
+1. Pick 1-2 screenshots: mobile, core flow.
+2. Paste screenshots + BELT.md + JARVIS IGNITION into agent.
+**Outputs:** ICK_AUDIT.md (3+ real findings per cycle).
+**Acceptance:** 3+ non-trivial icks per cycle. No false alarms. Visual runner passes.
+
+### Legacy Backend Debug
+**Profiles:** unlimited, corp-sec
+**Prep (10 min):**
+1. Paste error logs + broken component into agent.
+2. Run `recon` on the relevant module.
+3. Paste BELT.md + DEBUG PROTOCOL (INQUISITOR) into agent.
+**Outputs:** DIAGNOSIS, DIFF, TEST_REPORT.md.
+**Acceptance:** Root cause identified (not symptom). Fix radiates. Tests pass.
+
+### Aggressive PR Review
+**Profiles:** unlimited, token-limited, corp-sec
+**Prep (5 min):**
+1. Paste PR diff or file list into agent.
+2. Paste BELT.md + REVIEW PROTOCOL (DEV-LEROY) into agent.
+**Outputs:** PR-REVIEW.md with per-file verdicts and concrete alternatives.
+**Acceptance:** Every blocking item has a concrete fix. No vague feedback.
+
+### New Product Architecture
+**Profiles:** unlimited, locked-down, adaptive
+**Prep (15 min):**
+1. Write one-sentence product thesis.
+2. Write one-sentence core job.
+3. Run `recon` on any existing codebase.
+4. Paste thesis + core job + BELT.md into Claude tab.
+**Outputs:** PRODUCT_SPEC.md, EXECUTION_QUEUE.md (ordered by dependency).
+**Acceptance:** Tech stack justified. Data model covers core entities. Queue ordered by dependency.
+
+### Interview Prep
+**Profiles:** unlimited, locked-down, zero-budget, adaptive
+**Prep (10 min):**
+1. Paste job description + resume into agent.
+2. Paste BELT.md into agent.
+3. Declare focus: behavioral, technical, system-design, or all.
+**Outputs:** INTERVIEW_PREP.md, MOCK_INTERVIEW_LOG.md, SYSTEM_DESIGN_NOTES.md.
+**Acceptance:** 10 questions covered. Answers specific. System design has trade-offs.
+
+### Token-Limited Emergency
+**Profiles:** token-limited
+**Prep (2 min):**
+1. Paste the ONE file that matters.
+2. Paste BELT.md (truncated to rules + artifact contracts only).
+3. State the task in one sentence.
+**Outputs:** DIFF only. Or review only. Or fix only.
+**Acceptance:** Output is a diff, not a conversation. File is correct. No token waste.
+
+### Zero-Budget Freelancer
+**Profiles:** zero-budget
+**Prep (5 min):**
+1. Paste the task description.
+2. Paste BELT.md.
+3. State constraints: 2 files max, 1K output, free models only.
+**Outputs:** DIFF + test command. Nothing else.
+**Acceptance:** Solution works. Within token budget. No paid services used.
+
+### Stealth / Offline
+**Profiles:** stealth
+**Prep (5 min):**
+1. Run `pack` to pack the relevant repo slice to clipboard.
+2. Run `recon` for repo intelligence.
+3. Work entirely offline.
+**Outputs:** All artifacts local. Zero network calls.
+**Acceptance:** Zero network calls. All artifacts local. System survives disconnection.
+
+### Design Critique
+**Profiles:** unlimited, corp-sec
+**Prep (10 min):**
+1. Take screenshots of key screens (mobile + desktop).
+2. Paste 1-2 screenshots + BELT.md into agent.
+**Outputs:** DESIGN_CRITIQUE.md with per-screen verdicts and concrete fixes.
+**Acceptance:** Each screen has concrete, actionable feedback. No "polish more."
 
 ---
 
@@ -439,8 +505,4 @@ Fix the system first. Then fix myself. Both compound.
 
 ## EVOLUTION
 
-This file IS the system. Delete the rest and still win.
-Every session adds PREFs. After 5: audit, deduplicate, propose permanent additions.
-Every file in this repo must define a contract, a formula, a scenario, or a launcher. Anything else dies.
-No ghosts. No "I once thought X." If it's important, it's encoded. If it's not encoded, it's gone.
-personal is not a notes repo. It is a prep-time weapons factory.
+This file IS the system. Delete the rest and still win. Every session adds PREFs. After 5: audit, deduplicate, propose permanent additions. Every file must define a contract, formula, scenario, or launcher. Anything else dies.

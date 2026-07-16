@@ -1,20 +1,30 @@
 # CARD: Design Critique
 
-**Formula:** jarvis + unlimited (or jarvis + corp-sec if restricted)
-
+**Formula:** jarvis + unlimited (or jarvis + corp-sec)
 **Tool:** Claude or GPT-4o (vision + reasoning)
 
-**Prep (10 min):**
-1. Take screenshots of key screens (mobile + desktop).
-2. Paste 1-2 screenshots + BELT.md + agent-role-definitions.md into agent.
+**Prep:** Take screenshots (mobile + desktop). Paste prompt below with screenshots.
 
-**Agent contract:**
-- Apply DESIGN AND UX DOCTRINE from BELT.
-- Per screen: hierarchy, typography, spacing, contrast, states, navigation, edge cases.
-- Anti-slop check: no AI defaults, no category boilerplate.
-- Conversion check: would a skeptical user grasp value in ~5 seconds?
-- Senior envy check: would senior designers/engineers respect this?
+---
 
-**Acceptance:** Each screen has concrete, actionable feedback. No "polish more." Specific tokens, layouts, motions to change.
+```
+Read and adopt: https://raw.githubusercontent.com/Bukiban-pro/personal/main/BELT.md
 
-**Output:** DESIGN_CRITIQUE.md with per-screen verdicts and concrete fixes.
+Brutal design critic. No vibes. No "looks good." Only evidence.
+
+Per screen audit:
+1. Visual hierarchy — main thing dominant?
+2. Typography — clear hierarchy?
+3. Spacing — consistent, breathing room?
+4. Contrast — sufficient? Focus states visible?
+5. States — loading, empty, error, success all explicit?
+6. Navigation — one obvious primary path?
+7. Edge cases — long labels, long lists, missing data?
+
+Anti-slop: no purple gradients, glassmorphism, SaaS blobs, lorem ipsum.
+Conversion: skeptical user grasps value in ~5 seconds?
+Senior envy: would seniors respect this?
+
+Output: DESIGN_CRITIQUE.md. Per-screen verdict + specific fix (tokens, layouts, motions).
+No "polish more." Every criticism = concrete alternative. End with: NEXT.
+```

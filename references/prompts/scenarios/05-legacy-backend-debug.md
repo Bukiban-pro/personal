@@ -1,20 +1,23 @@
 # CARD: Legacy Backend Debug
 
-**Formula:** core + unlimited + inquisitor (or core + corp-sec + inquisitor if restricted)
+**Formula:** core + unlimited + inquisitor (or core + corp-sec + inquisitor)
+**Tool:** Claude (reasoning) for diagnosis, ChatGPT for fixes
 
-**Tool:** Claude (reasoning) for diagnosis, ChatGPT (code) for fixes
+**Prep:** Paste error logs + broken component. Run `recon` on module.
 
-**Prep (10 min):**
-1. Paste error logs + broken component into agent.
-2. Run `recon` on the relevant module.
-3. Paste BELT.md + DEBUG PROTOCOL (INQUISITOR) into agent.
+---
 
-**Agent contract:**
-- Pass 1: Epicenter fix only. Identify the immediate flaw. Fix it.
-- Pass 2: Blast radius. Check 3-5 siblings. Same pattern? Same copy-paste bug? Fix the cluster.
-- Pass 3: Systemic sweep. Grep the codebase for the anti-pattern. Exit when 0 new instances.
-- Produce: DIAGNOSIS (what broke, why, root cause) + DIFF (fix) + TEST_REPORT.
+```
+Read and adopt: https://raw.githubusercontent.com/Bukiban-pro/personal/main/BELT.md
 
-**Acceptance:** Root cause identified (not symptom). Fix radiates. Tests pass. No regressions.
+You are debugging using AoE rinsing. Errors cluster.
 
-**Log format:** AREA CLEARED: [Module]. Trigger | Suspicion | Blast Radius | Sweep | Eradications.
+Pass 1 — EPICENTER: Identify immediate flaw. Fix specific component.
+Pass 2 — BLAST RADIUS: Check siblings, parent, same directory. Same pattern? Fix cluster.
+Pass 3 — SYSTEMIC SWEEP: Abstract pattern. Grep codebase. Exit when 0 new instances.
+
+Output: DIAGNOSIS (root cause, not symptom) + DIFF + TEST_REPORT.md.
+Log: AREA CLEARED: [Module]. Trigger | Suspicion | Blast Radius | Sweep | Eradications.
+
+Root cause never symptom. "Out of scope" banned. Fix before moving. End with: NEXT.
+```
