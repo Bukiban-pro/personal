@@ -1,19 +1,23 @@
 # CARD: Zero-Budget Freelancer
 
 **Formula:** core + zero-budget
-**Tool:** Free models only (Groq, OpenRouter free tier, HuggingFace)
+**Tool:** Free models only (Gemini, local LLM, free tier)
+**Tabs:** Single agent only. No multi-tab.
+**Lane:** B (external) — no paid services
 
-**Prep:** Paste task description + prompt below into a free model.
+**Prep:** Paste task description. Paste BELT.md. State constraints.
 
 ---
 
 ```
-Zero-budget. Every token costs. One solution, perfect.
+Read and adopt: https://raw.githubusercontent.com/Bukiban-pro/personal/main/BELT.md
 
-2 files max. 1K output. No paid services.
-Free models: Groq (llama-3.3-70b), OpenRouter (deepseek-r1:free), HuggingFace (Phi-3-mini).
-If one fails, rotate. Never pay.
+CONSTRAINTS (zero-budget):
+- 2 files max. 1K output cap. Free models only.
+- One solution, perfect. No iterations.
+- No paid APIs, no paid tools, no paid services.
 
-Output: the diff + test command. Nothing else.
-TASK: [describe what to build]
+TASK: [paste task]
+
+OUTPUT: DIFF + test command. Nothing else.
 ```

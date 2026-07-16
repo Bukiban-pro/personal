@@ -2,8 +2,10 @@
 
 **Formula:** recon + scope
 **Tool:** Any
+**Tabs:** Tab1(SCOPE)=repo, Tab2(SHOT)=no repo, Tab3(FINDER)=no repo, Tab4(WEB)=no repo
+**Lane:** A (internal) for Tab1, B (external) for Tabs 2-4
 
-**Prep:** Run `recon` on the repo. Paste the prompt below with recon output.
+**Prep:** Run `recon` on the repo. Run `boot` with mission + profile. Tab1 gets recon + WARROOM.
 
 ---
 

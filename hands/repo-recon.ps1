@@ -1,6 +1,9 @@
 param(
     [string]$RepoPath = ".",
-    [int]$Depth = 3
+    [int]$Depth = 3,
+    [switch]$ScanLandmines,
+    [switch]$ScanSensitive,
+    [switch]$Minimal
 )
 
 $startTime = Get-Date
@@ -8,6 +11,14 @@ $output = @()
 $output += "=== REPO RECON: $(Resolve-Path $RepoPath) ==="
 $output += "=== Generated: $(Get-Date -Format 'yyyy-MM-dd HH:mm') ==="
 $output += ""
+
+# Git tracked files (the targeting system)
+if (-not $Minimal) {
+    $gitFiles = git -C $RepoPath ls-files 2>&1
+    $output += "## GIT TRACKED FILES ($($gitFiles.Count) files)"
+    $output += $gitFiles
+    $output += ""
+}
 
 # File tree
 $output += "## FILE TREE (depth $Depth)"
@@ -38,9 +49,9 @@ if ($readme) {
     $output += ""
 }
 
-# Git log
-$gitLog = git -C $RepoPath log --oneline -15 2>&1
-$output += "## GIT LOG (last 15)"
+# Git log (active areas)
+$gitLog = git -C $RepoPath log --oneline -20 2>&1
+$output += "## GIT LOG (last 20)"
 $output += $gitLog
 $output += ""
 
@@ -53,6 +64,49 @@ $exts = Get-ChildItem -Path $RepoPath -Recurse -File -ErrorAction SilentlyContin
     Select-Object -First 10 |
     ForEach-Object { "$($_.Name): $($_.Count) files" }
 $output += $exts
+$output += ""
+
+# === LANDMINE SCAN ===
+if ($ScanLandmines -or (-not $Minimal)) {
+    $output += "## LANDMINE SCAN (TODO/FIXME/HACK/XXX)"
+    $landmines = @()
+    foreach ($ext in @("*.ts","*.tsx","*.js","*.jsx","*.py","*.java","*.kt","*.go","*.rs","*.rb","*.php","*.cs")) {
+        $found = Get-ChildItem -Path $RepoPath -Filter $ext -Recurse -ErrorAction SilentlyContinue |
+            Where-Object { $_.FullName -notmatch '\\(node_modules|\.git|dist|build|\.next|target|__pycache__)\\' } |
+            ForEach-Object { findstr /N /S /I "TODO FIXME HACK XXX" $_.FullName 2>$null }
+        if ($found) { $landmines += $found }
+    }
+    if ($landmines.Count -gt 0) {
+        $output += "FOUND $($landmines.Count) landmines:"
+        $output += $landmines | Select-Object -First 30
+        if ($landmines.Count -gt 30) { $output += "... [TRUNCATED: $($landmines.Count - 30) more]" }
+    }
+    else {
+        $output += "CLEAN — no landmines found."
+    }
+    $output += ""
+}
+
+# === SENSITIVE SCAN ===
+if ($ScanSensitive -or (-not $Minimal)) {
+    $output += "## SENSITIVE SCAN (password/apiKey/token/secret)"
+    $sensitive = @()
+    foreach ($pattern in @("*.config","*.env*","*.yml","*.yaml","*.json","*.xml","*.properties","*.ini","*.toml")) {
+        $found = Get-ChildItem -Path $RepoPath -Filter $pattern -Recurse -ErrorAction SilentlyContinue |
+            Where-Object { $_.FullName -notmatch '\\(node_modules|\.git|dist|build|\.next|target)\\' } |
+            ForEach-Object { findstr /N /S /I "password apiKey token secret secretKey accessKey privateKey" $_.FullName 2>$null }
+        if ($found) { $sensitive += $found }
+    }
+    if ($sensitive.Count -gt 0) {
+        $output += "FOUND $($sensitive.Count) sensitive references — NEVER PASTE THESE TO EXTERNAL AI:"
+        $output += $sensitive | Select-Object -First 20
+        if ($sensitive.Count -gt 20) { $output += "... [TRUNCATED: $($sensitive.Count - 20) more]" }
+    }
+    else {
+        $output += "CLEAN — no sensitive references found."
+    }
+    $output += ""
+}
 
 $result = $output -join "`n"
 Set-Clipboard $result
@@ -63,4 +117,4 @@ Write-Host "Path: $RepoPath" -ForegroundColor Yellow
 Write-Host "Length: $($result.Length) chars" -ForegroundColor Yellow
 Write-Host "Time: $($elapsed.TotalSeconds.ToString('0.0'))s" -ForegroundColor Yellow
 Write-Host "Copied to clipboard." -ForegroundColor Green
-Write-Host "Paste into any AI with INIT.md for instant context." -ForegroundColor Cyan
+Write-Host "Paste into any AI with BELT.md for instant context." -ForegroundColor Cyan

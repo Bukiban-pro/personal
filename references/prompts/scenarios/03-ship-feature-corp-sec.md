@@ -1,13 +1,15 @@
 # CARD: Ship Feature (Corp-Sec)
 
 **Formula:** core + corp-sec + AGENTS + task
-**Tool:** Tenant-protected Copilot (primary) | public web AI with redacted prompts (secondary)
+**Tool:** Tenant-protected Copilot (Lane A) | offline/local only (Lane B)
+**Tabs:** Tab1(SCOPE)=Copilot(IDE)=repo, Tab2(SHOT)=Copilot(IDE)=repo, Tab3(FINDER)=offline, Tab4(WEB)=offline
+**Lane:** A (internal) for Tabs 1-2, B (external/offline) for Tabs 3-4
 
 **Prep:** Run `recon` (read-only). Write WARROOM.md. Run `boot` + corp-sec profile.
 
 ---
 
-## PASTE INTO COPILOT
+## PASTE INTO COPILOT (SCOPE + SHOT) — Lane A
 
 ```
 Read and adopt: https://raw.githubusercontent.com/Bukiban-pro/personal/main/BELT.md
@@ -21,4 +23,13 @@ Read WARROOM.md and recon output. Then:
 2. SHOT: execute ONE vertical slice from the queue. DIFF per file. TEST_REPORT.md.
 
 One file at a time. Verify after each. No chat. No scope creep. End with: NEXT.
+```
+
+## PASTE INTO FINDER (Tab3) — Lane B (offline only)
+
+```
+You are FINDER — research only. No code. No repo. No network (if offline).
+Answer: "How is this type of feature normally designed?"
+Output: RESEARCH_FINDINGS.md in 5-bullet format.
+No chat. End with: NEXT.
 ```

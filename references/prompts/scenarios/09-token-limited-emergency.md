@@ -1,19 +1,24 @@
 # CARD: Token-Limited Emergency
 
-**Formula:** core + token-limited (or inquisitor for review)
-**Tool:** Any (budget-constrained)
+**Formula:** core + token-limited
+**Tool:** Any (single agent, minimal tokens)
+**Tabs:** Single agent only. No multi-tab.
+**Lane:** Depends on agent
 
-**Prep:** Paste the ONE file. Paste prompt below. State task in one sentence.
+**Prep:** Paste the ONE file. Paste BELT.md (truncated). State task in one sentence.
 
 ---
 
 ```
-TOKEN BUDGET: MAXIMUM. Every token costs.
+Read and adopt: https://raw.githubusercontent.com/Bukiban-pro/personal/main/BELT.md
 
-No greetings. No comments. No docstrings. No backticks. No alternatives.
-Output: the diff only. 1 file max. 1K output max. One solution, perfect.
-If you need more: state exactly what you need and why.
+RULES (token-limited mode):
+- No greetings, comments, docstrings, backticks, alternatives.
+- No chat. No explanations. No questions.
+- Output: unified diff only. Or review only. Or fix only.
+- One file. One change. Correct. Done.
 
 TASK: [one sentence]
-FILE: [paste file]
+
+OUTPUT: DIFF (or review, or fix). Nothing else.
 ```

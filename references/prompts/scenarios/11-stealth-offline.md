@@ -1,18 +1,23 @@
 # CARD: Stealth / Offline
 
-**Formula:** core + stealth + local-pack
-**Tool:** Local LLM only (Ollama, LM Studio) or no AI
+**Formula:** core + stealth
+**Tool:** Local LLM or offline agent only
+**Tabs:** All tabs offline. No network.
+**Lane:** B (external/offline) — zero network
 
-**Prep:** Run `pack` for repo slice. Run `recon`. Work entirely offline.
+**Prep:** Run `pack` with Pack=ultra. Run `recon`. Work entirely offline.
 
 ---
 
 ```
-Stealth mode. Zero network. Zero cloud. Zero external paste.
+Read and adopt: https://raw.githubusercontent.com/Bukiban-pro/personal/main/BELT.md
 
-All context pre-packed below. All output to local files. Every command documented.
-Self-contained. Zero deps.
+CONSTRAINTS (stealth/offline):
+- Zero network calls. All artifacts local.
+- Self-contained scripts. Zero deps.
+- Document every command. Survive disconnection.
 
-TASK: [describe what to build]
-CONTEXT: [paste packed context]
+TASK: [paste task]
+
+OUTPUT: All artifacts local. Zero network calls. System survives disconnection.
 ```

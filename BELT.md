@@ -38,8 +38,8 @@ Everything you run must be reachable from these verbs. No second system.
 | `boot` | Multi-tab agent ignition (Planner / Doer / Finder / Web). BELT + SESSION preloaded. | hands/boot-session.ps1 |
 | `task` | Builds context prompt for the Doer with BELT embedded. Logs to HANDS_LOG. | hands/task-to-diff.ps1 |
 | `apply` | Consumes diffs (via clipboard or DROPZONE). Runs tests. Logs result. | hands/apply-diff.ps1 |
-| `pack` | Packs repo slice for generic web tools. No code execution. Corp-sec safe. | hands/context-pack.ps1 |
-| `recon` | Generates repo intelligence for Planner. File tree, git log, configs. | hands/repo-recon.ps1 |
+| `pack` | Packs repo slice with Pack=full/packed/ultra + Anonymize. Lane A=full, Lane B=ultra. | hands/context-pack.ps1 |
+| `recon` | Repo intelligence: file tree, git log, landmine scan (TODO/FIXME), sensitive scan (password/apiKey). | hands/repo-recon.ps1 |
 | `archive` | Rolls SESSION.md into history. Clears state for next mission. | hands/archive-session.ps1 |
 
 Params for all scripts: see hands/ directory. Under pressure, use defaults.
@@ -54,14 +54,17 @@ Execution partner, not conversational assistant. Output artifacts: diffs, plans,
 
 ## RULES
 
+These are DEFAULTS. Not advice. Not suggestions. Violations are bugs.
+
+- **Default suspicion:** everything is broken until proven otherwise.
+- **Default scope:** one file, one diff, one verify. After each: re-read to verify structural integrity.
+- **Default output:** artifact, not chat. Every interaction produces a file. No conversation.
+- **Default answer to "can we do X":** YES. Figure out how. Improvise if blocked.
 - Build loading/empty/error/success/edge. Anything less is half-built.
 - Fix root cause, never symptom. One bug = systemic pattern. Radiate.
 - "Out of scope" and "Requires backend changes" are banned.
 - Read the full ask. Name 3 alternatives. Identify failure modes. Then act.
 - Every criticism has a concrete alternative. "Polish more" is banned.
-- Default suspicion: everything is broken until proven otherwise.
-- One thing at a time. After each file: re-read to verify structural integrity.
-- Your default answer to "can we do X" is YES. Figure out how. Improvise if blocked.
 - Stopping is failure. If stuck, state what you know and your best guess.
 
 ---
@@ -118,9 +121,15 @@ Hard rules. Not suggestions. Violations are bugs.
 - DB schema → [SCHEMA REDACTED]
 - File paths → ./src/[MODULE]/[FILE]
 
+**LANE TRANSFORMS (how to feed both brains):**
+- **Internal agent (Lane A):** Run `pack` with Pack=full. Feed real code, WARROOM, recon. This agent sees everything.
+- **External agent (Lane B):** Run `pack` with Pack=ultra -Anonymize. Feed only signatures, routes, types, config keys. Replace company/project/customer names with generic tokens. You give it the SHAPE, not the secret.
+- **Result:** Same brain, different payloads. Internal AI implements against real code. External AI designs against abstract structure. You never waste tokens on comments, dead code, or per-line noise.
+- **The transform pattern:** "This is the shape of our service without names. Design the product." → "Here is an abstracted route tree; propose UX flows." → "Here is an anonymized schema; design validation." Then pull the design back inside.
+
 ---
 
-## PREP-TIME CHECKLIST (15 minutes max)
+## PREP-TIME CHECKLIST (10 minutes max)
 
 Before touching any new repo or feature:
 
@@ -153,13 +162,18 @@ When pressure rises, most engineers collapse into manual work because they confu
 - Cross situation × environment. Get the exact agent roles + prompts + artifacts.
 
 ### Step 4: Prep in ≤10 minutes
-- Run `recon` if repo unknown.
-- Write WARROOM.md: one product thesis, one core job, top 3 P0 defects, top 3 P0 tasks for SHOT.
-- Run `boot` with mission, profile tuned to energy.
+- Run `recon` on the repo (file tree, git log, landmine scan, sensitive scan).
+- **Narrow scope:** Never paste the whole repo. Use recon output to identify 5 target files and 3 tests. That's your playlist.
+- Write WARROOM.md: one product thesis, one core job, top 3 P0 defects, top 3 P0 tasks for SHOT, anti-goals.
+- Write EXECUTION_QUEUE.md: each task has user outcome, files, acceptance criteria, effort estimate.
+- Run `boot` with mission, profile tuned to energy. Tabs get repo context per situation flow.
 
 ### Step 5: Agent orchestration
-- SCOPE agent gets WARROOM + recon. Outputs: PRODUCT_AUDIT, PRODUCT_SPEC, EXECUTION_QUEUE.
-- SHOT agent gets PRODUCT_SPEC + EXECUTION_QUEUE. Executes ONE vertical slice with Jarvis Prime loop.
+- **SCOPE** (Tab1, Lane A): Gets recon + WARROOM. Produces PRODUCT_AUDIT, PRODUCT_SPEC, EXECUTION_QUEUE.
+- **SHOT** (Tab2, Lane A or B): Gets EXECUTION_QUEUE item. Executes ONE vertical slice with Jarvis Prime loop.
+- **FINDER** (Tab3, Lane B): Research only. No repo. Answers "how is X normally designed?"
+- **WEB** (Tab4, Lane B): Fact-checks claims. Verifies docs. Flags errors.
+- Decision density: You never ask "What should we do?" You ask "Implement TASK 3 exactly; do not touch anything else."
 
 ### Step 6: Output requirements
 - No chat-only outputs. Every interaction produces an artifact.
@@ -370,19 +384,21 @@ See `references/prompts/scenarios/` for drop-in scenario cards.
 
 ## SITUATION FLOWS
 
-Every situation has: a name, a profile selection, a prep sequence (≤10 steps), and a canonical output set. These are the only acceptable flows. Any deviation is a bug.
+Every situation has: a name, a profile selection, a prep sequence (≤10 steps), a canonical output set, and tab assignments (which agents see repo code vs only personal). These are the only acceptable flows. Any deviation is a bug.
 
 ### Unknown Repo
 **Profiles:** unlimited, adaptive
+**Tabs:** Tab1(SCOPE)=repo, Tab2(SHOT)=no repo, Tab3(FINDER)=no repo, Tab4(WEB)=no repo
 **Prep (5 min):**
 1. Run `recon` on the repo.
-2. Paste recon output + BELT.md into agent.
-3. Agent classifies: what is this, what works, what is broken.
+2. Run `boot` with mission + profile. Tab1 gets recon + WARROOM.
+3. Tab1 classifies: what is this, what works, what is broken.
 **Outputs:** PRODUCT_AUDIT.md, top 3 files list.
 **Acceptance:** Audit is evidence-based. Top 3 files justified. No vibes.
 
 ### Ship Feature (Unlimited)
 **Profiles:** unlimited, locked-down, adaptive
+**Tabs:** Tab1(SCOPE)=repo+WARROOM, Tab2(SHOT)=repo, Tab3(FINDER)=no repo, Tab4(WEB)=no repo
 **Prep (10 min):**
 1. Write TASKS.md with the feature spec.
 2. Run `recon` if repo is unfamiliar.
@@ -393,6 +409,7 @@ Every situation has: a name, a profile selection, a prep sequence (≤10 steps),
 
 ### Ship Feature (Corp-Sec)
 **Profiles:** corp-sec
+**Tabs:** Tab1(SCOPE)=Copilot(IDE)=repo, Tab2(SHOT)=Copilot(IDE)=repo, Tab3(FINDER)=offline only, Tab4(WEB)=offline only
 **Prep (10 min):**
 1. Run `recon` on the repo (read-only).
 2. Write WARROOM.md: product thesis, core job, P0s, anti-goals.
@@ -403,50 +420,60 @@ Every situation has: a name, a profile selection, a prep sequence (≤10 steps),
 
 ### Vibecoded UX Mess
 **Profiles:** unlimited, corp-sec
+**Tabs:** Tab1(SCOPE)=repo+screenshots, Tab2(SHOT)=no repo, Tab3(FINDER)=no repo, Tab4(WEB)=no repo
 **Prep (10 min):**
 1. Pick 1-2 screenshots: mobile, core flow.
-2. Paste screenshots + BELT.md + JARVIS IGNITION into agent.
+2. Run `boot` with mission + profile.
+3. Paste screenshots + BELT.md + JARVIS IGNITION into agent.
 **Outputs:** ICK_AUDIT.md (3+ real findings per cycle).
 **Acceptance:** 3+ non-trivial icks per cycle. No false alarms. Visual runner passes.
 
 ### Legacy Backend Debug
 **Profiles:** unlimited, corp-sec
+**Tabs:** Tab1(SCOPE)=repo+logs, Tab2(SHOT)=repo, Tab3(FINDER)=no repo, Tab4(WEB)=no repo
 **Prep (10 min):**
 1. Paste error logs + broken component into agent.
 2. Run `recon` on the relevant module.
-3. Paste BELT.md + DEBUG PROTOCOL (INQUISITOR) into agent.
+3. Run `boot` with mission + profile.
+4. Paste BELT.md + DEBUG PROTOCOL (INQUISITOR) into agent.
 **Outputs:** DIAGNOSIS, DIFF, TEST_REPORT.md.
 **Acceptance:** Root cause identified (not symptom). Fix radiates. Tests pass.
 
 ### Aggressive PR Review
 **Profiles:** unlimited, token-limited, corp-sec
+**Tabs:** Tab1(SCOPE)=PR diff, Tab2(SHOT)=repo, Tab3(FINDER)=no repo, Tab4(WEB)=no repo
 **Prep (5 min):**
 1. Paste PR diff or file list into agent.
-2. Paste BELT.md + REVIEW PROTOCOL (DEV-LEROY) into agent.
+2. Run `boot` with mission + profile.
+3. Paste BELT.md + REVIEW PROTOCOL (DEV-LEROY) into agent.
 **Outputs:** PR-REVIEW.md with per-file verdicts and concrete alternatives.
 **Acceptance:** Every blocking item has a concrete fix. No vague feedback.
 
 ### New Product Architecture
 **Profiles:** unlimited, locked-down, adaptive
-**Prep (15 min):**
+**Tabs:** Tab1(SCOPE)=repo, Tab2(SHOT)=no repo, Tab3(FINDER)=no repo, Tab4(WEB)=no repo
+**Prep (10 min):**
 1. Write one-sentence product thesis.
 2. Write one-sentence core job.
 3. Run `recon` on any existing codebase.
-4. Paste thesis + core job + BELT.md into Claude tab.
+4. Run `boot` with mission + profile.
+5. Paste thesis + core job + BELT.md into Planner tab.
 **Outputs:** PRODUCT_SPEC.md, EXECUTION_QUEUE.md (ordered by dependency).
 **Acceptance:** Tech stack justified. Data model covers core entities. Queue ordered by dependency.
 
 ### Interview Prep
 **Profiles:** unlimited, locked-down, zero-budget, adaptive
+**Tabs:** Tab1(SCOPE)=resume+JD, Tab2(SHOT)=no repo, Tab3(FINDER)=no repo, Tab4(WEB)=no repo
 **Prep (10 min):**
 1. Paste job description + resume into agent.
-2. Paste BELT.md into agent.
+2. Run `boot` with mission + profile.
 3. Declare focus: behavioral, technical, system-design, or all.
 **Outputs:** INTERVIEW_PREP.md, MOCK_INTERVIEW_LOG.md, SYSTEM_DESIGN_NOTES.md.
 **Acceptance:** 10 questions covered. Answers specific. System design has trade-offs.
 
 ### Token-Limited Emergency
 **Profiles:** token-limited
+**Tabs:** Single agent only. No multi-tab.
 **Prep (2 min):**
 1. Paste the ONE file that matters.
 2. Paste BELT.md (truncated to rules + artifact contracts only).
@@ -456,6 +483,7 @@ Every situation has: a name, a profile selection, a prep sequence (≤10 steps),
 
 ### Zero-Budget Freelancer
 **Profiles:** zero-budget
+**Tabs:** Single agent only. No multi-tab.
 **Prep (5 min):**
 1. Paste the task description.
 2. Paste BELT.md.
@@ -465,6 +493,7 @@ Every situation has: a name, a profile selection, a prep sequence (≤10 steps),
 
 ### Stealth / Offline
 **Profiles:** stealth
+**Tabs:** All tabs offline. No network.
 **Prep (5 min):**
 1. Run `pack` to pack the relevant repo slice to clipboard.
 2. Run `recon` for repo intelligence.
@@ -474,9 +503,11 @@ Every situation has: a name, a profile selection, a prep sequence (≤10 steps),
 
 ### Design Critique
 **Profiles:** unlimited, corp-sec
+**Tabs:** Tab1(SCOPE)=screenshots, Tab2(SHOT)=no repo, Tab3(FINDER)=no repo, Tab4(WEB)=no repo
 **Prep (10 min):**
 1. Take screenshots of key screens (mobile + desktop).
-2. Paste 1-2 screenshots + BELT.md into agent.
+2. Run `boot` with mission + profile.
+3. Paste 1-2 screenshots + BELT.md into agent.
 **Outputs:** DESIGN_CRITIQUE.md with per-screen verdicts and concrete fixes.
 **Acceptance:** Each screen has concrete, actionable feedback. No "polish more."
 
