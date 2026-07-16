@@ -1,4 +1,4 @@
-param(
+﻿param(
     [string]$RepoPath = "",
     [string]$TestCommand = "",
     [string]$PatchFile = "clipboard.diff",
@@ -122,7 +122,7 @@ function Apply-Diff {
     }
     Add-Content $logPath $log
     Write-Host "Logged to HANDS_LOG.md" -ForegroundColor Green
-    Write-Host "Branch: $safeBranch — merge to main after verification." -ForegroundColor Cyan
+    Write-Host "Branch: $safeBranch â€” merge to main after verification." -ForegroundColor Cyan
 }
 
 # === DROPZONE WATCH MODE ===
@@ -174,3 +174,4 @@ if ([string]::IsNullOrWhiteSpace($clipText)) {
 }
 
 Apply-Diff -DiffContent $clipText -Source "clipboard"
+

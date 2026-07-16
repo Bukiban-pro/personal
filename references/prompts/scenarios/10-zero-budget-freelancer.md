@@ -1,9 +1,9 @@
-# CARD: Zero-Budget Freelancer
+﻿# CARD: Zero-Budget Freelancer
 
 **Formula:** core + zero-budget
 **Tool:** Free models only (Gemini, local LLM, free tier)
 **Tabs:** Single agent only. No multi-tab.
-**Lane:** B (external) — no paid services
+**Lane:** B (external) â€” no paid services
 
 **Prep:** Paste task description. Paste BELT.md. State constraints.
 
@@ -21,3 +21,4 @@ TASK: [paste task]
 
 OUTPUT: DIFF + test command. Nothing else.
 ```
+

@@ -1,4 +1,4 @@
-param(
+﻿param(
     [string]$RepoPath = ""
 )
 
@@ -32,7 +32,7 @@ $current
 Add-Content -Path $historyPath -Value $archiveEntry
 
 $freshStart = @"
-# SESSION — Fresh Start
+# SESSION â€” Fresh Start
 
 _Archived: $(Get-Date -Format 'yyyy-MM-dd')_
 _Open this file and begin._
@@ -49,3 +49,4 @@ Write-Host "=== SESSION ARCHIVED ===" -ForegroundColor Cyan
 Write-Host "Week: $weekStamp" -ForegroundColor Yellow
 Write-Host "Archived to: SESSION_HISTORY.md" -ForegroundColor Green
 Write-Host "SESSION.md reset to fresh start." -ForegroundColor Yellow
+

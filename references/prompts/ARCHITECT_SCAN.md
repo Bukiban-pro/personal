@@ -1,8 +1,8 @@
-# ARCHITECT SCAN PROMPT
+﻿# ARCHITECT SCAN PROMPT
 
 **Use with:** REPO SCAN MODE output (5 files from `prep scan`)
 
-**Paste into:** Internal Copilot (tenant-protected) — this agent sees real code.
+**Paste into:** Internal Copilot (tenant-protected) â€” this agent sees real code.
 
 ---
 
@@ -49,7 +49,7 @@ RULES:
 
 ### REPO_FILES.md
 ```
-# REPO_FILES — All tracked files
+# REPO_FILES â€” All tracked files
 src/components/Button.tsx
 src/hooks/useAuth.ts
 src/api/client.ts
@@ -58,7 +58,7 @@ src/api/client.ts
 
 ### REPO_TODO.md
 ```
-# REPO_TODO — All TODO/FIXME/HACK/XXX
+# REPO_TODO â€” All TODO/FIXME/HACK/XXX
 FOUND 47 landmines:
 src/api/client.ts:12: // TODO: handle retry logic
 src/components/Form.tsx:45: // FIXME: validation broken on mobile
@@ -67,7 +67,7 @@ src/components/Form.tsx:45: // FIXME: validation broken on mobile
 
 ### REPO_LOG.md
 ```
-# REPO_LOG — Last 20 commits
+# REPO_LOG â€” Last 20 commits
 a1b2c3d Fix auth token refresh
 e4f5g6h Add checkout flow
 ...
@@ -75,7 +75,7 @@ e4f5g6h Add checkout flow
 
 ### REPO_CODE_INDEX.md
 ```
-# REPO_CODE_INDEX — Code files and paths
+# REPO_CODE_INDEX â€” Code files and paths
 src/components/
   Button.tsx
   Form.tsx

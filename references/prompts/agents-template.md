@@ -1,4 +1,4 @@
-# AGENTS.md — [PROJECT_NAME]
+﻿# AGENTS.md â€” [PROJECT_NAME]
 
 ```
 This file is my brain. I improve it.
@@ -27,9 +27,9 @@ What this system does, who it serves, what matters most.
 - Hierarchy: BEST (ideal UX) > VISION (specs) > IMPLEMENTATION (code).
 
 **EXECUTION:**
-- 3-stage gate: AUDIT spec → VISION fix spec → IMPLEMENT code
+- 3-stage gate: AUDIT spec â†’ VISION fix spec â†’ IMPLEMENT code
 - Feature lifecycle check: beginning + middle + end. No half-built features.
-- Anti-pattern: shotgunning → STOP and diagnose. Assumption creep → VERIFY code.
+- Anti-pattern: shotgunning â†’ STOP and diagnose. Assumption creep â†’ VERIFY code.
 
 **POST-SESSION:** VERIFY + REFLECT + EXTRACT + INSCRIBE.
 
@@ -46,3 +46,4 @@ What this system does, who it serves, what matters most.
 - Backend = source of truth for types.
 - Full-stack: fix backend FIRST, then frontend.
 - UX: loading states, confirmations, keyboard shortcuts. Non-negotiable.
+

@@ -1,4 +1,4 @@
-# CHECKLIST INDEX — Prep-Time Weapons Factory
+﻿# CHECKLIST INDEX â€” Prep-Time Weapons Factory
 
 **Three fixed modes. Three scenario checklists. No thinking, just execute.**
 
@@ -8,7 +8,7 @@
 
 | Mode | Command | Purpose | Lane |
 |------|---------|---------|------|
-| **SCAN** | `prep scan` | Repo intelligence → 5 files for architect | A (internal) |
+| **SCAN** | `prep scan` | Repo intelligence â†’ 5 files for architect | A (internal) |
 | **GRID** | `prep grid` | 4-tab agentic pipeline (SCOPE/SHOT/FINDER/AUDITOR) | A + B |
 | **OUTSIDE** | `prep outside` | Pack=ultra redacted structure for external AI | B (external) |
 
@@ -18,42 +18,42 @@
 
 ## SCENARIO CHECKLISTS
 
-### 1. Unknown Repo — 15 minutes
+### 1. Unknown Repo â€” 15 minutes
 **File:** `01-unknown-repo-15min.md`
-**Sequence:** SCAN → OUTSIDE → GRID
+**Sequence:** SCAN â†’ OUTSIDE â†’ GRID
 **Goal:** From zero to executing queue item #1.
 
 | Step | Command | Time |
 |------|---------|------|
 | 1 | `prep scan` | 5 min |
-| 2 | Paste scans → external planner → get PRODUCT_SPEC + EXECUTION_QUEUE | 5 min |
-| 3 | `prep grid` → SHOT executes item #1 | 5 min |
+| 2 | Paste scans â†’ external planner â†’ get PRODUCT_SPEC + EXECUTION_QUEUE | 5 min |
+| 3 | `prep grid` â†’ SHOT executes item #1 | 5 min |
 
 ---
 
-### 2. Vibecoded Monstrosity — 30 minutes
+### 2. Vibecoded Monstrosity â€” 30 minutes
 **File:** `02-vibecoded-ux-30min.md`
-**Sequence:** SCAN (UI) → SCREENSHOTS → OUTSIDE (UX) → GRID (fix)
-**Goal:** ICK audit → fix one core flow.
+**Sequence:** SCAN (UI) â†’ SCREENSHOTS â†’ OUTSIDE (UX) â†’ GRID (fix)
+**Goal:** ICK audit â†’ fix one core flow.
 
 | Step | Command | Time |
 |------|---------|------|
 | 1 | `prep scan` + filter for UI | 5 min |
 | 2 | Capture mobile + desktop screenshots | 5 min |
-| 3 | `prep outside` + screenshots → ICK_AUDIT | 10 min |
-| 4 | `prep grid` → SHOT fixes top ick | 10 min |
+| 3 | `prep outside` + screenshots â†’ ICK_AUDIT | 10 min |
+| 4 | `prep grid` â†’ SHOT fixes top ick | 10 min |
 
 ---
 
-### 3. Zero-Trust / No-Admin / VM — 15 minutes
+### 3. Zero-Trust / No-Admin / VM â€” 15 minutes
 **File:** `03-zero-trust-vm-15min.md`
-**Sequence:** VM SCAN → HOST OUTSIDE → SPLIT GRID
+**Sequence:** VM SCAN â†’ HOST OUTSIDE â†’ SPLIT GRID
 **Goal:** Full pipeline on locked-down corp machine.
 
 | Step | Location | Command | Time |
 |------|----------|---------|------|
 | 1 | VM | `prep scan` | 5 min |
-| 2 | Host | Paste 3 safe scans → external planner → PRODUCT_SPEC + QUEUE | 5 min |
+| 2 | Host | Paste 3 safe scans â†’ external planner â†’ PRODUCT_SPEC + QUEUE | 5 min |
 | 3 | VM + Host | `prep grid -CorpSec` (VM Tab 1 + Host Tabs 2-4) | 5 min |
 
 ---
@@ -80,18 +80,18 @@ prep list
 ```
 
 ### Key Files (Internal Copilot / Lane A)
-- WARROOM.md — product thesis, core job, P0s, anti-goals
-- EXECUTION_QUEUE.md — ranked tasks with outcomes, files, acceptance
-- PRODUCT_SPEC.md — one thesis, one flow, one metric
-- ICK_AUDIT.md — route | device | state | finding | principle | impact | root | fix | verify
-- DIFF — unified diff per file
-- TEST_REPORT.md — what passed, what failed, commands to run
+- WARROOM.md â€” product thesis, core job, P0s, anti-goals
+- EXECUTION_QUEUE.md â€” ranked tasks with outcomes, files, acceptance
+- PRODUCT_SPEC.md â€” one thesis, one flow, one metric
+- ICK_AUDIT.md â€” route | device | state | finding | principle | impact | root | fix | verify
+- DIFF â€” unified diff per file
+- TEST_REPORT.md â€” what passed, what failed, commands to run
 
 ### Key Files (External AI / Lane B)
-- REPO_TODO.md — landmines only
-- REPO_LOG.md — commits only
-- REPO_CODE_INDEX.md — paths only
-- PACK=ULTRA output — signatures, routes, types, config keys (redacted)
+- REPO_TODO.md â€” landmines only
+- REPO_LOG.md â€” commits only
+- REPO_CODE_INDEX.md â€” paths only
+- PACK=ULTRA output â€” signatures, routes, types, config keys (redacted)
 
 ### Forbidden Crossings
 | From | To | Forbidden |
@@ -102,8 +102,8 @@ prep list
 ### Allowed Crossings
 | From | To | Allowed |
 |------|----|---------|
-| VM → Host | REPO_TODO, REPO_LOG, REPO_CODE_INDEX, ARCHITECT_PROMPT, screenshots |
-| Host → VM | PRODUCT_SPEC, EXECUTION_QUEUE, RESEARCH_FINDINGS, FACT_CHECK, ICK_AUDIT |
+| VM â†’ Host | REPO_TODO, REPO_LOG, REPO_CODE_INDEX, ARCHITECT_PROMPT, screenshots |
+| Host â†’ VM | PRODUCT_SPEC, EXECUTION_QUEUE, RESEARCH_FINDINGS, FACT_CHECK, ICK_AUDIT |
 
 ---
 
@@ -111,9 +111,9 @@ prep list
 
 | File | Used By | Purpose |
 |------|---------|---------|
-| ARCHITECT_SCAN.md | External Planner (Tab 2) | Scan → PRODUCT_SPEC + QUEUE |
+| ARCHITECT_SCAN.md | External Planner (Tab 2) | Scan â†’ PRODUCT_SPEC + QUEUE |
 | AGENT_GRID_IGNITION.md | All 4 tabs | Hard role prompts |
-| OUTSIDE_BRAIN.md | External AI (any) | Redacted structure → design |
+| OUTSIDE_BRAIN.md | External AI (any) | Redacted structure â†’ design |
 | SCOPE_SHOT_IGNITION.md | Legacy (pre-grid) | SCOPE + SHOT prompts |
 
 ---
@@ -125,7 +125,7 @@ prep list
 3. **Every AI interaction produces a file.** No chat-only.
 4. **SCAN before GRID.** Always.
 5. **One queue item at a time.** SHOT does not multitask.
-6. **Time box.** If checklist exceeds hard cap → scope down, don't extend.
+6. **Time box.** If checklist exceeds hard cap â†’ scope down, don't extend.
 7. **Verify after each diff.** Types, lint, tests. No exceptions.
 8. **Lane discipline is the system.** Violate it, you own the leak.
 

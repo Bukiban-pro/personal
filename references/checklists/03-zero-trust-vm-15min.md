@@ -1,19 +1,19 @@
-# CHECKLIST: Zero-Trust / No-Admin / VM (15 minutes)
+﻿# CHECKLIST: Zero-Trust / No-Admin / VM (15 minutes)
 
 **Goal:** Full agentic pipeline on a locked-down corp machine with no admin rights.
 
 **Constraint:** SentinelOne, VPN, no admin, random provided Copilot. You have: PowerShell, git, browser, IDE with Copilot.
 
-**Mode sequence:** VM ISOLATION → SCAN (internal) → GRID (internal + external split)
+**Mode sequence:** VM ISOLATION â†’ SCAN (internal) â†’ GRID (internal + external split)
 
 ---
 
-## SETUP: VM ISOLATION (0 min — done once)
+## SETUP: VM ISOLATION (0 min â€” done once)
 
 - [ ] **VM = Inside Lane (Lane A)**: Git, IDE, internal Copilot, corp repos, secrets
 - [ ] **Host = Outside Lane (Lane B)**: Browser, external AI (Claude/ChatGPT/Gemini/Perplexity), public `personal`
-- [ ] **No data crosses VM→Host except**: screenshots, redacted pack output, markdown artifacts
-- [ ] **No data crosses Host→VM except**: PRODUCT_SPEC.md, EXECUTION_QUEUE.md, RESEARCH_FINDINGS.md, FACT_CHECK.md
+- [ ] **No data crosses VMâ†’Host except**: screenshots, redacted pack output, markdown artifacts
+- [ ] **No data crosses Hostâ†’VM except**: PRODUCT_SPEC.md, EXECUTION_QUEUE.md, RESEARCH_FINDINGS.md, FACT_CHECK.md
 
 ---
 
@@ -32,10 +32,10 @@ prep scan
 - [ ] `.prep-output/REPO_CODE_INDEX.md`
 - [ ] `.prep-output/ARCHITECT_PROMPT.md`
 
-**Copy to host (Lane B) — redacted only:**
-- [ ] `REPO_TODO.md` (safe — no secrets)
-- [ ] `REPO_LOG.md` (safe — no secrets)
-- [ ] `REPO_CODE_INDEX.md` (safe — paths only)
+**Copy to host (Lane B) â€” redacted only:**
+- [ ] `REPO_TODO.md` (safe â€” no secrets)
+- [ ] `REPO_LOG.md` (safe â€” no secrets)
+- [ ] `REPO_CODE_INDEX.md` (safe â€” paths only)
 - [ ] `ARCHITECT_PROMPT.md` (template)
 
 **NEVER copy to host:**
@@ -61,8 +61,8 @@ prep scan
 - [ ] ARCHITECT_SCAN.md (as prompt)
 
 **External planner outputs (copy back to VM):**
-- [ ] `PRODUCT_SPEC.md` → copy to VM repo root
-- [ ] `EXECUTION_QUEUE.md` → copy to VM repo root
+- [ ] `PRODUCT_SPEC.md` â†’ copy to VM repo root
+- [ ] `EXECUTION_QUEUE.md` â†’ copy to VM repo root
 
 ---
 
@@ -75,25 +75,25 @@ prep grid -Mission "Ship [feature from PRODUCT_SPEC]" -Profile corp-sec -CorpSec
 
 | Tab | Location | Agent | Role |
 |-----|----------|-------|------|
-| 1 | VM (IDE) | Internal Copilot | SHOT — implements diffs |
+| 1 | VM (IDE) | Internal Copilot | SHOT â€” implements diffs |
 | 2 | Host (browser) | External Planner | (already done in Step 2) |
-| 3 | Host (browser) | External Finder | RESEARCH — domain patterns |
-| 4 | Host (browser) | External Auditor | ICK — UX from screenshots |
+| 3 | Host (browser) | External Finder | RESEARCH â€” domain patterns |
+| 4 | Host (browser) | External Auditor | ICK â€” UX from screenshots |
 
 **Paste blocks:**
 
 | Location | Tab | Block Source |
 |----------|-----|--------------|
-| VM | 1 | AGENT_GRID_IGNITION.md → TAB 1 |
-| Host | 3 | AGENT_GRID_IGNITION.md → TAB 3 |
-| Host | 4 | AGENT_GRID_IGNITION.md → TAB 4 |
+| VM | 1 | AGENT_GRID_IGNITION.md â†’ TAB 1 |
+| Host | 3 | AGENT_GRID_IGNITION.md â†’ TAB 3 |
+| Host | 4 | AGENT_GRID_IGNITION.md â†’ TAB 4 |
 
 **VM Tab 1 (SHOT) executes:**
 - [ ] Reads EXECUTION_QUEUE.md (copied from host)
 - [ ] Implements queue item #1
-- [ ] Outputs DIFF → DROPZONE.md (watcher auto-applies)
-- [ ] Runs tests → TEST_REPORT.md
-- [ ] Logs issues → ICK_AUDIT.md
+- [ ] Outputs DIFF â†’ DROPZONE.md (watcher auto-applies)
+- [ ] Runs tests â†’ TEST_REPORT.md
+- [ ] Logs issues â†’ ICK_AUDIT.md
 
 **Host Tab 4 (AUDITOR) re-audits:**
 - [ ] Takes screenshots from VM (shared folder or manual)
@@ -102,14 +102,14 @@ prep grid -Mission "Ship [feature from PRODUCT_SPEC]" -Profile corp-sec -CorpSec
 
 ---
 
-## FILE TRANSFER PROTOCOL (VM ↔ Host)
+## FILE TRANSFER PROTOCOL (VM â†” Host)
 
 | Direction | Files | Method |
 |-----------|-------|--------|
-| VM → Host | REPO_TODO, REPO_LOG, REPO_CODE_INDEX, ARCHITECT_PROMPT | Shared folder / clipboard |
-| Host → VM | PRODUCT_SPEC, EXECUTION_QUEUE, RESEARCH_FINDINGS, FACT_CHECK | Shared folder / clipboard |
-| VM → Host | Screenshots (for auditor) | Shared folder |
-| Host → VM | ICK_AUDIT (new icks) | Shared folder |
+| VM â†’ Host | REPO_TODO, REPO_LOG, REPO_CODE_INDEX, ARCHITECT_PROMPT | Shared folder / clipboard |
+| Host â†’ VM | PRODUCT_SPEC, EXECUTION_QUEUE, RESEARCH_FINDINGS, FACT_CHECK | Shared folder / clipboard |
+| VM â†’ Host | Screenshots (for auditor) | Shared folder |
+| Host â†’ VM | ICK_AUDIT (new icks) | Shared folder |
 
 **NEVER transfer:**
 - Source code

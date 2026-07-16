@@ -1,4 +1,4 @@
-# CARD: Token-Limited Emergency
+﻿# CARD: Token-Limited Emergency
 
 **Formula:** core + token-limited
 **Tool:** Any (single agent, minimal tokens)
@@ -22,3 +22,4 @@ TASK: [one sentence]
 
 OUTPUT: DIFF (or review, or fix). Nothing else.
 ```
+

@@ -1,4 +1,4 @@
-param(
+﻿param(
     [string]$RepoPath = "",
     [string]$Task = "",
     [string]$TaskFile = "TASKS.md",
@@ -72,7 +72,7 @@ switch ($Pack) {
     "packed" {
         $context = $rawContext -replace '(?m)^\s*//.*$', '' -replace '(?m)^\s*#.*$', '' -replace '(?m)^(\s*\n){3,}', "`n`n"
         if ($context.Length -gt 50000) {
-            $context = $context.Substring(0, 50000) + "`n... [TRUNCATED at 50000 chars — token budget preserved]"
+            $context = $context.Substring(0, 50000) + "`n... [TRUNCATED at 50000 chars â€” token budget preserved]"
         }
     }
     "ultra" {
@@ -104,3 +104,4 @@ Write-Host "Profile: $Profile | Tool: $toolUpper | Pack: $Pack" -ForegroundColor
 Write-Host "Files: $($contextFiles.Count) | Prompt: $($prompt.Length) chars" -ForegroundColor Yellow
 Write-Host "Copied to clipboard. Paste into $toolUpper now." -ForegroundColor Green
 Write-Host "Logged to HANDS_LOG.md" -ForegroundColor DarkGray
+

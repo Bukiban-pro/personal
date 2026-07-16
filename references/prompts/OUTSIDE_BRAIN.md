@@ -1,4 +1,4 @@
-# OUTSIDE BRAIN MODE — Redacted Structures Only
+﻿# OUTSIDE BRAIN MODE â€” Redacted Structures Only
 
 **Use this when:** You need product/architect thinking from external AI (Claude, ChatGPT, Gemini) but CANNOT paste any corp code.
 
@@ -8,7 +8,7 @@
 
 ## TRANSFORM CHECKLIST (run before every external paste)
 
-- [ ] `pack -SourceDir ./src -Pack ultra -Anonymize` → clipboard
+- [ ] `pack -SourceDir ./src -Pack ultra -Anonymize` â†’ clipboard
 - [ ] Verify output contains NO: company names, project names, customer names, real URLs, API keys, DB schemas, internal package names
 - [ ] Verify output contains ONLY: type signatures, route paths, state action names, config keys, interface shapes
 - [ ] If any secret slips: discard, fix, re-run
@@ -35,7 +35,7 @@ DO NOT:
 
 OUTPUT:
 1. PRODUCT THESIS (1 line): who, what job, what outcome
-2. PRIMARY JOURNEY (3-5 steps): entry → core action → outcome
+2. PRIMARY JOURNEY (3-5 steps): entry â†’ core action â†’ outcome
 3. 3 FLOWS TO KEEP (from routes/types): why they matter
 4. 3 FLOWS TO CUT/MERGE: why they're noise
 5. EXECUTION_QUEUE (5 tasks): user outcome | types/files to touch | acceptance
@@ -82,11 +82,11 @@ envKeys: [REDACTED]_API_URL, [REDACTED]_CLIENT_ID
 
 ```
 INTERNAL (Lane A)                    EXTERNAL (Lane B)
-─────────────────────                ─────────────────────
-1. pack -Pack ultra -Anonymize    →  2. Paste into external AI
-3. Get PRODUCT_SPEC + QUEUE       ←  4. External outputs design
-5. Internal Copilot implements     ←  6. Design informs implementation
-7. Tests pass, ICK_AUDIT clean     ←  8. External auditor reviews screenshots
+â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€                â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+1. pack -Pack ultra -Anonymize    â†’  2. Paste into external AI
+3. Get PRODUCT_SPEC + QUEUE       â†  4. External outputs design
+5. Internal Copilot implements     â†  6. Design informs implementation
+7. Tests pass, ICK_AUDIT clean     â†  8. External auditor reviews screenshots
 ```
 
 **Never mix lanes.** Lane A sees real code. Lane B sees only shape.

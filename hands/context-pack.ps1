@@ -1,4 +1,4 @@
-param(
+﻿param(
     [string]$SourceDir = ".",
     [string]$Extensions = "java,kt,ts,tsx,py,js,jsx,rs,go,rb,php,sql,yaml,yml,xml,json,md,properties,css,scss,html,vue,sh,ps1,bat",
     [int]$MaxChars = 60000,
@@ -25,7 +25,7 @@ foreach ($file in $filtered) {
     if ($content) {
         $block = "=== FILE: $($file.FullName) ===`n$content`n"
         if ($output.Length + $block.Length -gt $MaxChars) {
-            $output += "`n... [TRUNCATED at $MaxChars chars — $($filtered.Count - $count) files omitted]"
+            $output += "`n... [TRUNCATED at $MaxChars chars -- $($filtered.Count - $count) files omitted]"
             break
         }
         $output += $block
@@ -38,7 +38,7 @@ switch ($Pack) {
     "packed" {
         $output = $output -replace '(?m)^\s*//.*$', '' -replace '(?m)^\s*#.*$', '' -replace '(?m)^(\s*\n){3,}', "`n`n"
         if ($output.Length -gt 50000) {
-            $output = $output.Substring(0, 50000) + "`n... [TRUNCATED at 50000 chars — token budget preserved]"
+            $output = $output.Substring(0, 50000) + "`n... [TRUNCATED at 50000 chars -- token budget preserved]"
         }
     }
     "ultra" {
@@ -87,3 +87,4 @@ else {
         Write-Host "LANE B: This pack is safe for external AI (no raw secrets)." -ForegroundColor Green
     }
 }
+

@@ -1,4 +1,4 @@
-param(
+﻿param(
     [ValidateSet("scan","grid","outside","card","list")]
     [string]$Mode = "list",
     [string]$Card = "",
@@ -13,15 +13,15 @@ if ($RepoPath -eq "") {
 }
 
 function Show-Help {
-    Write-Host "=== PREP — Three-Mode Prep-Time Weapons Factory ===" -ForegroundColor Cyan
+    Write-Host "=== PREP -- Three-Mode Prep-Time Weapons Factory ===" -ForegroundColor Cyan
     Write-Host ""
-    Write-Host "USAGE: prep <mode> [options]" -ForegroundColor Yellow
+    Write-Host "USAGE: prep [mode] [options]" -ForegroundColor Yellow
     Write-Host ""
     Write-Host "MODES:" -ForegroundColor Green
-    Write-Host "  scan       REPO SCAN MODE — CLI brain. Outputs 5 files for architect." -ForegroundColor White
-    Write-Host "  grid       AGENT GRID MODE — 4-tab ignition (SCOPE/SHOT/FINDER/WEB)." -ForegroundColor White
-    Write-Host "  outside    OUTSIDE BRAIN MODE — redacted structure pack for external AI." -ForegroundColor White
-    Write-Host "  card       SCENARIO CARD — select card, execute full prep." -ForegroundColor White
+    Write-Host "  scan       REPO SCAN MODE -- CLI brain. Outputs 5 files for architect." -ForegroundColor White
+    Write-Host "  grid       AGENT GRID MODE -- 4-tab ignition (SCOPE/SHOT/FINDER/WEB)." -ForegroundColor White
+    Write-Host "  outside    OUTSIDE BRAIN MODE -- redacted structure pack for external AI." -ForegroundColor White
+    Write-Host "  card       SCENARIO CARD -- select card, execute full prep." -ForegroundColor White
     Write-Host "  list       List available scenario cards." -ForegroundColor White
     Write-Host ""
     Write-Host "OPTIONS:" -ForegroundColor Green

@@ -1,7 +1,7 @@
-# CHECKLIST: Unknown Repo — 15 Minutes
+﻿# CHECKLIST: Unknown Repo â€” 15 Minutes
 
 **Scenario:** New repo, no context. Need: product thesis, core flows, execution queue.
-**Modes:** SCAN → OUTSIDE BRAIN → GRID
+**Modes:** SCAN â†’ OUTSIDE BRAIN â†’ GRID
 
 ---
 
@@ -41,10 +41,10 @@ prep scan
 prep grid -Mission "Understand and ship first fix" -Profile adaptive
 ```
 **Tabs open:**
-- [ ] Tab 1: Internal Copilot (SHOT) — gets EXECUTION_QUEUE
-- [ ] Tab 2: External Planner — already done (scans → queue)
-- [ ] Tab 3: External Finder — "How do good products in this domain handle [core flow]?"
-- [ ] Tab 4: External Auditor — screenshots of current flow (if UI)
+- [ ] Tab 1: Internal Copilot (SHOT) â€” gets EXECUTION_QUEUE
+- [ ] Tab 2: External Planner â€” already done (scans â†’ queue)
+- [ ] Tab 3: External Finder â€” "How do good products in this domain handle [core flow]?"
+- [ ] Tab 4: External Auditor â€” screenshots of current flow (if UI)
 
 **Execute:**
 - [ ] Tab 1 implements queue item #1
@@ -80,7 +80,7 @@ prep grid -Mission "Understand and ship first fix" -Profile adaptive
 ---
 
 ## LANE CHECK
-- [ ] Internal Copilot: sees real code ✓
-- [ ] External agents: see scans only ✓
-- [ ] No secrets in scan files ✓
-- [ ] No raw code pasted to web ✓
+- [ ] Internal Copilot: sees real code âœ“
+- [ ] External agents: see scans only âœ“
+- [ ] No secrets in scan files âœ“
+- [ ] No raw code pasted to web âœ“

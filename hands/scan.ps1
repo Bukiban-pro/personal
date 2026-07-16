@@ -1,4 +1,4 @@
-param(
+﻿param(
     [string]$RepoPath = "",
     [switch]$Force
 )
@@ -19,7 +19,7 @@ if (-not (Test-Path $outputDir)) {
 # === 1. REPO_FILES.md - all tracked files ===
 Write-Host "[1/5] Generating REPO_FILES.md..." -ForegroundColor Green
 $gitFiles = git -C $repoRoot ls-files 2>&1
-$gitFilesContent = "# REPO_FILES — All tracked files`n`n$gitFiles"
+$gitFilesContent = "# REPO_FILES -- All tracked files`n`n$gitFiles"
 Set-Content -Path (Join-Path $outputDir "REPO_FILES.md") -Value $gitFilesContent -Encoding UTF8
 
 # === 2. REPO_TODO.md - all TODO/FIXME/HACK/XXX ===
@@ -31,20 +31,20 @@ foreach ($ext in @("*.ts","*.tsx","*.js","*.jsx","*.py","*.java","*.kt","*.go","
         ForEach-Object { findstr /N /S /I "TODO FIXME HACK XXX" $_.FullName 2>$null }
     if ($found) { $todos += $found }
 }
-$todoContent = "# REPO_TODO — All TODO/FIXME/HACK/XXX`n`n"
+$todoContent = "# REPO_TODO -- All TODO/FIXME/HACK/XXX`n`n"
 if ($todos.Count -gt 0) {
     $todoContent += "FOUND $($todos.Count) landmines:`n`n"
-    $todoContent += ($todos | Select-Object -First 100 -join "`n")
+    $todoContent += ($todos | Select-Object -First 100) -join "`n"
     if ($todos.Count -gt 100) { $todoContent += "`n... [TRUNCATED: $($todos.Count - 100) more]" }
 } else {
-    $todoContent += "CLEAN — no landmines found."
+    $todoContent += "CLEAN -- no landmines found."
 }
 Set-Content -Path (Join-Path $outputDir "REPO_TODO.md") -Value $todoContent -Encoding UTF8
 
 # === 3. REPO_LOG.md - last 20 commits ===
 Write-Host "[3/5] Generating REPO_LOG.md..." -ForegroundColor Green
 $gitLog = git -C $repoRoot log --oneline -20 2>&1
-$logContent = "# REPO_LOG — Last 20 commits`n`n$gitLog"
+$logContent = "# REPO_LOG -- Last 20 commits`n`n$gitLog"
 Set-Content -Path (Join-Path $outputDir "REPO_LOG.md") -Value $logContent -Encoding UTF8
 
 # === 4. REPO_CODE_INDEX.md - code files and paths by type ===
@@ -53,7 +53,7 @@ $codeFiles = Get-ChildItem -Path $repoRoot -Recurse -File -ErrorAction SilentlyC
     Where-Object { $_.FullName -notmatch '\\(node_modules|\.git|dist|build|\.next|target|__pycache__|\.venv)\\' } |
     Where-Object { $_.Extension -in @(".ts",".tsx",".js",".jsx",".py",".java",".kt",".go",".rs",".rb",".php",".cs",".vue",".svelte") }
 
-$indexContent = "# REPO_CODE_INDEX — Code files by category`n`n"
+$indexContent = "# REPO_CODE_INDEX -- Code files by category`n`n"
 $categories = @{
     "Routes / API" = @("*route*", "*api*", "*endpoint*", "*controller*")
     "Components / UI" = @("*component*", "*view*", "*page*", "*screen*", "*widget*")
@@ -73,7 +73,7 @@ foreach ($cat in $categories.Keys) {
     } | ForEach-Object { $_.FullName.Replace($repoRoot.Path, '') }
     if ($matches.Count -gt 0) {
         $indexContent += "## $cat ($($matches.Count) files)`n"
-        $indexContent += ($matches | Sort-Object -join "`n") + "`n`n"
+        $indexContent += (($matches | Sort-Object) -join "`n") + "`n`n"
     }
 }
 
@@ -89,7 +89,7 @@ foreach ($cat in $categories.Keys) {
 $uncategorized = $codeFiles | Where-Object { $_ -notin $allMatched } | ForEach-Object { $_.FullName.Replace($repoRoot.Path, '') }
 if ($uncategorized.Count -gt 0) {
     $indexContent += "## Uncategorized ($($uncategorized.Count) files)`n"
-    $indexContent += ($uncategorized | Sort-Object -join "`n") + "`n`n"
+    $indexContent += (($uncategorized | Sort-Object) -join "`n") + "`n`n"
 }
 
 Set-Content -Path (Join-Path $outputDir "REPO_CODE_INDEX.md") -Value $indexContent -Encoding UTF8

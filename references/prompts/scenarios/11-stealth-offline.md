@@ -1,9 +1,9 @@
-# CARD: Stealth / Offline
+﻿# CARD: Stealth / Offline
 
 **Formula:** core + stealth
 **Tool:** Local LLM or offline agent only
 **Tabs:** All tabs offline. No network.
-**Lane:** B (external/offline) — zero network
+**Lane:** B (external/offline) â€” zero network
 
 **Prep:** Run `pack` with Pack=ultra. Run `recon`. Work entirely offline.
 
@@ -21,3 +21,4 @@ TASK: [paste task]
 
 OUTPUT: All artifacts local. Zero network calls. System survives disconnection.
 ```
+

@@ -1,4 +1,4 @@
-param(
+﻿param(
     [string]$Mission = "",
     [string]$Profile = "unlimited",
     [string]$Browser = "auto",
@@ -34,18 +34,14 @@ if (Test-Path $reconPath) {
     $recon = "RECON previously run. Check HANDS_LOG.md for details."
 }
 
-# === LANE RULES ===
-# Lane A (internal): Copilot/IDE — gets real code, WARROOM, recon
-# Lane B (external): Claude/ChatGPT/Gemini — gets only personal, generic structure, no repo
-
 $internalAgent = "Claude (Planner/SCOPE)"
 $externalAgent = "ChatGPT (Doer/SHOT)"
 $externalAgent2 = "Gemini (Finder/Web)"
 $externalAgent3 = "Perplexity (Fact-Check)"
 
 if ($CorpSec) {
-    $internalAgent = "Copilot in IDE (SCOPE — tenant-protected)"
-    $externalAgent = "Copilot in IDE (SHOT — tenant-protected)"
+    $internalAgent = "Copilot in IDE (SCOPE -- tenant-protected)"
+    $externalAgent = "Copilot in IDE (SHOT -- tenant-protected)"
     $externalAgent2 = "Local LLM or offline only (Finder)"
     $externalAgent3 = "Local LLM or offline only (Fact-Check)"
 }
@@ -59,7 +55,7 @@ $tabs = @(
         GetsWarroom = $true
         GetsRecon = $true
         Prompt = @"
-You are SCOPE — the Auditor and Product Brain.
+You are SCOPE -- the Auditor and Product Brain.
 
 Read and adopt: $coreUrl
 ROLE: SCOPE (auditor/product brain)
@@ -95,7 +91,7 @@ OUTPUT: PRODUCT_AUDIT.md, PRODUCT_SPEC.md, EXECUTION_QUEUE.md
         GetsWarroom = $false
         GetsRecon = $false
         Prompt = @"
-You are SHOT — the Executor and Closer.
+You are SHOT -- the Executor and Closer.
 
 Read and adopt: $coreUrl
 ROLE: SHOT (executor/closer)
@@ -104,8 +100,8 @@ PROFILE: $Profile
 
 Your job:
 1. Read one task from EXECUTION_QUEUE.md.
-2. Execute ONE vertical slice: UI → component → state → API → DB.
-3. Run Jarvis Prime loop: ICK audit → fix → verify → repeat.
+2. Execute ONE vertical slice: UI -> component -> state -> API -> DB.
+3. Run Jarvis Prime loop: ICK audit -> fix -> verify -> repeat.
 4. Produce DIFF + TEST_REPORT.md + ICK_AUDIT.md.
 
 RULES:
@@ -125,7 +121,7 @@ OUTPUT: DIFF (unified), TEST_REPORT.md, ICK_AUDIT.md
         GetsWarroom = $false
         GetsRecon = $false
         Prompt = @"
-You are FINDER — the Research Agent.
+You are FINDER -- the Research Agent.
 
 Read and adopt: $coreUrl
 ROLE: FINDER (research/web/docs only)
@@ -141,7 +137,7 @@ Your job:
 RULES:
 - No repo context. No code. No configs.
 - Only public docs, patterns, standards.
-- Structure every answer: Problem → Pattern → Trade-offs → Recommendation → Source.
+- Structure every answer: Problem -> Pattern -> Trade-offs -> Recommendation -> Source.
 - Output ONLY findings. No chat. End with NEXT.
 
 OUTPUT: RESEARCH_FINDINGS.md
@@ -155,7 +151,7 @@ OUTPUT: RESEARCH_FINDINGS.md
         GetsWarroom = $false
         GetsRecon = $false
         Prompt = @"
-You are WEB — the Fact-Checker.
+You are WEB -- the Fact-Checker.
 
 Read and adopt: $coreUrl
 ROLE: WEB (fact-check/docs/standards)
@@ -171,7 +167,7 @@ Your job:
 RULES:
 - No repo context. No code.
 - Only public information. Official docs preferred.
-- Structure every answer: Claim → Evidence → Verdict → Source.
+- Structure every answer: Claim -> Evidence -> Verdict -> Source.
 - Output ONLY verifications. No chat. End with NEXT.
 
 OUTPUT: FACT_CHECK.md
@@ -187,7 +183,7 @@ for ($i = 0; $i -lt $tabs.Count; $i++) {
 
     $extraContext = ""
     if ($tabs[$i].GetsRepo) {
-        $extraContext += "`n`n## REPO CONTEXT (Lane A — internal agent)`nUse Pack=full on hot files. This agent sees real code."
+        $extraContext += "`n`n## REPO CONTEXT (Lane A -- internal agent)`nUse Pack=full on hot files. This agent sees real code."
     }
     else {
         $extraContext += "`n`n## LANE B RULES (external agent)`nDO NOT paste repo code. Use Pack=ultra: only signatures, routes, types, config keys. Replace company/project/customer names with generic tokens. You see the SHAPE, not the secret."
@@ -224,14 +220,14 @@ if (-not $NoTabs) {
 Write-Host "=== BOOT SEQUENCE ===" -ForegroundColor Cyan
 Write-Host "Profile: $Profile | Mission: $Mission | CorpSec: $CorpSec" -ForegroundColor Yellow
 Write-Host "" -ForegroundColor Cyan
-Write-Host "Tab 1 ($($tabs[0].Label)) — ROLE: $($tabs[0].Role) — COPIED. Paste now." -ForegroundColor Green
+Write-Host "Tab 1 ($($tabs[0].Label)) -- ROLE: $($tabs[0].Role) -- COPIED. Paste now." -ForegroundColor Green
 Write-Host "  Gets repo: $($tabs[0].GetsRepo) | Gets WARROOM: $($tabs[0].GetsWarroom)" -ForegroundColor DarkGray
 
 for ($i = 1; $i -lt $tabs.Count; $i++) {
     Write-Host "When Tab $i is booted, press ENTER -> Tab $($i+1) ($($tabs[$i].Label))" -ForegroundColor DarkGray
     $null = Read-Host
     Set-Clipboard (Get-Content "$tmpDir\tab$($i+1).txt" -Raw)
-    Write-Host "Tab $($i+1) ($($tabs[$i].Label)) — ROLE: $($tabs[$i].Role) — COPIED. Paste now." -ForegroundColor Green
+    Write-Host "Tab $($i+1) ($($tabs[$i].Label)) -- ROLE: $($tabs[$i].Role) -- COPIED. Paste now." -ForegroundColor Green
     Write-Host "  Gets repo: $($tabs[$i].GetsRepo) | Gets WARROOM: $($tabs[$i].GetsWarroom)" -ForegroundColor DarkGray
 }
 

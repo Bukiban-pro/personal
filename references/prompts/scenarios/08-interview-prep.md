@@ -1,9 +1,9 @@
-# CARD: Interview Prep
+﻿# CARD: Interview Prep
 
 **Formula:** learn + career
-**Tool:** Claude/ChatGPT (prep) → you (practice)
+**Tool:** Claude/ChatGPT (prep) â†’ you (practice)
 **Tabs:** Tab1(SCOPE)=resume+JD, Tab2(SHOT)=no repo, Tab3(FINDER)=no repo, Tab4(WEB)=no repo
-**Lane:** B (external) — no repo involved
+**Lane:** B (external) â€” no repo involved
 
 **Prep:** Paste job description + resume. Run `boot`. Declare focus: behavioral, technical, system-design, or all.
 
@@ -21,9 +21,10 @@ RESUME: [paste resume]
 FOCUS: [behavioral / technical / system-design / all]
 
 Produce:
-1. INTERVIEW_PREP.md — 10 questions (mix of behavioral + technical + system-design). Answers specific to this candidate and this role.
-2. MOCK_INTERVIEW_LOG.md — Practice log with scoring.
-3. SYSTEM_DESIGN_NOTES.md — Trade-offs for 2 system design problems.
+1. INTERVIEW_PREP.md â€” 10 questions (mix of behavioral + technical + system-design). Answers specific to this candidate and this role.
+2. MOCK_INTERVIEW_LOG.md â€” Practice log with scoring.
+3. SYSTEM_DESIGN_NOTES.md â€” Trade-offs for 2 system design problems.
 
 No generic answers. Everything specific to this JD and this resume. End with: NEXT.
 ```
+

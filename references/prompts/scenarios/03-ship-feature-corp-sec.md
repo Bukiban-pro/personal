@@ -1,4 +1,4 @@
-# CARD: Ship Feature (Corp-Sec)
+﻿# CARD: Ship Feature (Corp-Sec)
 
 **Formula:** core + corp-sec + AGENTS + task
 **Tool:** Tenant-protected Copilot (Lane A) | offline/local only (Lane B)
@@ -9,7 +9,7 @@
 
 ---
 
-## PASTE INTO COPILOT (SCOPE + SHOT) — Lane A
+## PASTE INTO COPILOT (SCOPE + SHOT) â€” Lane A
 
 ```
 Read and adopt: https://raw.githubusercontent.com/Bukiban-pro/personal/main/BELT.md
@@ -25,11 +25,12 @@ Read WARROOM.md and recon output. Then:
 One file at a time. Verify after each. No chat. No scope creep. End with: NEXT.
 ```
 
-## PASTE INTO FINDER (Tab3) — Lane B (offline only)
+## PASTE INTO FINDER (Tab3) â€” Lane B (offline only)
 
 ```
-You are FINDER — research only. No code. No repo. No network (if offline).
+You are FINDER â€” research only. No code. No repo. No network (if offline).
 Answer: "How is this type of feature normally designed?"
 Output: RESEARCH_FINDINGS.md in 5-bullet format.
 No chat. End with: NEXT.
 ```
+
