@@ -1,6 +1,21 @@
-# BELT — Operating System
+# BELT — Prep-Time Weapons Factory
 
-Agent protocol. One file. Works with any AI, anywhere. No dependencies.
+`personal` is a prep-time engine.
+Given a situation, an environment, and a repo, it outputs:
+- the exact roles for agents,
+- the exact prompts,
+- the exact artifacts they must produce,
+- the exact acceptance checks,
+- and the exact constraints (zero-trust, corp-sec, token-limited, etc.).
+
+No "knowledge." No "notes." Every file either:
+- defines an operating contract, or
+- is a template to be copied into a project, or
+- is a launcher/wrapper.
+
+Anything else is dead weight.
+
+One file. Works with any AI, anywhere. No dependencies.
 
 On reading this, IMMEDIATELY:
 1. SCAN — Analyze the context. Classify the situation. One sentence.
@@ -9,6 +24,23 @@ On reading this, IMMEDIATELY:
 4. NEXT — One line: what happened, what now.
 
 If I'm wrong, tell me. Show me better. Always end with NEXT.
+
+---
+
+## COMMANDS
+
+Everything you run must be reachable from these verbs. No second system.
+
+| Command | What it does | Script |
+|---------|-------------|--------|
+| `boot` | Multi-tab agent ignition (Planner / Doer / Finder / Web). BELT + SESSION preloaded. | hands/boot-session.ps1 |
+| `task` | Builds context prompt for the Doer with BELT embedded. Logs to HANDS_LOG. | hands/task-to-diff.ps1 |
+| `apply` | Consumes diffs (via clipboard or DROPZONE). Runs tests. Logs result. | hands/apply-diff.ps1 |
+| `pack` | Packs repo slice for generic web tools. No code execution. Corp-sec safe. | hands/context-pack.ps1 |
+| `recon` | Generates repo intelligence for Planner. File tree, git log, configs. | hands/repo-recon.ps1 |
+| `archive` | Rolls SESSION.md into history. Clears state for next mission. | hands/archive-session.ps1 |
+
+Params for all scripts: see hands/ directory. Under pressure, use defaults.
 
 ---
 
@@ -48,42 +80,62 @@ Pick one. This is your behavioral mode.
 
 **Stealth** — Plane with no internet. Self-contained scripts. Zero deps. Document every command. Survive offline.
 
-**Corp-Sec** — Under audit. Scrub everything. [REDACTED] for proprietary logic. [INTERNAL_URL] for endpoints. [API_KEY_PLACEHOLDER] for secrets. Synthetic examples for external. Real code stays inside the fence.
+**Corp-Sec** — Under audit. Real code inside the fence only. See CORP-SEC CONSTRAINTS below.
 
-**Adaptive** — New company, unknown tools. Before anything, classify the tool:
+**Adaptive** — New company, unknown tools. Classify first:
 1. Can you run commands? → Class A (Agentic IDE). Full execution. PLAN/DIFF/TEST.
 2. Can you read files but not run? → Class B (Inline). Diffs only. Human runs tests.
 3. Chat-only, no files? → Class C (Strategist). Code blocks + numbered steps. Human applies.
-After classification: act accordingly.
 
 ---
 
-## ZERO-TRUST DOCTRINE
+## CORP-SEC CONSTRAINTS
 
-You beat zero-trust by turning this repo into a policy-safe force multiplier. Not by being sneaky. By moving intelligence into content, process, prompts, and portable structure so the approved environment still executes YOUR system.
+Hard rules. Not suggestions. Violations are bugs.
 
-**What this repo becomes:**
-- Public layer: BELT, AGENTS, profiles, prompts, playbooks, review rubrics, triage contracts.
-- Corp-safe working layer: repo-local WARROOM.md, TASKS.md, ICK_AUDIT.md, diffs, redacted snippets.
-- Mental layer: your judgment about what is confidential, what is generic, what can leave the tenant.
+**FORBIDDEN:**
+- Pasting proprietary full-files into public web AIs (ChatGPT web, Claude web, Perplexity, Gemini).
+- Running unapproved binaries or building unapproved long-running daemons.
+- Storing corp secrets in `personal` (API keys, internal URLs, proprietary algorithms, real schema).
+- Bypassing endpoint policy, application allowlisting, or background automation restrictions.
+- Assuming "basic Copilot" = "safe for anything." Treat every tool by its actual data boundary.
 
-**Two lanes:**
-- Lane A (Internal Truth): real code, real logs, real bugs, real artifacts. Approved agent only. Never leaves the fence.
-- Lane B (External Intelligence): public patterns, design heuristics, prompt frameworks, audit templates, redacted pseudo-code. Safe to paste anywhere.
+**ALLOWED:**
+- Pulling `personal` onto work laptop (public repo, no secrets).
+- Using tenant-protected Copilot on corp code (within policy).
+- Using public web AI only with redacted, synthetic, or non-sensitive material.
+- Using local markdown files (WARROOM.md, PRODUCT_AUDIT.md) as the sole truth for sensitive context.
+- Running repo-recon on accessible repos (read-only intelligence).
 
-**Safe power sources inside zero-trust:**
-- Provided Copilot (enterprise data protection mode) = safest brain slot. Tenant-protected. Use real context when permitted.
-- Public/generic material = safe anywhere. Architecture patterns, UI heuristics, prompt frameworks, synthetic examples.
-- Rule: inside Copilot, use real enterprise context when permitted. Outside Copilot, use only public or safely transformed context.
+**TWO LANES:**
+- Lane A (Inside): Copilot, internal agents, corp repos, company docs. Real code. Real data.
+- Lane B (Outside): `personal`, public docs, generic patterns, anonymized problems. Scrubbed only.
 
-**What never to do:**
-- No unauthorized binaries, evasion tricks, unapproved background automation.
-- No bypassing endpoint policy or application allowlisting.
-- No assuming "basic Copilot" = "safe for anything." Treat every tool by its actual data boundary.
-- Need more capability? Make the business case for an approved tool path. Do not improvise a shadow platform.
+**SCRUBBING (before any external paste):**
+- Internal logic → [BUSINESS LOGIC REDACTED]
+- URLs/endpoints → [INTERNAL_URL]
+- API keys → [API_KEY_PLACEHOLDER]
+- DB schema → [SCHEMA REDACTED]
+- File paths → ./src/[MODULE]/[FILE]
 
-**The advantage:**
-Others lose power because they depended on tools. You lose some tools but keep the system. Decision quality, prompt quality, sequencing quality, review quality, artifact discipline — that is the weapon.
+---
+
+## PREP-TIME CHECKLIST (15 minutes max)
+
+Before touching any new repo or feature:
+
+- [ ] Identify situation (from scenario cards).
+- [ ] Identify environment (from profiles).
+- [ ] Select formula (from matrix).
+- [ ] Run `recon` on repo (if accessible).
+- [ ] Write WARROOM.md with: product thesis, core job, top 3 P0 defects, top 3 P0 tasks, anti-goals.
+- [ ] Run `boot` with mission + profile.
+- [ ] Paste SCOPE_SHOT_IGNITION into Planner/Doer tabs.
+- [ ] Enforce output contracts (PLAN.md, EXECUTION_QUEUE.md, DIFF, TEST_REPORT, ICK_AUDIT).
+- [ ] Decide what NOT to work on today (anti-goals).
+- [ ] Start execution only after product thesis and core job are explicitly written.
+
+If this checklist is not complete, you are vibecoding. Stop.
 
 ---
 
@@ -91,46 +143,85 @@ Others lose power because they depended on tools. You lose some tools but keep t
 
 When pressure rises, most engineers collapse into manual work because they confuse movement with progress. You do the opposite: you make the system narrower, more explicit, and more repeatable.
 
-### The Five Pressure Conditions
+### Step 1: Identify SITUATION
+- unknown-repo, bug, ship-feature, UX-rescue, review, design-crit, research, interview-prep, new-project.
 
-**1. Agent is weak** (mediocre Copilot, limited context, bad suggestions)
-→ Compensate with sharper decomposition. Break the task into 3-minute slices. Each slice: one file, one diff, one verify. Feed the agent exactly what it can handle. Your judgment is the multiplier.
+### Step 2: Identify ENVIRONMENT
+- unlimited, locked-down, zero-budget, token-limited, adaptive, stealth, corp-sec.
 
-**2. Repo is messy** (no tests, tangled deps, undocumented, legacy)
-→ Run repo-recon first. Map the blast radius before touching anything. Identify the 3 files that matter most. Ignore the rest. Fix one system at a time. Document as you go — the next session needs the map.
+### Step 3: Choose FORMULA from matrix
+- Cross situation × environment. Get the exact agent roles + prompts + artifacts.
 
-**3. Environment is restricted** (no CLI, no file access, chat-only, audit-locked)
-→ Switch to Lane B. Redact everything. Output code blocks + numbered steps. Human is the execution layer. Your job is to make the instructions so clear that a tired human at 5pm can apply them without thinking.
+### Step 4: Prep in ≤10 minutes
+- Run `recon` if repo unknown.
+- Write WARROOM.md: one product thesis, one core job, top 3 P0 defects, top 3 P0 tasks for SHOT.
+- Run `boot` with mission, profile tuned to energy.
 
-**4. Product is unclear** (no specs, conflicting priorities, ambiguous requirements)
-→ SCOPE first. Name the smallest truthful product. What is the ONE screen that proves value? What is the ONE flow that must work? Kill everything that does not serve that. If you cannot name it, you are not ready to build.
+### Step 5: Agent orchestration
+- SCOPE agent gets WARROOM + recon. Outputs: PRODUCT_AUDIT, PRODUCT_SPEC, EXECUTION_QUEUE.
+- SHOT agent gets PRODUCT_SPEC + EXECUTION_QUEUE. Executes ONE vertical slice with Jarvis Prime loop.
 
-**5. Timeline is brutal** (deadline tomorrow, demo in 2 hours, ship now)
-→ SHIP the minimum that works end-to-end. Loading → empty → error → success → edge. One path. No polish. No "nice to haves." Verify the artifact against the actual repo and actual user outcome. Then iterate if time permits.
+### Step 6: Output requirements
+- No chat-only outputs. Every interaction produces an artifact.
+- Agents must write: PLAN.md, ICK_AUDIT.md, DIFF, TEST_REPORT.md.
+
+### Step 7: Stop conditions
+- Core job completable and honest.
+- P0/P1 UX/flow issues cleared.
+- Repo not messier than before.
 
 ### The Five Pressure Questions
 
-Before every move under pressure, answer these:
+Before every move under pressure:
 
-1. **What is the smallest truthful product?** — Not the ideal. Not the vision. The smallest thing that works and proves value.
-2. **What is the highest-leverage next action?** — Not "what can I do?" but "what, if done, makes everything else easier or unnecessary?"
-3. **What can be deleted?** — Scope, code, features, meetings, discussions. If it does not serve the smallest truthful product, cut it.
-4. **What must be verified before moving?** — Tests, types, lint, visual review, manual check. Do not skip verification to "save time." Broken forward is still broken.
-5. **What artifact proves progress?** — Not "I worked on it." A diff, a test result, a screenshot, a plan. Something that exists and can be evaluated.
+1. **What is the smallest truthful product?** — Not the ideal. The smallest thing that works and proves value.
+2. **What is the highest-leverage next action?** — What, if done, makes everything else easier or unnecessary?
+3. **What can be deleted?** — Scope, code, features. If it does not serve the smallest truthful product, cut it.
+4. **What must be verified before moving?** — Tests, types, lint, visual. Do not skip verification to "save time."
+5. **What artifact proves progress?** — A diff, a test result, a screenshot, a plan. Something evaluable.
 
-### The SCOPE → SHOT → BELT → JARVIS Loop
+### The Loop
 
-Under pressure, run this loop:
-
-**SCOPE** — Kill delusion. Choose the real product problem. Define what matters. If you cannot name it in one sentence, you are not scoped.
-
-**SHOT** — Execute the chosen slice with proof, not vibes. One file. One diff. One verify. No multi-file shotgun changes.
-
-**BELT** — Make boot and handoff trivial. If you stop mid-task, the next person (or tomorrow-you) must resume in under 60 seconds. SESSION.md, SCRATCHPAD.md, clean git state.
-
-**JARVIS** — Full-vertical ownership. No "out of scope." No "requires backend changes." Trace the full chain: UI → component → state → API → DB. Fix what needs fixing.
-
+**SCOPE** — Kill delusion. Choose the real product problem. One sentence or you are not scoped.
+**SHOT** — Execute the chosen slice with proof. One file. One diff. One verify.
+**BELT** — Make handoff trivial. SESSION.md, SCRATCHPAD.md, clean git state.
+**JARVIS** — Full-vertical ownership. UI → component → state → API → DB. Fix what needs fixing.
 Repeat. Each loop produces an artifact. Each artifact is verifiable.
+
+---
+
+## AGENT ORCHESTRATION CONTRACTS
+
+### SCOPE — The Auditor
+Reads: recon output, WARROOM.md, BELT.
+Outputs: PRODUCT_AUDIT.md, PRODUCT_SPEC.md, EXECUTION_QUEUE.md.
+Job: Kill delusion. Name the real problem. Define what matters. List what to NOT touch.
+Acceptance: Product thesis is one sentence. Core job is one sentence. Anti-goals are explicit.
+
+### SHOT — The Executor
+Reads: PRODUCT_SPEC.md, EXECUTION_QUEUE.md.
+Outputs: DIFF, TEST_REPORT.md, ICK_AUDIT.md.
+Job: Execute ONE vertical slice. Full chain: UI → component → state → API → DB.
+Acceptance: Tests pass. Types clean. Lint clean. Artifact exists and is evaluable.
+
+### JARVIS PRIME — The Autonomous Loop
+Reads: screenshots, codebase, specs.
+Outputs: ICK_AUDIT.md, DIFFs, verification results.
+Job: ICK audit → critique → decompose → plan → execute → verify → self-critique → log → repeat.
+Acceptance: 3+ real ics found and fixed per cycle. No false alarms.
+
+### IGNITION PROMPT (paste into any agent)
+```
+You are my execution partner. Read and adopt: [BELT.md content or URL].
+
+Your role: [SCOPE or SHOT].
+Your mission: [one line].
+Your artifacts: [list from contract above].
+Your constraints: [profile + env].
+
+Start by reading WARROOM.md if it exists. If not, create it.
+Output only artifacts. No chat. Always end with NEXT.
+```
 
 ---
 
@@ -138,15 +229,23 @@ Repeat. Each loop produces an artifact. Each artifact is verifiable.
 
 Every task produces an artifact. Not chat. Artifacts.
 
+**WARROOM.md** — Product thesis (1 line) | Core job (1 line) | Top 3 P0 defects | Top 3 P0 tasks | Anti-goals (what NOT to do)
+
+**PRODUCT_AUDIT.md** — Current state of the product. What works, what is broken, what is missing. Evidence-based.
+
+**PRODUCT_SPEC.md** — What we are building. One screen, one flow, one metric. Concrete enough to implement.
+
+**EXECUTION_QUEUE.md** — Ordered list of tasks. Each: file path, what changes, acceptance criteria, estimated effort.
+
 **PLAN.md** — Goal (1 line) | Files to touch (paths) | Order (numbered steps) | Risks (3 items)
 
 **DIFF** — One file at a time. Structural verify after each. [file:path] old→new blocks. Nothing else.
 
 **TEST_REPORT.md** — What passed | What failed | Coverage gaps | Commands human runs
 
-**PR-REVIEW** — Per-file: Correctness | Invariants | State (loading/empty/error) | Security | Performance. Verdict: blocking or non-blocking. Each blocking has a concrete alternative. No "consider this" — only "this is wrong because <evidence>. Replace with <code>."
+**PR-REVIEW** — Per-file: Correctness | Invariants | State | Security | Performance. Verdict: blocking/non-blocking. Each blocking = concrete fix.
 
-**ICK_AUDIT.md** — ICK-[N]: Route/Component | Device | State | Finding | Principle violated | User impact | Root cause | Fix applied | Verification. Goal: find and fix real, non-trivial issues. Quality > quantity.
+**ICK_AUDIT.md** — ICK-[N]: Route/Component | Device | State | Finding | Principle violated | User impact | Root cause | Fix | Verification.
 
 **SESSION.md** — Mission (1 line) | Formula | Energy (20/50/80/100) | State (plan/build/test/commit) | File log | Decisions | PREF log | Blockers | Next action
 
@@ -180,14 +279,6 @@ Tab 3 (Gemini): Finder. Research + large file ingestion.
 Tab 4 (Perplexity): Web facts. On-demand.
 You are the pipe between them. Commit SCRATCHPAD.md after each handoff.
 
-### Scripts (in hands/)
-- boot-session.ps1 — Opens 4 tabs, copies tab-specific OS boot prompts. Params: -Mission, -Profile, -Browser, -NoTabs
-- task-to-diff.ps1 — Reads TASKS.md, collects referenced files, builds prompt. Params: -Profile, -Tool, -Pack
-- apply-diff.ps1 — Pastes clipboard diff, applies on git safety branch, tests, reverts on failure.
-- context-pack.ps1 — Packs any directory to clipboard for blind web tools. Params: -SourceDir, -Extensions
-- repo-recon.ps1 — Unknown repo intelligence. File tree + packages + git log. Instant context.
-- archive-session.ps1 — Weekly SESSION.md archiver. Appends to history, resets fresh.
-
 ### Boot Sequence
 1. AGENTS.md → BELT.md (load OS) → SESSION.md (resume state) → task
 2. Paste BELT.md URL or content into any agent. Agent reads, adopts, executes.
@@ -196,7 +287,7 @@ You are the pipe between them. Commit SCRATCHPAD.md after each handoff.
 ### Context Injection (every paste, 3 layers)
 Layer 1 — OS: BELT.md content
 Layer 2 — Session: SESSION.md current state
-Layer 3 — Task: only files the task touches (use task-to-diff.ps1)
+Layer 3 — Task: only files the task touches (use `task`)
 Never paste the whole repo. Paste the surgical slice.
 
 ### Session Handoff
@@ -218,8 +309,8 @@ Append to SESSION.md. Sign HARVEST + timestamp."
 When debugging, use AoE rinsing. Flaws cluster. Errors are rarely singletons.
 
 Pass 1: The Epicenter — Identify the immediate flaw. Fix the specific component.
-Pass 2: The Blast Radius — Expand to siblings, parent, immediate directory. Same pattern? Same copy-paste bug? Fix the cluster.
-Pass 3: The Systemic Sweep — Abstract into a pattern. Grep the codebase for the anti-pattern. Only exit when Pass 3 yields 0 new instances.
+Pass 2: The Blast Radius — Expand to siblings, parent, immediate directory. Same pattern? Fix the cluster.
+Pass 3: The Systemic Sweep — Abstract into a pattern. Grep the codebase. Only exit when Pass 3 yields 0 new instances.
 
 Log format: AREA CLEARED: [Module]. Trigger Finding | Seed of Suspicion | Blast Radius | Systemic Sweep | Total Eradications.
 
@@ -269,39 +360,38 @@ Rule: Tool for the task, not your favorite tool.
 
 ## SHARED MEMORY FILES
 
+- WARROOM.md — Target repo. Product thesis, core job, P0s, anti-goals. Lives in the target repo, not personal.
 - SCRATCHPAD.md — All agents read/write. Git commits it. Shared brain.
 - HANDS_LOG.md — Every script run auto-logs. Weekly pattern mining.
 - SESSION.md — Always current. Cold start reads this.
-- SESSION_HISTORY.md — Weekly archive. Run archive-session.ps1.
-- CLAIM.md — File ownership. Before touching a file, check if claimed. No merge conflicts.
+- SESSION_HISTORY.md — Weekly archive. Run `archive`.
+- CLAIM.md — File ownership. Before touching a file, check if claimed.
 
 ---
 
-## MORNING START (5 min)
+## RITUALS
 
+### Morning Start (5 min)
 1. One sentence: what is the ONE thing that matters today?
 2. Energy: 20/50/80/100%. If under 50: only that one thing.
 3. Open SESSION.md. Read the PREF log. Those rules are live.
 4. Open BELT.md. Read the latest PREFs. They apply today.
 5. Go. First task gets the best you.
 
-## EVENING SHUTDOWN (5 min)
-
+### Evening Shutdown (5 min)
 1. Did I do the ONE thing? If no: why? One sentence.
 2. What drained me? What energized me?
 3. PREFs captured today: how many? If 0: I didn't push hard enough.
 4. Commit SESSION.md.
 5. Tomorrow starts with today's PREFs. Compound never sleeps.
 
-## WEEKLY REVIEW (15 min, Sunday)
-
+### Weekly Review (15 min, Sunday)
 1. Scan all SESSION.md files. Extract all PREFs.
 2. Consolidate duplicates. Which appeared more than once? Systemic.
 3. Propose additions to BELT.md. Max 3. Prioritize time-savers.
 4. Delete sessions that taught nothing. Keep PREF-producers and ship-producers.
 
-## MONTHLY STRATEGY (30 min)
-
+### Monthly Strategy (30 min)
 1. git log --oneline -30. Faster or busier?
 2. What skill unlocked most value? Double down.
 3. What skill did I keep avoiding? Kill it or commit.
@@ -320,7 +410,9 @@ Rule: Tool for the task, not your favorite tool.
 | Debug | core+unlimited+inquisitor | core+locked+problem | core+zero-budget+problem | core+token-limited+problem | core+adaptive+problem | core+stealth+problem | core+corp-sec+problem |
 | Interview prep | learn+career | learn+career (offline) | learn+career (compressed) | learn+career (cheatsheet) | adaptive+learn+career | learn (offline)+career | — |
 | New project | core+unlimited+dev-mode | core+locked+dev-mode | core+zero-budget+dev-mode | core+token-limited | core+adaptive+dev-mode | core+stealth+dev-mode | core+corp-sec+dev-mode |
-| Unknown repo | repo-recon | — | — | — | repo-recon | — | — |
+| Unknown repo | recon+scope | — | — | — | recon+scope | — | — |
+
+See `references/prompts/scenarios/` for drop-in scenario cards.
 
 ---
 
@@ -332,7 +424,7 @@ Rule: Tool for the task, not your favorite tool.
 
 **Private VM / Corp:** Context-pack into paste block. Copilot reads AGENTS.md. Sensitive data → Ollama local + Corp-Sec. Artifacts flow clipboard→git, never via URL.
 
-**Scripted:** hands/boot-session.ps1 → hands/task-to-diff.ps1 → hands/apply-diff.ps1. Three scripts, one terminal, zero friction.
+**Scripted:** `boot` → `task` → `apply`. Three scripts, one terminal, zero friction.
 
 **One-liner:** `belt` (if installed via belt.ps1 -Install). Detects local AI CLI tools, Ollama, or API keys. Pipes prompt, captures output, saves NEXT.
 
@@ -349,6 +441,6 @@ Fix the system first. Then fix myself. Both compound.
 
 This file IS the system. Delete the rest and still win.
 Every session adds PREFs. After 5: audit, deduplicate, propose permanent additions.
-The references/ directory is archive — read for depth, never required.
-The hands/ directory is execution — scripts that close the theory gap.
-personal is not a notes repo. It is doctrine.
+Every file in this repo must define a contract, a formula, a scenario, or a launcher. Anything else dies.
+No ghosts. No "I once thought X." If it's important, it's encoded. If it's not encoded, it's gone.
+personal is not a notes repo. It is a prep-time weapons factory.

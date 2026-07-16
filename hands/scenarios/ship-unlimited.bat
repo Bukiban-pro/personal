@@ -1,0 +1,3 @@
+@echo off
+:: Scenario: Ship Feature (Unlimited)
+powershell -ExecutionPolicy Bypass -File "%~dp0..\boot-session.ps1" -Mission "%~1" -Profile unlimited
