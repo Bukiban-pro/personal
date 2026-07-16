@@ -1,35 +1,40 @@
 # SCRATCHPAD — Shared Memory
 
 ## Current Mission
-Evolve the personal system from theoretical architecture to executable reality.
-Fix all gaps identified by multi-AI audit (12 gaps closed this session).
+Refactor personal from a notes repo into a zero-trust weaponized operating manual.
+BELT.md is now the complete OS. Doctrine, not notes.
 
 ## Active Tasks
-- [x] Patch task-to-diff.ps1 — Profile + Tool params, no hardcoded unlimited
-- [x] Patch apply-diff.ps1 — git safety branch, revert on test failure
-- [x] Patch boot-session.ps1 — tab-specific prompts, browser detection
-- [x] Create context-pack.ps1 — Windows port of context-pack.sh
-- [x] Wire jarvis-prime-system.md into core-philosophy.md
-- [x] Create payment-api/AGENTS.md + TASKS.md
+- [x] Rewrite BELT.md as complete self-contained OS
+- [x] Update AGENTS.md boot loader
+- [x] Update core-philosophy.md to clean redirect
+- [x] Update corp-sec profile with zero-trust doctrine
+- [x] Update zero-trust-env skill with two-lane strategy
+- [x] Update SESSION.md
 - [ ] Commit all changes
+- [ ] Push to GitHub
+- [ ] Test: paste new BELT.md into fresh Claude session
 
-## Found by Finder (Gemini audit)
-- task-to-diff.ps1 had PROFILE: unlimited hardcoded → FIXED
-- apply-diff.ps1 had no git safety → FIXED
-- boot-session.ps1 had hardcoded Chrome → FIXED (auto-detect)
-- context-pack.ps1 didn't exist → CREATED
-- jarvis-prime-system.md was orphaned → WIRED
-- payment-api/ had no AGENTS.md or TASKS.md → CREATED
+## What Was Done
+BELT.md expanded from 9 lines to the full operating system:
+- 7 profiles (Unlimited through Adaptive)
+- Zero-trust doctrine (two-lane, safe power, what never to do)
+- Artifact contracts (PLAN, DIFF, TEST_REPORT, PR-REVIEW, ICK_AUDIT, SESSION)
+- Human signals + Preference protocol
+- Execution layer (tabs, scripts, boot, context, handoff, harvest)
+- Debug/Review/UI audit protocols
+- Model selection, shared memory, rituals, formula matrix, deployment modes
+
+## Decisions
+- BELT.md = one file, all inline. No external dependencies for core operation.
+- references/ = archive for depth. Never required for operation.
+- Zero-trust is strategy, not evasion. Move intelligence into content.
+- Artifacts beat chat. Every interaction produces output, not conversation.
 
 ## Blockers
 None
 
-## Decisions
-- jarvis-prime for complex sessions (3+ turns), core-philosophy for single artifacts
-- Every script gets -Profile param to respect formula matrix
-- Every apply-diff creates isolated git branch for zero-risk revert
-
 ## Next Actions
 1. Commit all changes to main
 2. Push to GitHub
-3. Run boot -Mission "apply GoTymeX" tomorrow morning
+3. Test BELT.md in a fresh agent session

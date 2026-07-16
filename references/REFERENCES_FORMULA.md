@@ -26,7 +26,7 @@ You don't need it. BELT.md contains everything inline.
 ## Key
 
 ```
-core        = references/prompts/core-philosophy.md    [the prepender — use for quick tasks]
+core        = BELT.md                                   [the OS — paste the whole file]
 jarvis      = references/prompts/jarvis-prime-system.md [apex OS — 14KB, use for complex 3+ turn sessions]
 unlimited   = references/profiles/unlimited.md
 locked-down = references/profiles/locked-down.md
@@ -136,7 +136,7 @@ After any formula, check:
 
 ```
 1. Open any web tool
-2. Paste: https://raw.githubusercontent.com/Bukiban-pro/personal/main/references/prompts/core-philosophy.md
+2. Paste: https://raw.githubusercontent.com/Bukiban-pro/personal/main/BELT.md
    With: "Read this file and adopt the OS before we begin"
 3. Task follows. Session boots in under 60 seconds.
 ```
