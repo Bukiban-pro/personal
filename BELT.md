@@ -87,6 +87,53 @@ Others lose power because they depended on tools. You lose some tools but keep t
 
 ---
 
+## PRESSURE PROTOCOL
+
+When pressure rises, most engineers collapse into manual work because they confuse movement with progress. You do the opposite: you make the system narrower, more explicit, and more repeatable.
+
+### The Five Pressure Conditions
+
+**1. Agent is weak** (mediocre Copilot, limited context, bad suggestions)
+→ Compensate with sharper decomposition. Break the task into 3-minute slices. Each slice: one file, one diff, one verify. Feed the agent exactly what it can handle. Your judgment is the multiplier.
+
+**2. Repo is messy** (no tests, tangled deps, undocumented, legacy)
+→ Run repo-recon first. Map the blast radius before touching anything. Identify the 3 files that matter most. Ignore the rest. Fix one system at a time. Document as you go — the next session needs the map.
+
+**3. Environment is restricted** (no CLI, no file access, chat-only, audit-locked)
+→ Switch to Lane B. Redact everything. Output code blocks + numbered steps. Human is the execution layer. Your job is to make the instructions so clear that a tired human at 5pm can apply them without thinking.
+
+**4. Product is unclear** (no specs, conflicting priorities, ambiguous requirements)
+→ SCOPE first. Name the smallest truthful product. What is the ONE screen that proves value? What is the ONE flow that must work? Kill everything that does not serve that. If you cannot name it, you are not ready to build.
+
+**5. Timeline is brutal** (deadline tomorrow, demo in 2 hours, ship now)
+→ SHIP the minimum that works end-to-end. Loading → empty → error → success → edge. One path. No polish. No "nice to haves." Verify the artifact against the actual repo and actual user outcome. Then iterate if time permits.
+
+### The Five Pressure Questions
+
+Before every move under pressure, answer these:
+
+1. **What is the smallest truthful product?** — Not the ideal. Not the vision. The smallest thing that works and proves value.
+2. **What is the highest-leverage next action?** — Not "what can I do?" but "what, if done, makes everything else easier or unnecessary?"
+3. **What can be deleted?** — Scope, code, features, meetings, discussions. If it does not serve the smallest truthful product, cut it.
+4. **What must be verified before moving?** — Tests, types, lint, visual review, manual check. Do not skip verification to "save time." Broken forward is still broken.
+5. **What artifact proves progress?** — Not "I worked on it." A diff, a test result, a screenshot, a plan. Something that exists and can be evaluated.
+
+### The SCOPE → SHOT → BELT → JARVIS Loop
+
+Under pressure, run this loop:
+
+**SCOPE** — Kill delusion. Choose the real product problem. Define what matters. If you cannot name it in one sentence, you are not scoped.
+
+**SHOT** — Execute the chosen slice with proof, not vibes. One file. One diff. One verify. No multi-file shotgun changes.
+
+**BELT** — Make boot and handoff trivial. If you stop mid-task, the next person (or tomorrow-you) must resume in under 60 seconds. SESSION.md, SCRATCHPAD.md, clean git state.
+
+**JARVIS** — Full-vertical ownership. No "out of scope." No "requires backend changes." Trace the full chain: UI → component → state → API → DB. Fix what needs fixing.
+
+Repeat. Each loop produces an artifact. Each artifact is verifiable.
+
+---
+
 ## ARTIFACT CONTRACTS
 
 Every task produces an artifact. Not chat. Artifacts.
