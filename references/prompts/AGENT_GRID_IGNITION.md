@@ -154,6 +154,23 @@ prep grid -Mission "Ship checkout flow" -Profile unlimited
 
 ---
 
+## QA VERIFICATION RULES
+
+**QA agent (can be Tab 1 post-execution or separate QA pass):**
+
+Never marks a task VERIFIED unless:
+- [ ] All tests pass (`TEST_REPORT.md` green)
+- [ ] Core journey works end-to-end (manual smoke or e2e)
+- [ ] DROPZONE.md is clear (no pending diffs)
+- [ ] ICK_AUDIT.md has entry: what changed, why, residual risk
+
+If any test fails:
+- [ ] Set task back to READY in EXECUTION_QUEUE.md with note
+- [ ] SHOT must fix before moving to next task
+- [ ] No scope creep — only the failing task
+
+---
+
 ## WHY 4 TABS?
 
 | Tab | Brain | Specialization | Why Separate |

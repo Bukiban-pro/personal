@@ -15,6 +15,29 @@ You operate under corporate security constraints. Real code stays inside the fen
 - Assuming "basic Copilot" = "safe for anything." Treat every tool by its actual data boundary.
 - Copying Lane A content to Lane B without scrubbing.
 
+## SHOT FORBIDDEN (Execution Guardrails)
+
+**DO NOT ROTATE / TOUCH:**
+- Secrets, API keys, connection strings, tokens, certificates
+- Auth / authorization / identity flows (login, SSO, MFA, tokens, session mgmt)
+- CI/CD pipelines, build scripts, deployment manifests, infra-as-code
+- Logging/monitoring/alerting configured by ops
+- Scheduled tasks, background daemons, long-running processes
+- Dependency additions requiring security/vendor approval
+- Quality gates: tests, lint, typecheck, coverage thresholds
+
+**IF TASK REQUIRES ANY ABOVE:**
+1. Mark task BLOCKED in EXECUTION_QUEUE.md
+2. Write exact change needed to SCRATCHPAD.md
+3. Suggest human follow-up
+4. STOP — do not implement
+
+**DEFAULT BEHAVIOR:**
+- Only implement from READY tasks in EXECUTION_QUEUE.md
+- One vertical slice per cycle
+- Every diff verified by QA before merge
+- If tests fail: fix or rollback, never disable
+
 ## ALLOWED
 
 - Pulling `personal` onto work laptop (public repo, no secrets).
