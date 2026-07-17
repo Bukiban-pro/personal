@@ -4,7 +4,8 @@
     [string]$Mission = "",
     [string]$Profile = "unlimited",
     [switch]$CorpSec,
-    [switch]$Force
+    [switch]$Force,
+    [switch]$NoTabs
 )
 
 if ($Card -eq "") {
@@ -13,7 +14,7 @@ if ($Card -eq "") {
 }
 
 if ($RepoPath -eq "") {
-    $RepoPath = Resolve-Path "$PSScriptRoot\.."
+    $RepoPath = Resolve-Path "."
 }
 
 $cardsDir = "$PSScriptRoot\..\references\prompts\scenarios"
@@ -63,9 +64,12 @@ if ($cardContent -match '\*\*Lane:\*\*\s*(.+)') {
 
 # Extract prep steps
 $prepSteps = @()
-if ($cardContent -match '\*\*Prep:\*\*\s*(.+?)(?:\n\n|---|$)') {
+if ($cardContent -match '\*\*Prep:\*\*\s*(.+?)(?:\r?\n\r?\n|---|$)') {
     $prepText = $matches[1].Trim()
     $prepSteps = $prepText -split '\n' | Where-Object { $_ -match '^\d+\.' } | ForEach-Object { $_.Trim() }
+    if ($prepSteps.Count -eq 0 -and $prepText -ne "") {
+        $prepSteps = $prepText -split '\.\s+' | Where-Object { $_ -match '\S' } | ForEach-Object { $_.Trim().TrimEnd('.') }
+    }
 }
 
 Write-Host "Formula: $formula" -ForegroundColor Yellow
@@ -80,17 +84,17 @@ foreach ($step in $prepSteps) {
     Write-Host "[PREP $stepNum] $step" -ForegroundColor Green
     
     # Handle special step patterns
-    if ($step -match 'Run `recon`') {
-        Write-Host "  -> Running repo-recon.ps1..." -ForegroundColor DarkGray
-        & "$PSScriptRoot\repo-recon.ps1" -RepoPath $RepoPath -ScanLandmines -ScanSensitive
+    if ($step -match 'prep scan|Run `scan`|Run `recon`') {
+        Write-Host "  -> Running scan.ps1..." -ForegroundColor DarkGray
+        & "$PSScriptRoot\scan.ps1" -RepoPath $RepoPath
     }
-    elseif ($step -match 'Run `boot`') {
+    elseif ($step -match 'prep grid|Run `boot`') {
         if ($Mission -eq "") {
             Write-Host "  -> WARNING: -Mission not provided, using card name" -ForegroundColor Yellow
             $Mission = $Card
         }
         Write-Host "  -> Running boot-session.ps1..." -ForegroundColor DarkGray
-        & "$PSScriptRoot\boot-session.ps1" -Mission $Mission -Profile $Profile -CorpSec:$CorpSec
+        & "$PSScriptRoot\boot-session.ps1" -Mission $Mission -Profile $Profile -RepoPath $RepoPath -CorpSec:$CorpSec -NoTabs:$NoTabs
     }
     elseif ($step -match 'Write WARROOM') {
         $warroomTemplate = "$PSScriptRoot\..\references\templates\WARROOM.md"
@@ -103,9 +107,9 @@ foreach ($step in $prepSteps) {
             }
         }
     }
-    elseif ($step -match 'Run `pack`') {
+    elseif ($step -match 'prep outside|Run `pack`') {
         Write-Host "  -> Running context-pack.ps1 (Pack=ultra -Anonymize)..." -ForegroundColor DarkGray
-        & "$PSScriptRoot\context-pack.ps1" -SourceDir $RepoPath -Pack ultra -Anonymize
+        & "$PSScriptRoot\context-pack.ps1" -SourceDir $RepoPath -Pack ultra -Anonymize -Mission $Mission
     }
     elseif ($step -match 'Take screenshots') {
         Write-Host "  -> MANUAL: Take 1-2 screenshots (mobile + core flow)" -ForegroundColor Yellow

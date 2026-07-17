@@ -2,7 +2,7 @@
 
 **Formula:** inquisitor + dev-leroy
 **Tool:** Claude/ChatGPT (review) â†’ you (apply fixes)
-**Tabs:** Tab1(SCOPE)=PR diff, Tab2(SHOT)=repo, Tab3(FINDER)=no repo, Tab4(WEB)=no repo
+**Tabs:** Tab1(SHOT)=repo, Tab2(SCOPE)=PR diff/safe scans, Tab3(FINDER)=no repo, Tab4(AUDITOR)=docs only
 **Lane:** A (internal) for Tabs 1-2, B (external) for Tabs 3-4
 
 **Prep:** Paste PR diff or file list. Run `boot` with mission + profile.

@@ -2,10 +2,10 @@
 
 **Formula:** core + corp-sec + AGENTS + task
 **Tool:** Tenant-protected Copilot (Lane A) | offline/local only (Lane B)
-**Tabs:** Tab1(SCOPE)=Copilot(IDE)=repo, Tab2(SHOT)=Copilot(IDE)=repo, Tab3(FINDER)=offline, Tab4(WEB)=offline
-**Lane:** A (internal) for Tabs 1-2, B (external/offline) for Tabs 3-4
+**Tabs:** Tab1(SHOT)=Copilot(IDE)=repo, Tab2(SCOPE)=safe scans only, Tab3(FINDER)=offline, Tab4(AUDITOR)=offline/screenshots
+**Lane:** A (internal) for SHOT, B (external/offline) for SCOPE/FINDER/AUDITOR
 
-**Prep:** Run `recon` (read-only). Write WARROOM.md. Run `boot` + corp-sec profile.
+**Prep:** Run `prep scan` (read-only). Write WARROOM.md. Copy only safe scan files to planner. Run `prep grid` + corp-sec profile.
 
 ---
 
@@ -18,7 +18,7 @@ You are SHOT operating under corp-sec constraints.
 
 CORP-SEC RULES: All code stays inside the fence. No proprietary pastes to public AIs. Scrub: [BUSINESS LOGIC REDACTED], [INTERNAL_URL], [API_KEY_PLACEHOLDER].
 
-Read WARROOM.md and recon output. Then:
+Read WARROOM.md and safe scan output if planning is not already done. Then:
 1. SCOPE: produce PRODUCT_AUDIT.md, PRODUCT_SPEC.md, EXECUTION_QUEUE.md.
 2. SHOT: execute ONE vertical slice from the queue. DIFF per file. TEST_REPORT.md.
 

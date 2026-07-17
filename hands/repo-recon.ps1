@@ -82,7 +82,7 @@ if ($ScanLandmines -or (-not $Minimal)) {
         if ($landmines.Count -gt 30) { $output += "... [TRUNCATED: $($landmines.Count - 30) more]" }
     }
     else {
-        $output += "CLEAN â€” no landmines found."
+        $output += "CLEAN -- no landmines found."
     }
     $output += ""
 }
@@ -98,24 +98,33 @@ if ($ScanSensitive -or (-not $Minimal)) {
         if ($found) { $sensitive += $found }
     }
     if ($sensitive.Count -gt 0) {
-        $output += "FOUND $($sensitive.Count) sensitive references â€” NEVER PASTE THESE TO EXTERNAL AI:"
+        $output += "FOUND $($sensitive.Count) sensitive references -- NEVER PASTE THESE TO EXTERNAL AI:"
         $output += $sensitive | Select-Object -First 20
         if ($sensitive.Count -gt 20) { $output += "... [TRUNCATED: $($sensitive.Count - 20) more]" }
     }
     else {
-        $output += "CLEAN â€” no sensitive references found."
+        $output += "CLEAN -- no sensitive references found."
     }
     $output += ""
 }
 
 $result = $output -join "`n"
-Set-Clipboard $result
+$copied = $false
+try {
+    Set-Clipboard $result -ErrorAction Stop
+    $copied = $true
+}
+catch {
+    Write-Host "Clipboard unavailable. Recon output was generated but not copied." -ForegroundColor Yellow
+}
 
 $elapsed = (Get-Date) - $startTime
 Write-Host "=== REPO RECON ===" -ForegroundColor Cyan
 Write-Host "Path: $RepoPath" -ForegroundColor Yellow
 Write-Host "Length: $($result.Length) chars" -ForegroundColor Yellow
 Write-Host "Time: $($elapsed.TotalSeconds.ToString('0.0'))s" -ForegroundColor Yellow
-Write-Host "Copied to clipboard." -ForegroundColor Green
-Write-Host "Paste into any AI with BELT.md for instant context." -ForegroundColor Cyan
+if ($copied) {
+    Write-Host "Copied to clipboard." -ForegroundColor Green
+    Write-Host "Paste into any AI with BELT.md for instant context." -ForegroundColor Cyan
+}
 

@@ -3,11 +3,11 @@
 )
 
 if ($RepoPath -eq "") {
-    $RepoPath = Resolve-Path "$PSScriptRoot\.."
+    $RepoPath = Resolve-Path "."
 }
 
-$sessionPath = "$RepoPath\references\session\SESSION.md"
-$historyPath = "$RepoPath\references\session\SESSION_HISTORY.md"
+$sessionPath = Join-Path $RepoPath "SESSION.md"
+$historyPath = Join-Path $RepoPath "SESSION_HISTORY.md"
 $weekStamp = "Week of $(Get-Date -Format 'yyyy-MM-dd')"
 
 if (-not (Test-Path $sessionPath)) {

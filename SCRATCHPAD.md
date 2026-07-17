@@ -11,16 +11,25 @@ personal is now a prep-time weapons factory. Not notes. Not a library. Doctrine.
 - [x] 8 scenario wrapper .bat files in hands/scenarios/
 - [x] CORP-SEC CONSTRAINTS: hard rules in BELT
 - [x] Dead weight purged: archive/, redundant prompts, research/
+- [x] 2026-07-17 architecture pass: canonicalized `prep scan -> SCOPE -> prep grid -> SHOT`, fixed current-repo defaults, hardened Lane B pack output, and smoke-tested dispatcher/card flows
+
+### AREA CLEARED: Prep Command Surface
+- Trigger Finding: `BELT.md` advertised `boot/task/apply/recon`, while checklists and scripts used `prep scan/grid/outside/card`.
+- Seed of Suspicion: The OS and executable layer had forked; under pressure, agents would boot the wrong role order or scan the `personal` repo instead of the target repo.
+- Blast Radius Findings (Pass 2): `prep outside` passed an unsupported `-Mission`; `run-card.ps1` skipped one-line prep steps on CRLF files; `-NoTabs` did not flow through card mode; clipboard failures printed false "copied" messages.
+- Systemic Sweep (Pass 3): Searched `BELT.md`, formula backup, scenario cards, checklists, and launchers for stale `recon` / Tab1=SCOPE assumptions; only the intentional legacy `recon` command remains.
+- Total Eradications: 17 workflow fixes across docs, dispatcher scripts, card runner, boot prompts, clipboard handling, and Lane B pack redaction.
 
 ## Active Tasks
 - [ ] Commit and push all changes
 - [ ] Test BELT.md in fresh agent session
-- [ ] Test scenario card under pressure
+- [x] Test scenario card under pressure
+- [ ] Re-test BELT.md in a fresh web/IDE agent after this architecture pass
 
 ## Blockers
 None
 
 ## Next Actions
 1. Commit + push
-2. Test BELT.md transformation
-3. Test 15-min prep-time on a real repo
+2. Test BELT.md transformation in a fresh agent
+3. Run the 15-min unknown-repo checklist on a real target repo

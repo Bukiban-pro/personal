@@ -9,7 +9,7 @@
 )
 
 if ($RepoPath -eq "") {
-    $RepoPath = Resolve-Path "$PSScriptRoot\.."
+    $RepoPath = Resolve-Path "."
 }
 
 $toolUpper = $Tool.ToUpper()
@@ -72,7 +72,7 @@ switch ($Pack) {
     "packed" {
         $context = $rawContext -replace '(?m)^\s*//.*$', '' -replace '(?m)^\s*#.*$', '' -replace '(?m)^(\s*\n){3,}', "`n`n"
         if ($context.Length -gt 50000) {
-            $context = $context.Substring(0, 50000) + "`n... [TRUNCATED at 50000 chars â€” token budget preserved]"
+            $context = $context.Substring(0, 50000) + "`n... [TRUNCATED at 50000 chars -- token budget preserved]"
         }
     }
     "ultra" {
@@ -89,7 +89,14 @@ switch ($Pack) {
 $prompt += "CONTEXT FILES:`n$context"
 $prompt += "`nOUTPUT: unified diff. Test assertions. Nothing else."
 
-Set-Clipboard $prompt
+$copied = $false
+try {
+    Set-Clipboard $prompt -ErrorAction Stop
+    $copied = $true
+}
+catch {
+    Write-Host "Clipboard unavailable. Prompt was built but not copied." -ForegroundColor Yellow
+}
 
 # Auto-log to HANDS_LOG.md
 $logPath = "$RepoPath\HANDS_LOG.md"
@@ -102,6 +109,11 @@ Add-Content $logPath $logEntry
 Write-Host "=== TASK-TO-DIFF ===" -ForegroundColor Cyan
 Write-Host "Profile: $Profile | Tool: $toolUpper | Pack: $Pack" -ForegroundColor Yellow
 Write-Host "Files: $($contextFiles.Count) | Prompt: $($prompt.Length) chars" -ForegroundColor Yellow
-Write-Host "Copied to clipboard. Paste into $toolUpper now." -ForegroundColor Green
+if ($copied) {
+    Write-Host "Copied to clipboard. Paste into $toolUpper now." -ForegroundColor Green
+}
+else {
+    Write-Host "Prompt length: $($prompt.Length) chars. Re-run with a free clipboard or inspect HANDS_LOG for context." -ForegroundColor Yellow
+}
 Write-Host "Logged to HANDS_LOG.md" -ForegroundColor DarkGray
 

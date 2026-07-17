@@ -35,11 +35,12 @@ Everything you run must be reachable from these verbs. No second system.
 
 | Command | What it does | Script |
 |---------|-------------|--------|
-| `boot` | Multi-tab agent ignition (Planner / Doer / Finder / Web). BELT + SESSION preloaded. | hands/boot-session.ps1 |
+| `prep` | Canonical dispatcher: `scan`, `grid`, `outside`, `card`, `list`. Defaults to the current repo. | hands/prep.ps1 |
+| `boot` | Lower-level multi-tab agent ignition used by `prep grid`. BELT + SESSION preloaded. | hands/boot-session.ps1 |
 | `task` | Builds context prompt for the Doer with BELT embedded. Logs to HANDS_LOG. | hands/task-to-diff.ps1 |
 | `apply` | Consumes diffs (via clipboard or DROPZONE). Runs tests. Logs result. | hands/apply-diff.ps1 |
 | `pack` | Packs repo slice with Pack=full/packed/ultra + Anonymize. Lane A=full, Lane B=ultra. | hands/context-pack.ps1 |
-| `recon` | Repo intelligence: file tree, git log, landmine scan (TODO/FIXME), sensitive scan (password/apiKey). | hands/repo-recon.ps1 |
+| `recon` | Legacy/deep-dive monolithic report. Prefer `prep scan` for normal workflow. | hands/repo-recon.ps1 |
 | `archive` | Rolls SESSION.md into history. Clears state for next mission. | hands/archive-session.ps1 |
 
 Params for all scripts: see hands/ directory. Under pressure, use defaults.
@@ -108,7 +109,7 @@ Hard rules. Not suggestions. Violations are bugs.
 - Using tenant-protected Copilot on corp code (within policy).
 - Using public web AI only with redacted, synthetic, or non-sensitive material.
 - Using local markdown files (WARROOM.md, PRODUCT_AUDIT.md) as the sole truth for sensitive context.
-- Running repo-recon on accessible repos (read-only intelligence).
+- Running `prep scan` on accessible repos (read-only intelligence).
 
 **TWO LANES:**
 - Lane A (Inside): Copilot, internal agents, corp repos, company docs. Real code. Real data.
@@ -122,7 +123,7 @@ Hard rules. Not suggestions. Violations are bugs.
 - File paths â†’ ./src/[MODULE]/[FILE]
 
 **LANE TRANSFORMS (how to feed both brains):**
-- **Internal agent (Lane A):** Run `pack` with Pack=full. Feed real code, WARROOM, recon. This agent sees everything.
+- **Internal agent (Lane A):** Run `pack` with Pack=full. Feed real code, WARROOM, and scan files. This agent sees everything.
 - **External agent (Lane B):** Run `pack` with Pack=ultra -Anonymize. Feed only signatures, routes, types, config keys. Replace company/project/customer names with generic tokens. You give it the SHAPE, not the secret.
 - **Result:** Same brain, different payloads. Internal AI implements against real code. External AI designs against abstract structure. You never waste tokens on comments, dead code, or per-line noise.
 - **The transform pattern:** "This is the shape of our service without names. Design the product." â†’ "Here is an abstracted route tree; propose UX flows." â†’ "Here is an anonymized schema; design validation." Then pull the design back inside.
@@ -136,7 +137,7 @@ Before touching any new repo or feature:
 - [ ] Identify situation (from scenario cards).
 - [ ] Identify environment (from profiles).
 - [ ] Select formula (from matrix).
-- [ ] Run `recon` on repo (if accessible).
+- [ ] Run `prep scan` on repo (if accessible).
 - [ ] Update WARROOM.md with mission, constraints, anti-goals.
 - [ ] Run `boot` with mission + profile.
 - [ ] Paste SCOPE_SHOT_IGNITION into Planner/Doer tabs.
@@ -162,15 +163,15 @@ When pressure rises, most engineers collapse into manual work because they confu
 - Cross situation Ã-- environment. Get the exact agent roles + prompts + artifacts.
 
 ### Step 4: Prep in â‰¤10 minutes
-- Run `recon` on the repo (file tree, git log, landmine scan, sensitive scan).
-- **Narrow scope:** Never paste the whole repo. Use recon output to identify 5 target files and 3 tests. That's your playlist.
+- Run `prep scan` on the repo (tracked files, git log, landmines, code index, architect prompt).
+- **Narrow scope:** Never paste the whole repo. Use `.prep-output` scan files to identify 5 target files and 3 tests. That's your playlist.
 - Write WARROOM.md: one product thesis, one core job, top 3 P0 defects, top 3 P0 tasks for SHOT, anti-goals.
 - Write EXECUTION_QUEUE.md: each task has user outcome, files, acceptance criteria, effort estimate.
 - Run `boot` with mission, profile tuned to energy. Tabs get repo context per situation flow.
 
 ### Step 5: Agent orchestration
-- **SCOPE** (Tab1, Lane A): Gets recon + WARROOM. Produces PRODUCT_AUDIT, PRODUCT_SPEC, EXECUTION_QUEUE.
-- **SHOT** (Tab2, Lane A or B): Gets EXECUTION_QUEUE item. Executes ONE vertical slice with Jarvis Prime loop.
+- **SHOT** (Tab1, Lane A): Gets repo + WARROOM + EXECUTION_QUEUE. Executes ONE vertical slice with Jarvis Prime loop.
+- **SCOPE** (Tab2, Lane B or A): Gets safe scan files + WARROOM. Produces PRODUCT_AUDIT, PRODUCT_SPEC, EXECUTION_QUEUE.
 - **FINDER** (Tab3, Lane B): Research only. No repo. Answers "how is X normally designed?"
 - **WEB** (Tab4, Lane B): Fact-checks claims. Verifies docs. Flags errors.
 - Decision density: You never ask "What should we do?" You ask "Implement TASK 3 exactly; do not touch anything else."
@@ -207,7 +208,7 @@ Repeat. Each loop produces an artifact. Each artifact is verifiable.
 ## AGENT ORCHESTRATION CONTRACTS
 
 ### SCOPE â€” The Auditor
-Reads: recon output, WARROOM.md, BELT.
+Reads: `.prep-output` scan files, WARROOM.md, BELT.
 Outputs: PRODUCT_AUDIT.md, PRODUCT_SPEC.md, EXECUTION_QUEUE.md.
 Job: Kill delusion. Name the real problem. Define what matters. List what to NOT touch.
 Acceptance: Product thesis is one sentence. Core job is one sentence. Anti-goals are explicit.
@@ -408,7 +409,7 @@ WARROOM.md (target repo, product truth) | SCRATCHPAD.md (shared brain, git-commi
 | Debug | core+unlimited+inquisitor | core+locked+problem | core+zero-budget+problem | core+token-limited+problem | core+adaptive+problem | core+stealth+problem | core+corp-sec+problem |
 | Interview prep | learn+career | learn+career (offline) | learn+career (compressed) | learn+career (cheatsheet) | adaptive+learn+career | learn (offline)+career | â€” |
 | New project | core+unlimited+dev-mode | core+locked+dev-mode | core+zero-budget+dev-mode | core+token-limited | core+adaptive+dev-mode | core+stealth+dev-mode | core+corp-sec+dev-mode |
-| Unknown repo | recon+scope | â€” | â€” | â€” | recon+scope | â€” | â€” |
+| Unknown repo | prep-scan+scope | â€” | â€” | â€” | prep-scan+scope | â€” | â€” |
 
 See `references/prompts/scenarios/` for drop-in scenario cards.
 
@@ -420,39 +421,39 @@ Every situation has: a name, a profile selection, a prep sequence (â‰¤10 ste
 
 ### Unknown Repo
 **Profiles:** unlimited, adaptive
-**Tabs:** Tab1(SCOPE)=repo, Tab2(SHOT)=no repo, Tab3(FINDER)=no repo, Tab4(WEB)=no repo
+**Tabs:** Tab1(SHOT)=repo, Tab2(SCOPE)=safe scans, Tab3(FINDER)=no repo, Tab4(AUDITOR)=screenshots/docs only
 **Prep (5 min):**
-1. Run `recon` on the repo.
-2. Run `boot` with mission + profile. Tab1 gets recon + WARROOM.
-3. Tab1 classifies: what is this, what works, what is broken.
+1. Run `prep scan` on the repo.
+2. Paste `.prep-output` safe scans into SCOPE to produce PRODUCT_SPEC + EXECUTION_QUEUE.
+3. Run `prep grid` with mission + profile. SHOT executes queue item #1.
 **Outputs:** PRODUCT_AUDIT.md, top 3 files list.
 **Acceptance:** Audit is evidence-based. Top 3 files justified. No vibes.
 
 ### Ship Feature (Unlimited)
 **Profiles:** unlimited, locked-down, adaptive
-**Tabs:** Tab1(SCOPE)=repo+WARROOM, Tab2(SHOT)=repo, Tab3(FINDER)=no repo, Tab4(WEB)=no repo
+**Tabs:** Tab1(SHOT)=repo+WARROOM+queue, Tab2(SCOPE)=safe scans, Tab3(FINDER)=no repo, Tab4(AUDITOR)=screenshots/docs only
 **Prep (10 min):**
 1. Write TASKS.md with the feature spec.
-2. Run `recon` if repo is unfamiliar.
-3. Run `boot` with mission + profile.
-4. Paste SCOPE_SHOT_IGNITION into Planner tab.
+2. Run `prep scan` if repo is unfamiliar.
+3. Paste safe scans into SCOPE if the queue is not already written.
+4. Run `prep grid` with mission + profile.
 **Outputs:** PLAN.md, EXECUTION_QUEUE.md, DIFF, TEST_REPORT.md.
 **Acceptance:** PLAN.md exists. DIFFs apply cleanly. Tests pass. Types clean.
 
 ### Ship Feature (Corp-Sec)
 **Profiles:** corp-sec
-**Tabs:** Tab1(SCOPE)=Copilot(IDE)=repo, Tab2(SHOT)=Copilot(IDE)=repo, Tab3(FINDER)=offline only, Tab4(WEB)=offline only
+**Tabs:** Tab1(SHOT)=Copilot(IDE)=repo, Tab2(SCOPE)=safe scans only, Tab3(FINDER)=offline only, Tab4(AUDITOR)=offline/screenshots
 **Prep (10 min):**
-1. Run `recon` on the repo (read-only).
+1. Run `prep scan` on the repo (read-only).
 2. Write WARROOM.md: product thesis, core job, P0s, anti-goals.
-3. Run `boot` with mission + corp-sec profile.
-4. Paste SCOPE_SHOT_IGNITION into Copilot.
+3. Copy only safe scan files to Lane B planner.
+4. Run `prep grid` with mission + corp-sec profile.
 **Outputs:** PRODUCT_AUDIT.md, PRODUCT_SPEC.md, EXECUTION_QUEUE.md, DIFF, TEST_REPORT.md.
 **Acceptance:** No proprietary code leaked to external tools. Artifacts exist. Tests pass.
 
 ### Vibecoded UX Mess
 **Profiles:** unlimited, corp-sec
-**Tabs:** Tab1(SCOPE)=repo+screenshots, Tab2(SHOT)=no repo, Tab3(FINDER)=no repo, Tab4(WEB)=no repo
+**Tabs:** Tab1(SHOT)=repo, Tab2(SCOPE)=safe scans/ICK queue, Tab3(FINDER)=no repo, Tab4(AUDITOR)=screenshots only
 **Prep (10 min):**
 1. Pick 1-2 screenshots: mobile, core flow.
 2. Run `boot` with mission + profile.
@@ -462,18 +463,18 @@ Every situation has: a name, a profile selection, a prep sequence (â‰¤10 ste
 
 ### Legacy Backend Debug
 **Profiles:** unlimited, corp-sec
-**Tabs:** Tab1(SCOPE)=repo+logs, Tab2(SHOT)=repo, Tab3(FINDER)=no repo, Tab4(WEB)=no repo
+**Tabs:** Tab1(SHOT)=repo+logs, Tab2(SCOPE)=safe scans, Tab3(FINDER)=no repo, Tab4(AUDITOR)=docs/screenshots only
 **Prep (10 min):**
 1. Paste error logs + broken component into agent.
-2. Run `recon` on the relevant module.
-3. Run `boot` with mission + profile.
+2. Run `prep scan` on the repo or relevant module root.
+3. Run `prep grid` with mission + profile.
 4. Paste BELT.md + DEBUG PROTOCOL (INQUISITOR) into agent.
 **Outputs:** DIAGNOSIS, DIFF, TEST_REPORT.md.
 **Acceptance:** Root cause identified (not symptom). Fix radiates. Tests pass.
 
 ### Aggressive PR Review
 **Profiles:** unlimited, token-limited, corp-sec
-**Tabs:** Tab1(SCOPE)=PR diff, Tab2(SHOT)=repo, Tab3(FINDER)=no repo, Tab4(WEB)=no repo
+**Tabs:** Tab1(SHOT)=repo, Tab2(SCOPE)=PR diff/safe scans, Tab3(FINDER)=no repo, Tab4(AUDITOR)=docs only
 **Prep (5 min):**
 1. Paste PR diff or file list into agent.
 2. Run `boot` with mission + profile.
@@ -483,19 +484,19 @@ Every situation has: a name, a profile selection, a prep sequence (â‰¤10 ste
 
 ### New Product Architecture
 **Profiles:** unlimited, locked-down, adaptive
-**Tabs:** Tab1(SCOPE)=repo, Tab2(SHOT)=no repo, Tab3(FINDER)=no repo, Tab4(WEB)=no repo
+**Tabs:** Tab1(SHOT)=repo, Tab2(SCOPE)=safe scans/thesis, Tab3(FINDER)=no repo, Tab4(AUDITOR)=docs only
 **Prep (10 min):**
 1. Write one-sentence product thesis.
 2. Write one-sentence core job.
-3. Run `recon` on any existing codebase.
-4. Run `boot` with mission + profile.
+3. Run `prep scan` on any existing codebase.
+4. Run `prep grid` with mission + profile.
 5. Paste thesis + core job + BELT.md into Planner tab.
 **Outputs:** PRODUCT_SPEC.md, EXECUTION_QUEUE.md (ordered by dependency).
 **Acceptance:** Tech stack justified. Data model covers core entities. Queue ordered by dependency.
 
 ### Interview Prep
 **Profiles:** unlimited, locked-down, zero-budget, adaptive
-**Tabs:** Tab1(SCOPE)=resume+JD, Tab2(SHOT)=no repo, Tab3(FINDER)=no repo, Tab4(WEB)=no repo
+**Tabs:** Single agent or Tab2(SCOPE)=resume+JD; no repo tabs needed
 **Prep (10 min):**
 1. Paste job description + resume into agent.
 2. Run `boot` with mission + profile.
@@ -528,14 +529,14 @@ Every situation has: a name, a profile selection, a prep sequence (â‰¤10 ste
 **Tabs:** All tabs offline. No network.
 **Prep (5 min):**
 1. Run `pack` to pack the relevant repo slice to clipboard.
-2. Run `recon` for repo intelligence.
+2. Run `prep scan -Minimal` for repo intelligence.
 3. Work entirely offline.
 **Outputs:** All artifacts local. Zero network calls.
 **Acceptance:** Zero network calls. All artifacts local. System survives disconnection.
 
 ### Design Critique
 **Profiles:** unlimited, corp-sec
-**Tabs:** Tab1(SCOPE)=screenshots, Tab2(SHOT)=no repo, Tab3(FINDER)=no repo, Tab4(WEB)=no repo
+**Tabs:** Tab4(AUDITOR)=screenshots, Tab3(FINDER)=no repo, SHOT only if fixes will be applied
 **Prep (10 min):**
 1. Take screenshots of key screens (mobile + desktop).
 2. Run `boot` with mission + profile.

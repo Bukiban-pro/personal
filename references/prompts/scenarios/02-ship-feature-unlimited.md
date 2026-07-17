@@ -1,11 +1,11 @@
 ﻿# CARD: Ship Feature (Unlimited)
 
 **Formula:** core + unlimited + AGENTS + task
-**Tool:** Claude (planner/SCOPE) â†’ ChatGPT (doer/SHOT) â†’ you (pipe)
-**Tabs:** Tab1(SCOPE)=repo+WARROOM, Tab2(SHOT)=repo, Tab3(FINDER)=no repo, Tab4(WEB)=no repo
-**Lane:** A (internal) for Tabs 1-2, B (external) for Tabs 3-4
+**Tool:** Claude/ChatGPT (planner from scans) -> SHOT in repo -> Finder/Auditor as needed
+**Tabs:** Tab1(SHOT)=repo+WARROOM+queue, Tab2(SCOPE)=safe scans, Tab3(FINDER)=no repo, Tab4(AUDITOR)=screenshots/docs only
+**Lane:** A (internal) for SHOT, B (external) for SCOPE/FINDER/AUDITOR
 
-**Prep:** Write TASKS.md. Run `recon` if unfamiliar. Run `boot` with mission + profile.
+**Prep:** Write TASKS.md. Run `prep scan` if unfamiliar. Paste safe scans to SCOPE. Run `prep grid` with mission + profile.
 
 ---
 
@@ -14,7 +14,7 @@
 ```
 Read and adopt: https://raw.githubusercontent.com/Bukiban-pro/personal/main/BELT.md
 
-You are SCOPE. Read recon output and TASKS.md below. Produce:
+You are SCOPE. Read scan output and TASKS.md below. Produce:
 1. PRODUCT_AUDIT.md â€” current state, evidence-based
 2. PRODUCT_SPEC.md â€” smallest truthful product, one screen, one flow, one metric, anti-goals
 3. EXECUTION_QUEUE.md â€” ordered tasks: file path | change | acceptance | effort (S/M/L)

@@ -7,7 +7,7 @@
 )
 
 if ($RepoPath -eq "") {
-    $RepoPath = Resolve-Path "$PSScriptRoot\.."
+    $RepoPath = Resolve-Path "."
 }
 
 $patchPath = Join-Path $RepoPath $PatchFile
@@ -122,18 +122,25 @@ function Apply-Diff {
     }
     Add-Content $logPath $log
     Write-Host "Logged to HANDS_LOG.md" -ForegroundColor Green
-    Write-Host "Branch: $safeBranch â€” merge to main after verification." -ForegroundColor Cyan
+    Write-Host "Branch: $safeBranch -- merge to main after verification." -ForegroundColor Cyan
 }
 
 # === DROPZONE WATCH MODE ===
 if ($Watch) {
     if (-not (Test-Path $dropzonePath)) {
-        Set-Content -Path $dropzonePath -Value "# DROPZONE.md`n`nDrop unified diffs in \`\`\`diff blocks below. Watcher auto-applies on save.`n`n---" -Encoding UTF8
+        $initialDropzone = @"
+# DROPZONE.md
+
+Drop unified diffs in ```diff blocks below. Watcher auto-applies on save.
+
+---
+"@
+        Set-Content -Path $dropzonePath -Value $initialDropzone -Encoding UTF8
         Write-Host "Created DROPZONE.md: $dropzonePath" -ForegroundColor DarkGray
     }
 
     Write-Host "=== DROPZONE WATCHER ===" -ForegroundColor Cyan
-    Write-Host "Write \`\`\`diff blocks to: $dropzonePath" -ForegroundColor Yellow
+    Write-Host "Write diff blocks to: $dropzonePath" -ForegroundColor Yellow
     Write-Host "Watcher auto-applies on every save. Ctrl+C to stop." -ForegroundColor DarkGray
     Write-Host ""
 
@@ -169,7 +176,7 @@ if (-not $clipText) {
 
 if ([string]::IsNullOrWhiteSpace($clipText)) {
     Write-Host "ERROR: Clipboard is empty. Copy a diff from ChatGPT first." -ForegroundColor Red
-    Write-Host "Or use -Watch to watch DROPZONE.md for \`\`\`diff blocks." -ForegroundColor DarkGray
+    Write-Host "Or use -Watch to watch DROPZONE.md for diff blocks." -ForegroundColor DarkGray
     exit 1
 }
 

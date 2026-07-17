@@ -5,11 +5,13 @@
     [string]$RepoPath = "",
     [string]$Mission = "",
     [string]$Profile = "unlimited",
-    [switch]$CorpSec
+    [switch]$CorpSec,
+    [switch]$Minimal,
+    [switch]$NoTabs
 )
 
 if ($RepoPath -eq "") {
-    $RepoPath = Resolve-Path "$PSScriptRoot\.."
+    $RepoPath = Resolve-Path "."
 }
 
 function Show-Help {
@@ -25,10 +27,12 @@ function Show-Help {
     Write-Host "  list       List available scenario cards." -ForegroundColor White
     Write-Host ""
     Write-Host "OPTIONS:" -ForegroundColor Green
-    Write-Host "  -RepoPath  Target repo (default: parent of this script)" -ForegroundColor DarkGray
+    Write-Host "  -RepoPath  Target repo (default: current directory)" -ForegroundColor DarkGray
     Write-Host "  -Mission   One-line mission for grid/outside modes" -ForegroundColor DarkGray
     Write-Host "  -Profile   Profile: unlimited|locked-down|zero-budget|token-limited|stealth|corp-sec|adaptive" -ForegroundColor DarkGray
     Write-Host "  -CorpSec   Enable corp-sec lane constraints (grid mode)" -ForegroundColor DarkGray
+    Write-Host "  -Minimal   Faster scan with landmine search skipped" -ForegroundColor DarkGray
+    Write-Host "  -NoTabs    Build grid prompts without opening browser tabs" -ForegroundColor DarkGray
     Write-Host ""
     Write-Host "EXAMPLES:" -ForegroundColor Green
     Write-Host "  prep scan -RepoPath .\target-repo" -ForegroundColor White
@@ -55,7 +59,7 @@ switch ($Mode) {
     }
 
     "scan" {
-        & "$PSScriptRoot\scan.ps1" -RepoPath $RepoPath
+        & "$PSScriptRoot\scan.ps1" -RepoPath $RepoPath -Minimal:$Minimal
         exit $LASTEXITCODE
     }
 
@@ -64,7 +68,7 @@ switch ($Mode) {
             Write-Host "ERROR: -Mission required for grid mode" -ForegroundColor Red
             exit 1
         }
-        & "$PSScriptRoot\boot-session.ps1" -Mission $Mission -Profile $Profile -CorpSec:$CorpSec
+        & "$PSScriptRoot\boot-session.ps1" -Mission $Mission -Profile $Profile -RepoPath $RepoPath -CorpSec:$CorpSec -NoTabs:$NoTabs
         exit $LASTEXITCODE
     }
 
@@ -82,7 +86,7 @@ switch ($Mode) {
             Write-Host "ERROR: -Card required for card mode" -ForegroundColor Red
             exit 1
         }
-        & "$PSScriptRoot\run-card.ps1" -Card $Card -RepoPath $RepoPath -Mission $Mission -Profile $Profile -CorpSec:$CorpSec
+        & "$PSScriptRoot\run-card.ps1" -Card $Card -RepoPath $RepoPath -Mission $Mission -Profile $Profile -CorpSec:$CorpSec -NoTabs:$NoTabs
         exit $LASTEXITCODE
     }
 

@@ -7,8 +7,11 @@
     [switch]$CorpSec
 )
 
-$repoRoot = if ($RepoPath -ne "") { $RepoPath } else { Resolve-Path "$PSScriptRoot\.." }
-$sessionPath = "$repoRoot\references\session\SESSION.md"
+$repoRoot = if ($RepoPath -ne "") { (Resolve-Path $RepoPath).Path } else { (Resolve-Path ".").Path }
+$sessionPath = Join-Path $repoRoot "SESSION.md"
+if (-not (Test-Path $sessionPath)) {
+    $sessionPath = "$PSScriptRoot\..\references\session\SESSION.md"
+}
 $coreUrl = "https://raw.githubusercontent.com/Bukiban-pro/personal/main/BELT.md"
 
 $sessionState = ""
@@ -29,67 +32,24 @@ if (Test-Path $warroomPath) {
 }
 
 $recon = ""
-$reconPath = "$repoRoot\HANDS_LOG.md"
-if (Test-Path $reconPath) {
-    $recon = "RECON previously run. Check HANDS_LOG.md for details."
+$scanPath = Join-Path $repoRoot ".prep-output\REPO_CODE_INDEX.md"
+if (Test-Path $scanPath) {
+    $recon = "SCAN available. Use .prep-output/REPO_TODO.md, REPO_LOG.md, REPO_CODE_INDEX.md, and ARCHITECT_PROMPT.md."
 }
 
-$internalAgent = "Claude (Planner/SCOPE)"
-$externalAgent = "ChatGPT (Doer/SHOT)"
-$externalAgent2 = "Gemini (Finder/Web)"
-$externalAgent3 = "Perplexity (Fact-Check)"
-
-if ($CorpSec) {
-    $internalAgent = "Copilot in IDE (SCOPE -- tenant-protected)"
-    $externalAgent = "Copilot in IDE (SHOT -- tenant-protected)"
-    $externalAgent2 = "Local LLM or offline only (Finder)"
-    $externalAgent3 = "Local LLM or offline only (Fact-Check)"
-}
+$shotAgent = if ($CorpSec) { "Copilot in IDE (SHOT -- tenant-protected)" } else { "ChatGPT/Codex (SHOT -- repo executor)" }
+$scopeAgent = if ($CorpSec) { "External planner from safe scans (SCOPE)" } else { "Claude/ChatGPT (SCOPE -- scans planner)" }
+$finderAgent = if ($CorpSec) { "Local LLM or offline only (Finder)" } else { "Gemini/Perplexity (Finder)" }
+$auditorAgent = if ($CorpSec) { "Local LLM or screenshot-only auditor" } else { "Claude/GPT-4o (Auditor)" }
 
 $tabs = @(
     @{
-        Label = $internalAgent
-        Url = if ($CorpSec) { "vscode://" } else { "https://claude.ai/new" }
-        Role = "SCOPE"
+        Label = $shotAgent
+        Url = if ($CorpSec) { "vscode://copilot" } else { "https://chatgpt.com" }
+        Role = "SHOT"
         GetsRepo = $true
         GetsWarroom = $true
         GetsRecon = $true
-        Prompt = @"
-You are SCOPE -- the Auditor and Product Brain.
-
-Read and adopt: $coreUrl
-ROLE: SCOPE (auditor/product brain)
-MISSION: $Mission
-PROFILE: $Profile
-
-Your job:
-1. Read WARROOM.md (product truth) and recon output.
-2. Kill delusion. Name the real problem.
-3. Produce PRODUCT_AUDIT.md, PRODUCT_SPEC.md, EXECUTION_QUEUE.md.
-
-WARROOM:
-$warroom
-
-SESSION:
-$sessionState
-
-RULES:
-- Product thesis is ONE sentence or you are not scoped.
-- Core job is ONE sentence or you are not scoped.
-- Anti-goals are explicit or you are not scoped.
-- EXECUTION_QUEUE tasks have: user outcome, file paths, acceptance criteria, effort estimate.
-- Output ONLY artifacts. No chat. End with NEXT.
-
-OUTPUT: PRODUCT_AUDIT.md, PRODUCT_SPEC.md, EXECUTION_QUEUE.md
-"@
-    },
-    @{
-        Label = $externalAgent
-        Url = if ($CorpSec) { "vscode://copilot" } else { "https://chatgpt.com" }
-        Role = "SHOT"
-        GetsRepo = (-not $CorpSec)
-        GetsWarroom = $false
-        GetsRecon = $false
         Prompt = @"
 You are SHOT -- the Executor and Closer.
 
@@ -99,22 +59,62 @@ MISSION: $Mission
 PROFILE: $Profile
 
 Your job:
-1. Read one task from EXECUTION_QUEUE.md.
-2. Execute ONE vertical slice: UI -> component -> state -> API -> DB.
-3. Run Jarvis Prime loop: ICK audit -> fix -> verify -> repeat.
+1. Read EXECUTION_QUEUE.md and PRODUCT_SPEC.md from the target repo.
+2. Pick exactly one READY task.
+3. Execute one vertical slice: UI -> component -> state -> API -> DB as needed.
 4. Produce DIFF + TEST_REPORT.md + ICK_AUDIT.md.
+
+WARROOM:
+$warroom
+
+SESSION:
+$sessionState
+
+SCAN:
+$recon
 
 RULES:
 - One file at a time. One diff. One verify.
 - No shotgun changes across unrelated areas.
-- Every ICK must be non-trivial (real user impact).
+- If a task crosses a boundary, trace the boundary instead of stopping.
+- Every visible change covers loading, empty, error, success, and edge states where relevant.
 - Output ONLY artifacts. No chat. End with NEXT.
 
 OUTPUT: DIFF (unified), TEST_REPORT.md, ICK_AUDIT.md
 "@
     },
     @{
-        Label = $externalAgent2
+        Label = $scopeAgent
+        Url = if ($CorpSec) { "https://claude.ai/new" } else { "https://claude.ai/new" }
+        Role = "SCOPE"
+        GetsRepo = $false
+        GetsWarroom = $true
+        GetsRecon = $true
+        Prompt = @"
+You are SCOPE -- the Auditor and Product Brain.
+
+Read and adopt: $coreUrl
+ROLE: SCOPE (planner from scans)
+MISSION: $Mission
+PROFILE: $Profile
+
+Your job:
+1. Read safe scan files only: REPO_TODO.md, REPO_LOG.md, REPO_CODE_INDEX.md, ARCHITECT_PROMPT.md.
+2. Kill delusion. Name the real product problem.
+3. Produce PRODUCT_SPEC.md and EXECUTION_QUEUE.md.
+
+RULES:
+- Do not ask for raw source code.
+- If scans are insufficient, name the exact missing scan.
+- Product thesis is one sentence.
+- Tasks have: user outcome, file paths, acceptance criteria, effort estimate, risk.
+- Output ONLY artifacts. No chat. End with NEXT.
+
+OUTPUT: PRODUCT_SPEC.md, EXECUTION_QUEUE.md
+"@
+    },
+    @{
+        Label = $finderAgent
         Url = "https://gemini.google.com"
         Role = "FINDER"
         GetsRepo = $false
@@ -144,39 +144,51 @@ OUTPUT: RESEARCH_FINDINGS.md
 "@
     },
     @{
-        Label = $externalAgent3
+        Label = $auditorAgent
         Url = "https://perplexity.ai"
-        Role = "WEB"
+        Role = "AUDITOR"
         GetsRepo = $false
         GetsWarroom = $false
         GetsRecon = $false
         Prompt = @"
-You are WEB -- the Fact-Checker.
+You are AUDITOR -- the UX and verification critic.
 
 Read and adopt: $coreUrl
-ROLE: WEB (fact-check/docs/standards)
+ROLE: AUDITOR (screenshots/facts/verification)
 MISSION: $Mission
 PROFILE: $Profile
 
 Your job:
 1. Verify claims made by other agents.
-2. Find official docs, API references, standards.
-3. Check dates, versions, compatibility.
+2. Audit screenshots or described flows for hierarchy, contrast, state coverage, recovery, and edge cases.
+3. Find official docs, API references, or standards when a factual claim needs checking.
 4. Flag anything that looks wrong.
 
 RULES:
-- No repo context. No code.
+- No repo code. Screenshots and public docs only.
 - Only public information. Official docs preferred.
-- Structure every answer: Claim -> Evidence -> Verdict -> Source.
+- Structure every answer: Finding -> Evidence -> Impact -> Fix -> Verification.
 - Output ONLY verifications. No chat. End with NEXT.
 
-OUTPUT: FACT_CHECK.md
+OUTPUT: ICK_AUDIT.md or FACT_CHECK.md
 "@
     }
 )
 
 $tmpDir = "$env:TEMP\jarvis-boot-$(Get-Date -Format 'HHmmss')"
 New-Item -ItemType Directory -Path $tmpDir -Force | Out-Null
+
+function Copy-TabPrompt {
+    param([string]$Path)
+    try {
+        Set-Clipboard (Get-Content $Path -Raw) -ErrorAction Stop
+        return $true
+    }
+    catch {
+        Write-Host "Clipboard unavailable. Prompt saved: $Path" -ForegroundColor Yellow
+        return $false
+    }
+}
 
 for ($i = 0; $i -lt $tabs.Count; $i++) {
     $p = $tabs[$i].Prompt
@@ -193,7 +205,7 @@ for ($i = 0; $i -lt $tabs.Count; $i++) {
     Set-Content -Path "$tmpDir\tab$($i+1).txt" -Value $finalPrompt -Encoding UTF8
 }
 
-Set-Clipboard (Get-Content "$tmpDir\tab1.txt" -Raw)
+$tab1Copied = Copy-TabPrompt -Path "$tmpDir\tab1.txt"
 
 if (-not $NoTabs) {
     if ($Browser -eq "auto") {
@@ -220,20 +232,27 @@ if (-not $NoTabs) {
 Write-Host "=== BOOT SEQUENCE ===" -ForegroundColor Cyan
 Write-Host "Profile: $Profile | Mission: $Mission | CorpSec: $CorpSec" -ForegroundColor Yellow
 Write-Host "" -ForegroundColor Cyan
-Write-Host "Tab 1 ($($tabs[0].Label)) -- ROLE: $($tabs[0].Role) -- COPIED. Paste now." -ForegroundColor Green
+$tab1Status = if ($tab1Copied) { "COPIED. Paste now." } else { "SAVED. Open the prompt file." }
+Write-Host "Tab 1 ($($tabs[0].Label)) -- ROLE: $($tabs[0].Role) -- $tab1Status" -ForegroundColor Green
 Write-Host "  Gets repo: $($tabs[0].GetsRepo) | Gets WARROOM: $($tabs[0].GetsWarroom)" -ForegroundColor DarkGray
 
 for ($i = 1; $i -lt $tabs.Count; $i++) {
-    Write-Host "When Tab $i is booted, press ENTER -> Tab $($i+1) ($($tabs[$i].Label))" -ForegroundColor DarkGray
-    $null = Read-Host
-    Set-Clipboard (Get-Content "$tmpDir\tab$($i+1).txt" -Raw)
-    Write-Host "Tab $($i+1) ($($tabs[$i].Label)) -- ROLE: $($tabs[$i].Role) -- COPIED. Paste now." -ForegroundColor Green
+    if (-not $NoTabs) {
+        Write-Host "When Tab $i is booted, press ENTER -> Tab $($i+1) ($($tabs[$i].Label))" -ForegroundColor DarkGray
+        $null = Read-Host
+    }
+    else {
+        Write-Host "Prompt saved: $tmpDir\tab$($i+1).txt" -ForegroundColor DarkGray
+    }
+    $copied = Copy-TabPrompt -Path "$tmpDir\tab$($i+1).txt"
+    $status = if ($copied) { "COPIED. Paste now." } else { "SAVED. Open the prompt file." }
+    Write-Host "Tab $($i+1) ($($tabs[$i].Label)) -- ROLE: $($tabs[$i].Role) -- $status" -ForegroundColor Green
     Write-Host "  Gets repo: $($tabs[$i].GetsRepo) | Gets WARROOM: $($tabs[$i].GetsWarroom)" -ForegroundColor DarkGray
 }
 
 Write-Host ""
 Write-Host "All $($tabs.Count) tabs booted." -ForegroundColor Cyan
-Write-Host "LANE A (internal): real code, WARROOM, recon." -ForegroundColor Green
+Write-Host "LANE A (internal): real code, WARROOM, scan files." -ForegroundColor Green
 Write-Host "LANE B (external): abstract structure only. No secrets." -ForegroundColor Yellow
 Write-Host "SCRATCHPAD.md is shared memory." -ForegroundColor DarkGray
 Write-Host "Commit SCRATCHPAD.md after each tab output." -ForegroundColor DarkGray

@@ -5,7 +5,7 @@
 **Tabs:** All tabs offline. No network.
 **Lane:** B (external/offline) â€” zero network
 
-**Prep:** Run `pack` with Pack=ultra. Run `recon`. Work entirely offline.
+**Prep:** Run `prep scan -Minimal`. Run `prep outside` or `context-pack.ps1 -Pack ultra -Anonymize -NoClipboard`. Work entirely offline.
 
 ---
 

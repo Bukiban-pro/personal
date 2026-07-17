@@ -2,10 +2,10 @@
 
 **Formula:** core + unlimited/locked-down + dev-mode
 **Tool:** Claude (SCOPE) â†’ you (validate) â†’ SHOT (execute)
-**Tabs:** Tab1(SCOPE)=repo, Tab2(SHOT)=no repo, Tab3(FINDER)=no repo, Tab4(WEB)=no repo
+**Tabs:** Tab1(SHOT)=repo, Tab2(SCOPE)=safe scans/thesis, Tab3(FINDER)=no repo, Tab4(AUDITOR)=docs only
 **Lane:** A (internal) for Tab1, B (external) for Tabs 2-4
 
-**Prep:** Write one-sentence product thesis. Write one-sentence core job. Run `recon`. Run `boot`.
+**Prep:** Write one-sentence product thesis. Write one-sentence core job. Run `prep scan` if code exists. Run `prep grid`.
 
 ---
 

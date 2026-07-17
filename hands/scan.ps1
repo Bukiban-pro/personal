@@ -1,10 +1,11 @@
 ﻿param(
     [string]$RepoPath = "",
-    [switch]$Force
+    [switch]$Force,
+    [switch]$Minimal
 )
 
 if ($RepoPath -eq "") {
-    $RepoPath = Resolve-Path "$PSScriptRoot\.."
+    $RepoPath = Resolve-Path "."
 }
 
 $repoRoot = Resolve-Path $RepoPath
@@ -25,19 +26,24 @@ Set-Content -Path (Join-Path $outputDir "REPO_FILES.md") -Value $gitFilesContent
 # === 2. REPO_TODO.md - all TODO/FIXME/HACK/XXX ===
 Write-Host "[2/5] Generating REPO_TODO.md..." -ForegroundColor Green
 $todos = @()
-foreach ($ext in @("*.ts","*.tsx","*.js","*.jsx","*.py","*.java","*.kt","*.go","*.rs","*.rb","*.php","*.cs")) {
-    $found = Get-ChildItem -Path $repoRoot -Filter $ext -Recurse -ErrorAction SilentlyContinue |
-        Where-Object { $_.FullName -notmatch '\\(node_modules|\.git|dist|build|\.next|target|__pycache__)\\' } |
-        ForEach-Object { findstr /N /S /I "TODO FIXME HACK XXX" $_.FullName 2>$null }
-    if ($found) { $todos += $found }
-}
 $todoContent = "# REPO_TODO -- All TODO/FIXME/HACK/XXX`n`n"
-if ($todos.Count -gt 0) {
-    $todoContent += "FOUND $($todos.Count) landmines:`n`n"
-    $todoContent += ($todos | Select-Object -First 100) -join "`n"
-    if ($todos.Count -gt 100) { $todoContent += "`n... [TRUNCATED: $($todos.Count - 100) more]" }
-} else {
-    $todoContent += "CLEAN -- no landmines found."
+if ($Minimal) {
+    $todoContent += "SKIPPED -- minimal scan requested. Re-run without -Minimal before execution."
+}
+else {
+    foreach ($ext in @("*.ts","*.tsx","*.js","*.jsx","*.py","*.java","*.kt","*.go","*.rs","*.rb","*.php","*.cs")) {
+        $found = Get-ChildItem -Path $repoRoot -Filter $ext -Recurse -ErrorAction SilentlyContinue |
+            Where-Object { $_.FullName -notmatch '\\(node_modules|\.git|dist|build|\.next|target|__pycache__|\.venv|coverage|\.prep-output)\\' } |
+            ForEach-Object { findstr /N /S /I "TODO FIXME HACK XXX" $_.FullName 2>$null }
+        if ($found) { $todos += $found }
+    }
+    if ($todos.Count -gt 0) {
+        $todoContent += "FOUND $($todos.Count) landmines:`n`n"
+        $todoContent += ($todos | Select-Object -First 100) -join "`n"
+        if ($todos.Count -gt 100) { $todoContent += "`n... [TRUNCATED: $($todos.Count - 100) more]" }
+    } else {
+        $todoContent += "CLEAN -- no landmines found."
+    }
 }
 Set-Content -Path (Join-Path $outputDir "REPO_TODO.md") -Value $todoContent -Encoding UTF8
 
@@ -50,7 +56,7 @@ Set-Content -Path (Join-Path $outputDir "REPO_LOG.md") -Value $logContent -Encod
 # === 4. REPO_CODE_INDEX.md - code files and paths by type ===
 Write-Host "[4/5] Generating REPO_CODE_INDEX.md..." -ForegroundColor Green
 $codeFiles = Get-ChildItem -Path $repoRoot -Recurse -File -ErrorAction SilentlyContinue |
-    Where-Object { $_.FullName -notmatch '\\(node_modules|\.git|dist|build|\.next|target|__pycache__|\.venv)\\' } |
+    Where-Object { $_.FullName -notmatch '\\(node_modules|\.git|dist|build|\.next|target|__pycache__|\.venv|coverage|\.prep-output)\\' } |
     Where-Object { $_.Extension -in @(".ts",".tsx",".js",".jsx",".py",".java",".kt",".go",".rs",".rb",".php",".cs",".vue",".svelte") }
 
 $indexContent = "# REPO_CODE_INDEX -- Code files by category`n`n"

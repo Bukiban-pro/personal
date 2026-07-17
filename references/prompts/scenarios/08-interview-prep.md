@@ -2,7 +2,7 @@
 
 **Formula:** learn + career
 **Tool:** Claude/ChatGPT (prep) â†’ you (practice)
-**Tabs:** Tab1(SCOPE)=resume+JD, Tab2(SHOT)=no repo, Tab3(FINDER)=no repo, Tab4(WEB)=no repo
+**Tabs:** Single agent or Tab2(SCOPE)=resume+JD; no repo tabs needed
 **Lane:** B (external) â€” no repo involved
 
 **Prep:** Paste job description + resume. Run `boot`. Declare focus: behavioral, technical, system-design, or all.

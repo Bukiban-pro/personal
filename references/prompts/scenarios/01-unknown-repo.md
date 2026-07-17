@@ -1,11 +1,11 @@
 ﻿# CARD: Unknown Repo
 
-**Formula:** recon + scope
+**Formula:** prep scan + outside + grid
 **Tool:** Any
-**Tabs:** Tab1(SCOPE)=repo, Tab2(SHOT)=no repo, Tab3(FINDER)=no repo, Tab4(WEB)=no repo
-**Lane:** A (internal) for Tab1, B (external) for Tabs 2-4
+**Tabs:** Tab1(SHOT)=repo, Tab2(SCOPE)=safe scans, Tab3(FINDER)=no repo, Tab4(AUDITOR)=screenshots/docs only
+**Lane:** A (internal) for SHOT, B (external) for SCOPE/FINDER/AUDITOR
 
-**Prep:** Run `recon` on the repo. Run `boot` with mission + profile. Tab1 gets recon + WARROOM.
+**Prep:** Run `prep scan`. Paste `.prep-output` safe scans into SCOPE. Run `prep grid` with mission + profile. SHOT gets the resulting queue.
 
 ---
 
@@ -16,7 +16,7 @@ You are SCOPE â€” a brutal auditor.
 
 TASK: Classify this repo. Tell me what it is, what works, what is broken.
 
-Read the recon output below. Then produce:
+Read the scan output below. Then produce:
 
 1. PRODUCT_AUDIT.md â€” What works (evidence), what is broken (specific files), what is missing (states). Confidence: X%.
 2. Top 3 files that matter most. Justify each in one sentence.

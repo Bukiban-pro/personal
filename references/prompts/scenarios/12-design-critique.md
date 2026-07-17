@@ -2,7 +2,7 @@
 
 **Formula:** jarvis + unlimited/corp-sec
 **Tool:** Claude/GPT-4o (vision) â†’ you (apply fixes)
-**Tabs:** Tab1(SCOPE)=screenshots, Tab2(SHOT)=no repo, Tab3(FINDER)=no repo, Tab4(WEB)=no repo
+**Tabs:** Tab4(AUDITOR)=screenshots, Tab3(FINDER)=no repo, SHOT only if fixes will be applied
 **Lane:** A (internal) for Tab1, B (external) for Tabs 2-4
 
 **Prep:** Take screenshots of key screens (mobile + desktop). Run `boot`.

@@ -20,7 +20,7 @@ You don't need it. BELT.md contains everything inline.
 | **Learn topic** | `learn` | `learn` (offline) | `learn` (3-pass) | `learn` (cheatsheet) | `adaptive + learn` | `learn` (offline) | — |
 | **Build infra** | `dev-mode` | `dev-mode` (local) | — | — | `adaptive + dev-mode` | `dev-mode` (offline) | — |
 | **Run multi-agent** | `protocol + web-brain` | — | — | — | `adaptive + protocol` | — | — |
-| **Unknown repo** | `INIT.md + repo-recon` | — | — | — | `INIT.md + repo-recon` | — | — |
+| **Unknown repo** | `prep scan + ARCHITECT_SCAN` | — | — | — | `prep scan + ARCHITECT_SCAN` | — | — |
 | **UI audit / ICK hunt** | `jarvis` | — | — | — | — | — | — |
 
 ## Key

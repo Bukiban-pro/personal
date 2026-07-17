@@ -2,10 +2,10 @@
 
 **Formula:** core + unlimited/corp-sec + inquisitor
 **Tool:** Claude/ChatGPT (diagnosis) â†’ SHOT (fix)
-**Tabs:** Tab1(SCOPE)=repo+logs, Tab2(SHOT)=repo, Tab3(FINDER)=no repo, Tab4(WEB)=no repo
+**Tabs:** Tab1(SHOT)=repo+logs, Tab2(SCOPE)=safe scans, Tab3(FINDER)=no repo, Tab4(AUDITOR)=docs/screenshots only
 **Lane:** A (internal) for Tabs 1-2, B (external) for Tabs 3-4
 
-**Prep:** Paste error logs + broken component. Run `recon` on the module. Run `boot`.
+**Prep:** Paste error logs + broken component. Run `prep scan` on the repo or module root. Run `prep grid`.
 
 ---
 
