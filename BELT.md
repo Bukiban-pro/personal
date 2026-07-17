@@ -1,4 +1,4 @@
-﻿# BELT â€” Prep-Time Weapons Factory
+# BELT â€” Prep-Time Weapons Factory
 
 `personal` is a prep-time engine.
 Given a situation, an environment, and a repo, it outputs:
@@ -8,12 +8,16 @@ Given a situation, an environment, and a repo, it outputs:
 - the exact acceptance checks,
 - and the exact constraints (zero-trust, corp-sec, token-limited, etc.).
 
-No "knowledge." No "notes." Every file either:
-- defines an operating contract, or
-- is a template to be copied into a project, or
-- is a launcher/wrapper.
+Hot path files must earn immediate execution value. Every file is one of:
+- an operating contract,
+- a reusable prompt/template,
+- a launcher/wrapper,
+- or a cold-storage archive/research artifact with a retrieval reason.
 
-Anything else is dead weight.
+Archive is not dead weight. Stale does not mean useless. A file dies only after one of these is true:
+- its value was extracted into a better hot-path artifact,
+- it is a duplicate with no unique prompt, pattern, story, or example,
+- it contains secrets or harmful drift and a ledger says why.
 
 One file. Works with any AI, anywhere. No dependencies.
 
@@ -44,6 +48,16 @@ Everything you run must be reachable from these verbs. No second system.
 | `archive` | Rolls SESSION.md into history. Clears state for next mission. | hands/archive-session.ps1 |
 
 Params for all scripts: see hands/ directory. Under pressure, use defaults.
+
+---
+
+## ARCHIVE DOCTRINE
+
+BELT is the boot OS. `references/archive/` and `research/` are cold memory.
+
+Use cold memory when the mission needs older doctrine, prompt DNA, UI/research source material, learning systems, or the story behind why the current hot path exists. Do not paste it blindly into a live task. Mine it, verify stale facts, and promote only the distilled pattern.
+
+Deletion rule: before removing archive/research material, write down what replaced it. If nothing replaced the unique value, keep it. The recovered map lives at `references/archive/RECOVERY_INDEX.md`.
 
 ---
 
@@ -554,7 +568,7 @@ Every situation has: a name, a profile selection, a prep sequence (â‰¤10 ste
 
 **Private VM / Corp:** Context-pack into paste block. Copilot reads AGENTS.md. Sensitive data â†’ Ollama local + Corp-Sec. Artifacts flow clipboardâ†’git, never via URL.
 
-**Scripted:** `boot` â†’ `task` â†’ `apply`. Three scripts, one terminal, zero friction.
+**Scripted:** `prep scan` -> `prep grid` / `prep card` -> `task` -> `apply`. One terminal, zero friction.
 
 **One-liner:** `belt` (if installed via belt.ps1 -Install). Detects local AI CLI tools, Ollama, or API keys. Pipes prompt, captures output, saves NEXT.
 
@@ -569,5 +583,4 @@ Fix the system first. Then fix myself. Both compound.
 
 ## EVOLUTION
 
-This file IS the system. Delete the rest and still win. Every session adds PREFs. After 5: audit, deduplicate, propose permanent additions. Every file must define a contract, formula, scenario, or launcher. Anything else dies.
-
+This file is the hot boot system, not the whole memory. It should survive alone in an emergency, but it must not teach agents to delete the archive. Every session adds PREFs. After 5: audit, deduplicate, propose permanent additions. Every file must define a contract, formula, scenario, launcher, or recoverable archive value. Deletion requires extraction or a ledger.

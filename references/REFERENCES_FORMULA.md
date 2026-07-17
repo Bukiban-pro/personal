@@ -4,6 +4,8 @@
 This file is a supplementary backup for the situation × environment matrix.
 You don't need it. BELT.md contains everything inline.
 
+Cold-storage note: legacy frameworks, workflows, profiles, and research live under `references/archive/` or `research/`. They are not the hot boot path. Use them as source material, verify stale facts, and promote distilled patterns into BELT/scenario cards when they prove useful.
+
 ## Situation × Environment Matrix
 
 | Situation | Unlimited | Locked-Down | Zero-Budget | Token-Limited | **Adaptive** | **Stealth** | **Corp-Sec** |
@@ -28,12 +30,12 @@ You don't need it. BELT.md contains everything inline.
 ```
 core        = BELT.md                                   [the OS — paste the whole file]
 jarvis      = references/prompts/jarvis-prime-system.md [apex OS — 14KB, use for complex 3+ turn sessions]
-unlimited   = references/profiles/unlimited.md
-locked-down = references/profiles/locked-down.md
-zero-budget = references/profiles/zero-budget.md
-token-limited = references/profiles/token-limited.md
-adaptive    = references/profiles/adaptive.md          [self-detects tool capabilities]
-stealth     = references/profiles/stealth.md           [no internet, corp-blocked]
+unlimited   = references/archive/profiles/unlimited.md
+locked-down = references/archive/profiles/locked-down.md
+zero-budget = references/archive/profiles/zero-budget.md
+token-limited = references/archive/profiles/token-limited.md
+adaptive    = references/archive/profiles/adaptive.md  [self-detects tool capabilities]
+stealth     = references/archive/profiles/stealth.md   [no internet, corp-blocked]
 corp-sec    = references/profiles/corp-sec.md          [zero-trust company compliance]
 AGENTS      = references/prompts/agents-template.md    [deploy as ./AGENTS.md]
 task        = your own prompt specifying what to build
@@ -42,17 +44,17 @@ inquisitor  = references/prompts/inquisitor-system.md
 dev-leroy   = references/prompts/dev-leroy-reviewer.md
 demo        = references/prompts/investor-demo-copilot.md
 ui-design   = references/prompts/agent-role-definitions.md
-learn       = references/frameworks/universal-learning-os.md
+learn       = references/archive/frameworks/universal-learning-os.md
 career      = career/developer-playbook.md
-dev-mode    = references/frameworks/dev-mode-blueprint.md
-protocol    = references/frameworks/dual-agent-concurrency-protocol.md
-web-brain   = references/frameworks/web-brain-agentic-hands.md
+dev-mode    = references/archive/frameworks/dev-mode-blueprint.md
+protocol    = references/archive/frameworks/dual-agent-concurrency-protocol.md
+web-brain   = references/archive/frameworks/web-brain-agentic-hands.md
 local-pack  = references/skills/zero-trust-env.md     [offline survival]
 session     = references/session/SESSION.md           [context persistence]
-cold-start  = references/workflows/cold-start.md      [2-min re-entry]
-token-pack  = references/workflows/token-packing.md   [max value per budget]
-java-tasks  = references/templates/java-backend-tasks.md [Spring Boot recipes]
-persona     = references/frameworks/persona-switching.md [5 operating personas]
+cold-start  = references/archive/workflows/cold-start.md [2-min re-entry]
+token-pack  = references/archive/workflows/token-packing.md [max value per budget]
+java-tasks  = references/archive/templates/java-backend-tasks.md [Spring Boot recipes]
+persona     = references/archive/frameworks/persona-switching.md [5 operating personas]
 models      = references/prompts/llm-model-selection.md  [model selection policy]
 snippets    = .vscode/opencode.code-snippets             [macro: 2-keystroke formula deploy]
 triad       = Finder/Planner/Doer                        [see protocol + web-brain]
@@ -142,4 +144,3 @@ After any formula, check:
 ```
 
 For the triad: open three tabs. Git is shared memory. SESSION.md is handoff protocol.
-
