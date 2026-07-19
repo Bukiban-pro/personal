@@ -4,7 +4,7 @@
 
 You are operating as an autonomous standalone perception team for ChefKix Phase 1.
 
-Your only job here is to build the ingredient-detection foundation described in `projects/chefkix/docs/phased-implementation-plan.md` and `projects/chefkix/docs/technical-architecture.md`:
+Your only job here is to build the ingredient-detection foundation described in `personal/projects/chefkix/docs/phased-implementation-plan.md` and `personal/projects/chefkix/docs/technical-architecture.md`:
 
 - ingredient detection first
 - YOLO as baseline
@@ -107,7 +107,7 @@ Every phase summary must include an evidence block listing:
 
 ### Assumption ledger
 
-Create `projects/chefkix/perception/ASSUMPTIONS.md` and append every non-trivial assumption to it.
+Create `personal/projects/chefkix/perception/ASSUMPTIONS.md` and append every non-trivial assumption to it.
 
 Each entry must include:
 
@@ -260,15 +260,15 @@ Create and maintain the work under a standalone perception module.
 
 Expected top-level structure:
 
-- `projects/chefkix/perception/`
-- `projects/chefkix/perception/data/`
-- `projects/chefkix/perception/labels/`
-- `projects/chefkix/perception/train/`
-- `projects/chefkix/perception/eval/`
-- `projects/chefkix/perception/export/`
-- `projects/chefkix/perception/service/`
-- `projects/chefkix/perception/ui/`
-- `projects/chefkix/perception/tests/`
+- `personal/projects/chefkix/perception/`
+- `personal/projects/chefkix/perception/data/`
+- `personal/projects/chefkix/perception/labels/`
+- `personal/projects/chefkix/perception/train/`
+- `personal/projects/chefkix/perception/eval/`
+- `personal/projects/chefkix/perception/export/`
+- `personal/projects/chefkix/perception/service/`
+- `personal/projects/chefkix/perception/ui/`
+- `personal/projects/chefkix/perception/tests/`
 
 Every file should belong to one of those functions.
 
@@ -803,18 +803,18 @@ Build the work in the documented standalone location under the perception module
 
 Likely files include:
 
-- `projects/chefkix/perception/README.md`
-- `projects/chefkix/perception/data/collect_and_convert.py`
-- `projects/chefkix/perception/data/README.md`
-- `projects/chefkix/perception/labels/taxonomy.yaml`
-- `projects/chefkix/perception/train/yolov8_train.py`
-- `projects/chefkix/perception/train/rtdetr_train.py`
-- `projects/chefkix/perception/eval/evaluate.py`
-- `projects/chefkix/perception/export/export_to_onnx.py`
-- `projects/chefkix/perception/service/app.py`
-- `projects/chefkix/perception/service/Dockerfile`
-- `projects/chefkix/perception/ui/index.html`
-- `projects/chefkix/perception/tests/`
+- `personal/projects/chefkix/perception/README.md`
+- `personal/projects/chefkix/perception/data/collect_and_convert.py`
+- `personal/projects/chefkix/perception/data/README.md`
+- `personal/projects/chefkix/perception/labels/taxonomy.yaml`
+- `personal/projects/chefkix/perception/train/yolov8_train.py`
+- `personal/projects/chefkix/perception/train/rtdetr_train.py`
+- `personal/projects/chefkix/perception/eval/evaluate.py`
+- `personal/projects/chefkix/perception/export/export_to_onnx.py`
+- `personal/projects/chefkix/perception/service/app.py`
+- `personal/projects/chefkix/perception/service/Dockerfile`
+- `personal/projects/chefkix/perception/ui/index.html`
+- `personal/projects/chefkix/perception/tests/`
 
 Minimum file intent:
 

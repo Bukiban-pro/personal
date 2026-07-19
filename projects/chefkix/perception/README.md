@@ -38,7 +38,7 @@ This command runs normalization, labeling validation, baseline and challenger sm
 Install dependencies:
 
 ```powershell
-cd c:\Users\YOGA\Desktop\personal\chefkix\perception
+cd d:\code\chefkix\personal\projects\chefkix\perception
 pip install -r requirements.txt
 ```
 

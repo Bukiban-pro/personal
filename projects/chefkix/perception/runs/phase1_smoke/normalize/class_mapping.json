@@ -1,0 +1,99 @@
+{
+  "beef": {
+    "aliases": [
+      "beef",
+      "beef_meat"
+    ],
+    "id": 5,
+    "notes": "Raw beef pieces or cuts clearly visible in frame."
+  },
+  "butter": {
+    "aliases": [
+      "butter",
+      "butter_block"
+    ],
+    "id": 10,
+    "notes": "Butter block or pat when visually identifiable."
+  },
+  "carrot": {
+    "aliases": [
+      "carrot",
+      "carrots"
+    ],
+    "id": 7,
+    "notes": "Whole, cut, or shredded carrot when visually identifiable."
+  },
+  "chicken": {
+    "aliases": [
+      "chicken",
+      "chicken_meat"
+    ],
+    "id": 4,
+    "notes": "Raw chicken pieces or whole cuts clearly visible in frame."
+  },
+  "egg": {
+    "aliases": [
+      "egg",
+      "eggs"
+    ],
+    "id": 0,
+    "notes": "Whole egg, shell-on or shell-off, if visually distinct."
+  },
+  "garlic": {
+    "aliases": [
+      "garlic",
+      "garlic_clove",
+      "garlic_cloves"
+    ],
+    "id": 3,
+    "notes": "Whole cloves or clearly identifiable garlic pieces."
+  },
+  "lemon": {
+    "aliases": [
+      "lemon",
+      "lemons"
+    ],
+    "id": 11,
+    "notes": "Whole lemons or clearly identifiable lemon pieces."
+  },
+  "lettuce": {
+    "aliases": [
+      "lettuce"
+    ],
+    "id": 8,
+    "notes": "Leaf lettuce or lettuce piles."
+  },
+  "milk_carton": {
+    "aliases": [
+      "milk carton",
+      "milk_carton",
+      "carton_of_milk"
+    ],
+    "id": 9,
+    "notes": "Carton-based milk container when the container itself is visible."
+  },
+  "onion": {
+    "aliases": [
+      "onion",
+      "onions"
+    ],
+    "id": 2,
+    "notes": "Yellow, red, or white onion when visually identifiable."
+  },
+  "potato": {
+    "aliases": [
+      "potato",
+      "potatoes"
+    ],
+    "id": 6,
+    "notes": "Whole or cut potato when visually identifiable."
+  },
+  "tomato": {
+    "aliases": [
+      "tomato",
+      "tomatoes"
+    ],
+    "id": 1,
+    "notes": "Raw tomato or clearly identifiable tomato pieces."
+  }
+}

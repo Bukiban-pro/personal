@@ -28,7 +28,7 @@ Define a consistent bounding-box labeling policy for the Phase 1 ingredient onto
 
 ## Output contract
 
-- Source manifest: `chefkix/perception/data/normalized_manifest.json`
-- Class mapping: `chefkix/perception/data/class_mapping.json`
-- Annotation schema: `chefkix/perception/labels/annotation_schema.yaml`
-- Edge-case notes: this file and `chefkix/perception/ASSUMPTIONS.md`
+- Source manifest: `personal/projects/chefkix/perception/data/normalized_manifest.json`
+- Class mapping: `personal/projects/chefkix/perception/data/class_mapping.json`
+- Annotation schema: `personal/projects/chefkix/perception/labels/annotation_schema.yaml`
+- Edge-case notes: this file and `personal/projects/chefkix/perception/ASSUMPTIONS.md`
