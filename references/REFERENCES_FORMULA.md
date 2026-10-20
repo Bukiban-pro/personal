@@ -4,6 +4,8 @@
 This file is a supplementary backup for the situation × environment matrix.
 You don't need it. BELT.md contains everything inline.
 
+Architect extension: for an existing goal that needs resumable execution, deploy `references/prompts/jarvis-mission-execution.md` with its mission/task templates into the target. This portable kit supports serial execution and optional native workers/continuation. The `jarvis` shorthand below still names the original JARVIS PRIME full-stack/UX specialist; mission execution is a separate workflow. Follow BELT's workflow selection rules and the target's authority rather than forcing an existing plan through the discovery grid.
+
 Cold-storage note: legacy frameworks, workflows, profiles, and research live under `references/archive/` or `research/`. They are not the hot boot path. Use them as source material, verify stale facts, and promote distilled patterns into BELT/scenario cards when they prove useful.
 
 ## Situation × Environment Matrix
